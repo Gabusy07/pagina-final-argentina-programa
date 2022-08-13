@@ -1,0 +1,45 @@
+
+#knowledges-container{
+    margin-left: 10%;
+}
+
+#infoAndSkills_container{
+    border: 1.5px groove var(--difused-black);
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+
+#porter{
+    height: 55vh;
+    width: 100%;
+    background-color: darkgoldenrod;
+}
+
+#main_about{
+    position: relative;
+    margin: 15px;
+    margin-top: 100px;
+}
+
+
+.anchor{
+    cursor: pointer;
+    color: white;
+}
+
+.div_info{
+    margin: 25px;
+}
+
+#navbarHome{
+    position: relative;
+    top: 0px;
+    width: 100%;
+    margin-bottom: 100px;
+    z-index: 10;
+
+}
+
+
+

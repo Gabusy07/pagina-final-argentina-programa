@@ -1,0 +1,34 @@
+header{
+    margin: 2.5rem 0rem;
+}
+#account_button{
+    width: 25%;
+    margin: 0rem 0.5rem;
+}
+
+main{
+    background-color: black;
+    height: 120vh;
+    width: 100%;
+}
+
+#principal_background{
+    
+    padding: 20% 0%;
+    height: 100%;
+    
+}
+
+#welcome_message{
+    font-size: 8em;
+    color: white;
+    letter-spacing: 15px;
+    
+    
+}
+
+@media only screen and (max-width: 900px){
+    #welcome_message{ font-size: xx-large; margin: auto;}
+    
+}
+

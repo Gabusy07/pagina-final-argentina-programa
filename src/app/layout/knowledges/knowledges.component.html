@@ -1,0 +1,33 @@
+<p>knowledges works!</p>
+<div>
+<h1 style="color: green">Skills</h1>
+    <br/>
+    
+    
+    <div *ngFor="let knowledge of allknowledges; let i = index" >
+
+        <h5>{{ knowledge[0] }}</h5>
+        <div class="progress" style="max-width: 100%">
+            <div class={{ knowledge[2] }}
+                 >
+            </div>
+        </div>
+    </div>
+
+
+        <!--
+        <div class="progress-bar bg-success"
+            style="width: 20%">20%
+        </div>
+        <div class="progress-bar bg-danger
+            progress-bar-stripped" style="width: 30%">
+            30%
+        </div>
+        <div class="progress-bar bg-warning
+            progress-bar-stripped" style="width: 40%">
+            40%
+        </div>
+        -->
+    
+
+</div>

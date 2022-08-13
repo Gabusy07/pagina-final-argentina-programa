@@ -18,6 +18,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AsideComponent } from './layout/aside/aside.component';
+import { AboutComponent } from '@layout/about/about.component';
 
 
 const appRoutes : Routes = [
@@ -31,6 +32,7 @@ const appRoutes : Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
+    AboutComponent,
   
     WelcomeComponent,
     CalculatorComponent,
@@ -39,7 +41,7 @@ const appRoutes : Routes = [
     KnowledgesComponent,
     NavigationComponent,
     FooterComponent,
-    AsideComponent
+    AsideComponent,
    
   ],
   imports: [

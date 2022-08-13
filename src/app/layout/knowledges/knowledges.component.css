@@ -1,0 +1,39 @@
+.knw-container{
+    width: 100%;
+}
+
+#python{
+    width: 55%;
+}
+
+#javascript{
+    width: 60%;
+}
+
+#html{
+    width: 75%;
+}
+
+#css{
+    width: 55%;
+}
+
+#mysql{
+    width: 45%;
+}
+
+#angular{
+    width: 40%;
+}
+
+#java{
+    width: 35%;
+}
+
+#springboot{
+    width: 2%;
+}
+
+#ingles{
+    width: 60%;
+}

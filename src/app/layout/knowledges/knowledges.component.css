@@ -4,6 +4,16 @@
   
 }
 
+.sp{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    font-weight: bold;
+    margin: auto 2% auto 0.5%;
+}
+
+
+
 .knw-container{
     width: 100%;
    

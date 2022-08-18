@@ -13,6 +13,7 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
   email = new FormControl("");
   user = new FormControl("");
   password = new FormControl("");

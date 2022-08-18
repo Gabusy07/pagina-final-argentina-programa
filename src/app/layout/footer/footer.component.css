@@ -1,5 +1,6 @@
 footer{
     display: flex;
+    justify-content: right;
     background-color: black;
     position: relative;
     bottom: 0px;
@@ -12,6 +13,7 @@ footer{
 
 
 footer a{
+    display: inline;
     color: white;
     margin: auto 0.5% auto 2.5%;
 }

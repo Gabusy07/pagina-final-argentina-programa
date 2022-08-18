@@ -19,12 +19,14 @@
    
 }
 
+
+
 #python{
-    width: 55%;
+    width: 90%;
 }
 
 #javascript{
-    width: 60%;
+    width: 65%;
 }
 
 #html{
@@ -32,25 +34,37 @@
 }
 
 #css{
-    width: 55%;
+    width: 60%;
 }
 
 #mysql{
-    width: 45%;
-}
-
-#angular{
-    width: 40%;
-}
-
-#java{
     width: 35%;
 }
 
+#java{
+    width: 10%;
+}
+
 #springboot{
-    width: 2%;
+    width: 1%;
 }
 
 #ingles{
-    width: 60%;
+    width: 100%;
+}
+
+#angular{
+    width: 37%;
+}
+
+#git{
+    width: 23%;
+}
+
+#github{
+    width: 35%;
+}
+
+#bootstrap{
+    width: 45%;
 }

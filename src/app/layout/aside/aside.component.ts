@@ -12,7 +12,12 @@ export class AsideComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  aside_show:string="container-fluid";
+showAside(){
+  this.visibility="container-fluid"
+
+}
+
+visibility:string="d-none";
 
 
 }

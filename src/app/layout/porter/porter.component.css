@@ -11,11 +11,24 @@
     background: linear-gradient(to left, rgba(255, 132, 0), rgba(255, 120, 0, .65));
 }
 
-#circle{
+.circle{
     position: relative;
-    transform: translate(var(--circle_x) var(--circle_y));
+    top:0px;
+    right: 0px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
     background-color: black;
+    
 }
+
+.animated_figure{
+    animation: bajar 4s 0.1s 1 forwards;
+
+}
+
+@keyframes bajar {
+    10% {top: 0px;}
+    50% {top: 75px;}
+    90% {top: 115px;}
+  }

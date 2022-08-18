@@ -1,22 +1,25 @@
 
 <div id="bodyHome">
-    <div id="porter">
-    </div>
+  
+    <app-porter></app-porter>
+    
     <app-navigation></app-navigation>
-
-    <app-aside></app-aside>
 
     <main class="container-fluid" id="main_about">
 
-       <app-about></app-about>
-          
-         
-      <div class="container.fluid">
-      <!--catalogo de proyectos (deben estar hubicados en componentes independientes)-->
-        <p>Proyectos</p>
-        <div></div>
+      <div class="row">
+        <app-aside class="col-1"></app-aside>
+        <app-about class="col-11"></app-about>
+        
       </div>
+          
+        <div class="container.fluid">
+        <!--catalogo de proyectos (deben estar hubicados en componentes independientes)-->
+          <p>Proyectos</p>
+          <div></div>
+        </div>
     </main>
+
     <app-footer></app-footer>
 </div>  
 

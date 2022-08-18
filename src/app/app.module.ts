@@ -19,6 +19,7 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AsideComponent } from './layout/aside/aside.component';
 import { AboutComponent } from '@layout/about/about.component';
+import { PorterComponent } from './layout/porter/porter.component';
 
 
 const appRoutes : Routes = [
@@ -42,6 +43,7 @@ const appRoutes : Routes = [
     NavigationComponent,
     FooterComponent,
     AsideComponent,
+    PorterComponent,
    
   ],
   imports: [

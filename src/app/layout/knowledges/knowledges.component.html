@@ -16,7 +16,7 @@
             <span>2</span>
         </div>
     </div><br>
-
+<!--
     <div class="row">
         
         <div class="col-6">
@@ -124,6 +124,30 @@
             <h5>GitHub</h5>
             <div class="progress knw-container">
                 <div class="progress-bar bg-warning" id="github">
+
+                </div>
+            </div>
+        </div>
+    </div><br>
+
+    <div  *ngFor="let lenguaje of lenguajes">
+
+        <div class="col-6">
+            <h5>{{lenguaje.nn}}</h5>
+            <div class="progress knw-container">
+                <div class= "{{lenguaje.progressBar}}" [ngStyle]="{'width' : lenguaje.width}">
+
+                </div>
+            </div>
+        </div>
+
+    </div>-->
+
+    <div class="row" *ngFor="let language_pares of languages">
+        <div class="col-6 mb-3" *ngFor="let language of language_pares">
+            <h5>{{language.nn}}</h5>
+            <div class="progress knw-container">
+                <div class="{{language.progressBar}}" [ngStyle]="{'width' : language.width}">
 
                 </div>
             </div>

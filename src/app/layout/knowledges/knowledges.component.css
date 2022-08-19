@@ -16,10 +16,11 @@
 
 .knw-container{
     width: 100%;
+    margin: 1% auto;
    
 }
 
-
+/*
 
 #python{
     width: 90%;
@@ -61,10 +62,8 @@
     width: 23%;
 }
 
-#github{
-    width: 35%;
-}
+
 
 #bootstrap{
     width: 45%;
-}
+}*/

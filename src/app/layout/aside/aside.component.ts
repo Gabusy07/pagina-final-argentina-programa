@@ -12,12 +12,12 @@ export class AsideComponent implements OnInit {
   ngOnInit(): void {
   }
 
-showAside(){
-  this.visibility="container-fluid"
+showAsidebar(){
+  this.visibilityOfSidebar = this.visibilityOfSidebar? false : true;
 
 }
 
-visibility:string="d-none";
+visibilityOfSidebar=false;
 
 
 }

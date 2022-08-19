@@ -1,42 +1,46 @@
 
-<button (click)="showAside()" class="btn" >abrir aside</button>
-<div [ngClass]="visibility">
+<div (click)="showAsidebar()" class="m-0 row justify-content-center"><i><i class="bi bi-three-dots"></i></i></div>
+
+
+
+<ng-container *ngIf="visibilityOfSidebar">
+
     <div class="row">
-        <div class="col-sm-auto bg-light top" >
+        <div class="col-lg-auto bg-light top" >
             <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center top">
-                <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Icon-only">
                     <i class="bi-bootstrap fs-1"></i>
                 </a>
                 <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
                     <li class="nav-item">
-                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-                            <i class="bi-house fs-1"></i>
+                        <a href="#" class="nav-link py-3 px-0.5" >
+                            <i class="bi-house fs-0.5"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-                            <i class="bi-speedometer2 fs-1"></i>
+                        <a href="#" class="nav-link py-3 px-0.5" >
+                            <i class="bi-speedometer2 fs-0.5"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-                            <i class="bi-table fs-1"></i>
+                        <a href="#" class="nav-link py-3 px-0.5" >
+                            <i class="bi-table fs-0.5"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-                            <i class="bi-heart fs-1"></i>
+                        <a href="#" class="nav-link py-3 px-0.5">
+                            <i class="bi-heart fs-0.5"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-                            <i class="bi-people fs-1"></i>
+                        <a href="#" class="nav-link py-3 px-0.5">
+                            <i class="bi-people fs-0.5"></i>
                         </a>
                     </li>
                 </ul>
                 <div class="dropdown">
                     <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi-person-circle h2"></i>
+                        <i class="bi-person-circle fs-5"></i>
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
                         <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -50,4 +54,4 @@
             <!-- content -->
         </div>
     </div>
-</div>
+</ng-container>

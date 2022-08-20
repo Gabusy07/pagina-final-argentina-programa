@@ -1,0 +1,10 @@
+.box_skill{
+    width: 150px;
+    text-align: center;
+}
+
+.box_skill--selected{
+    width: 200px;
+    text-align: center;
+    height: 100px;
+}

@@ -30,27 +30,23 @@ export class KnowledgesComponent implements OnInit {
       progressBar : "progress-bar bg-warning",
       width : "45%"
       },
-      {nn : "Ingles (B2)",
-      progressBar : "progress-bar bg-success",
-      width: "100%"
-      }],
-      [{nn : "Angular",
+      {nn : "Angular",
       progressBar : "progress-bar bg-warning",
       width : "35%"
-      },
-      {nn : "Java",
+      }],
+      [{nn : "Java",
       progressBar : "progress-bar bg-danger",
       width: "10%"
-      }],
-      [{nn : "Spring Boot",
+      },
+      {nn : "Spring Boot",
       progressBar : "progress-bar bg-danger",
       width : "1%"
-      },
-      {nn : "GIT",
+      }],
+      [{nn : "GIT",
       progressBar : "progress-bar bg-danger",
       width: "23%"
-      }],
-      [{nn : "GitHub",
+      },
+      {nn : "GitHub",
       progressBar : "progress-bar bg-warning",
       width : "30%"
       }]

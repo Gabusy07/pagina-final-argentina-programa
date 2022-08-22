@@ -2,9 +2,15 @@
     width: 150px;
     text-align: center;
 }
-
-.box_skill--selected{
-    width: 200px;
-    text-align: center;
-    height: 100px;
+/*
+.selected{
+    animation-name: skillSelected;
+    animation-duration: 4s;
 }
+
+@keyframes skillSelected {
+
+    from {background-color: red;}
+    to {background-color: yellow;}
+    
+}*/

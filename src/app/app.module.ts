@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Route, Routes, RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,6 +36,7 @@ const appRoutes : Routes = [
     AppComponent,
     HomeComponent,
     AboutComponent,
+    
   
     WelcomeComponent,
     CalculatorComponent,
@@ -50,6 +52,7 @@ const appRoutes : Routes = [
   imports: [
     
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     CoreModule,

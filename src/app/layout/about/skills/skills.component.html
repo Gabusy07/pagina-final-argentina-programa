@@ -1,6 +1,6 @@
 <div class="d-flex p2 justify-content-between m-5">
-    <div [ngClass]="scale ? 'alert alert-info box_skill' : 'alert alert-info box_skill--selected' " role="alert" (mouseover)="scalling()">Inglés(B2)</div>
-    <div class="alert alert-info box_skill" role="alert">Asertivo</div>
-    <div class="alert alert-info box_skill" role="alert">Comprometido</div>
-    <div class="alert alert-info box_skill" role="alert">Proactivo</div>
+    <div [@animation1]="arrayDivs[0]" class="alert alert-info box_skill" (mouseenter)="enlarge(0)" (mouseleave)="reduce(0)">Inglés(B2)</div>
+    <div [@animation1]="arrayDivs[1]" class="alert alert-info box_skill" (mouseenter)="enlarge(1)" (mouseleave)="reduce(1)">Asertivo</div>
+    <div [@animation1]="arrayDivs[2]" class="alert alert-info box_skill" (mouseenter)="enlarge(2)" (mouseleave)="reduce(2)">Comprometido</div>
+    <div [@animation1]="arrayDivs[3]" class="alert alert-info box_skill" (mouseenter)="enlarge(3)" (mouseleave)="reduce(3)">Proactivo</div>
 </div>

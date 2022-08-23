@@ -1,5 +1,8 @@
+// pagina de bienvenida con opciones para ingresar o registrarse
+
+
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { RegisterService } from '@shared/register.service';
 
 
 
@@ -10,28 +13,33 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
 
-  
+  // descarga de servicio
 
-  constructor( private router: Router) { }
+  constructor(private formService: RegisterService) {
+    this.signIn = this.formService.formOpen;
+   }
 
   ngOnInit(): void {
-
-  }
-
-  enterHome(){
-
     
-    this.router.navigate(['home']);
 
   }
 
+  // llamada al hacer click en 'ingresar'
+  enterHome(){
+    this.formService.openingForm();
+    this.signIn = this.formService.getFormOpen(); //recibe del servicio si esta  desplegado el formulario
+    this.optionSelected = true;
+  }
+
+  // llamada al hacer click en 'registrar
   register () {
-    this.enter = true;
+    this.signUp = true;
   }
 
-  
-
-  enter : boolean = false;
+  // atributos para registrar y registrado
+  optionSelected = false // desabilita los botones al abrir formulario
+  signIn : boolean;
+  signUp : boolean = false;
 
 }
 

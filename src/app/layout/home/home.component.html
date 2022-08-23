@@ -7,17 +7,17 @@
 
     <main class="container-fluid" id="main_about">
 
-      <div class="row">
-        <app-aside class="col-1"></app-aside>
-        <app-about class="col-11"></app-about>
-        
-      </div>
+        <div class="row">
+          <app-aside class="col-1"></app-aside>
+          <app-about class="col-11"></app-about>
           
-        <div class="container.fluid">
-        <!--catalogo de proyectos (deben estar hubicados en componentes independientes)-->
-          <p>Proyectos</p>
-          <div></div>
         </div>
+            
+        <div class="container.fluid">
+          <!--catalogo de proyectos (deben estar hubicados en componentes independientes)-->
+            <app-projects-container></app-projects-container>
+        </div>
+      
     </main>
 
     <app-footer></app-footer>

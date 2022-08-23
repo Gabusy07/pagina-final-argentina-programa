@@ -1,24 +1,25 @@
 <form class="container-fluid" id="enter_form">
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeForm()"></button>
     <div class="form-group-row elementP">
         <label class="col-sm-2 col-form-label">Usuario:</label>
         <div class="col-sm-15">
-            <input class="form-control" type="text" [formControl]="user">
+            <input class="form-control" type="text" [formControl]="user" required>
        </div>
     </div><br>
         <div class="form-group-row elementP">
         <label class="col-sm-2 col-form-label">Email:</label>
         <div class="col-sm-15">
-            <input class="form-control" type="email" [formControl]="email">
+            <input class="form-control" type="email" [formControl]="email" required>
         </div>
     </div><br>
     <div class="form-group-row elementP">
         <label class="col-sm-2 col-form-label">Contraseña:</label>
         <div class="col-sm-15">
-            <input class="form-control" type="password" [formControl]="password">
+            <input class="form-control" type="password" [formControl]="password" required>
         </div>
    </div><br>
    <div class="d-grid gap-2">
-    <button class="btn btn-primary">registrarse</button>
+    <input type="submit" class="btn btn-primary" (click)="submitSignIn()">
    </div>
 
 

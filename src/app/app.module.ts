@@ -22,6 +22,8 @@ import { AsideComponent } from './layout/aside/aside.component';
 import { AboutComponent } from '@layout/about/about.component';
 import { PorterComponent } from './layout/porter/porter.component';
 import { SkillsComponent } from '@layout/about/skills/skills.component';
+import { ProjectsContainerComponent } from '@layout/projects-container/projects-container.component';
+
 
 
 const appRoutes : Routes = [
@@ -46,7 +48,8 @@ const appRoutes : Routes = [
     FooterComponent,
     AsideComponent,
     PorterComponent,
-    SkillsComponent
+    SkillsComponent,
+    ProjectsContainerComponent
    
   ],
   imports: [

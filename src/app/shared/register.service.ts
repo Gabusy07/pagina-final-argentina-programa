@@ -6,10 +6,21 @@ import { FormControl } from "@angular/forms";
 })
 export class RegisterService {
 
-  constructor() { }
-}
+  constructor() {
+    this.formOpen = false;
+   }
+// cambia el estado del formulario
+  openingForm(): void{
+    console.log("antes"+this.formOpen);
+    this.formOpen = this.formOpen ? false : true;
+    console.log("despues"+this.formOpen);
+  }
 
-/*
-email = new FormControl("");
-user = new FormControl("");
-password = new FormControl("");*/
+ getFormOpen () : boolean {
+  return this.formOpen;
+ }
+
+
+  formOpen: boolean;
+
+  }

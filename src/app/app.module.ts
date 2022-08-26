@@ -12,7 +12,7 @@ import { CalculatorComponent } from './shared/components/calculator/calculator.c
 import { RegisterFormComponent } from './shared/components/register-form/register-form.component';
 import { ReactiveFormsModule } from "@angular/forms";
 
-import { KnowledgesComponent } from './layout/knowledges/knowledges.component';
+import { KnowledgesComponent } from './layout/home/knowledges/knowledges.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -20,9 +20,9 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AsideComponent } from './layout/aside/aside.component';
 import { AboutComponent } from '@layout/about/about.component';
-import { PorterComponent } from './layout/porter/porter.component';
+import { PorterComponent } from './layout/home/porter/porter.component';
 import { SkillsComponent } from '@layout/about/skills/skills.component';
-import { ProjectsContainerComponent } from '@layout/projects-container/projects-container.component';
+import { ProjectsContainerComponent } from '@layout/home/projects-container/projects-container.component';
 
 
 
@@ -38,8 +38,6 @@ const appRoutes : Routes = [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    
-  
     WelcomeComponent,
     CalculatorComponent,
     RegisterFormComponent,

@@ -12,7 +12,7 @@ import { CalculatorComponent } from './shared/components/calculator/calculator.c
 import { RegisterFormComponent } from './shared/components/register-form/register-form.component';
 import { ReactiveFormsModule } from "@angular/forms";
 
-import { KnowledgesComponent } from './layout/home/knowledges/knowledges.component';
+import { KnowledgesComponent } from './layout/about/knowledges/knowledges.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';

@@ -11,47 +11,52 @@ export class KnowledgesComponent implements OnInit {
 
     this.languages = [
       [{nn : "Python",
-      progressBar : "progress-bar bg-success",
-      width : "90%"
+      progressBar : "progress-bar",
+      width : 82
       },
       {nn : "JavaScript",
-      progressBar : "progress-bar bg-primary",
-      width: "52%"
+      progressBar : "progress-bar",
+      width: 54
       }],
       [{nn : "HTML",
-      progressBar : "progress-bar bg-success",
-      width : "75%"
+      progressBar : "progress-bar",
+      width : 75
       },
       {nn : "CSS",
-      progressBar : "progress-bar bg-primary",
-      width: "62%"
+      progressBar : "progress-bar",
+      width: 65
       }],
       [{nn : "Bootstrap",
-      progressBar : "progress-bar bg-warning",
-      width : "45%"
+      progressBar : "progress-bar",
+      width : 45
       },
       {nn : "Angular",
-      progressBar : "progress-bar bg-warning",
-      width : "35%"
+      progressBar : "progress-bar",
+      width : 40
       }],
       [{nn : "Java",
-      progressBar : "progress-bar bg-danger",
-      width: "10%"
+      progressBar : "progress-bar",
+      width: 15
       },
       {nn : "Spring Boot",
-      progressBar : "progress-bar bg-danger",
-      width : "1%"
+      progressBar : "progress-bar",
+      width : 5
       }],
       [{nn : "GIT",
-      progressBar : "progress-bar bg-danger",
-      width: "23%"
+      progressBar : "progress-bar",
+      width: 25
       },
       {nn : "GitHub",
-      progressBar : "progress-bar bg-warning",
-      width : "30%"
+      progressBar : "progress-bar",
+      width : 30
+      },{nn : "MySql",
+      progressBar : "progress-bar",
+      width: 35
       }]
       
     ]
+
+    this.progressBarColor(this.languages)
     
    }
 
@@ -59,7 +64,32 @@ export class KnowledgesComponent implements OnInit {
 
   }
 
- languages: any[];
-  
- 
+  progressBarColor(objList:any[]){
+    for (let languagesList of objList){
+      for (let language of languagesList){
+        let exp = language.width;
+        switch (true) {
+          case exp <= 25:
+            language.progressBar += " bg-danger";
+          break;
+          case exp  <= 50:
+            language.progressBar += " bg-warning"; 
+            break;
+          
+          case exp <= 75:
+            language.progressBar += " bg-primary"; 
+            break;
+          default:
+            language.progressBar += " bg-success";
+            break;
+      }
+
+      }
+      
+        
+    }
+
+  }
+
+ languages: any[]; 
 }

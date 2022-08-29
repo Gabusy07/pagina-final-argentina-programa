@@ -11,5 +11,5 @@
  
     </div>
 
-    <app-register-form *ngIf="signIn"></app-register-form>
+    <app-register-form (onCloseEvent)="closeForm($event)" *ngIf="signIn"></app-register-form>
   </main>

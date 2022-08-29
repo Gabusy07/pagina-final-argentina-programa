@@ -9,7 +9,7 @@ import { HomeComponent } from './layout/home/home.component';
 
 import { WelcomeComponent } from './layout/welcome/welcome.component';
 import { CalculatorComponent } from './shared/components/calculator/calculator.component';
-import { RegisterFormComponent } from './shared/components/register-form/register-form.component';
+
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { KnowledgesComponent } from './layout/about/knowledges/knowledges.component';
@@ -23,6 +23,7 @@ import { AboutComponent } from '@layout/about/about.component';
 import { PorterComponent } from './layout/home/porter/porter.component';
 import { SkillsComponent } from '@layout/about/skills/skills.component';
 import { ProjectsContainerComponent } from '@layout/home/projects-container/projects-container.component';
+import { RegisterFormComponent } from '@layout/welcome/register-form/register-form.component';
 
 
 

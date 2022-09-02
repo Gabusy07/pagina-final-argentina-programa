@@ -13,9 +13,5 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  *goAbout(){
-    this.route.navigate(['about']);
-
-  }
 
 }

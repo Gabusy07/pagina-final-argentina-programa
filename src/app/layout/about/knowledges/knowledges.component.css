@@ -1,3 +1,4 @@
+
 #comp-container{
   margin-left: 5%;
   margin-right: 0%;
@@ -20,50 +21,12 @@
    
 }
 
-/*
-
-#python{
-    width: 90%;
+.progress--bar{
+    animation: knw-animated-bar ease-out 2.5s forwards;
 }
 
-#javascript{
-    width: 65%;
+@keyframes knw-animated-bar {
+    from{
+        width: 0%;
+    }
 }
-
-#html{
-    width: 75%;
-}
-
-#css{
-    width: 60%;
-}
-
-#mysql{
-    width: 35%;
-}
-
-#java{
-    width: 10%;
-}
-
-#springboot{
-    width: 1%;
-}
-
-#ingles{
-    width: 100%;
-}
-
-#angular{
-    width: 37%;
-}
-
-#git{
-    width: 23%;
-}
-
-
-
-#bootstrap{
-    width: 45%;
-}*/

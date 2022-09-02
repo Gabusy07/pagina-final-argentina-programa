@@ -4,6 +4,7 @@ header{
 #account_button{
     width: 25%;
     margin: 0rem 0.5rem;
+    min-width: 120px;
 }
 
 main{

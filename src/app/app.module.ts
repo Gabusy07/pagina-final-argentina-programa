@@ -26,14 +26,6 @@ import { ProjectsContainerComponent } from '@layout/home/projects-container/proj
 import { RegisterFormComponent } from '@layout/welcome/register-form/register-form.component';
 
 
-
-const appRoutes : Routes = [
- {path : '', component : WelcomeComponent},
- {path : 'home', component : HomeComponent},
-
-
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,8 +50,7 @@ const appRoutes : Routes = [
     AppRoutingModule,
     ReactiveFormsModule,
     CoreModule,
-    SharedModule,
-    RouterModule.forRoot(appRoutes, {useHash: true})
+    SharedModule
   ],
   exports: [RouterModule],
 

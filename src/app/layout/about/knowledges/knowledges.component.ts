@@ -91,5 +91,5 @@ export class KnowledgesComponent implements OnInit {
 
   }
 
- languages: any[]; 
+ languages: any[];
 }

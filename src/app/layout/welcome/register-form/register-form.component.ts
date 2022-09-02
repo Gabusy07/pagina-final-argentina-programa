@@ -12,17 +12,25 @@ export class RegisterFormComponent implements OnInit {
   
   @Output() onCloseEvent = new EventEmitter<boolean>();
 
-  constructor( private router: Router, private formBuilder : FormBuilder ) {
-    this.form = this.formBuilder.group({
-      name: ['',[Validators.required]],
+  constructor( private router: Router, private readonly formBuilder : FormBuilder ) {
+    this.openedForm = true;
+    this.form = this.initForm();
+    
+   }
+
+  ngOnInit(): void {
+    console.log(this.form.value)
+    
+  }
+
+  //construccion del reactiveForm
+  initForm(): FormGroup{
+    return this.formBuilder.group({
       user: ['',[Validators.required, Validators.pattern('^[a-z0-9_-]{3,16}$')]],
       email: ['',[Validators.required, Validators.email]],
       password: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(18)]],
     })
-   }
 
-  ngOnInit(): void {
-    
   }
 
   get Email(){
@@ -55,7 +63,7 @@ export class RegisterFormComponent implements OnInit {
     this.onCloseEvent.emit(this.openedForm);
   }
 
-  openedForm: boolean = true;
+  openedForm: boolean;
   
   form: FormGroup;
   

@@ -36,13 +36,11 @@ export class SkillsComponent implements OnInit {
 
   // agranda el div de una skill
   enlarge(index: number){
-    console.log(this.arrayDivs)
      this.arrayDivs[index] = "estado2" ;
   }
 
   // achica el div de una skill
   reduce(index: number){
-    console.log(this.arrayDivs)
     this.arrayDivs[index] =  "estado1";
   }
 

@@ -18,7 +18,7 @@ import { CoreModule } from './core/core.module';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { AsideComponent } from './layout/aside/aside.component';
+import { AsideComponent } from './layout/home/aside/aside.component';
 import { AboutComponent } from '@layout/about/about.component';
 import { PorterComponent } from './layout/home/porter/porter.component';
 import { SkillsComponent } from '@layout/about/skills/skills.component';

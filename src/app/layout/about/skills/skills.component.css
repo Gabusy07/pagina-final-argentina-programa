@@ -2,6 +2,10 @@
     width: 150px;
     text-align: center;
 }
+
+.sk{
+    cursor:none;
+}
 /*
 .selected{
     animation-name: skillSelected;

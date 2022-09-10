@@ -1,0 +1,29 @@
+#sidebar--closed{
+    position: absolute;
+    animation: open .9s ease 1 forwards;
+}
+
+@keyframes open {
+    from{
+        left: -10%
+    }
+    to{
+        left: 0%
+    }
+    
+}
+
+#sidebar--opened{
+    position: absolute;
+    animation: close .9s ease 1 forwards;
+}
+
+@keyframes close {
+    from{
+        left: 0%
+    }
+    to{
+        left: -10%
+    }
+    
+}

@@ -16,11 +16,11 @@ export class KnowledgesComponent implements OnInit {
       },
       {nn : "JavaScript",
       progressBar : "progress-bar",
-      width: 54
+      width: 55
       }],
       [{nn : "HTML",
       progressBar : "progress-bar",
-      width : 75
+      width : 76
       },
       {nn : "CSS",
       progressBar : "progress-bar",
@@ -40,7 +40,7 @@ export class KnowledgesComponent implements OnInit {
       },
       {nn : "Spring Boot",
       progressBar : "progress-bar",
-      width : 5
+      width : 7
       }],
       [{nn : "GIT",
       progressBar : "progress-bar",

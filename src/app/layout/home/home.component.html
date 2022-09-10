@@ -3,14 +3,13 @@
   
     <app-porter></app-porter>
     
-    <app-navigation></app-navigation>
+    <app-navigation id="navbar"></app-navigation>
 
     <main class="container-fluid" id="main_about">
 
         <div class="row h-100">
-          <app-aside class="col-1"></app-aside>
-          <app-about class="col-11"></app-about>
-          
+          <app-aside (messageEvent)="receiveMessage($event)" class="{{col_aside}}"></app-aside>
+          <app-about class="{{col_about}}"></app-about>
         </div>
             
         <div class="container.fluid">

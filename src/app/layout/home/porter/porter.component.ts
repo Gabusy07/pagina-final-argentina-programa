@@ -12,16 +12,7 @@ export class PorterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-animated:string ="circle";
-x:number=0;
-y:number =0;
 
-coordenadas(evt:MouseEvent){
-  this.animated="circle animated_figure";
- 
-  }
-  
-  s:number= this.x;
 
 }
 

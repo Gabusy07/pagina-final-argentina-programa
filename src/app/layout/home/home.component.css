@@ -1,3 +1,7 @@
+#bodyHome{
+    background: rgb(222, 213, 205);
+    width: 100%;
+}
 
 #knowledges-container{
     margin-left: 10%;
@@ -26,12 +30,10 @@
     margin: 25px;
 }
 
-#navbarHome{
-    position: relative;
-    top: 0px;
-    width: 100%;
-    margin-bottom: 100px;
-    z-index: 10;
+#navbar{
+    position: sticky;
+    top: 0;
+    z-index: 1;
 
 }
 

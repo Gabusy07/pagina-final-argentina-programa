@@ -6,10 +6,9 @@
   </header>
    
   <main class="container-fluid">
-    <div class="container-xxl-fluid" id="principal_background">
-      <h1 class="text-center" id="welcome_message">BIENVENID@</h1>
- 
+    <div id="principal_background">
+      <h1 class="text-center" id="welcome_message">BIENVENID@!<span>&#160;</span></h1>
     </div>
-
-    <app-register-form (onCloseEvent)="closeForm($event)" *ngIf="signIn"></app-register-form>
+    <!--formularios de ingreso y registro -->
+    <app-register-form (onCloseEvent)="closeForm($event)" *ngIf="signIn"></app-register-form> 
   </main>

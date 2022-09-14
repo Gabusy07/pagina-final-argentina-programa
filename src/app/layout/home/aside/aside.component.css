@@ -1,6 +1,8 @@
+/*movimiento del asidebar al ser activado o desactivado*/
+
 #sidebar--closed{
     position: absolute;
-    animation: open .9s ease 1 forwards;
+    animation: open .5s ease 1 forwards;
 }
 
 @keyframes open {
@@ -14,8 +16,9 @@
 }
 
 #sidebar--opened{
+    margin-right: 5%;
     position: absolute;
-    animation: close .9s ease 1 forwards;
+    animation: close .5s ease 1 forwards;
 }
 
 @keyframes close {

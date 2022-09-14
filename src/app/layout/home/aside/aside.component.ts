@@ -20,20 +20,20 @@ showAsidebar(){
 
   this.closingSidebar();
   this.activeVisibilityOfSidebar = this.activeVisibilityOfSidebar? false : true;
-  this.messageEvent.emit(this.activeVisibilityOfSidebar? "active":"inactive");
+  this.messageEvent.emit(this.activeVisibilityOfSidebar? "active":"inactive"); //envia estado de activacion a componente padre
   setTimeout(()=>{
     this.visibilityOfSidebar = this.activeVisibilityOfSidebar? false : true;
     
 
-  },1000)
+  },500)
 }
 
 closingSidebar(){
   this.sidebar = this.activeVisibilityOfSidebar? "sidebar--closed":"sidebar--opened"
 }
 
-visibilityOfSidebar=true;
-activeVisibilityOfSidebar=false;
+visibilityOfSidebar=false; //estado actual de visibilidad
+activeVisibilityOfSidebar=true; // al hacer click en evento
 sidebar:string = "sidebar--closed"
 
 //revisar todo esto

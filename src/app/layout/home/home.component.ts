@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
   }
 
   changeColumnSide(){
-    this.col_about = this.childMessage == "active"? "col-9" : "col-12";
-    this.col_aside = this.childMessage == "active"? "col-2": "col-0";
+    this.pos_about = this.childMessage == "active"? "about_pos--before" : "about_pos--after";
+    //this.col_aside = this.childMessage == "active"? "aside_pos--before": "aside_pos--before";
 
   }
   
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
 
   childMessage:string="";
   col_aside:string= "col-0";
-  col_about:string= "col-12";
+  pos_about:string= "about_pos--before";
 
 
 }

@@ -8,31 +8,11 @@
     width: 90%;
 }
 
-.project_box{
-    position: relative;
-    background-color: rgb(47, 3, 3);
-    height: 40vh;
-    margin: 0.75vh auto;
-    overflow: hidden;
-}
 
-.img_container{
-    position: absolute;
-    top: 0px;
-    background-color: black;
-    height: 100%;
-    width: 100%;
-    animation: moving_box 3s ease 0.5s infinity normal none;
-}
 
-/*revisar*/
-@keyframes moving_box {
-    from{position: absolute;
-        left: -400px}
-    to{position: absolute;
-        left: 0px}
-    
-}
+
+
+
 
 .code{
     color: white;

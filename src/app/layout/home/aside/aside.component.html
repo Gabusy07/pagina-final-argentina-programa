@@ -1,12 +1,12 @@
 
-<div (click)="showAsidebar()" class="m-0 row justify-content-center"><i><i class="bi bi-three-dots"></i></i></div>
+<div  class="m-0 row justify-content-center "><i><i class="bi bi-three-dots"></i></i></div>
 
-
+<div (click)="showAsidebar()" id="sidebar_container">
 
 <ng-container *ngIf="visibilityOfSidebar"> <!--muestra/oculta el sidebar-->
 
-    <div class="row h-50" id="{{sidebar}}">
-        <div class="h-70 w-100 col-auto bg-light" >
+    <div class="row h-70" id="{{sidebar}}">
+        <div class="h-100 w-100 col-auto bg-light rounded-3" >
             <div class="h-100 d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center top" >
                 <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Icon-only">
                     <i class="bi-bootstrap fs-1"></i>
@@ -52,4 +52,5 @@
         </div>
     </div>
 </ng-container>
+</div>
 

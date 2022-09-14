@@ -47,11 +47,11 @@
 @keyframes move_left_aboutcont {
     
     from{
-        left: 2.5vw;
+        left: 2.5%;
     }
     
     to{
-        left: 0vw;
+        left: 0%;
     }
 }
 
@@ -64,11 +64,11 @@
 @keyframes move_rigth_aboutcont {
     
     from{
-        left: 0vw;
+        left: 0%;
     }
     
     to{
-        left: 2.5vw;
+        left: 2.5%;
     }
 }
 

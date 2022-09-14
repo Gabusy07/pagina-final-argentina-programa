@@ -1,3 +1,7 @@
+#bodyHome{
+    background: rgb(222, 213, 205);
+    width: 100%;
+}
 
 #knowledges-container{
     margin-left: 10%;
@@ -9,12 +13,6 @@
     margin-bottom: 5%;
 }
 
-
-#porter{
-    height: 55vh;
-    width: 100%;
-    background-color: darkgoldenrod;
-}
 
 #main_about{
     position: relative;
@@ -32,14 +30,49 @@
     margin: 25px;
 }
 
-#navbarHome{
-    position: relative;
-    top: 0px;
-    width: 100%;
-    margin-bottom: 100px;
-    z-index: 10;
+#navbar{
+    position: sticky;
+    top: 0;
+    z-index: 1;
 
 }
+
+/*posicion y movimiento del contenedor about al abrir o cerrar el asidebar*/
+
+.about_pos--before{
+    position: relative;
+    animation: move_left_aboutcont .25s ease 1 forwards;
+}
+
+@keyframes move_left_aboutcont {
+    
+    from{
+        left: 2.5%;
+    }
+    
+    to{
+        left: 0%;
+    }
+}
+
+.about_pos--after{
+    position: relative;
+    animation: move_rigth_aboutcont .25s ease 1 forwards;
+
+}
+
+@keyframes move_rigth_aboutcont {
+    
+    from{
+        left: 0%;
+    }
+    
+    to{
+        left: 2.5%;
+    }
+}
+
+
 
 
 

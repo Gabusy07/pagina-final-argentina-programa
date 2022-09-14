@@ -3,10 +3,7 @@
     top: 50%;
     right: 35%;
     left: auto;
-
     align-content: center;
-
-    height: 500px;
     width: 400px;
     border: 1px solid black;
     border-radius: 10px;
@@ -19,6 +16,12 @@
 .elementsP{
     margin-left: auto;
     margin-right: auto;
+}
+
+#close_button{
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 

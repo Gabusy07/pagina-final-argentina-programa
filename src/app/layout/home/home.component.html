@@ -1,22 +1,24 @@
 
 <div id="bodyHome">
-    <div id="porter">
-    </div>
-    <app-navigation></app-navigation>
-
-    <app-aside></app-aside>
+  
+    <app-porter></app-porter>
+    
+    <app-navigation id="navbar"></app-navigation>
 
     <main class="container-fluid" id="main_about">
 
-       <app-about></app-about>
-          
-         
-      <div class="container.fluid">
-      <!--catalogo de proyectos (deben estar hubicados en componentes independientes)-->
-        <p>Proyectos</p>
-        <div></div>
-      </div>
+        <div class="h-100">
+          <app-aside (messageEvent)="receiveMessage($event)"></app-aside>
+          <app-about class="{{pos_about}}"></app-about>
+        </div>
+            
+        <div class="container.fluid">
+          <!--catalogo de proyectos (deben estar hubicados en componentes independientes)-->
+            <app-projects-container></app-projects-container>
+        </div>
+      
     </main>
+
     <app-footer></app-footer>
 </div>  
 

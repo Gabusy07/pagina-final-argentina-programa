@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+// pagina de bienvenida con opciones para ingresar o registrarse
+
+
+import {  Component, OnInit } from '@angular/core';
 
 
 
@@ -10,28 +12,41 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
 
+  constructor() {
+    this.signIn = false;
+   }
   
 
-  constructor( private router: Router) { }
 
   ngOnInit(): void {
-
-  }
-
-  enterHome(){
-
     
-    this.router.navigate(['home']);
 
   }
 
-  register () {
-    this.enter = true;
+  // llamada al hacer click en 'ingresar'
+  enterHome(){
+    this.signIn = true
+    this.optionSelected = true;
   }
 
   
 
-  enter : boolean = false;
+  // llamada al hacer click en 'registrar
+  register () {
+    this.signUp = true;
+  }
+
+// cerrar formulario en el welcome a partir del atributo 'closedForm' del child 'RegisterForm-Component'
+closeForm($event: boolean){
+  this.signIn = $event;
+  this.optionSelected = false
+  
+}
+
+  // atributos para registrar y registrado
+  optionSelected = false // desabilita los botones al abrir formulario
+  signIn : boolean;
+  signUp : boolean = false;
 
 }
 

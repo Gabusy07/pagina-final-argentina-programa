@@ -1,0 +1,13 @@
+.error_container{
+    padding: 10%;
+    margin: 10% 5%;
+}
+
+.container_link{
+    display: block;
+    padding: 0;
+}
+
+a{
+    margin: auto 2%;
+}

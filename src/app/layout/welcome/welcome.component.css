@@ -4,28 +4,58 @@ header{
 #account_button{
     width: 25%;
     margin: 0rem 0.5rem;
+    min-width: 120px;
 }
 
 main{
     background-color: black;
-    height: 120vh;
+    height: 150vh;
     width: 100%;
 }
 
 #principal_background{
     
-    padding: 20% 0%;
+    padding: 20% 20%;
     height: 100%;
+    text-align: center;
     
 }
 
 #welcome_message{
-    font-size: 8em;
+    display: inline;
+    position: relative;
+    font-size: 7em;
+
+    font: oblique bold;
+    font-family: Courier, "Lucida Console", monospace;
     color: white;
-    letter-spacing: 15px;
-    
+    letter-spacing: 5px;
+    animation: ghost 5s linear forwards;
+       
+}
+
+@keyframes ghost {
+    from{color: black;}
     
 }
+/*
+span{
+    position: absolute;
+    right: 0;
+    width: 100%;
+    border-left: 2px solid white;
+    animation: typing 5s infinite alternate steps(12);
+    background-color: black;
+
+}
+
+@keyframes typing {
+    from{width: 100%;}
+    to{width: 0%;}
+    
+}*/
+
+
 
 @media only screen and (max-width: 900px){
     #welcome_message{ font-size: xx-large; margin: auto;}

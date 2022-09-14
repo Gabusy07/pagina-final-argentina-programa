@@ -1,0 +1,51 @@
+
+
+/*movimiento del asidebar al ser activado o desactivado*/
+
+#sidebar--closed{
+    position: absolute;
+    height: 45%;
+    animation: open .5s ease 1 forwards;
+}
+
+@keyframes open {
+    from{
+        left: -10%
+    }
+    to{
+        left: 0%
+    }
+    
+}
+
+#sidebar--opened{
+    margin-right: 5%;
+    position: absolute;
+    height: 45%;
+    animation: close .5s ease 1 forwards;
+}
+
+#sidebar_container::before{
+
+    content: "";
+    position: absolute;
+    top: 25%;
+    left: -2.5%;
+    width: 0em;
+    height: 5em;
+    margin-left: 0;
+    border-right: 1em solid transparent;
+    border-bottom: 1em solid transparent;
+    border-top: 1em solid transparent;
+    border-left: 2em solid black;
+}
+
+@keyframes close {
+    from{
+        left: 0%
+    }
+    to{
+        left: -10%
+    }
+    
+}

@@ -1,6 +1,8 @@
 #bodyHome{
     background: rgb(222, 213, 205);
     width: 100%;
+    margin: 0%;
+    overflow-x: hidden;
 }
 
 #knowledges-container{
@@ -16,8 +18,8 @@
 
 #main_about{
     position: relative;
-    margin: 15px;
-    margin-top: 100px;
+    margin: 1%;
+    margin-top: 10%;
 }
 
 

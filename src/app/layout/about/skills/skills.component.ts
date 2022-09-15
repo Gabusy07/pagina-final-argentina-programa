@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   animations: [
     trigger('animation1', [
       state('estado1', style({transform : 'scale(1)',})),
-      state('estado2', style({transform : 'scale(1.3)', boxShadow: '10px 5px 5px gray', 
+      state('estado2', style({transform : 'scale(1.2)', boxShadow: '5px 3px 3px gray', 
       filter: 'brightness(1.009)'})),
       transition('estado1 <=> estado2', animate('0.08s'))
     ])

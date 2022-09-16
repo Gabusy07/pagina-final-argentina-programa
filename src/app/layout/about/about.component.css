@@ -2,8 +2,8 @@
     border: 1.5px solid rgba(0, 0, 0, .25) ;
     border-radius: 2%;
     padding: 2.5%;
-    margin: 5%;
+    margin: 0% auto auto 5%;
     width: 90%;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--boxes-shadow);
     background-color: white;
 }

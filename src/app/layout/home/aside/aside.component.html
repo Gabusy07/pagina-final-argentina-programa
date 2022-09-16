@@ -1,9 +1,9 @@
 
-<div (click)="showAsidebar()" id="sidebar_container"> <!--abre cierra sidebar-->
+<div *ngIf="!visibilityOfSidebar" (click)="showAsidebar()" id="sidebar_container"></div> <!--abre cierra sidebar-->
 
 <ng-container *ngIf="visibilityOfSidebar"> <!--muestra/oculta el sidebar-->
-
-    <div class="row" id="{{sidebar}}">
+    <span (click)="showAsidebar()" class="material-symbols-outlined" id="menu">menu</span>
+    <div class="row bar" id="{{sidebar}}">
         <div class="h-100 w-100 col-auto bg-light rounded-3" >
             <div class="h-100 d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center top" >
                 <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Icon-only">
@@ -50,5 +50,3 @@
         </div>
     </div>
 </ng-container>
-</div>
-

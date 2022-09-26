@@ -24,6 +24,10 @@ import { PorterComponent } from './layout/home/porter/porter.component';
 import { SkillsComponent } from '@layout/about/skills/skills.component';
 import { ProjectsContainerComponent } from '@layout/home/projects-container/projects-container.component';
 import { RegisterFormComponent } from '@layout/welcome/register-form/register-form.component';
+import { BEndService } from "../app/services/b-end.service";
+import { HttpClientModule } from "@angular/common/http";
+import { end } from '@popperjs/core';
+import { LoginComponent } from './layout/welcome/login-form/login.component';
 
 
 @NgModule({
@@ -40,7 +44,9 @@ import { RegisterFormComponent } from '@layout/welcome/register-form/register-fo
     AsideComponent,
     PorterComponent,
     SkillsComponent,
-    ProjectsContainerComponent
+    ProjectsContainerComponent,
+    LoginComponent
+ 
    
   ],
   imports: [
@@ -50,7 +56,8 @@ import { RegisterFormComponent } from '@layout/welcome/register-form/register-fo
     AppRoutingModule,
     ReactiveFormsModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   exports: [RouterModule],
 
@@ -58,7 +65,7 @@ import { RegisterFormComponent } from '@layout/welcome/register-form/register-fo
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy
-  }
+  }, BEndService
     
   ],
   bootstrap: [AppComponent]

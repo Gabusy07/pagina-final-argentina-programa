@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Route, Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +13,7 @@ import { CalculatorComponent } from './shared/components/calculator/calculator.c
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { KnowledgesComponent } from './layout/about/knowledges/knowledges.component';
-import { SharedModule } from './shared/shared.module';
+
 import { CoreModule } from './core/core.module';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NavigationComponent } from './layout/navigation/navigation.component';
@@ -26,8 +26,10 @@ import { ProjectsContainerComponent } from '@layout/home/projects-container/proj
 import { RegisterFormComponent } from '@layout/welcome/register-form/register-form.component';
 import { BEndService } from "../app/services/b-end.service";
 import { HttpClientModule } from "@angular/common/http";
-import { end } from '@popperjs/core';
 import { LoginComponent } from './layout/welcome/login-form/login.component';
+import { LoaderComponent } from '@shared/loader/loader.component';
+
+
 
 
 @NgModule({
@@ -45,9 +47,9 @@ import { LoginComponent } from './layout/welcome/login-form/login.component';
     PorterComponent,
     SkillsComponent,
     ProjectsContainerComponent,
-    LoginComponent
+    LoginComponent,
+    LoaderComponent
  
-   
   ],
   imports: [
     
@@ -56,8 +58,7 @@ import { LoginComponent } from './layout/welcome/login-form/login.component';
     AppRoutingModule,
     ReactiveFormsModule,
     CoreModule,
-    SharedModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   exports: [RouterModule],
 

@@ -5,18 +5,19 @@ import {HttpClientModule} from '@angular/common/http';
 
 import * as fromComponents from './components';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule(
   {
   
-  declarations: [...fromComponents.components, ErrorPageComponent],
+  declarations: [...fromComponents.components, ErrorPageComponent, LoaderComponent],
   imports: [
     
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   
   exports:  [

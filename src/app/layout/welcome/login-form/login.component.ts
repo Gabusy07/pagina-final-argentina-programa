@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
 
-  @Output() onCloseEvent = new EventEmitter<boolean>();
+  @Output() onCloseLogingEvent = new EventEmitter<boolean>();
 
   constructor( private router: Router, private readonly formBuilder : FormBuilder ) {
     this.openedForm = true;
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
  
   closingForm(){
     this.openedForm = false;
-    this.onCloseEvent.emit(this.openedForm);
+    this.onCloseLogingEvent.emit(this.openedForm);
   }
 
   openedForm: boolean;

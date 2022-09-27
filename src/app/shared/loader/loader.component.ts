@@ -3,7 +3,7 @@ import { LoadingService } from './loading.service';
 
 @Component({
   selector: 'app-loader',
-  template: `<div *ngIf="isLoading$ | assync" class="overlay">
+  template: `<div *ngIf="isLoading$ | async" class="overlay">
   <span class="loader">Load&nbsp;ng</span>
 </div>`
   ,

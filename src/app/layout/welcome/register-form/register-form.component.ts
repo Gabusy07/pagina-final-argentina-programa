@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterFormComponent implements OnInit {
   
-  @Output() onCloseEvent = new EventEmitter<boolean>();
+  @Output() onCloseRegisterEvent = new EventEmitter<boolean>();
 
   constructor( private router: Router, private readonly formBuilder : FormBuilder ) {
     this.openedForm = true;
@@ -60,7 +60,7 @@ export class RegisterFormComponent implements OnInit {
  
   closingForm(){
     this.openedForm = false;
-    this.onCloseEvent.emit(this.openedForm);
+    this.onCloseRegisterEvent.emit(this.openedForm);
   }
 
   openedForm: boolean;

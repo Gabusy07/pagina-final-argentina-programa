@@ -1,3 +1,4 @@
+
 .box_skill{
     display: block;
     width: 20%;
@@ -12,24 +13,24 @@
 
 #container{
     width: 95%;
+    padding: 2.5%;
 }
 
 @media screen and (max-width:750px){
     .box_skill{
-        width: 75%;
-    }
-
-    #container{
-        padding: 15%;
-     
-
+        width: 90%;
+        margin: 5% auto;
+        
     }
     
 }
 
 @media screen and (max-width:500px){
     .box_skill{
-        width: 50%;
+        width: 60%;
+        margin: 2% auto;
     }
+
+    
     
 }

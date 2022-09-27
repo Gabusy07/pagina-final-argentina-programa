@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Route, Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +13,7 @@ import { CalculatorComponent } from './shared/components/calculator/calculator.c
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { KnowledgesComponent } from './layout/about/knowledges/knowledges.component';
-import { SharedModule } from './shared/shared.module';
+
 import { CoreModule } from './core/core.module';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NavigationComponent } from './layout/navigation/navigation.component';
@@ -24,6 +24,12 @@ import { PorterComponent } from './layout/home/porter/porter.component';
 import { SkillsComponent } from '@layout/about/skills/skills.component';
 import { ProjectsContainerComponent } from '@layout/home/projects-container/projects-container.component';
 import { RegisterFormComponent } from '@layout/welcome/register-form/register-form.component';
+import { BEndService } from "../app/services/b-end.service";
+import { HttpClientModule } from "@angular/common/http";
+import { LoginComponent } from './layout/welcome/login-form/login.component';
+import { LoaderComponent } from '@shared/loader/loader.component';
+
+
 
 
 @NgModule({
@@ -40,8 +46,10 @@ import { RegisterFormComponent } from '@layout/welcome/register-form/register-fo
     AsideComponent,
     PorterComponent,
     SkillsComponent,
-    ProjectsContainerComponent
-   
+    ProjectsContainerComponent,
+    LoginComponent,
+    LoaderComponent
+ 
   ],
   imports: [
     
@@ -50,7 +58,7 @@ import { RegisterFormComponent } from '@layout/welcome/register-form/register-fo
     AppRoutingModule,
     ReactiveFormsModule,
     CoreModule,
-    SharedModule
+    HttpClientModule,
   ],
   exports: [RouterModule],
 
@@ -58,7 +66,7 @@ import { RegisterFormComponent } from '@layout/welcome/register-form/register-fo
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy
-  }
+  }, BEndService
     
   ],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 
-<div *ngIf="!visibilityOfSidebar" (click)="showAsidebar()" id="sidebar_container"></div> <!--abre cierra sidebar-->
+<div *ngIf="!visibilityOfSidebar" (mouseover)="showAsidebar()" id="sidebar_container"></div> <!--abre cierra sidebar-->
 
 <ng-container *ngIf="visibilityOfSidebar"> <!--muestra/oculta el sidebar-->
     <span (click)="showAsidebar()" class="material-symbols-outlined" id="menu">menu</span>

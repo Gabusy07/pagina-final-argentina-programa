@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +29,20 @@ export class HomeComponent implements OnInit {
     this.changeColumnSide();
   }
 
+  //revisar *********************
+  @HostListener("document:scroll")
+  enable_mainComponents():void{
+    if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) this.enableComponent = true;
+    
+    if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0)  this.enableProjectComponent = true;
+    else{
+       this.enableComponent = false;
+       this.enableProjectComponent = false;
+    }
+  }
+
+  enableProjectComponent:boolean = false
+  enableComponent:boolean = false;
   childMessage:string="";
   col_aside:string= "col-0";
   pos_about:string= "about_pos--before";

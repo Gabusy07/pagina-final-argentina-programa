@@ -14,6 +14,7 @@ export class WelcomeComponent implements OnInit {
 
   constructor() {
     this.signIn = false;
+    this.login = false;
    }
   
 
@@ -23,30 +24,39 @@ export class WelcomeComponent implements OnInit {
 
   }
 
-  // llamada al hacer click en 'ingresar'
+  // llamada al hacer click en 'ingresar' abre formulario
   enterHome(){
-    this.signIn = true
+    this.login = true
     this.optionSelected = true;
   }
 
   
 
-  // llamada al hacer click en 'registrar
+  // llamada al hacer click en 'registrar' abre formularip
   register () {
-    this.signUp = true;
+    this.signIn = true;
+    this.optionSelected = true;
   }
 
-// cerrar formulario en el welcome a partir del atributo 'closedForm' del child 'RegisterForm-Component'
-closeForm($event: boolean){
+// cerrar formulario en el welcome a partir del atributo 'closedRegisterForm' del child 'RegisterForm-Component'
+closeRegisterForm($event: boolean){
   this.signIn = $event;
   this.optionSelected = false
   
 }
 
+// cerrar formulario en el welcome a partir del atributo 'closedLoginForm' del child 'LoginForm-Component'
+closeLoginForm($event: boolean){
+  this.login = $event;
+  this.optionSelected = false
+  
+}
+
+
   // atributos para registrar y registrado
   optionSelected = false // desabilita los botones al abrir formulario
   signIn : boolean;
-  signUp : boolean = false;
+  login : boolean;
 
 }
 

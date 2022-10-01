@@ -14,7 +14,8 @@ export class UserService {
   
   //crea un usuario
   createUser(u: User): Observable<object>{
-    return this.request.post<User>(this.url+"/add", u);
+    
+    return this.request.post<User>(this.url+"/api/add", u);
   }
 
   deleteUser():void{}

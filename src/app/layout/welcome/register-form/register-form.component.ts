@@ -17,10 +17,12 @@ export class RegisterFormComponent implements OnInit {
   constructor( private router: Router, private readonly formBuilder : FormBuilder , private readonly httpSVC: UserService) {
     this.openedForm = true;
     this.form = this.initForm();
+    this.registeredUser = false;
     
    }
 
   ngOnInit(): void {
+
     
   }
 
@@ -63,8 +65,12 @@ export class RegisterFormComponent implements OnInit {
 
   submitSignIn(){
     // envia formulario y redirige a home
-    this.router.navigate(['home']); 
     this.saveUser()
+    if (this.registeredUser) this.router.navigate(['home']); 
+    else setTimeout(() => window.location.reload(), 700 ) ;
+
+    //ajustar esto
+    
 
   }
 
@@ -81,11 +87,17 @@ export class RegisterFormComponent implements OnInit {
 
     const user = this.form.value;
     const u = new User(user.name, user.lastname, user.nickname, user.email, user.password)
-    this.httpSVC.createUser(u).subscribe(data => alert ("usuario guardado con exito"))
+
+    this.httpSVC.createUser(u).subscribe({
+      next: data => {setTimeout (() => alert ("usuario guardado con exito"), 500),
+      this.registeredUser = true; // permite la navegacion a home
+    },
+      error: data => alert ("error en conexion al servidor")
+    });
   }
 
   openedForm: boolean;
-  
+  registeredUser: boolean;
   form: FormGroup;
   
 

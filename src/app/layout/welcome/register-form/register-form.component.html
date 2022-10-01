@@ -1,9 +1,30 @@
 <form [formGroup]="form"  class="container-fluid" id="enter_form">
     <button type="button" class="btn-close" id="close_button" aria-label="Close" (click)="closingForm()"></button>
+    
+    
     <div class="form-group-row elementP">
-        <label class="col-sm-2 col-form-label">Usuario:</label>
+        <label class="col-sm-2 col-form-label">Nombre:</label>
         <div class="col-sm-15">
-            <input class="form-control" type="text" name="user" formControlName="user" >
+            <input name="name" [ngClass]="{'is-invalid' : Name?.errors && Name?.touched, 'is-valid' : !Name?.errors && Name?.touched}" class="form-control" type="text" formControlName="name" >
+            <div *ngIf="Name?.errors && Name?.touched">
+                <small *ngIf="Name?.hasError('required')" class="text-danger">El campo nombre no debe estar vacio</small>
+                <small *ngIf="Name?.errors?.['maxlength']" class="text-danger">El nombre debe ser mas corto</small>
+            </div>
+       </div>
+    </div><br>
+    
+    
+    <div class="form-group-row elementP">
+        <label class="col-sm-2 col-form-label">Apellido:</label>
+        <div class="col-sm-15">
+            <input   name="lastname" [ngClass]="{'is-invalid' : Lastname?.errors && Lastname?.touched, 'is-valid' : !Lastname?.errors && Lastname?.touched}" class="form-control" type="text" formControlName="lastname" >
+       </div>
+    </div><br>
+    
+    <div class="form-group-row elementP">
+        <label class="col-sm-2 col-form-label">Nick Usuario:</label>
+        <div class="col-sm-15">
+            <input name="nickname" [ngClass]="{'is-invalid' : Nickname?.errors && Nickname?.touched, 'is-valid' : !Nickname?.errors && Nickname?.touched}"  class="form-control" type="text" required formControlName="nickname" >
        </div>
     </div><br>
         <div class="form-group-row elementP">

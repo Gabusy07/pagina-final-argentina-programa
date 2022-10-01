@@ -24,7 +24,7 @@ import { PorterComponent } from './layout/home/porter/porter.component';
 import { SkillsComponent } from '@layout/about/skills/skills.component';
 import { ProjectsContainerComponent } from '@layout/home/projects-container/projects-container.component';
 import { RegisterFormComponent } from '@layout/welcome/register-form/register-form.component';
-import { BEndService } from "../app/services/b-end.service";
+import { UserService } from "./services/http/User.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LoginComponent } from './layout/welcome/login-form/login.component';
 import { LoaderComponent } from '@shared/loader/loader.component';
@@ -65,7 +65,7 @@ import { LoaderInterceptor } from '@shared/loader/loader.interceptor';
 
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy},
-    BEndService,
+    UserService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true}
     
   ],

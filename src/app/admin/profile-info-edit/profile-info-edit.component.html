@@ -13,7 +13,10 @@
             <i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
             <span class="input-group-text">Descripción</span>
         </div>
-        <textarea class="form-control" aria-label="With textarea" name="textInput" [placeholder]="text"></textarea>
-        <button class="btn btn-secondary position-relative start-50 w-50 mr-2" (click)="onSubmitText()">editar</button>
+        <textarea class="form-control" aria-label="With textarea" name="textInput" [placeholder]="text"
+        [ngClass]="{'is-invalid' : Text?.errors && Text?.touched, 'is-valid' : !Text?.errors}" formControlName="text"
+        
+        ></textarea>
+        <button class="btn btn-secondary position-relative start-50 w-50 mr-2" (click)="onSubmitText()" [disabled]="form.invalid">editar</button>
     </form>
 </ng-template>

@@ -43,7 +43,7 @@ get Text(): any{
 
   onSubmitText(){
     const formText = this.form.value;
-    console.log(formText.text);
+    this.text = formText.text;
     this.onEditText = true;
 
   }

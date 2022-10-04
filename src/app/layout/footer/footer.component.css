@@ -1,27 +1,54 @@
 footer{
-    display: flex;
-    justify-content: right;
-    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     position: relative;
     bottom: 0px;
-    height: 100px;
+    height: 45vh;
     width: 100%;
-    padding: 15px 2.5% 1px 2.5%;
+
+    /* revisar */
+    mask-image: url("/assets/Hannah-Green-Therapy-Wave-Background (1) (1).svg");
+    background-size: cover;
+    padding: .5vh 2.5% 0.1vh 2.5%;
     
+}
+
+footer::before{
+    position: absolute;
+    left: 5%;
+    width: 500px;
+    height: 250px;
+    background-color: red;
+    z-index: 10;
+}
+
+h4{
+    position: relative;
+    top: 30vh;
+    margin: 1vh 1% auto 2.5%;
+    color: white;
+}
+
+#link_container{
+    display: flex;
+    justify-content: right;
 }
 
 
 
 footer a{
-    display: inline;
-    margin: auto 1% auto 2.5%;
-    background-color: black;
+    position: relative;
+    top: 30vh;
+    margin: 1vh 1% auto 2.5%;
     width: 25px;
-    transition: width;
+    fill: lightgray;
+    transition: width, transform, filter 0.5s;
 }
 
 footer a:hover{
-    width: 40px;
+    width: 35px;
     transition-delay: .10s;
+    transform: translateY(-5px);
+    filter: brightness(2.5);
 }
 

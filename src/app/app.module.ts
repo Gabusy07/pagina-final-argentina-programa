@@ -29,6 +29,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LoginComponent } from './layout/welcome/login-form/login.component';
 import { LoaderComponent } from '@shared/loader/loader.component';
 import { LoaderInterceptor } from '@shared/loader/loader.interceptor';
+import { ArrowComponent } from '@shared/arrow/arrow.component';
+import { KnowledgesEditComponent } from './admin/knowledges-edit/knowledges-edit.component';
+import { SkillsEditComponent } from './admin/skills-edit/skills-edit.component';
+import { ProfileInfoComponent } from './layout/about/profile-info/profile-info.component';
+import { ProfileInfoEditComponent } from './admin/profile-info-edit/profile-info-edit.component';
+import { ProjectsEditComponent } from './admin/projects-edit/projects-edit.component';
+import { FooterEditComponent } from './admin/footer-edit/footer-edit.component';
 
 
 
@@ -49,7 +56,14 @@ import { LoaderInterceptor } from '@shared/loader/loader.interceptor';
     SkillsComponent,
     ProjectsContainerComponent,
     LoginComponent,
-    LoaderComponent
+    LoaderComponent,
+    ArrowComponent,
+    KnowledgesEditComponent,
+    SkillsEditComponent,
+    ProfileInfoComponent,
+    ProfileInfoEditComponent,
+    ProjectsEditComponent,
+    FooterEditComponent
  
   ],
   imports: [

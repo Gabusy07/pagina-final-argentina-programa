@@ -6,12 +6,13 @@ import {HttpClientModule} from '@angular/common/http';
 import * as fromComponents from './components';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoaderComponent } from './loader/loader.component';
+import { ArrowComponent } from './arrow/arrow.component';
 
 
 @NgModule(
   {
   
-  declarations: [...fromComponents.components, ErrorPageComponent, LoaderComponent],
+  declarations: [...fromComponents.components, ErrorPageComponent, LoaderComponent, ArrowComponent],
   imports: [
     
     CommonModule,

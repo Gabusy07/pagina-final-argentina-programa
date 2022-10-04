@@ -15,7 +15,7 @@ export class UserService {
   //crea un usuario
   createUser(u: User): Observable<object>{
     
-    return this.request.post<User>(this.url+"/api/add", u);
+    return this.request.post<User>(this.url+"/user/add", u);
   }
 
   deleteUser():void{}
@@ -27,7 +27,7 @@ export class UserService {
   updateUser():void{}
 
   // conecta con UserController en el servidor
-  url = "http://localhost:8080/porfolio/user";
+  url = "http://localhost:8080/porfolio";
 
   
 }

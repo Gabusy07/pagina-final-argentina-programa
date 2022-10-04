@@ -68,8 +68,6 @@ export class RegisterFormComponent implements OnInit {
     this.saveUser()
     if (this.registeredUser) this.router.navigate(['home']); 
     else setTimeout(() => window.location.reload(), 700 ) ;
-
-    //ajustar esto
     
 
   }
@@ -99,7 +97,5 @@ export class RegisterFormComponent implements OnInit {
   openedForm: boolean;
   registeredUser: boolean;
   form: FormGroup;
-  
-
 
 }

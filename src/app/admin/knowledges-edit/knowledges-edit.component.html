@@ -1,1 +1,33 @@
-<p>knowledges-edit works!</p>
+<!--barra de progreso lenguajes y herramientas de programacion-->
+
+
+<div id="comp-container">
+    <h1 style="color: green">Conocimientos</h1>
+    
+    <small><b>  años de estudio</b></small><br>
+
+    <div class="d-flex justify-content-between"> <!--parte superior-->
+
+        <div class="sp">
+            <span>0</span>
+            <span>2</span>
+        </div>
+       
+        <div class="sp">
+            <span>0</span>
+            <span>2</span>
+        </div>
+    </div><br>
+    <!--recorrido de los elementos de array lenguages de knowledges.ts-->
+    <div class="row" *ngFor="let language_pares of languages">
+        <div class="col-6 mb-3" *ngFor="let language of language_pares">
+            <h5>{{language.nn}}</h5>
+            <div class="progress knw-container">
+                <div class="{{language.progressBar}} progress--bar" [ngStyle]="{'width' : language.width.toString()+'%'}">
+
+                </div>
+            </div>
+        </div>
+    </div><br>
+
+</div>

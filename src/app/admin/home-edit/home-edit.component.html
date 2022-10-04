@@ -10,19 +10,20 @@
 
         <div class="h-100">
           <app-aside *ngIf="enableAside" (messageEvent)="receiveMessage($event)" id="aside"></app-aside>
-          <app-about *ngIf="enableComponent"  class="{{pos_about}}"></app-about>
+          <app-about-edit *ngIf="enableComponent"  class="{{pos_about}}"></app-about-edit>
         </div>
             
         <div class="container-fluid">
           <!--catalogo de proyectos (deben estar hubicados en componentes independientes)-->
-            <app-projects-container *ngIf="enableProjectComponent"></app-projects-container>
+            <app-projects-edit *ngIf="enableProjectComponent"></app-projects-edit>
         </div>
       
     </main>
 
-    <app-footer *ngIf="enableFooterComponent"></app-footer>
+    <app-footer-edit *ngIf="enableFooterComponent"></app-footer-edit>
 </div> 
 
-<app-home-edit></app-home-edit>
+
+
 
  

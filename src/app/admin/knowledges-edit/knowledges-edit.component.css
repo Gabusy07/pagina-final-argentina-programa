@@ -1,0 +1,32 @@
+
+#comp-container{
+    margin-left: 5%;
+    margin-right: 0%;
+    
+  }
+  
+  .sp{
+      display: flex;
+      justify-content: space-between;
+      width: 50%;
+      font-weight: bold;
+      margin: auto 2% auto 0.5%;
+  }
+  
+  
+  
+  .knw-container{
+      width: 100%;
+      margin: 1% auto;
+     
+  }
+  
+  .progress--bar{
+      animation: knw-animated-bar ease-out 2.5s forwards;
+  }
+  
+  @keyframes knw-animated-bar {
+      from{
+          width: 0%;
+      }
+  }

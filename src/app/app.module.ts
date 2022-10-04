@@ -36,6 +36,8 @@ import { ProfileInfoComponent } from './layout/about/profile-info/profile-info.c
 import { ProfileInfoEditComponent } from './admin/profile-info-edit/profile-info-edit.component';
 import { ProjectsEditComponent } from './admin/projects-edit/projects-edit.component';
 import { FooterEditComponent } from './admin/footer-edit/footer-edit.component';
+import { HomeEditComponent } from './admin/home-edit/home-edit.component';
+import { AboutEditComponent } from './admin/about-edit/about-edit.component';
 
 
 
@@ -63,7 +65,9 @@ import { FooterEditComponent } from './admin/footer-edit/footer-edit.component';
     ProfileInfoComponent,
     ProfileInfoEditComponent,
     ProjectsEditComponent,
-    FooterEditComponent
+    FooterEditComponent,
+    HomeEditComponent,
+    AboutEditComponent
  
   ],
   imports: [

@@ -1,1 +1,19 @@
-<p>profile-info-edit works!</p>
+<div>
+    <i class="bi bi-pencil-square pen"></i>
+    <img src="#" alt="foto" class="img-fluid rounded float-right">
+</div>
+<div *ngIf="onEditText; else elseInputText">
+<i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
+<p>{{text}}</p>
+</div>
+
+<ng-template #elseInputText>
+    <form [formGroup]="form"  class="container-fluid">
+        <div class="input-group-prepend">
+            <i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
+            <span class="input-group-text">Descripción</span>
+        </div>
+        <textarea class="form-control" aria-label="With textarea" name="textInput" [placeholder]="text"></textarea>
+        <button class="btn btn-secondary position-relative start-50 w-50 mr-2" (click)="onSubmitText()">editar</button>
+    </form>
+</ng-template>

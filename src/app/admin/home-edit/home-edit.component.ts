@@ -1,0 +1,60 @@
+import { Component, HostListener, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-home-edit',
+  templateUrl: './home-edit.component.html',
+  styleUrls: ['./home-edit.component.css']
+})
+export class HomeEditComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+
+  changeColumnSide(){
+    this.pos_about = this.childMessage == "active"? "about_pos--before" : "about_pos--after";
+    //this.col_aside = this.childMessage == "active"? "aside_pos--before": "aside_pos--before";
+
+  }
+  
+  receiveMessage($event:string) {  //recibe de asideComponent un mensaje de activo o inactivo del aside
+    this.childMessage = $event
+    this.changeColumnSide();
+  }
+
+  //revisar *********************
+  @HostListener("document:scroll")
+  enable_mainComponents():void{
+    if(document.body.scrollTop > 1 || document.documentElement.scrollTop > 0){
+      this.enableComponent = true;
+      this.enableArrow = false;
+      this.enableAside = true;
+
+    } 
+    
+    if(document.body.scrollTop > 1 || document.documentElement.scrollTop > 0)  this.enableProjectComponent = true;
+
+    if(document.body.scrollTop > 2 || document.documentElement.scrollTop > 0)  this.enableFooterComponent = true;
+    else{
+       this.enableComponent = false;
+       this.enableProjectComponent = false;
+       this.enableFooterComponent = false;
+       this.enableArrow = true;
+       this.enableAside = false;
+    }
+  }
+
+  enableAside: boolean = false;
+  enableArrow: boolean = true;
+  enableFooterComponent: boolean = false;
+  enableProjectComponent:boolean = false
+  enableComponent:boolean = false;
+  childMessage:string="";
+  col_aside:string= "col-0";
+  pos_about:string= "about_pos--before";
+
+
+}
+

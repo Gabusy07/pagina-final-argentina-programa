@@ -1,7 +1,26 @@
-<div>
-    <i class="bi bi-pencil-square pen"></i>
+<!--foto-->
+<div *ngIf="onEditPhoto; else elseInputPhoto">
+    <i class="bi bi-pencil-square pen" (click)="photoEditPen()"></i>
     <img src="#" alt="foto" class="img-fluid rounded float-right">
 </div>
+
+<ng-template #elseInputPhoto>
+    <div class="container">
+        <div class="input-group-prepend">
+            <i class="bi bi-pencil-square pen" (click)="photoEditPen()"></i>
+            <span class="input-group-text">foto de perfil</span>
+        </div>
+        
+        <input type="text" [(ngModel)]="urlPhoto" placeholder="escribe una URL...">
+        <p>{{urlPhoto}}</p><br>
+        <button class="btn btn-secondary d-block position-relative start-25 w-75 m-2" (click)="onSubmitPhoto()" >editar</button>
+        <button class="btn btn-danger d-block position-relative start-30 w-75 m-2" (click)="onDeletePhoto()" >eliminar</button>
+    </div>
+</ng-template>
+<br>
+
+
+<!--descripción-->
 <div *ngIf="onEditText; else elseInputText">
 <i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
 <p>{{text}}</p>

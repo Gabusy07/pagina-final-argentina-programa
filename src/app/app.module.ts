@@ -10,7 +10,7 @@ import { HomeComponent } from './layout/home/home.component';
 import { WelcomeComponent } from './layout/welcome/welcome.component';
 import { CalculatorComponent } from './shared/components/calculator/calculator.component';
 
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { KnowledgesComponent } from './layout/about/knowledges/knowledges.component';
 
@@ -67,7 +67,7 @@ import { AboutEditComponent } from './admin/about-edit/about-edit.component';
     ProjectsEditComponent,
     FooterEditComponent,
     HomeEditComponent,
-    AboutEditComponent
+    AboutEditComponent,
  
   ],
   imports: [
@@ -78,6 +78,7 @@ import { AboutEditComponent } from './admin/about-edit/about-edit.component';
     ReactiveFormsModule,
     CoreModule,
     HttpClientModule,
+    FormsModule
   ],
   exports: [RouterModule],
 

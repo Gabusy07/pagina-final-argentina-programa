@@ -2,7 +2,9 @@
 
 
 <div id="comp-container">
-    <h1 style="color: green">Conocimientos</h1>
+    <div>
+      <h1 style="color: green">Conocimientos</h1>
+    </div>
     
     <small><b>  años de estudio</b></small><br>
 
@@ -20,7 +22,9 @@
     </div><br>
     <!--recorrido de los elementos de array lenguages de knowledges.ts-->
     <div class="row" *ngFor="let language_pares of languages">
-        <div class="col-6 mb-3" *ngFor="let language of language_pares">
+        <div class="col-6 mb-3 position-relative" *ngFor="let language of language_pares">
+            <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen()"></i>
+            <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash()"></i>
             <h5>{{language.nn}}</h5>
             <div class="progress knw-container">
                 <div class="{{language.progressBar}} progress--bar" [ngStyle]="{'width' : language.width.toString()+'%'}">
@@ -29,5 +33,24 @@
             </div>
         </div>
     </div><br>
+    <i class="bi bi-plus-square text-dark" id="add_square" (click)="onAddSquare()" *ngIf="!openKnwForm"></i>
+
+
+ <div *ngIf="openKnwForm">
+    <form [formGroup]="knwForm">
+        <button *ngIf="openKnwForm" type="button" class="btn-close" id="close_button" aria-label="Close" (click)="onCloseKnwForm()"></button>
+        <div class="form-group-row elementP div">
+            <label class="col-sm-2 col-form-label">Nombre:</label>
+            <div class="col-sm-15">
+                <input [ngClass]="{'is-invalid' : Name?.errors && Name?.touched, 'is-valid' : !Name?.errors && Name?.touched}" class="form-control"  type="text" formControlName="name" >
+           </div>
+           <label class="col-sm-2 col-form-label">Fecha:</label>
+            <div class="col-sm-15">
+                <input [ngClass]="{'is-invalid' : Date?.errors && Date?.touched, 'is-valid' : !Date?.errors && Date?.touched}" class="form-control" type="date" max="2022-10-7" formControlName="date" >
+           </div>
+           <input type="submit" class="btn btn-secondary" (click)="submitForm()" [disabled]="knwForm.invalid">
+        </div>
+    </form>
+</div>
 
 </div>

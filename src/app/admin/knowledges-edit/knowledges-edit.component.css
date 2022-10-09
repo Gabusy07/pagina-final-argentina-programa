@@ -20,6 +20,36 @@
       margin: 1% auto;
      
   }
+
+  .pen{
+    position: absolute;
+    cursor: pointer;
+}
+
+#add_square{
+    margin: auto 25%;
+
+    height: 2rem;
+    width: 2rem;
+    font-size: 2rem;
+    transition: font-size filter .25s;
+}
+
+#add_square:hover{
+    font-size: 2.5rem;
+    filter: brightness(1.1)
+}
+
+
+#edit_pen{
+    right: 5%;
+    top: 0%;
+
+}
+#delete_trash{
+    right: 0%;
+    top: 0%;
+}
   
   .progress--bar{
       animation: knw-animated-bar ease-out 2.5s forwards;

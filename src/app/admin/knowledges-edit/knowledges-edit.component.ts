@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-knowledges-edit',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KnowledgesEditComponent implements OnInit {
 
-  constructor() {
+  constructor(private readonly formBuilder : FormBuilder) {
+
+    this.datePickerId =new Date().toISOString().split("T")[0];
+    console.log(this.datePickerId)
+    this.knwForm = this.initKnwForm();
+
 
     this.languages = [
       [{nn : "Python",
@@ -64,6 +70,57 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
+   //construccion del reactiveForm
+   initKnwForm(): FormGroup{
+    return this.formBuilder.group({
+      name: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
+      date: ['',[Validators.required]],
+    })
+
+  }
+
+  get Name (){
+    return this.knwForm.get('name');
+
+  }
+
+  get Date (){
+    return this.knwForm.get('date');
+
+  }
+
+  submitForm(){
+    this.openKnwForm = false;
+    alert("datos guardados");
+    console.log(this.knwForm.value);
+
+  }
+
+  onEditPen():void{
+    this.editPen = this.editPen == false ? true : false;
+
+  }
+
+  onDeleteTrash():void{
+    this.deleteTrash = this.deleteTrash == false ? true : false;
+
+  }
+
+  onAddSquare():void{
+    this.openKnwForm =true;
+
+  }
+
+  onCloseKnwForm():void{
+    this.openKnwForm = false;
+
+  }
+
+
+
+
+
+
   progressBarColor(objList:any[]){
     for (let languagesList of objList){
       for (let language of languagesList){
@@ -91,7 +148,13 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
- languages: any[];
+
+datePickerId: String;
+languages: any[];
+openKnwForm:boolean = false;
+editPen:boolean = false;
+deleteTrash:boolean = false;
+knwForm: FormGroup;
 }
 
 

@@ -36,7 +36,8 @@ get Text(): any{
   return this.form.get('text');
 }
 
-  textEditPen(){
+//para editar el texto descriptivo principal 
+textEditPen(){
     this.onEditText = this.onEditText == false ? true : false;
 
   }
@@ -48,10 +49,29 @@ get Text(): any{
 
   }
 
+  /*  -----------------------------
+  para cambiar la foto de perfil*/
+  photoEditPen():void{
+    this.onEditPhoto = this.onEditPhoto == false ? true : false;
+    console.log(this.urlPhoto)
+
+  }
+
+  onSubmitPhoto():void{ 
+    this.onEditPhoto = true;
+
+  }
+
+  onDeletePhoto():void{
+    this.onEditPhoto = this.onEditPhoto == false ? true : false;
+    this.urlPhoto = "";
+
+  }
 
 
 
   text: any = "";
+  urlPhoto: string = "";
   onEditPhoto: boolean = true;
   onEditText: boolean = true;
   form: FormGroup;

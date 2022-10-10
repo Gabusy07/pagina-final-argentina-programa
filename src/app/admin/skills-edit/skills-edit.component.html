@@ -1,6 +1,16 @@
 <div id="container" class="row d-flex p2 justify-content-between">
-    <div *ngFor="let skill of listOfSkills; let i = index" class="col-3 box_skill">
+    <div *ngFor="let skill of listOfSkills; let i = index" class="col-3 box_skill position-relative">
+      <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen(i)"></i>
+      <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash(i)"></i>
       <div [@animation1]="stateDiv[i]" class="alert alert-info " (mouseenter)="enlarge(i)" (mouseleave)="reduce(i)">{{skill}}
        </div>
+
+       <button *ngIf="deleteTrash && i == indexSkill" class="btn btn-outline-danger w-75 " (click)="onDeleteButtom(i)">eliminar</button>
      </div>
+     <div *ngIf="editPen" class="form-group-row card p-3">
+        <label class="col-sm-2 col-form-label">Habilidad:</label>
+        <div class="col-sm-5">
+            <input name="habilidad"  class="form-control" type="text" required formControlName="habilidad">
+            <button class="btn btn-outline-warning m-1">editar</button>
+        </div>
   </div>

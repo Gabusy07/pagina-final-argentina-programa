@@ -4,16 +4,30 @@
     width: 20%;
     text-align: center;
     margin: 2.5%;
+    cursor:none;
     
 }
 
-.sk{
-    cursor:none;
-}
+
 
 #container{
     width: 95%;
     padding: 2.5%;
+}
+
+/*botones edicion*/
+.pen{
+    position: absolute;
+    cursor: pointer;
+    top: -25%;
+}
+
+#edit_pen{
+    right: 0%;
+
+}
+#delete_trash{
+    right: -10%;
 }
 
 @media screen and (max-width:750px){

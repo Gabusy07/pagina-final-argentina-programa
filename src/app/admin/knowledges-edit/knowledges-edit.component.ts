@@ -111,7 +111,6 @@ export class KnowledgesEditComponent implements OnInit {
   onDeleteButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
     
     this.languages = this.languages.splice(i);
-    console.log(this.languages)
     window.location.reload()
 
   }

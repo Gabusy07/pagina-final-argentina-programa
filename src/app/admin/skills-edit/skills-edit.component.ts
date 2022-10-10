@@ -22,7 +22,6 @@ export class SkillsEditComponent implements OnInit {
     for (let i=0; i<this.listOfSkills.length; i++){
       this.stateDiv.push("state1");
     }
-    console.log(this.stateDiv)
   
    }
 
@@ -40,9 +39,33 @@ export class SkillsEditComponent implements OnInit {
     this.stateDiv[index] =  "estado1";
   }
 
+  onEditPen(index:number):void{
+    this.indexSkill = index;
+    this.editPen = this.editPen == false ? true : false;
+    this.deleteTrash = false;
+
+  }
+
+  onDeleteTrash(index:number):void{
+    this.indexSkill = index;
+    this.editPen =  false;
+    this.deleteTrash = this.deleteTrash == false ? true : false;
+
+  }
+
+  onDeleteButtom(i:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
+    
+    this.listOfSkills = this.listOfSkills.splice(i);
+    window.location.reload()
+
+  }
+
 
   listOfSkills:string[] = ["ingles(B2)", "aservito", "comprometido", "proactivo"];
   stateDiv: string[] = [];
+  indexSkill: number =NaN;
+  editPen:boolean = false;
+  deleteTrash:boolean = false;
 
   
 

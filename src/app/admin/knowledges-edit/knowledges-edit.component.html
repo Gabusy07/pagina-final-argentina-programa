@@ -21,19 +21,26 @@
         </div>
     </div><br>
     <!--recorrido de los elementos de array lenguages de knowledges.ts-->
-    <div class="row" *ngFor="let language_pares of languages">
-        <div class="col-6 mb-3 position-relative" *ngFor="let language of language_pares">
-            <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen()"></i>
-            <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash()"></i>
+    <div class="row" *ngFor="let language_pares of languages; let i=index">
+        <div class="col-6 mb-3 position-relative" *ngFor="let language of language_pares; let j=index">
+            <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen(i, j)"></i>
+            <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash(i, j)"></i>
             <h5>{{language.nn}}</h5>
+            <input *ngIf="editPen && i ==indexsEditLang[0] && j == indexsEditLang[1]" class="form-control m-2" type="text" [placeholder]="language.nn">
+            <input *ngIf="editPen && i ==indexsEditLang[0] && j == indexsEditLang[1]" class="form-control m-2" type="date" [max]="datePickerId">
+            <button *ngIf="editPen && i ==indexsEditLang[0] && j == indexsEditLang[1]" class="btn btn-warning m-1">editar</button>
+            <button *ngIf="deleteTrash && i ==indexsDeleteLang[0] && j == indexsDeleteLang[1]" class="btn btn-danger" (click)="onDeleteButtom(i,j)">eliminar</button>
+
+
+        
             <div class="progress knw-container">
                 <div class="{{language.progressBar}} progress--bar" [ngStyle]="{'width' : language.width.toString()+'%'}">
-
                 </div>
             </div>
         </div>
     </div><br>
     <i class="bi bi-plus-square text-dark" id="add_square" (click)="onAddSquare()" *ngIf="!openKnwForm"></i>
+
 
 
  <div *ngIf="openKnwForm">
@@ -54,3 +61,41 @@
 </div>
 
 </div>
+
+
+<!--
+
+<div id="comp-container">
+    <div class="position-relative">
+      <h1 style="color: green">Conocimientos</h1>
+      <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen()"></i>
+      <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash()"></i>
+    </div>
+    
+    <small><b>  años de estudio</b></small><br>
+
+    <div class="d-flex justify-content-between">
+
+        <div class="sp">
+            <span>0</span>
+            <span>2</span>
+        </div>
+       
+        <div class="sp">
+            <span>0</span>
+            <span>2</span>
+        </div>
+    </div><br>
+    <div class="row" *ngFor="let language_pares of languages">
+        <div class="col-6 mb-3 position-relative" *ngFor="let language of language_pares">
+            <input *ngIf="editPen" type="text" [placeholder]="language.nn" class="form-control">
+            <input *ngIf="editPen" type="date" [max]="datePickerId" class="form-control">
+            <button *ngIf="editPen" class="btn btn-warning">editar</button>
+            <button *ngIf="deleteTrash" class="btn btn-danger">eliminar</button>
+            <h5 *ngIf="!editPen">{{language.nn}}</h5>
+            <div *ngIf="!editPen" class="progress knw-container">
+                <div class="{{language.progressBar}} progress--bar" [ngStyle]="{'width' : language.width.toString()+'%'}">
+                </div>
+            </div>
+
+-->

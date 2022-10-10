@@ -17,14 +17,12 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class SkillsEditComponent implements OnInit {
 
-
-  div1 = "estado1";
-  div2 = "estado1";
-  div3 = "estado1";
-  div4 = "estado1";
-  arrayDivs: any[] = [this.div1, this.div2, this.div3, this.div4];
   
   constructor() {
+    for (let i=0; i<this.listOfSkills.length; i++){
+      this.stateDiv.push("state1");
+    }
+    console.log(this.stateDiv)
   
    }
 
@@ -34,13 +32,17 @@ export class SkillsEditComponent implements OnInit {
 
   // agranda el div de una skill
   enlarge(index: number){
-     this.arrayDivs[index] = "estado2" ;
+     this.stateDiv[index] = "estado2" ;
   }
 
   // achica el div de una skill
   reduce(index: number){
-    this.arrayDivs[index] =  "estado1";
+    this.stateDiv[index] =  "estado1";
   }
+
+
+  listOfSkills:string[] = ["ingles(B2)", "aservito", "comprometido", "proactivo"];
+  stateDiv: string[] = [];
 
   
 

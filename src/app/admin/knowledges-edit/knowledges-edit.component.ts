@@ -95,13 +95,24 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
-  onEditPen():void{
+  onEditPen(i:number, j:number):void{
+    
+    this.indexsEditLang = [i, j];
     this.editPen = this.editPen == false ? true : false;
 
   }
 
-  onDeleteTrash():void{
+  onDeleteTrash(i:number, j:number):void{
+    this.indexsDeleteLang = [i, j];
     this.deleteTrash = this.deleteTrash == false ? true : false;
+
+  }
+
+  onDeleteButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
+    
+    this.languages = this.languages.splice(i);
+    console.log(this.languages)
+    window.location.reload()
 
   }
 
@@ -147,13 +158,14 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
-
-datePickerId: String;
-languages: any[];
-openKnwForm:boolean = false;
-editPen:boolean = false;
-deleteTrash:boolean = false;
-knwForm: FormGroup;
+  indexsDeleteLang: number[] =[NaN,NaN];
+  indexsEditLang: number[] =[NaN,NaN];
+  datePickerId: String;
+  languages: any[];
+  openKnwForm:boolean = false;
+  editPen:boolean = false;
+  deleteTrash:boolean = false;
+  knwForm: FormGroup;
 }
 
 

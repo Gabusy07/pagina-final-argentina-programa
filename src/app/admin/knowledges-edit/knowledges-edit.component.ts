@@ -10,7 +10,7 @@ export class KnowledgesEditComponent implements OnInit {
 
   constructor(private readonly formBuilder : FormBuilder) {
 
-    this.datePickerId =new Date().toISOString().split("T")[0];
+    this.datePickerId =new Date().toISOString().substring(0, 10);
     console.log(this.datePickerId)
     this.knwForm = this.initKnwForm();
 
@@ -92,7 +92,6 @@ export class KnowledgesEditComponent implements OnInit {
   submitForm(){
     this.openKnwForm = false;
     alert("datos guardados");
-    console.log(this.knwForm.value);
 
   }
 

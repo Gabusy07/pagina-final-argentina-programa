@@ -46,7 +46,7 @@
            </div>
            <label class="col-sm-2 col-form-label">Fecha:</label>
             <div class="col-sm-15">
-                <input [ngClass]="{'is-invalid' : Date?.errors && Date?.touched, 'is-valid' : !Date?.errors && Date?.touched}" class="form-control" type="date" max="2022-10-7" formControlName="date" >
+                <input [ngClass]="{'is-invalid' : Date?.errors && Date?.touched, 'is-valid' : !Date?.errors && Date?.touched}" class="form-control" type="date" [max]="datePickerId" formControlName="date" >
            </div>
            <input type="submit" class="btn btn-secondary" (click)="submitForm()" [disabled]="knwForm.invalid">
         </div>

@@ -48,11 +48,11 @@
         <div class="form-group-row elementP div">
             <label class="col-sm-2 col-form-label">Nombre:</label>
             <div class="col-sm-15">
-                <input [ngClass]="{'is-invalid' : Name?.errors && Name?.touched, 'is-valid' : !Name?.errors && Name?.touched}" class="form-control"  type="text" formControlName="name" >
+                <input [ngClass]="{'is-invalid' : Name?.errors && Name?.touched, 'is-valid' : !Name?.errors && Name?.touched}" class="form-control w-75"  type="text" formControlName="name" >
            </div>
            <label class="col-sm-2 col-form-label">Fecha:</label>
             <div class="col-sm-15">
-                <input [ngClass]="{'is-invalid' : Date?.errors && Date?.touched, 'is-valid' : !Date?.errors && Date?.touched}" class="form-control" type="date" [max]="datePickerId" formControlName="date" >
+                <input [ngClass]="{'is-invalid' : Date?.errors && Date?.touched, 'is-valid' : !Date?.errors && Date?.touched}" class="form-control w-75" type="date" [max]="datePickerId" formControlName="date" >
            </div>
            <input type="submit" class="btn btn-secondary" (click)="submitForm()" [disabled]="knwForm.invalid">
         </div>

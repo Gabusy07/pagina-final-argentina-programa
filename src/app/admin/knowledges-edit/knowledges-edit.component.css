@@ -28,7 +28,6 @@
 
 #add_square{
     margin: auto 25%;
-
     height: 2rem;
     width: 2rem;
     font-size: 2rem;
@@ -50,6 +49,8 @@
     right: 0%;
     top: 0%;
 }
+
+
   
   .progress--bar{
       animation: knw-animated-bar ease-out 2.5s forwards;

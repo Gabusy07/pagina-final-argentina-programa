@@ -28,6 +28,8 @@ export class SkillsEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+
 
   // agranda el div de una skill
   enlarge(index: number){
@@ -39,14 +41,25 @@ export class SkillsEditComponent implements OnInit {
     this.stateDiv[index] =  "estado1";
   }
 
-  onEditPen(index:number):void{
+  onEditPen(index:number):void{ //icono editar
     this.indexSkill = index;
     this.editPen = this.editPen == false ? true : false;
     this.deleteTrash = false;
+    let skillEditable = document.getElementById(index+"div");
+    if (this.editPen){
+      skillEditable?.setAttribute("contenteditable", "true");
+    }else{
+      skillEditable?.setAttribute("contenteditable", "false");
+      skillEditable?.autofocus;
+    }
+    
+
+    
+    
 
   }
 
-  onDeleteTrash(index:number):void{
+  onDeleteTrash(index:number):void{ //icono eliminar
     this.indexSkill = index;
     this.editPen =  false;
     this.deleteTrash = this.deleteTrash == false ? true : false;
@@ -60,8 +73,19 @@ export class SkillsEditComponent implements OnInit {
 
   }
 
+  onEditButtom(index:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
+    
+    this.editPen = this.editPen == false ? true : false;
+    this.deleteTrash = false;
+    let skillEditable = document.getElementById(index+"div");
+    skillEditable?.setAttribute("contenteditable", "false");
+    skillEditable?.setAttribute("autofocus", "false");
+    
 
-  listOfSkills:string[] = ["ingles(B2)", "aservito", "comprometido", "proactivo"];
+  }
+
+
+  listOfSkills:string[] = ["ingles(B2)", "asertivo", "comprometido", "proactivo"];
   stateDiv: string[] = [];
   indexSkill: number =NaN;
   editPen:boolean = false;

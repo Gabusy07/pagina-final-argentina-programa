@@ -11,7 +11,6 @@ export class KnowledgesEditComponent implements OnInit {
   constructor(private readonly formBuilder : FormBuilder) {
 
     this.datePickerId =new Date().toISOString().substring(0, 10);
-    console.log(this.datePickerId)
     this.knwForm = this.initKnwForm();
 
 
@@ -99,12 +98,14 @@ export class KnowledgesEditComponent implements OnInit {
     
     this.indexsEditLang = [i, j];
     this.editPen = this.editPen == false ? true : false;
+    this.deleteTrash = false;
 
   }
 
   onDeleteTrash(i:number, j:number):void{
     this.indexsDeleteLang = [i, j];
     this.deleteTrash = this.deleteTrash == false ? true : false;
+    this.editPen = false;
 
   }
 
@@ -157,6 +158,7 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
+  
   indexsDeleteLang: number[] =[NaN,NaN];
   indexsEditLang: number[] =[NaN,NaN];
   datePickerId: String;

@@ -20,6 +20,14 @@
     position: absolute;
     cursor: pointer;
     top: -25%;
+    transition: scale, transform 0.2s;
+}
+
+.pen:hover{
+    scale: 1.5;
+    transition-delay: .05s;
+    transform: translateY(-5px);
+    filter: brightness(.75);
 }
 
 #edit_pen{
@@ -29,6 +37,14 @@
 #delete_trash{
     right: -10%;
 }
+
+
+#skill_up_text{
+    border-right:0rem;
+    border-left:0rem;
+    border-bottom:0rem;
+}
+
 
 @media screen and (max-width:750px){
     .box_skill{

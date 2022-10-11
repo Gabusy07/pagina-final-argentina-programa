@@ -29,9 +29,9 @@ export class RegisterFormComponent implements OnInit {
   //construccion del reactiveForm
   initForm(): FormGroup{
     return this.formBuilder.group({
-      nickname: ['',[Validators.required, Validators.pattern('[/^[a-z][a-z]+\d*$|^[a-z]\d\d+$/i]')]],
-      name: ['',[Validators.required ,Validators.pattern('[a-zA-Z ]*'), Validators.minLength(1), Validators.maxLength(50)]],
-      lastname: ['',[Validators.required, Validators.pattern('[a-zA-Z ]*') , Validators.minLength(1), Validators.maxLength(50)]],
+      nickname: ['',[Validators.required, Validators.pattern("^[A-Za-z]\\w*$"), Validators.minLength(5), Validators.maxLength(12)]],
+      name: ['',[Validators.required ,Validators.pattern('^[a-zA-ZÀ-ÿ \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ \u00f1\u00d1]+$'), Validators.minLength(1), Validators.maxLength(50)]],
+      lastname: ['',[Validators.required, Validators.pattern('^[a-zA-ZÀ-ÿ \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ \u00f1\u00d1]+$') , Validators.minLength(1), Validators.maxLength(50)]],
       email: ['',[Validators.required, Validators.email]],
       password: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(18)]],
     })
@@ -68,8 +68,6 @@ export class RegisterFormComponent implements OnInit {
     this.saveUser()
     if (this.registeredUser) this.router.navigate(['home']); 
     else setTimeout(() => window.location.reload(), 700 ) ;
-
-    //ajustar esto
     
 
   }
@@ -99,7 +97,5 @@ export class RegisterFormComponent implements OnInit {
   openedForm: boolean;
   registeredUser: boolean;
   form: FormGroup;
-  
-
 
 }

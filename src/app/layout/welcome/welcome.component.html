@@ -8,12 +8,14 @@
   </div>
   
    
-  <main class="container-fluid">
+  <main class="container-fluid" id="sub_container">
     <div id="principal_background">
       <h1 class="text-center" id="welcome_message">BIENVENID@!<span>&#160;</span></h1>
     </div>
     <!--formularios de ingreso y registro -->
-    <app-register-form (onCloseRegisterEvent)="closeRegisterForm($event)" *ngIf="signIn"></app-register-form>
-    <app-login (onCloseLogingEvent)="closeLoginForm($event)" *ngIf="login"></app-login>
+    <div id="form">
+      <app-register-form (onCloseRegisterEvent)="closeRegisterForm($event)" *ngIf="signIn"></app-register-form>
+      <app-login (onCloseLogingEvent)="closeLoginForm($event)" *ngIf="login"></app-login>
+    </div>
   </main>
 </div>

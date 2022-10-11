@@ -22,8 +22,8 @@
             <small *ngIf="Password?.errors?.['maxlength']" class="text-danger">El campo contraseña debe ser mas corta</small>
         </div>
    </div><br>
-   <div class="d-grid gap-2">
-    <input type="submit" class="btn btn-primary" (click)="submitlogin()" [disabled]="form.invalid">
+   <div class="d-grid gap-2 opacity-100">
+    <input type="submit" class="btn btn-primary" id="submit_button" (click)="submitlogin()" [disabled]="form.invalid">
    </div>
 
 

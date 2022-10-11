@@ -1,7 +1,16 @@
 #container{
-    padding: 0%;
+    padding: 1%;
     height: 100%;
     width: 100%;
+}
+
+
+#form{
+    position: absolute;
+    top: 5vh;
+    right: 15vw;
+    margin: 10%;
+
 }
 
 

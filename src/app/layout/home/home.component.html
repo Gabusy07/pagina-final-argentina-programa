@@ -4,11 +4,12 @@
     <app-porter></app-porter>
     
     <app-navigation id="navbar"></app-navigation>
+    <app-arrow *ngIf="enableArrow"></app-arrow>
 
     <main class="container-fluid" id="main_about">
 
         <div class="h-100">
-          <app-aside (messageEvent)="receiveMessage($event)"></app-aside>
+          <app-aside *ngIf="enableAside" (messageEvent)="receiveMessage($event)" id="aside"></app-aside>
           <app-about *ngIf="enableComponent"  class="{{pos_about}}"></app-about>
         </div>
             
@@ -19,7 +20,9 @@
       
     </main>
 
-    <app-footer></app-footer>
-</div>  
+    <app-footer *ngIf="enableFooterComponent"></app-footer>
+</div> 
+
+<app-home-edit></app-home-edit>
 
  

@@ -15,10 +15,12 @@ export class UserService {
   //crea un usuario
   createUser(u: User): Observable<object>{
     
-    return this.request.post<User>(this.url+"/api/add", u);
+    return this.request.post<User>(this.url+"/add", u);
   }
 
-  deleteUser():void{}
+  deleteUser(id:BigInt):Observable<object>{
+    return  this.request.delete(this.url+"/delete/"+id);
+  }
 
   getUser():void{
     //debe retornar user

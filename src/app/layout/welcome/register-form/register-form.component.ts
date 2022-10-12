@@ -14,7 +14,7 @@ export class RegisterFormComponent implements OnInit {
   
   @Output() onCloseRegisterEvent = new EventEmitter<boolean>();
 
-  constructor( private router: Router, private readonly formBuilder : FormBuilder , private readonly httpSVC: UserService) {
+  constructor( private router: Router, private readonly formBuilder : FormBuilder , private readonly httpSvc: UserService) {
     this.openedForm = true;
     this.form = this.initForm();
     this.registeredUser = false;
@@ -26,8 +26,9 @@ export class RegisterFormComponent implements OnInit {
     
   }
 
+  //formulario
   //construccion del reactiveForm
-  initForm(): FormGroup{
+  public initForm(): FormGroup{
     return this.formBuilder.group({
       nickname: ['',[Validators.required, Validators.pattern("^[A-Za-z]\\w*$"), Validators.minLength(5), Validators.maxLength(12)]],
       name: ['',[Validators.required ,Validators.pattern('^[a-zA-ZÀ-ÿ \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ \u00f1\u00d1]+$'), Validators.minLength(1), Validators.maxLength(50)]],
@@ -39,23 +40,23 @@ export class RegisterFormComponent implements OnInit {
   }
   
 
-  get Name(){
+  public get Name(){
     return this.form.get('name');
   }
 
-  get Lastname(){
+  public get Lastname(){
     return this.form.get('lastname');
   }
 
-  get Email(){
+  public get Email(){
     return this.form.get('email');
   }
 
-  get Password(){
+  public get Password(){
     return this.form.get('password');
   }
 
-  get Nickname(){
+  public get Nickname(){
     return this.form.get('nickname');
   }
 
@@ -63,39 +64,51 @@ export class RegisterFormComponent implements OnInit {
 
   // revisar para luego cambiar a un metodo post
 
-  submitSignIn(){
+  public submitSignIn(){
     // envia formulario y redirige a home
     this.saveUser()
+    console.log(this.a);
     if (this.registeredUser) this.router.navigate(['home']); 
-    else setTimeout(() => window.location.reload(), 700 ) ;
+    else setTimeout(() => window.location.reload(), 550 ) ;
+    
     
 
   }
 
   // cerrar formulario al presionar 'x/close'
  
-  closingForm(){
+  public closingForm(){
     this.openedForm = false;
     this.onCloseRegisterEvent.emit(this.openedForm);
   }
 
-  saveUser():void{
+  //--------------------------------------------------------
+  //CRUD
 
-    //crea un usuario con los valores del formgroup y llama al servicio que conecta con el servidor backend
+  private saveUser():void{
+
+    //crea un usuario con los valores del formgroup y llama al servicio que conecta con el servidor
 
     const user = this.form.value;
-    const u = new User(user.name, user.lastname, user.nickname, user.email, user.password)
+    const u = new User();
+    u.user(user.name, user.lastname, user.nickname, user.email, user.password);
 
-    this.httpSVC.createUser(u).subscribe({
+    this.a = this.httpSvc.createUser(u).subscribe({
       next: data => {setTimeout (() => alert ("usuario guardado con exito"), 500),
       this.registeredUser = true; // permite la navegacion a home
     },
-      error: data => alert ("error en conexion al servidor")
+      error: data => alert ("error en conexion al servidor"),
     });
+
+
   }
 
-  openedForm: boolean;
-  registeredUser: boolean;
-  form: FormGroup;
+
+  //--------------------------------------------------------
+  //atributos
+  private a:any;
+  private openedForm: boolean;
+  private registeredUser: boolean;
+  public form: FormGroup;
 
 }

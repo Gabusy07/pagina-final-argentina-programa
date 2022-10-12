@@ -7,12 +7,13 @@ import * as fromComponents from './components';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ArrowComponent } from './arrow/arrow.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule(
   {
   
-  declarations: [...fromComponents.components, ErrorPageComponent, LoaderComponent, ArrowComponent],
+  declarations: [...fromComponents.components, ErrorPageComponent, LoaderComponent, ArrowComponent, UserProfileComponent],
   imports: [
     
     CommonModule,

@@ -67,7 +67,7 @@ import { AboutEditComponent } from './admin/about-edit/about-edit.component';
     ProjectsEditComponent,
     FooterEditComponent,
     HomeEditComponent,
-    AboutEditComponent,
+    AboutEditComponent
  
   ],
   imports: [

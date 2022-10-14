@@ -67,9 +67,10 @@ export class RegisterFormComponent implements OnInit {
   public submitSignIn(){
     // envia formulario y redirige a home
     this.saveUser()
-    console.log(this.a);
+    console.log(this.a)
+    /*
     if (this.registeredUser) this.router.navigate(['home']); 
-    else setTimeout(() => window.location.reload(), 550 ) ;
+    else setTimeout(() => window.location.reload(), 550 ) ;*/
     
     
 
@@ -97,7 +98,7 @@ export class RegisterFormComponent implements OnInit {
       next: data => {setTimeout (() => alert ("usuario guardado con exito"), 500),
       this.registeredUser = true; // permite la navegacion a home
     },
-      error: data => alert ("error en conexion al servidor"),
+      error: data => alert (data),
     });
 
 

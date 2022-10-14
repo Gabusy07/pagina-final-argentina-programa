@@ -52,6 +52,20 @@
     
 }
 
+.square{
+    margin: auto 25%;
+    height: 2rem;
+    width: 2rem;
+    font-size: 2rem;
+    transition: font-size filter .25s;
+}
+
+.square:hover{
+    font-size: 2.5rem;
+    filter: brightness(1.1)
+}
+
+
 
 
 

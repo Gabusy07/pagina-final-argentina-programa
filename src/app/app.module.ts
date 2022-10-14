@@ -67,7 +67,7 @@ import { AboutEditComponent } from './admin/about-edit/about-edit.component';
     ProjectsEditComponent,
     FooterEditComponent,
     HomeEditComponent,
-    AboutEditComponent
+    AboutEditComponent,
  
   ],
   imports: [
@@ -78,7 +78,7 @@ import { AboutEditComponent } from './admin/about-edit/about-edit.component';
     ReactiveFormsModule,
     CoreModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [RouterModule],
 

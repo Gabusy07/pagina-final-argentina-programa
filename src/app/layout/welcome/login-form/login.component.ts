@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Token } from 'app/model/TokenI-interface';
 import { User } from 'app/model/User';
 import { UserService } from 'app/services/http/User.service';
 
@@ -16,10 +17,9 @@ export class LoginComponent implements OnInit {
 
   constructor( private router: Router,
     private readonly formBuilder : FormBuilder,
-    private readonly   userSvc: UserService) {
+    private readonly userSvc: UserService) {
     this.openedForm = true;
     this.form = this.initForm();
-    this.loggedinUser = false;
     
    }
 
@@ -37,26 +37,19 @@ export class LoginComponent implements OnInit {
   }
 
   get Email(){
-    return this.form.get('login_email');
+    return this.form.get('email');
   }
 
   get Password(){
-    return this.form.get('login_password');
+    return this.form.get('password');
   }
 
 
-  // revisar para luego cambiar a un metodo post
 
   public submitlogin(){
+    //funcion fijada en el html
 
-    // envia formulario y redirige a home
-    this.login_user()
-    if (this.loggedinUser) this.router.navigate(['home']); 
-    else { alert("usuario o contraseña incorrecta");
-           setTimeout(() => window.location.reload(), 550 ) ;
-    }
-
-    console.log(this.a)
+  this.login_user();
 
   }
 
@@ -70,7 +63,7 @@ export class LoginComponent implements OnInit {
 
   // llamado a servicio de conexion a servidor
 
-  private login_user(){
+  public login_user(){
     const userForm = this.form.value;
     const user: User = new User();
 
@@ -78,22 +71,31 @@ export class LoginComponent implements OnInit {
     user.setEmail(userForm.email);
     user.setPassword(userForm.password);
 
-    this.a = this.userSvc.LoginUser(user).subscribe({
-      next: data => {setTimeout (() => alert ("ingreso exitoso"), 500),
-      this.loggedinUser = true; // permite la navegacion a home
-    },
-      error: data => alert ("error en conexion al servidor")
-    })
+
+    this.userSvc.LoginUser(user).subscribe(
+      data => {
+            let token = data.token;
+        
+            if (token == "FAIL"){
+              alert("los datos ingresados son incorrectos")
+              setTimeout(() => window.location.reload(), 550 );
+            }
+            else{
+              localStorage.setItem("token", token)
+              this.router.navigate(['home']); 
+            }
+        
+        
+      })
+        
   }
+  
 
 
 
 
-
-
-  private a: any;
+ 
   private openedForm: boolean;
-  private loggedinUser: boolean;
   public form: FormGroup;
   
 

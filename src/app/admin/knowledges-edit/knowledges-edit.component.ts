@@ -94,6 +94,7 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
+
   onEditPen(i:number, j:number):void{
     
     this.indexsEditLang = [i, j];
@@ -102,12 +103,14 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
+
   onDeleteTrash(i:number, j:number):void{
     this.indexsDeleteLang = [i, j];
     this.deleteTrash = this.deleteTrash == false ? true : false;
     this.editPen = false;
 
   }
+
 
   onDeleteButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
     
@@ -124,6 +127,12 @@ export class KnowledgesEditComponent implements OnInit {
   onCloseKnwForm():void{
     this.openKnwForm = false;
 
+  }
+
+  disableSelectedButtoms(){
+    this.editPen = false;
+    this.openKnwForm = false;
+    this.deleteTrash = false;
   }
 
   
@@ -159,6 +168,7 @@ export class KnowledgesEditComponent implements OnInit {
     }
 
   }
+
 
   
   indexsDeleteLang: number[] =[NaN,NaN];

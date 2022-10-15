@@ -73,7 +73,8 @@ export class LoginComponent implements OnInit {
 
 
     this.userSvc.LoginUser(user).subscribe(
-      data => {
+      data => { 
+
             let token = data.token;
         
             if (token == "FAIL"){
@@ -81,7 +82,7 @@ export class LoginComponent implements OnInit {
               setTimeout(() => window.location.reload(), 550 );
             }
             else{
-              localStorage.setItem("token", token)
+              localStorage.setItem("token",token)
               this.router.navigate(['home']); 
             }
         

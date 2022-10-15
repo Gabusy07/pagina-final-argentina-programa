@@ -24,7 +24,6 @@ export class SkillsComponent implements OnInit {
     for (let i=0; i<this.listOfSkills.length; i++){
       this.stateDiv.push("state1");
     }
-    console.log(this.stateDiv)
   
    }
 

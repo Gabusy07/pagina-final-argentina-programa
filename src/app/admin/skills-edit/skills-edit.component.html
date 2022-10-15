@@ -1,7 +1,7 @@
 <div id="container" class="row d-flex p2 justify-content-between">
     <div *ngFor="let skill of listOfSkills; let i = index" class="col-3 box_skill position-relative">
       <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen(i)"></i>
-      <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash(i)"></i>
+      <i class="bi bi-trash pen text-danger" id="delete_trash"  (click)="onDeleteTrash(i)"></i>
       <div *ngIf="editPen && i == indexSkill" class="card" id="skill_up_text">
         <div class="card-body">
           <small>puedes editar el texto</small>

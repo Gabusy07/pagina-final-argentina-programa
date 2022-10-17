@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Language } from 'app/model/Language';
+import { LanguageService } from 'app/services/http/language.service';
 
 @Component({
   selector: 'app-knowledges',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KnowledgesComponent implements OnInit {
 
-  constructor() {
+  constructor(private readonly http_svc: LanguageService) {
 
     this.languages = [
       [{nn : "Python",
@@ -90,6 +92,35 @@ export class KnowledgesComponent implements OnInit {
     }
 
   }
+
+  addLang(){
+    let langa = new Language("ingles", "2020-11-10")
+    this.http_svc.createLanguage(langa).subscribe({
+      next: data => {setTimeout (() => alert ("lenguaje guardado con exito"), 500)
+    },
+      error: error => console.log (error),
+    });
+  }
+
+  delLang(id: string){
+    const idB = BigInt(id);
+    this.http_svc.deleteLanguage(idB).subscribe({
+      next: data => {setTimeout (() => alert ("lenguaje borrado con exito"), 500)
+    },
+      error: error => console.log (error),
+    });
+
+  }
+
+  getAllLang(){
+    this.http_svc.getAll().subscribe({
+      next: data => {setTimeout (() => console.log (data), 500)
+    },
+      error: error => console.log (error),
+    });
+
+  }
+
 
  languages: any[];
 }

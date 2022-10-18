@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Token } from 'app/model/TokenI-interface';
+import { User } from 'app/model/User';
+import { UserService } from 'app/services/http/User.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +15,9 @@ export class LoginComponent implements OnInit {
 
   @Output() onCloseLogingEvent = new EventEmitter<boolean>();
 
-  constructor( private router: Router, private readonly formBuilder : FormBuilder ) {
+  constructor( private router: Router,
+    private readonly formBuilder : FormBuilder,
+    private readonly userSvc: UserService) {
     this.openedForm = true;
     this.form = this.initForm();
     
@@ -23,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   //construccion del reactiveForm
-  initForm(): FormGroup{
+  private initForm(): FormGroup{
     return this.formBuilder.group({
       email: ['',[Validators.required, Validators.email]],
       password: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(18)]],
@@ -32,31 +37,67 @@ export class LoginComponent implements OnInit {
   }
 
   get Email(){
-    return this.form.get('login_email');
+    return this.form.get('email');
   }
 
   get Password(){
-    return this.form.get('login_password');
+    return this.form.get('password');
   }
 
 
-  // revisar para luego cambiar a un metodo post
 
-  submitlogin(){
-    this.router.navigate(['home']); // envia formulario y redirige a home
+  public submitlogin(){
+    //funcion fijada en el html
+
+  this.login_user();
 
   }
 
   // cerrar formulario al presionar 'x/close'
  
-  closingForm(){
+ public closingForm(){
     this.openedForm = false;
     this.onCloseLogingEvent.emit(this.openedForm);
   }
 
-  openedForm: boolean;
+
+  // llamado a servicio de conexion a servidor
+
+  public login_user(){
+    const userForm = this.form.value;
+    const user: User = new User();
+
+    //asigna los valores del form formGroup
+    user.setEmail(userForm.email);
+    user.setPassword(userForm.password);
+
+
+    this.userSvc.LoginUser(user).subscribe(
+      data => { 
+
+            let token = data.token;
+        
+            if (token == "FAIL"){
+              alert("los datos ingresados son incorrectos")
+              setTimeout(() => window.location.reload(), 550 );
+            }
+            else{
+              localStorage.setItem("token",token)
+              this.router.navigate(['home']); 
+            }
+        
+        
+      })
+        
+  }
   
-  form: FormGroup;
+
+
+
+
+ 
+  private openedForm: boolean;
+  public form: FormGroup;
   
 
 

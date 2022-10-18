@@ -6,6 +6,7 @@
 :root{
     --difused-black: rgba(0, 0, 0, .25);
     --boxes-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    --gray_letter: #7a7a7a;
 }
 
 *{
@@ -16,6 +17,7 @@
 
 body{
     width: 100vw;
-    height: 100vh;
+    height: 150vh;
     overflow-x: hidden;
+    
 }

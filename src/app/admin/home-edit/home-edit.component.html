@@ -1,0 +1,29 @@
+
+<div id="bodyHome">
+  
+    <app-porter></app-porter>
+    
+    <app-navigation id="navbar"></app-navigation>
+    <app-arrow *ngIf="enableArrow"></app-arrow>
+
+    <main class="container-fluid" id="main_about">
+
+        <div class="h-100">
+          <app-aside *ngIf="enableAside" (messageEvent)="receiveMessage($event)" id="aside"></app-aside>
+          <app-about-edit *ngIf="enableComponent"  class="{{pos_about}}"></app-about-edit>
+        </div>
+            
+        <div class="container-fluid">
+          <!--catalogo de proyectos (deben estar hubicados en componentes independientes)-->
+            <app-projects-edit *ngIf="enableProjectComponent"></app-projects-edit>
+        </div>
+      
+    </main>
+
+    <app-footer-edit *ngIf="enableFooterComponent"></app-footer-edit>
+</div> 
+
+
+
+
+ 

@@ -1,4 +1,7 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Language } from 'app/model/Language';
+import { LanguageService } from 'app/services/http/language.service';
 
 @Component({
   selector: 'app-knowledges',
@@ -7,89 +10,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KnowledgesComponent implements OnInit {
 
-  constructor() {
-
-    this.languages = [
-      [{nn : "Python",
-      progressBar : "progress-bar",
-      width : 82
-      },
-      {nn : "JavaScript",
-      progressBar : "progress-bar",
-      width: 55
-      }],
-      [{nn : "HTML",
-      progressBar : "progress-bar",
-      width : 76
-      },
-      {nn : "CSS",
-      progressBar : "progress-bar",
-      width: 65
-      }],
-      [{nn : "Bootstrap",
-      progressBar : "progress-bar",
-      width : 45
-      },
-      {nn : "Angular",
-      progressBar : "progress-bar",
-      width : 40
-      }],
-      [{nn : "Java",
-      progressBar : "progress-bar",
-      width: 15
-      },
-      {nn : "Spring Boot",
-      progressBar : "progress-bar",
-      width : 7
-      }],
-      [{nn : "GIT",
-      progressBar : "progress-bar",
-      width: 25
-      },
-      {nn : "GitHub",
-      progressBar : "progress-bar",
-      width : 30
-      },{nn : "MySql",
-      progressBar : "progress-bar",
-      width: 35
-      }]
-      
-    ]
-
-    this.progressBarColor(this.languages)
-    
+  constructor(private readonly http_svc: LanguageService) {
+ 
    }
 
+
   ngOnInit(): void {
-
+    this.getAllLang();
   }
 
-  progressBarColor(objList:any[]){
-    for (let languagesList of objList){
-      for (let language of languagesList){
-        let exp = language.width;
-        switch (true) {
-          case exp <= 25:
-            language.progressBar += " bg-danger";
-          break;
-          case exp  <= 50:
-            language.progressBar += " bg-warning"; 
-            break;
-          
-          case exp <= 75:
-            language.progressBar += " bg-primary"; 
-            break;
-          default:
-            language.progressBar += " bg-success";
-            break;
+  
+  createObjForList(responseList: Language[]):void{
+    let list: Language[] = [];
+    for(let i=0; i<= responseList.length; i+=2){
+      if (i+1 > responseList.length){
+        return;
       }
-
+      if (i == responseList.length-1){
+        this.languages.push([responseList[i]])
+        return;
       }
-      
-        
+      this.languages.push([responseList[i], responseList[i+1]])
     }
-
+   
   }
 
- languages: any[];
+
+  getAllLang():void{
+    let response = this.http_svc.getAll().subscribe({
+      next: data => { this.resultGetAll = data;
+    },
+      error: error => console.log (error),
+      /* asegura que la peticion al servidor se haya completado y llama a
+      la funcion que carga en una nueva lista para mejor lectura en html */
+      complete: ()=> this.createObjForList(this.resultGetAll)
+    });
+}
+
+
+ languages: Language[][] = [];
+ resultGetAll: Language []=[]  ;
 }

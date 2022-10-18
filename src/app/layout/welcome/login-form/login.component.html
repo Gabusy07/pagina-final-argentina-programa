@@ -4,7 +4,7 @@
         <div class="form-group-row elementP">
         <label class="col-sm-2 col-form-label">Email:</label>
         <div class="col-sm-15">
-            <input name="login_email" [ngClass]="{'is-invalid' : Email?.errors && Email?.touched, 'is-valid' : !Email?.errors && Email?.touched}"  class="form-control" type="email" required formControlName="login_email" >
+            <input name="email" [ngClass]="{'is-invalid' : Email?.errors && Email?.touched, 'is-valid' : !Email?.errors && Email?.touched}"  class="form-control" type="email" required formControlName="email" >
         </div>
         <div *ngIf="Email?.errors && Email?.touched">
             <small *ngIf="Email?.hasError('required')" class="text-danger">El campo email no debe estar vacio</small>
@@ -14,7 +14,7 @@
     <div class="form-group-row elementP">
         <label class="col-sm-2 col-form-label">Contraseña:</label>
         <div class="col-sm-15">
-            <input name="login_password" [ngClass]="{'is-invalid' : Password?.errors && Password?.touched, 'is-valid' : !Password?.errors && Password?.touched}" class="form-control" type="password" formControlName="login_password" >
+            <input name="password" [ngClass]="{'is-invalid' : Password?.errors && Password?.touched, 'is-valid' : !Password?.errors && Password?.touched}" class="form-control" type="password" formControlName="password" >
         </div>
         <div *ngIf="Password?.errors && Password?.touched">
             <small *ngIf="Password?.hasError('required')" class="text-danger">El campo contraseña no debe estar vacio</small>
@@ -22,8 +22,8 @@
             <small *ngIf="Password?.errors?.['maxlength']" class="text-danger">El campo contraseña debe ser mas corta</small>
         </div>
    </div><br>
-   <div class="d-grid gap-2">
-    <input type="submit" class="btn btn-primary" (click)="submitlogin()" [disabled]="form.invalid">
+   <div class="d-grid gap-2 opacity-100">
+    <input type="submit" class="btn btn-primary" id="submit_button" (click)="submitlogin()" [disabled]="form.invalid">
    </div>
 
 

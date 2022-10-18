@@ -1,22 +1,22 @@
 
 .box_skill{
     display: block;
-    width: 20%;
     text-align: center;
-    margin: 2.5%;
+    padding: 1rem;
+    cursor: none;
     
 }
 
-.sk{
-    cursor:none;
-}
 
 #container{
     width: 95%;
     padding: 2.5%;
 }
 
+
 @media screen and (max-width:750px){
+   
+
     .box_skill{
         width: 90%;
         margin: 5% auto;
@@ -26,6 +26,7 @@
 }
 
 @media screen and (max-width:500px){
+    
     .box_skill{
         width: 60%;
         margin: 2% auto;

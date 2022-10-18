@@ -32,15 +32,28 @@ export class HomeComponent implements OnInit {
   //revisar *********************
   @HostListener("document:scroll")
   enable_mainComponents():void{
-    if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) this.enableComponent = true;
+    if(document.body.scrollTop > 1 || document.documentElement.scrollTop > 0){
+      this.enableComponent = true;
+      this.enableArrow = false;
+      this.enableAside = true;
+
+    } 
     
-    if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0)  this.enableProjectComponent = true;
+    if(document.body.scrollTop > 1 || document.documentElement.scrollTop > 0)  this.enableProjectComponent = true;
+
+    if(document.body.scrollTop > 2 || document.documentElement.scrollTop > 0)  this.enableFooterComponent = true;
     else{
        this.enableComponent = false;
        this.enableProjectComponent = false;
+       this.enableFooterComponent = false;
+       this.enableArrow = true;
+       this.enableAside = false;
     }
   }
 
+  enableAside: boolean = false;
+  enableArrow: boolean = true;
+  enableFooterComponent: boolean = false;
   enableProjectComponent:boolean = false
   enableComponent:boolean = false;
   childMessage:string="";

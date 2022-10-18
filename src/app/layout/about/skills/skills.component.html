@@ -1,6 +1,7 @@
-<div class="row d-flex p2 justify-content-between" id="container">
-    <div [@animation1]="arrayDivs[0]" class="alert alert-info box_skill sk col-3" (mouseenter)="enlarge(0)" (mouseleave)="reduce(0)">Inglés(B2)</div>
-    <div [@animation1]="arrayDivs[1]" class="alert alert-info box_skill sk col-3" (mouseenter)="enlarge(1)" (mouseleave)="reduce(1)">Asertivo</div>
-    <div [@animation1]="arrayDivs[2]" class="alert alert-info box_skill sk col-3" (mouseenter)="enlarge(2)" (mouseleave)="reduce(2)">Comprometido</div>
-    <div [@animation1]="arrayDivs[3]" class="alert alert-info box_skill sk col-3" (mouseenter)="enlarge(3)" (mouseleave)="reduce(3)">Proactivo</div>
+<div id="container" class="row d-flex p2 justify-content-between">
+  <div *ngFor="let skill of listOfSkills; let i = index" class="col-3 box_skill">
+    <div [@animation1]="stateDiv[i]" class="alert alert-info " (mouseenter)="enlarge(i)" (mouseleave)="reduce(i)">{{skill}}
+     </div>
+   </div>
 </div>
+

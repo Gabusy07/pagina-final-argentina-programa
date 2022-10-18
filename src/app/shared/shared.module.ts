@@ -6,12 +6,14 @@ import {HttpClientModule} from '@angular/common/http';
 import * as fromComponents from './components';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoaderComponent } from './loader/loader.component';
+import { ArrowComponent } from './arrow/arrow.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule(
   {
   
-  declarations: [...fromComponents.components, ErrorPageComponent, LoaderComponent],
+  declarations: [...fromComponents.components, ErrorPageComponent, LoaderComponent, ArrowComponent, UserProfileComponent],
   imports: [
     
     CommonModule,
@@ -26,7 +28,8 @@ import { LoaderComponent } from './loader/loader.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ...fromComponents.components
+    ...fromComponents.components,
+ 
   ]
 }
 )

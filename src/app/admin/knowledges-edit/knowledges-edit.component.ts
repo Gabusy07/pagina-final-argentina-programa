@@ -113,7 +113,8 @@ export class KnowledgesEditComponent implements OnInit {
 
   submitAddForm(){
     const f = this.knwForm.value;
-    const lang = new Language(f.name, f.date);
+    let name = f.name.charAt(0).toUpperCase() + f.name.slice(1);;
+    const lang = new Language(name, f.date);
     this.http_svc.createLanguage(lang).subscribe({
       next: ()=> alert("datos guardados con exito"),
       error: error => {

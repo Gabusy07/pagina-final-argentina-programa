@@ -38,6 +38,8 @@ import { ProjectsEditComponent } from './admin/projects-edit/projects-edit.compo
 import { FooterEditComponent } from './admin/footer-edit/footer-edit.component';
 import { HomeEditComponent } from './admin/home-edit/home-edit.component';
 import { AboutEditComponent } from './admin/about-edit/about-edit.component';
+import { NoDataTemplateComponent } from '@shared/no-data-template/no-data-template.component';
+
 
 
 
@@ -68,6 +70,7 @@ import { AboutEditComponent } from './admin/about-edit/about-edit.component';
     FooterEditComponent,
     HomeEditComponent,
     AboutEditComponent,
+    NoDataTemplateComponent
  
   ],
   imports: [

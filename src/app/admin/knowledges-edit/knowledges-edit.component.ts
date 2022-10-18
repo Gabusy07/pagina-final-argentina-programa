@@ -26,19 +26,17 @@ export class KnowledgesEditComponent implements OnInit {
   funciones dde conexion al servidor
   */
 
-  createObjForList(langList: Language[]):void{
+  createObjForList(responseList: Language[]):void{
     let list: Language[] = [];
-    for(let i=0; i<= langList.length; i++){
-      if(i == langList.length-1){
-        this.languages.push([langList[langList.length-1]])
-
+    for(let i=0; i<= responseList.length; i+=2){
+      if (i+1 > responseList.length){
+        return;
       }
-      else if(list.length > 1){
-        this.languages.push(list);
-        list = [];
-      }else{
-        list.push(langList[i])
+      if (i == responseList.length-1){
+        this.languages.push([responseList[i]])
+        return;
       }
+      this.languages.push([responseList[i], responseList[i+1]])
     }
    
   }
@@ -53,9 +51,8 @@ export class KnowledgesEditComponent implements OnInit {
     });
   }
 
-  delLang(id: string){
-    const idB = BigInt(id);
-    this.http_svc.deleteLanguage(idB).subscribe({
+  delLang(id: BigInt){
+    this.http_svc.deleteLanguage(id).subscribe({
       next: data => {setTimeout (() => alert ("lenguaje borrado con exito"), 500)
     },
       error: error => console.log (error),
@@ -98,15 +95,30 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
-  submitForm(){
+  submitEditForm(id:BigInt){
     const f = this.knwForm.value;
     const lang = new Language(f.name, f.date);
-    console.log(lang)
+    this.http_svc.updateLanguage(id, lang).subscribe({
+      next: ()=> alert("datos actualizados con exito"),
+      error: error => {
+        console.log(error);
+        alert ("no se han podido actualizar los datos")
+      },
+      complete: ()=> window.location.reload()
+
+  });
+    
+
+  }
+
+  submitAddForm(){
+    const f = this.knwForm.value;
+    const lang = new Language(f.name, f.date);
     this.http_svc.createLanguage(lang).subscribe({
       next: ()=> alert("datos guardados con exito"),
       error: error => {
         console.log(error);
-        alert ("no se han podido gardar los datos")
+        alert ("no se han podido guardar los datos")
       },
       complete: ()=> window.location.reload()
 
@@ -118,7 +130,7 @@ export class KnowledgesEditComponent implements OnInit {
   onEditPen(i:number, j:number):void{
     
     this.indexsEditLang = [i, j];
-    this.editPen = this.editPen == false ? true : false;
+    this.editPen = !this.editPen
     this.deleteTrash = false;
 
   }
@@ -126,14 +138,21 @@ export class KnowledgesEditComponent implements OnInit {
 
   onDeleteTrash(i:number, j:number):void{
     this.indexsDeleteLang = [i, j];
-    this.deleteTrash = this.deleteTrash == false ? true : false;
+    this.deleteTrash = !this.deleteTrash;
     this.editPen = false;
 
   }
 
+  onEditButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
+    
+    this.submitEditForm(this.languages[i][j].id)
+    window.location.reload();
+
+  }
 
   onDeleteButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
     
+    this.delLang(this.languages[i][j].id);
     window.location.reload();
 
   }

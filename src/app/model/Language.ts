@@ -9,7 +9,7 @@ export class Language {
 
     
 
-    private id!: BigInt;
+    public id!: BigInt;
     public name!: String;
     public progressbar!: String;
     public width!: number;

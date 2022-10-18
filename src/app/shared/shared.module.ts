@@ -28,7 +28,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ...fromComponents.components
+    ...fromComponents.components,
+ 
   ]
 }
 )

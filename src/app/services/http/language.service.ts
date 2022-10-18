@@ -21,8 +21,8 @@ export class LanguageService {
     return this.request.delete(this.url+"/delete/"+id)
   }
 
-  updateLanguage(lang:Language, id:BigInt): Observable<Object>{
-    return this.request.patch(this.url+"/delete/"+id, lang);
+  updateLanguage(id:BigInt, lang:Language): Observable<Object>{
+    return this.request.patch(this.url+`/update/${id}`, lang);
   }
 
   getAll(): Observable<Language[]>{

@@ -20,19 +20,17 @@ export class KnowledgesComponent implements OnInit {
   }
 
   
-  createObjForList(langList: Language[]):void{
+  createObjForList(responseList: Language[]):void{
     let list: Language[] = [];
-    for(let i=0; i<= langList.length; i++){
-      if(i == langList.length-1){
-        this.languages.push([langList[langList.length-1]])
-
+    for(let i=0; i<= responseList.length; i+=2){
+      if (i+1 > responseList.length){
+        return;
       }
-      else if(list.length > 1){
-        this.languages.push(list);
-        list = [];
-      }else{
-        list.push(langList[i])
+      if (i == responseList.length-1){
+        this.languages.push([responseList[i]])
+        return;
       }
+      this.languages.push([responseList[i], responseList[i+1]])
     }
    
   }

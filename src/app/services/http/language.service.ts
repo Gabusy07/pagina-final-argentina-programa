@@ -25,9 +25,8 @@ export class LanguageService {
     return this.request.patch(this.url+"/delete/"+id, lang);
   }
 
-  getAll(): Observable<any>{
-
-    return this.request.get(this.url+"/all");
+  getAll(): Observable<Language[]>{
+    return this.request.get<Language[]>(this.url+"/all");
   }
 
 

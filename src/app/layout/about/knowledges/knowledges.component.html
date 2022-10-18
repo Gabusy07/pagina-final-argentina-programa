@@ -21,15 +21,14 @@
     <!--recorrido de los elementos de array lenguages de knowledges.ts-->
     <div class="row" *ngFor="let language_pares of languages">
         <div class="col-6 mb-3" *ngFor="let language of language_pares">
-            <h5>{{language.nn}}</h5>
+            <h5>{{language.name}}</h5>
             <div class="progress knw-container">
-                <div class="{{language.progressBar}} progress--bar" [ngStyle]="{'width' : language.width.toString()+'%'}">
-
+                <div class="{{language.progressbar}} progress--bar" [ngStyle]="{'width' : language.width.toString()+'%'}">
                 </div>
             </div>
         </div>
     </div><br>
 
-    <button (click)="getAllLang()">traer lenguaje</button>
+
 
 </div>

@@ -67,7 +67,7 @@ export class RegisterFormComponent implements OnInit {
   public submitSignIn(){
     // envia formulario y redirige a home
     this.saveUser()
-    console.log(this.a)
+    //console.log(this.a)
     /*
     if (this.registeredUser) this.router.navigate(['home']); 
     else setTimeout(() => window.location.reload(), 550 ) ;*/

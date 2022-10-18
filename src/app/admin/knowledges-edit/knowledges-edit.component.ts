@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Language } from 'app/model/Language';
+import { LanguageService } from 'app/services/http/language.service';
 
 @Component({
   selector: 'app-knowledges-edit',
@@ -8,66 +10,74 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class KnowledgesEditComponent implements OnInit {
 
-  constructor(private readonly formBuilder : FormBuilder) {
+  constructor(private readonly formBuilder : FormBuilder, private readonly http_svc: LanguageService) {
 
     this.datePickerId =new Date().toISOString().substring(0, 10);
     this.knwForm = this.initKnwForm();
-
-
-    this.languages = [
-      [{nn : "Python",
-      progressBar : "progress-bar",
-      width : 82
-      },
-      {nn : "JavaScript",
-      progressBar : "progress-bar",
-      width: 55
-      }],
-      [{nn : "HTML",
-      progressBar : "progress-bar",
-      width : 76
-      },
-      {nn : "CSS",
-      progressBar : "progress-bar",
-      width: 65
-      }],
-      [{nn : "Bootstrap",
-      progressBar : "progress-bar",
-      width : 45
-      },
-      {nn : "Angular",
-      progressBar : "progress-bar",
-      width : 40
-      }],
-      [{nn : "Java",
-      progressBar : "progress-bar",
-      width: 15
-      },
-      {nn : "Spring Boot",
-      progressBar : "progress-bar",
-      width : 7
-      }],
-      [{nn : "GIT",
-      progressBar : "progress-bar",
-      width: 25
-      },
-      {nn : "GitHub",
-      progressBar : "progress-bar",
-      width : 30
-      },{nn : "MySql",
-      progressBar : "progress-bar",
-      width: 35
-      }]
-      
-    ]
-
-    this.progressBarColor(this.languages)
     
    }
 
   ngOnInit(): void {
+    this.getAllLang();
 
   }
+
+  /*-----------------------------------------------------
+  funciones dde conexion al servidor
+  */
+
+  createObjForList(langList: Language[]):void{
+    let list: Language[] = [];
+    for(let i=0; i<= langList.length; i++){
+      if(i == langList.length-1){
+        this.languages.push([langList[langList.length-1]])
+
+      }
+      else if(list.length > 1){
+        this.languages.push(list);
+        list = [];
+      }else{
+        list.push(langList[i])
+      }
+    }
+   
+  }
+
+
+  addLang(lang:Language){
+    
+    this.http_svc.createLanguage(lang).subscribe({
+      next: data => {setTimeout (() => alert ("lenguaje guardado con exito"), 500)
+    },
+      error: error => console.log (error),
+    });
+  }
+
+  delLang(id: string){
+    const idB = BigInt(id);
+    this.http_svc.deleteLanguage(idB).subscribe({
+      next: data => {setTimeout (() => alert ("lenguaje borrado con exito"), 500)
+    },
+      error: error => console.log (error),
+    });
+
+  }
+
+  getAllLang():void{
+    let response = this.http_svc.getAll().subscribe({
+      next: data => { this.resultGetAll = data;
+    },
+      error: error => console.log (error),
+      /* asegura que la peticion al servidor se haya completado y llama a
+      la funcion que carga en una nueva lista para mejor lectura en html */
+      complete: ()=> this.createObjForList(this.resultGetAll)
+    });
+}
+
+
+  /*------------------------------------------------------
+  formulario y funciones de edicion
+  */
 
    //construccion del reactiveForm
    initKnwForm(): FormGroup{
@@ -89,9 +99,19 @@ export class KnowledgesEditComponent implements OnInit {
   }
 
   submitForm(){
-    this.openKnwForm = false;
-    alert("datos guardados");
+    const f = this.knwForm.value;
+    const lang = new Language(f.name, f.date);
+    console.log(lang)
+    this.http_svc.createLanguage(lang).subscribe({
+      next: ()=> alert("datos guardados con exito"),
+      error: error => {
+        console.log(error);
+        alert ("no se han podido gardar los datos")
+      },
+      complete: ()=> window.location.reload()
 
+  });
+    this.openKnwForm = false;
   }
 
 
@@ -114,8 +134,7 @@ export class KnowledgesEditComponent implements OnInit {
 
   onDeleteButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
     
-    this.languages = this.languages.splice(i);
-    window.location.reload()
+    window.location.reload();
 
   }
 
@@ -135,46 +154,12 @@ export class KnowledgesEditComponent implements OnInit {
     this.deleteTrash = false;
   }
 
-  
 
-
-
-
-
-
-  progressBarColor(objList:any[]){
-    for (let languagesList of objList){
-      for (let language of languagesList){
-        let exp = language.width;
-        switch (true) {
-          case exp <= 25:
-            language.progressBar += " bg-danger";
-          break;
-          case exp  <= 50:
-            language.progressBar += " bg-warning"; 
-            break;
-          
-          case exp <= 75:
-            language.progressBar += " bg-primary"; 
-            break;
-          default:
-            language.progressBar += " bg-success";
-            break;
-      }
-
-      }
-      
-        
-    }
-
-  }
-
-
-  
+  languages: Language[][] = [];
+  resultGetAll: Language []=[]  ;
   indexsDeleteLang: number[] =[NaN,NaN];
   indexsEditLang: number[] =[NaN,NaN];
   datePickerId: String;
-  languages: any[];
   openKnwForm:boolean = false;
   editPen:boolean = false;
   deleteTrash:boolean = false;

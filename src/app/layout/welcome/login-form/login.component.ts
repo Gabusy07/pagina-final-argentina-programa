@@ -1,7 +1,8 @@
+
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Token } from 'app/model/TokenI-interface';
+import { Token } from 'app/model/Token-interface';
 import { User } from 'app/model/User';
 import { UserService } from 'app/services/http/User.service';
 
@@ -72,22 +73,27 @@ export class LoginComponent implements OnInit {
     user.setPassword(userForm.password);
 
 
-    this.userSvc.LoginUser(user).subscribe(
-      data => { 
+    this.userSvc.LoginUser(user).subscribe({
 
-            let token = data.token;
+     next: data => {
+      let token =  data.token;
+      if(token == "FAIL"){
+        alert ("ha ocurrido un error");
+        setTimeout(() => window.location.reload(), 550 );
+
+      }else{
+          localStorage.setItem("token",token);
+          this.router.navigate(['home']);
+        }
+      },
+      error: error => {
+        alert ("ha ocurrido un error");
+        setTimeout(() => window.location.reload(), 550 );
+                       
+      }
+     }
         
-            if (token == "FAIL"){
-              alert("los datos ingresados son incorrectos")
-              setTimeout(() => window.location.reload(), 550 );
-            }
-            else{
-              localStorage.setItem("token",token)
-              this.router.navigate(['home']); 
-            }
-        
-        
-      })
+    )
         
   }
   
@@ -95,6 +101,7 @@ export class LoginComponent implements OnInit {
 
 
 
+  logged_user:User = new User();
  
   private openedForm: boolean;
   public form: FormGroup;

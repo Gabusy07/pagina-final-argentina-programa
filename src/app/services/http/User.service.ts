@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'app/model/User';
 import { Observable } from 'rxjs';
-import { Token } from 'app/model/TokenI-interface';
+import { Token } from 'app/model/Token-interface';
 
 // servicio conecta con los formularios loginForm y RegisterForm
 @Injectable({
@@ -15,43 +15,55 @@ export class UserService {
   
   //metodos conexion con servidor crear, leer, loggear, eliminar, modificar
   createUser(u: User): Observable<object>{
-    const headers = new HttpHeaders();
+    const headers = this.getheader();
     
     return this.request.post<User>(this.url+"/add", u, {headers});
   }
 
   deleteUser(id:BigInt):Observable<object>{
-    const headers = new HttpHeaders();
-    headers.append('Authorization', localStorage['token']);
+    const headers = this.getheader();
     return  this.request.delete(this.url+"/delete/"+id, {headers});
   }
 
   LoginUser(u: User):Observable<Token>{
-    const headers = new HttpHeaders();
-    
-    return this.request.post<Token>(this.urlLogIn, u); //devuelve respuesta con el token
+    return this.request.post<Token>(this.urlLogIn+"login", u); //devuelve respuesta con el token
     
   }
 
-  getUser(id: BigInt):Observable<object>{
-    const headers = new HttpHeaders();
-    headers.append('Authorization', localStorage['token']);
-    return this.request.get<User>(this.url+"/data/"+id, {headers});
+
+  getUser():Observable<object>{
+    const headers = this.getheader();
+    return this.request.get<User>(this.url+"/data", {headers});
     
   }
 
   updateUser(id: BigInt, u:User):Observable<object>{
-    const headers = new HttpHeaders();
-    headers.append('Authorization', localStorage['token']);
+    const headers = this.getheader();
     return this.request.patch<User>(this.url+"/update"+id, u, {headers});
 
   }
+
+  private getheader():HttpHeaders{
+  
+
+    const token:string = localStorage['token'];
+    console.log(typeof(token))
+    
+    const headers= new HttpHeaders({
+      'Content-Type':  'application/json',
+      Authorization: token
+    })
+    return headers;
+  }
+
+
+
 
   // conecta con UserController en el servidor
   url = "http://localhost:8080/porfolio/user";
 
   // conecta con AuthController en el servidor
-  urlLogIn = "http://localhost:8080/porfolio/api/login";
+  urlLogIn = "http://localhost:8080/porfolio/api/";
 
   
 }

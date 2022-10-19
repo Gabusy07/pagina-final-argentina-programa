@@ -17,7 +17,6 @@ export class RegisterFormComponent implements OnInit {
   constructor( private router: Router, private readonly formBuilder : FormBuilder , private readonly httpSvc: UserService) {
     this.openedForm = true;
     this.form = this.initForm();
-    this.registeredUser = false;
     
    }
 
@@ -66,14 +65,7 @@ export class RegisterFormComponent implements OnInit {
 
   public submitSignIn(){
     // envia formulario y redirige a home
-    this.saveUser()
-    //console.log(this.a)
-    /*
-    if (this.registeredUser) this.router.navigate(['home']); 
-    else setTimeout(() => window.location.reload(), 550 ) ;*/
-    
-    
-
+    this.saveUser();
   }
 
   // cerrar formulario al presionar 'x/close'
@@ -94,11 +86,14 @@ export class RegisterFormComponent implements OnInit {
     const u = new User();
     u.user(user.name, user.lastname, user.nickname, user.email, user.password);
 
-    this.a = this.httpSvc.createUser(u).subscribe({
-      next: data => {setTimeout (() => alert ("usuario guardado con exito"), 500),
-      this.registeredUser = true; // permite la navegacion a home
+    this.httpSvc.createUser(u).subscribe({
+      next: data => {
+        alert ("usuario guardado con exito"),
+        setTimeout (() => this.router.navigate(['home']), 500)
     },
-      error: data => alert (data),
+      error: error => {console.log (error);
+             setTimeout(() => window.location.reload(), 550 );
+      },
     });
 
 
@@ -109,7 +104,6 @@ export class RegisterFormComponent implements OnInit {
   //atributos
   private a:any;
   private openedForm: boolean;
-  private registeredUser: boolean;
   public form: FormGroup;
 
 }

@@ -1,12 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+/* bootstrap icons */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+/* welcome font from google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
 
 :root{
     --difused-black: rgba(0, 0, 0, .25);
+    --boxes-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    --gray_letter: #7a7a7a;
 }
 
 *{
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    margin: 0%;
+    padding: 0%;
+}
+
+body{
+    width: 100vw;
+    height: 150vh;
+    overflow-x: hidden;
+    
 }

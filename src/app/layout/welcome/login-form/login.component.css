@@ -1,0 +1,23 @@
+#login_form{
+   
+    width: 50vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    opacity: .95;
+    padding: 2.5rem;
+    font-size: larger;
+}
+
+.elementsP{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#close_button{
+    position: absolute;
+    right: 2rem;
+    top: 0.25rem;
+}
+
+

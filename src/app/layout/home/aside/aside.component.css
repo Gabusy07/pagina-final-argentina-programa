@@ -1,10 +1,19 @@
 
+#menu{
+    cursor: pointer;
+    transition: scale .25s;
+}
+
+#menu:hover{
+    scale: 1.5;
+}
+
 
 /*movimiento del asidebar al ser activado o desactivado*/
 
+
 #sidebar--closed{
     position: absolute;
-    height: 45%;
     animation: open .5s ease 1 forwards;
 }
 
@@ -21,23 +30,7 @@
 #sidebar--opened{
     margin-right: 5%;
     position: absolute;
-    height: 45%;
     animation: close .5s ease 1 forwards;
-}
-
-#sidebar_container::before{
-
-    content: "";
-    position: absolute;
-    top: 25%;
-    left: -2.5%;
-    width: 0em;
-    height: 5em;
-    margin-left: 0;
-    border-right: 1em solid transparent;
-    border-bottom: 1em solid transparent;
-    border-top: 1em solid transparent;
-    border-left: 2em solid black;
 }
 
 @keyframes close {
@@ -46,6 +39,53 @@
     }
     to{
         left: -10%
+    }
+    
+}
+
+/*trapecio y menu para abrir y cerrar sidebar*/
+
+#sidebar_container{
+    position: relative;
+}
+
+#sidebar_container::before{
+
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -6%;
+    width: 0em;
+    height: 5em;
+    margin-left: 0;
+    border-right: 1em solid transparent;
+    border-bottom: 1em solid transparent;
+    border-top: 1em solid transparent;
+    border-left: 2em solid black;
+    animation: opening_trapeze ease-in-out .5s forwards;
+}
+
+@keyframes opening_trapeze {
+    to{
+        left: -2.5%;
+    }
+    
+}
+
+
+.bar{
+    box-shadow: var(--boxes-shadow);
+    height: 40%;
+}
+
+
+@media screen and (max-width: 750px) {
+    #sidebar_container{
+        display: none;
+    }
+
+    .bar{
+        display: none;
     }
     
 }

@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   animations: [
     trigger('animation1', [
       state('estado1', style({transform : 'scale(1)',})),
-      state('estado2', style({transform : 'scale(1.3)', boxShadow: '10px 5px 5px gray', 
+      state('estado2', style({transform : 'scale(1.1)', boxShadow: '5px 3px 3px gray', 
       filter: 'brightness(1.009)'})),
       transition('estado1 <=> estado2', animate('0.08s'))
     ])
@@ -20,13 +20,10 @@ import { Component, OnInit } from '@angular/core';
 
 export class SkillsComponent implements OnInit {
 
-  div1 = "estado1";
-  div2 = "estado1";
-  div3 = "estado1";
-  div4 = "estado1";
-  arrayDivs: any[] = [this.div1, this.div2, this.div3, this.div4];
-  
   constructor() {
+    for (let i=0; i<this.listOfSkills.length; i++){
+      this.stateDiv.push("state1");
+    }
   
    }
 
@@ -36,13 +33,17 @@ export class SkillsComponent implements OnInit {
 
   // agranda el div de una skill
   enlarge(index: number){
-     this.arrayDivs[index] = "estado2" ;
+     this.stateDiv[index] = "estado2" ;
   }
 
   // achica el div de una skill
   reduce(index: number){
-    this.arrayDivs[index] =  "estado1";
+    this.stateDiv[index] =  "estado1";
   }
+
+
+  listOfSkills:string[] = ["ingles(B2)", "aservito", "comprometido", "proactivo"];
+  stateDiv: string[] = [];
 
   
 

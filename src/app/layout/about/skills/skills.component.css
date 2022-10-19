@@ -1,20 +1,37 @@
+
 .box_skill{
-    width: 150px;
+    display: block;
     text-align: center;
-}
-
-.sk{
-    cursor:none;
-}
-/*
-.selected{
-    animation-name: skillSelected;
-    animation-duration: 4s;
-}
-
-@keyframes skillSelected {
-
-    from {background-color: red;}
-    to {background-color: yellow;}
+    padding: 1rem;
+    cursor: none;
     
-}*/
+}
+
+
+#container{
+    width: 95%;
+    padding: 2.5%;
+}
+
+
+@media screen and (max-width:750px){
+   
+
+    .box_skill{
+        width: 90%;
+        margin: 5% auto;
+        
+    }
+    
+}
+
+@media screen and (max-width:500px){
+    
+    .box_skill{
+        width: 60%;
+        margin: 2% auto;
+    }
+
+    
+    
+}

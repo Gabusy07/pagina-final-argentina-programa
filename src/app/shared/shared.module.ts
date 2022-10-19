@@ -13,7 +13,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 @NgModule(
   {
   
-  declarations: [...fromComponents.components, ErrorPageComponent, LoaderComponent, ArrowComponent, UserProfileComponent],
+  declarations: [...fromComponents.components, ErrorPageComponent, ArrowComponent, UserProfileComponent],
   imports: [
     
     CommonModule,

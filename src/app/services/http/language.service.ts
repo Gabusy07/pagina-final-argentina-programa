@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Language } from 'app/model/Language';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,14 @@ export class LanguageService {
   }
 
 
+
+
+
+  /*-----------------------------------------
+  atributos
+  */
   
-   // conecta con LanguageController en el servidor
+
+  // conecta con LanguageController en el servidor
    url = "http://localhost:8080/porfolio/languages";
 }

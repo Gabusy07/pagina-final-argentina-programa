@@ -36,9 +36,16 @@
 
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: var(--middle-high-z-index);
 
 }
+
+/*
+#aside{
+    position: sticky;
+    top: 10%;
+    left: 50%;
+}*/
 
 
 
@@ -62,7 +69,6 @@
 }
 
 .about_pos--after{
-    position: relative;
     animation: move_rigth_aboutcont .25s ease 1 forwards;
 
 }

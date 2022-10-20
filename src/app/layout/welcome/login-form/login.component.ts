@@ -69,8 +69,8 @@ export class LoginComponent implements OnInit {
     const user: User = new User();
 
     //asigna los valores del form formGroup
-    user.setEmail(userForm.email);
-    user.setPassword(userForm.password);
+    user.email = userForm.email;
+    user.password =userForm.password;
 
 
     this.userSvc.LoginUser(user).subscribe({

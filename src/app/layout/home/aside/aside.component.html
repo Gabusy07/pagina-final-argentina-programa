@@ -7,12 +7,13 @@
         <div class="h-100 w-100 col-auto bg-light rounded-3">
             <div class=" d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center top">
                 <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Icon-only">
-                    <i class="bi-bootstrap fs-1">ienvenido </i>
+                    <i class="bi-bootstrap fs-1">ienvenid@ {{user.nickname}}</i>
                 </a>
                 <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
                     <li class="nav-item m-4">
                         <a href="#" class="nav-link py-3" >
                             <i class="bi-house fs-1"></i>
+                            <h5>Inicio</h5>
                         </a>
                     </li>
                     <li class="nav-item m-4">
@@ -20,6 +21,7 @@
                             <i class="material-symbols-outlined fs-1">
                                 sports_score
                             </i>
+                            <h5>Puntuación</h5>
                         </a>
                     </li>
                 </ul>
@@ -36,5 +38,4 @@
             </div>
         </div>
     </div>
-    <button (click)="chargingDataUser()">data</button>
 </ng-container>

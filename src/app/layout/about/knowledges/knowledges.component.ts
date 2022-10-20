@@ -37,9 +37,9 @@ export class KnowledgesComponent implements OnInit {
 
 
   getAllLang():void{
-    let response = this.http_svc.getAll().subscribe({
+    this.http_svc.getAll().subscribe({
       next: data => { this.resultGetAll = data;
-        this.isLoading = true;
+      this.isLoading = true;
     },
       error: error => console.log (error),
       /* asegura que la peticion al servidor se haya completado y llama a

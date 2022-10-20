@@ -31,7 +31,7 @@ export class UserService {
   }
 
 
-  getUser():Observable<object>{
+  getUser():Observable<User>{
     const headers = this.getheader();
     return this.request.get<User>(this.url+"/data", {headers});
     
@@ -47,7 +47,6 @@ export class UserService {
   
 
     const token:string = localStorage['token'];
-    console.log(typeof(token))
     
     const headers= new HttpHeaders({
       'Content-Type':  'application/json',

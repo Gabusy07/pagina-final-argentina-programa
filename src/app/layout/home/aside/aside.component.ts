@@ -16,6 +16,8 @@ export class AsideComponent implements OnInit {
   constructor(private route: Router, private readonly httpSvc: UserService) { }
 
   ngOnInit(): void {
+    this.chargingDataUser()
+
   
   }
 
@@ -39,7 +41,6 @@ visibilityOfSidebar=false; //estado actual de visibilidad
 activeVisibilityOfSidebar=true; // al hacer click en evento
 sidebar:string = "sidebar--closed"
 
-//revisar todo esto
 
 
 /*----------------------------------------------
@@ -49,8 +50,8 @@ crud con servidor
 chargingDataUser():void{
 
   this.httpSvc.getUser().subscribe({
-    next: data => console.log(data),
-    error: error => console.log(error),
+    next: data =>  this.user = data,
+    error: error => console.log (error),
   });
 
 }
@@ -61,7 +62,7 @@ chargingDataUser():void{
 atributos
 */
 
-user:User= new User();
+user:User = new User();
 
 
 }

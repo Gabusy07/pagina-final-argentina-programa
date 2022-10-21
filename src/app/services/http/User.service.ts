@@ -20,9 +20,9 @@ export class UserService {
     return this.request.post<User>(this.url+"/add", u, {headers});
   }
 
-  deleteUser(id:BigInt):Observable<object>{
+  deleteUser():Observable<object>{
     const headers = this.getheader();
-    return  this.request.delete(this.url+"/delete/"+id, {headers});
+    return  this.request.delete(this.url+"/delete", {headers});
   }
 
   LoginUser(u: User):Observable<Token>{
@@ -37,9 +37,9 @@ export class UserService {
     
   }
 
-  updateUser(id: BigInt, u:User):Observable<object>{
+  updateUser( u:User):Observable<object>{
     const headers = this.getheader();
-    return this.request.patch<User>(this.url+"/update"+id, u, {headers});
+    return this.request.patch<User>(this.url+"/update", u, {headers});
 
   }
 

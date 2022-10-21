@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { User } from 'app/model/User';
+import { UserMatch } from 'app/model/UserMatch';
+import { UserMatchService } from 'app/services/http/user-match-service';
 import { UserService } from 'app/services/http/User.service';
 
 
@@ -14,7 +16,8 @@ export class RegisterFormComponent implements OnInit {
   
   @Output() onCloseRegisterEvent = new EventEmitter<boolean>();
 
-  constructor( private router: Router, private readonly formBuilder : FormBuilder , private readonly httpSvc: UserService) {
+  constructor( private router: Router, private readonly formBuilder : FormBuilder ,
+     private readonly httpSvc: UserService, private readonly httpUserMatchSvc: UserMatchService) {
     this.openedForm = true;
     this.form = this.initForm();
     
@@ -84,18 +87,43 @@ export class RegisterFormComponent implements OnInit {
 
     const user = this.form.value;
     const u = new User();
+    let user_match = new UserMatch();
     u.user(user.name, user.lastname, user.nickname, user.email, user.password);
 
     this.httpSvc.createUser(u).subscribe({
       next: data => {
-        alert ("usuario guardado con exito"),
-        setTimeout (() => this.router.navigate(['home']), 500)
+        alert ("usuario guardado con exito")
     },
       error: error => {console.log (error);
              setTimeout(() => window.location.reload(), 550 );
-      },
+      }
     });
 
+    //revisar luego
+
+    this.httpSvc.LoginUser(u).subscribe({
+      next: data => {
+        let token =  data.token;
+        if(token == "FAIL"){
+          alert ("ha ocurrido un error");
+          setTimeout(() => window.location.reload(), 550 );
+  
+        }else{
+            localStorage.setItem("token",token);
+            this.router.navigate(['home']);
+          }
+        },
+        error: error => {
+          alert ("ha ocurrido un error");
+          setTimeout(() => window.location.reload(), 550 );
+                         
+        }
+       }
+    )
+    this.httpUserMatchSvc.createMatch(user_match).subscribe({
+        next: data => console.log("exito"),
+        error: err => console.log("error")
+      })
 
   }
 

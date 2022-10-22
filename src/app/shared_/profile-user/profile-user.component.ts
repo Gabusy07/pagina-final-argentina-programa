@@ -15,7 +15,7 @@ export class ProfileUserComponent implements OnInit {
 
   constructor(private readonly httpSvc: UserService, private readonly httpUserMatchSvc: UserMatchService,
     private router:Router,private readonly formBuilder:FormBuilder) { 
-      this.form = this.initForm();
+      
     }
 
   ngOnInit(): void {
@@ -29,11 +29,11 @@ export class ProfileUserComponent implements OnInit {
   //construccion del reactiveForm
   public initForm(): FormGroup{
     return this.formBuilder.group({
-      nickname: ['',[Validators.required, Validators.pattern("^[A-Za-z]\\w*$"), Validators.minLength(5), Validators.maxLength(12)]],
-      name: ['',[Validators.required ,Validators.pattern('^[a-zA-ZÀ-ÿ \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ \u00f1\u00d1]+$'), Validators.minLength(1), Validators.maxLength(50)]],
-      lastname: ['',[Validators.required, Validators.pattern('^[a-zA-ZÀ-ÿ \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ \u00f1\u00d1]+$') , Validators.minLength(1), Validators.maxLength(50)]],
-      email: ['',[Validators.required, Validators.email]],
-      password: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(18)]],
+      nickname: [this.user.nickname,[Validators.required, Validators.pattern("^[A-Za-z]\\w*$"), Validators.minLength(5), Validators.maxLength(12)]],
+      name: [this.user.name,[Validators.required ,Validators.pattern('^[a-zA-ZÀ-ÿ \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ \u00f1\u00d1]+$'), Validators.minLength(2), Validators.maxLength(50)]],
+      lastname: [this.user.lastname,[Validators.required, Validators.pattern('^[a-zA-ZÀ-ÿ \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ \u00f1\u00d1]+$') , Validators.minLength(1), Validators.maxLength(50)]],
+      email: [this.user.email,[Validators.required, Validators.email]],
+      password: [undefined,[Validators.required, Validators.minLength(5), Validators.maxLength(18)]],
     })
 
   }
@@ -59,13 +59,34 @@ export class ProfileUserComponent implements OnInit {
     return this.form.get('nickname');
   }
 
+  
 
   closingForm(){
+    this.isEditFormOpen = !this.isEditFormOpen;
 
   }
 
-  submitSignIn(){
+  public editUser():void{
+    this.form = this.initForm();
+    this.isEditFormOpen = !this.isEditFormOpen;
+  
+  }
 
+
+
+  submitSignIn(){
+    let editedUser = new User();
+    let f = this.form.value;
+    if (f.password == f.repeatPassword){
+      editedUser.name = f.name[0].toUpperCase()+f.name.substring(1) ;
+      editedUser.lastname = f.lastname[0].toUpperCase()+f.lastname.substring(1)  ;
+      editedUser.nickname = f.nickname;
+      editedUser.email = f.email;
+      editedUser.password = f.password == null?  this.user.password: f.password ;
+    }
+    this.updateUser(editedUser);
+    this.isEditFormOpen = !this.isEditFormOpen;
+    window.location.reload();
   }
 
   /*----------------------------------------------
@@ -97,13 +118,13 @@ public deleteUser():void{
 
 }
 
-public updateUser():void{
+public updateUser(editedUser:User):void{
   const u = new User();
-  u.name = this.name;
-  u.lastname = this.lastname;
-  u.nickname = this.nickname;
-  u.email = this.email;
-  u.password! = this.password;
+  u.name = editedUser.name;
+  u.lastname = editedUser.lastname;
+  u.nickname = editedUser.nickname;
+  u.email = editedUser.email;
+  u.password! = editedUser.password;
   this.httpSvc.updateUser(u).subscribe({
     next: ()=>  console.log("exito"),
     error: error => console.log (error),
@@ -123,10 +144,6 @@ private chargingDataUserMatch():void{
 
 //-------------------------------
 
-public editUser():void{
-  this.router.navigate(['register-form']);
-
-}
 
 
 
@@ -134,12 +151,9 @@ public editUser():void{
 atributos
 */
 
-name: String = "NN";
-lastname!: String;
-nickname!: String;
-email!: String;
-password!: String;
-form: FormGroup;
+
+isEditFormOpen: boolean = false;
+form!: FormGroup;
 user_match:UserMatch = new UserMatch();
 user:User = new User();
 

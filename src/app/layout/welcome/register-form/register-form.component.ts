@@ -64,7 +64,7 @@ export class RegisterFormComponent implements OnInit {
 
 
 
-  // revisar para luego cambiar a un metodo post
+  //metodos en html
 
   public submitSignIn(){
     // envia formulario y redirige a home
@@ -87,7 +87,6 @@ export class RegisterFormComponent implements OnInit {
 
     const user = this.form.value;
     const u = new User();
-    let user_match = new UserMatch();
     u.user(user.name, user.lastname, user.nickname, user.email, user.password);
 
     this.httpSvc.createUser(u).subscribe({
@@ -96,11 +95,16 @@ export class RegisterFormComponent implements OnInit {
     },
       error: error => {console.log (error);
              setTimeout(() => window.location.reload(), 550 );
-      }
+      },
+      complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
+      //en local storage
     });
 
-    //revisar luego
 
+  }
+
+  logAfterRegister(u:User){
+    let user_match = new UserMatch();
     this.httpSvc.LoginUser(u).subscribe({
       next: data => {
         let token =  data.token;
@@ -117,19 +121,24 @@ export class RegisterFormComponent implements OnInit {
           alert ("ha ocurrido un error");
           setTimeout(() => window.location.reload(), 550 );
                          
+        },
+        //una vez loggeado el usuario recientemente creado llama a matchserver para crear la tabla de match
+        complete: ()=>{
+          this.httpUserMatchSvc.createMatch(user_match).subscribe({
+            next: data => console.log("exito"),
+            error: err => console.log("error")
+          })
+
         }
        }
     )
-    this.httpUserMatchSvc.createMatch(user_match).subscribe({
-        next: data => console.log("exito"),
-        error: err => console.log("error")
-      })
 
   }
 
 
   //--------------------------------------------------------
   //atributos
+  private user_created:boolean = false;
   private a:any;
   private openedForm: boolean;
   public form: FormGroup;

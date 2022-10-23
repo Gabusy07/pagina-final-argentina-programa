@@ -34,6 +34,7 @@ export class ProfileUserComponent implements OnInit {
       lastname: [this.user.lastname,[Validators.required, Validators.pattern('^[a-zA-ZÀ-ÿ \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ \u00f1\u00d1]+$') , Validators.minLength(1), Validators.maxLength(50)]],
       email: [this.user.email,[Validators.required, Validators.email]],
       password: [undefined,[Validators.required, Validators.minLength(5), Validators.maxLength(18)]],
+      repeatPassword:[undefined]
     })
 
   }
@@ -59,6 +60,9 @@ export class ProfileUserComponent implements OnInit {
     return this.form.get('nickname');
   }
 
+  public get RepeatPassword(){
+    return this.form.get('repeatPassword');
+  }
   
 
   closingForm(){
@@ -73,6 +77,9 @@ export class ProfileUserComponent implements OnInit {
   }
 
 
+  isPasswordEqualsRepeatPassword():boolean{
+    return this.form.get('password')?.value == this.form.get('repeatPassword')?.value;
+  }
 
   submitSignIn(){
     let editedUser = new User();

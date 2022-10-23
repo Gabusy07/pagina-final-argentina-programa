@@ -67,7 +67,6 @@ export class RegisterFormComponent implements OnInit {
   //metodos en html
 
   public submitSignIn(){
-    // envia formulario y redirige a home
     this.saveUser();
   }
 
@@ -90,11 +89,13 @@ export class RegisterFormComponent implements OnInit {
     u.user(user.name, user.lastname, user.nickname, user.email, user.password);
 
     this.httpSvc.createUser(u).subscribe({
+      
       next: data => {
         alert ("usuario guardado con exito")
     },
-      error: error => {console.log (error);
-             setTimeout(() => window.location.reload(), 550 );
+      error: error => {
+             console.log (error);
+             //setTimeout(() => window.location.reload(), 550 );
       },
       complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
       //en local storage

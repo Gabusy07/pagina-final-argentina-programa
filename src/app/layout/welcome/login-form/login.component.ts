@@ -2,7 +2,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Token } from 'app/model/Token-interface';
 import { User } from 'app/model/User';
 import { UserService } from 'app/services/http/User.service';
 
@@ -50,7 +49,7 @@ export class LoginComponent implements OnInit {
   public submitlogin(){
     //funcion fijada en el html
 
-  this.login_user();
+    this.login_user();
 
   }
 
@@ -88,6 +87,7 @@ export class LoginComponent implements OnInit {
       },
       error: error => {
         alert ("ha ocurrido un error");
+        confirm()
         setTimeout(() => window.location.reload(), 550 );
                        
       }

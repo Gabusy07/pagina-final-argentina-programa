@@ -81,7 +81,7 @@
                                      </div>
                                 </div>
                                 <div class="form-group row m-2">
-                                     <div class="col-12 mb-3 mb-sm-0">
+                                     <div class="col-6 mb-3 mb-sm-0">
                                          <input [ngClass]="{'is-invalid' : Password?.errors && Password?.touched, 'is-valid' : !Password?.errors && Password?.touched}" type="password" class="form-control form-control-user"
                                          formControlName="password" placeholder="Contraseña">
                                          <div *ngIf="Password?.errors && Password?.touched">
@@ -90,6 +90,11 @@
                                             <small *ngIf="Password?.errors?.['maxlength']" class="text-danger">El campo contraseña debe ser mas corta</small>
                                          </div>
                                      </div>
+                                    <div class="col-6">
+                                         <input type="password" class="form-control form-control-user"
+                                         formControlName="repeatPassword" placeholder="Repite la contraseña">
+                                         <small *ngIf="!isPasswordEqualsRepeatPassword()" class="text-danger">las contraseñas deben ser iguales</small>
+                                    </div>
                                  </div>
                                 <button (click)="submitSignIn()"  class="btn btn-primary btn-user btn-block">
                                      Register Account

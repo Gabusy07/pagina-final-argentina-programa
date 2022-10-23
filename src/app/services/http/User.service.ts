@@ -17,7 +17,7 @@ export class UserService {
   createUser(u: User): Observable<object>{
     const headers = this.getheader();
     
-    return this.request.post<User>(this.url+"/ad", u, {headers});
+    return this.request.post<User>(this.url+"/add", u, {headers});
   }
 
   deleteUser():Observable<object>{

@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -49,7 +48,7 @@ export class LoginComponent implements OnInit {
   public submitlogin(){
     //funcion fijada en el html
 
-    this.login_user();
+  this.login_user();
 
   }
 
@@ -69,31 +68,25 @@ export class LoginComponent implements OnInit {
 
     //asigna los valores del form formGroup
     user.email = userForm.email;
-    user.password =userForm.password;
+    user.password = userForm.password;
 
 
-    this.userSvc.LoginUser(user).subscribe({
+    this.userSvc.LoginUser(user).subscribe(
+      data => { 
 
-     next: data => {
-      let token =  data.token;
-      if(token == "FAIL"){
-        alert ("ha ocurrido un error");
-        setTimeout(() => window.location.reload(), 550 );
-
-      }else{
-          localStorage.setItem("token",token);
-          this.router.navigate(['home']);
-        }
-      },
-      error: error => {
-        alert ("ha ocurrido un error");
-        confirm()
-        setTimeout(() => window.location.reload(), 550 );
-                       
-      }
-     }
+            let token = data.token;
         
-    )
+            if (token == "FAIL"){
+              alert("los datos ingresados son incorrectos")
+              setTimeout(() => window.location.reload(), 550 );
+            }
+            else{
+              localStorage.setItem("token",token)
+              this.router.navigate(['home']); 
+            }
+        
+        
+      })
         
   }
   
@@ -101,7 +94,6 @@ export class LoginComponent implements OnInit {
 
 
 
-  logged_user:User = new User();
  
   private openedForm: boolean;
   public form: FormGroup;

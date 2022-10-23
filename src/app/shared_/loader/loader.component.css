@@ -7,7 +7,7 @@
     align-items: center;
     background-color: hsl(180, 4%, 82%);
     opacity: .6;
-    z-index: 10;
+    z-index: var(--highest-z-index);
 }
 
 

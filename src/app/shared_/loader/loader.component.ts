@@ -3,7 +3,7 @@ import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-loader',
-  template: `<div *ngIf="isLoading$ | async" class="overlay">
+  template: `<div *ngIf="isLoading$ | async" class="overlay"> <!-- html-->
   <span class="loader">Load&nbsp;ng</span>
 </div>`
   ,
@@ -11,11 +11,11 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class LoaderComponent implements OnInit {
 
-  constructor(private readonly loaderSVC: LoadingService) { }
+  constructor(private readonly loaderSvc: LoadingService) { }
 
   ngOnInit(): void {
   }
 
-  isLoading$ = this.loaderSVC.isLoading$;
+  isLoading$ = this.loaderSvc.isLoading$;
 
 }

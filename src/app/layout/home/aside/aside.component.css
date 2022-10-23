@@ -29,7 +29,6 @@
 
 #sidebar--opened{
     margin-right: 5%;
-    position: absolute;
     animation: close .5s ease 1 forwards;
 }
 
@@ -54,10 +53,10 @@
     content: "";
     position: absolute;
     top: 50%;
-    left: -6%;
+    left: 3%;
     width: 0em;
     height: 5em;
-    margin-left: 0;
+    margin-left: -1%;
     border-right: 1em solid transparent;
     border-bottom: 1em solid transparent;
     border-top: 1em solid transparent;
@@ -75,7 +74,9 @@
 
 .bar{
     box-shadow: var(--boxes-shadow);
-    height: 40%;
+    height: 100%;
+    z-index: var(--middle-z-index);
+    opacity: .9;
 }
 
 

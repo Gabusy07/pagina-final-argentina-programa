@@ -2,18 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './layout/home/home.component';
-
 import { WelcomeComponent } from './layout/welcome/welcome.component';
-import { CalculatorComponent } from './shared/components/calculator/calculator.component';
-
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-
 import { KnowledgesComponent } from './layout/about/knowledges/knowledges.component';
-
 import { CoreModule } from './core/core.module';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NavigationComponent } from './layout/navigation/navigation.component';
@@ -27,9 +21,9 @@ import { RegisterFormComponent } from '@layout/welcome/register-form/register-fo
 import { UserService } from "./services/http/User.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LoginComponent } from './layout/welcome/login-form/login.component';
-import { LoaderComponent } from '@shared/loader/loader.component';
-import { LoaderInterceptor } from '@shared/loader/loader.interceptor';
-import { ArrowComponent } from '@shared/arrow/arrow.component';
+import { LoaderComponent } from './shared_/loader/loader.component';
+import { LoaderInterceptor } from './shared_/loader/loader.interceptor';
+import { ArrowComponent } from './shared_/arrow/arrow.component';
 import { KnowledgesEditComponent } from './admin/knowledges-edit/knowledges-edit.component';
 import { SkillsEditComponent } from './admin/skills-edit/skills-edit.component';
 import { ProfileInfoComponent } from './layout/about/profile-info/profile-info.component';
@@ -38,7 +32,8 @@ import { ProjectsEditComponent } from './admin/projects-edit/projects-edit.compo
 import { FooterEditComponent } from './admin/footer-edit/footer-edit.component';
 import { HomeEditComponent } from './admin/home-edit/home-edit.component';
 import { AboutEditComponent } from './admin/about-edit/about-edit.component';
-import { NoDataTemplateComponent } from '@shared/no-data-template/no-data-template.component';
+import { NoDataTemplateComponent } from './shared_/no-data-template/no-data-template.component';
+import { ProfileUserComponent } from './shared_/profile-user/profile-user.component';
 
 
 
@@ -50,7 +45,6 @@ import { NoDataTemplateComponent } from '@shared/no-data-template/no-data-templa
     HomeComponent,
     AboutComponent,
     WelcomeComponent,
-    CalculatorComponent,
     RegisterFormComponent,
     KnowledgesComponent,
     NavigationComponent,
@@ -70,7 +64,8 @@ import { NoDataTemplateComponent } from '@shared/no-data-template/no-data-templa
     FooterEditComponent,
     HomeEditComponent,
     AboutEditComponent,
-    NoDataTemplateComponent
+    NoDataTemplateComponent,
+    ProfileUserComponent,
  
   ],
   imports: [

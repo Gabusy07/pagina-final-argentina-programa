@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Token } from 'app/model/TokenI-interface';
 import { User } from 'app/model/User';
 import { UserService } from 'app/services/http/User.service';
 
@@ -68,8 +67,8 @@ export class LoginComponent implements OnInit {
     const user: User = new User();
 
     //asigna los valores del form formGroup
-    user.setEmail(userForm.email);
-    user.setPassword(userForm.password);
+    user.email = userForm.email;
+    user.password = userForm.password;
 
 
     this.userSvc.LoginUser(user).subscribe(

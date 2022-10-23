@@ -21,7 +21,7 @@
         <div class="col-sm-15">
             <input   name="lastname" [ngClass]="{'is-invalid' : Lastname?.errors && Lastname?.touched, 'is-valid' : !Lastname?.errors && Lastname?.touched}" class="form-control" type="text" formControlName="lastname" >
        </div>
-       <div *ngIf="Name?.errors && Name?.touched">
+       <div *ngIf="Lastname?.errors && Lastname?.touched">
         <small *ngIf="Lastname?.hasError('required')" class="text-danger">El campo apellido no debe estar vacio</small>
         <small *ngIf="Lastname?.errors?.['maxlength']" class="text-danger">El apellido debe ser mas corto</small>
         <small *ngIf="Lastname?.errors?.['minlength']" class="text-danger">El apellido debe ser mas largo</small>
@@ -63,7 +63,7 @@
         </div>
    </div><br>
    <div class="d-grid gap-2">
-    <input type="submit" class="btn btn-primary" (click)="submitSignIn()" [disabled]="form.invalid">
+    <button class="btn btn-primary" (click)="submitSignIn()" [disabled]="form.invalid">Registrarse</button>
    </div>
 
 

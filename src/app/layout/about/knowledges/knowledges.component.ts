@@ -1,4 +1,4 @@
-import { ThisReceiver } from '@angular/compiler';
+
 import { Component, OnInit } from '@angular/core';
 import { Language } from 'app/model/Language';
 import { LanguageService } from 'app/services/http/language.service';
@@ -37,8 +37,9 @@ export class KnowledgesComponent implements OnInit {
 
 
   getAllLang():void{
-    let response = this.http_svc.getAll().subscribe({
+    this.http_svc.getAll().subscribe({
       next: data => { this.resultGetAll = data;
+      this.isLoading = true;
     },
       error: error => console.log (error),
       /* asegura que la peticion al servidor se haya completado y llama a
@@ -47,7 +48,7 @@ export class KnowledgesComponent implements OnInit {
     });
 }
 
-
- languages: Language[][] = [];
- resultGetAll: Language []=[]  ;
+  isLoading: boolean = false;
+  languages: Language[][] = [];
+  resultGetAll: Language []=[]  ;
 }

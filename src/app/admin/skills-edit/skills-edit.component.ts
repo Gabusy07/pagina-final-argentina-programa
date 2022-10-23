@@ -40,7 +40,7 @@ export class SkillsEditComponent implements OnInit {
     this.skillSvc.getAll().subscribe({
       next: data =>  this.listOfSkills = data,
       error: error => console.log(error),
-      complete: ()=> console.log(this.listOfSkills)
+      complete: ()=> this.isLenOfListOfSkillShort = this.listOfSkills.length < 4
     })
    }
 
@@ -105,6 +105,7 @@ export class SkillsEditComponent implements OnInit {
   }
 
 
+  isLenOfListOfSkillShort:boolean = false;
   listOfSkills:Skill[] = [];
   stateDiv: string[] = [];
   indexSkill: number =NaN;

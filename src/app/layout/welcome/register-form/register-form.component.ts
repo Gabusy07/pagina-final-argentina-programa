@@ -95,7 +95,7 @@ export class RegisterFormComponent implements OnInit {
     },
       error: error => {
              console.log (error);
-             //setTimeout(() => window.location.reload(), 550 );
+             setTimeout(() => window.location.reload(), 550 );
       },
       complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
       //en local storage

@@ -45,9 +45,7 @@ export class UserService {
 
   private getheader():HttpHeaders{
   
-
     const token:string = localStorage['token'];
-    
     const headers= new HttpHeaders({
       'Content-Type':  'application/json',
       Authorization: token

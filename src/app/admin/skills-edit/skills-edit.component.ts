@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SkillService } from 'app/services/http/skill.service';
+import { Skill } from 'app/model/Skill';
 
 @Component({
   selector: 'app-skills-edit',
@@ -18,7 +20,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class SkillsEditComponent implements OnInit {
 
   
-  constructor() {
+  constructor(private readonly skillSvc: SkillService) {
     for (let i=0; i<this.listOfSkills.length; i++){
       this.stateDiv.push("state1");
     }
@@ -26,7 +28,25 @@ export class SkillsEditComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getAllSkill();
   }
+
+  /*-----------------------------
+   CRUD
+   */
+
+
+   getAllSkill(){
+    this.skillSvc.getAll().subscribe({
+      next: data =>  this.listOfSkills = data,
+      error: error => console.log(error),
+      complete: ()=> console.log(this.listOfSkills)
+    })
+   }
+
+
+
+
 
   
 
@@ -85,7 +105,7 @@ export class SkillsEditComponent implements OnInit {
   }
 
 
-  listOfSkills:string[] = ["ingles(B2)", "asertivo", "comprometido", "proactivo"];
+  listOfSkills:Skill[] = [];
   stateDiv: string[] = [];
   indexSkill: number =NaN;
   editPen:boolean = false;

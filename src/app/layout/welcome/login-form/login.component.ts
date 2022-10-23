@@ -89,6 +89,11 @@ export class LoginComponent implements OnInit {
       })
         
   }
+
+
+
+
+  // -------------------atributos-------------------
   
 
 

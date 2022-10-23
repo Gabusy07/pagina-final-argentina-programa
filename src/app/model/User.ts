@@ -1,8 +1,6 @@
 export class User {
 
-    constructor(){
-
-    }
+    constructor(){}
     public user (name: String, lastname: String, nickname: String, email: String, password: String){
         this.name = name;
         this.lastname = lastname;

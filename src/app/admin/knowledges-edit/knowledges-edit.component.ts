@@ -61,9 +61,8 @@ export class KnowledgesEditComponent implements OnInit {
   }
 
   getAllLang():void{
-    let response = this.http_svc.getAll().subscribe({
-      next: data => { this.resultGetAll = data;
-    },
+    this.http_svc.getAll().subscribe({
+      next: data =>  this.resultGetAll = data,
       error: error => console.log (error),
       /* asegura que la peticion al servidor se haya completado y llama a
       la funcion que carga en una nueva lista para mejor lectura en html */
@@ -176,7 +175,7 @@ export class KnowledgesEditComponent implements OnInit {
 
 
   languages: Language[][] = [];
-  resultGetAll: Language []=[]  ;
+  resultGetAll: Language []=[];
   indexsDeleteLang: number[] =[NaN,NaN];
   indexsEditLang: number[] =[NaN,NaN];
   datePickerId: String;

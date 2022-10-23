@@ -111,17 +111,19 @@ public chargingDataUser():void{
 }
 
 public deleteUser():void{
-  confirm("seguro que deseas eliminar esta cuenta?")
-  this.httpUserMatchSvc.deleteMatch().subscribe({
-    error: error => console.log (error),
-    complete: ()=>{
+  if (confirm("seguro que deseas eliminar esta cuenta?")){
+    this.httpUserMatchSvc.deleteMatch().subscribe({
+      error: error => console.log (error),
+      complete: ()=>{
+  
+        this.httpSvc.deleteUser().subscribe({
+          next: data =>  console.log("exito"),
+        })
+  
+      }
+    })
 
-      this.httpSvc.deleteUser().subscribe({
-        next: data =>  console.log("exito"),
-      })
-
-    }
-  })
+  }
 
 }
 

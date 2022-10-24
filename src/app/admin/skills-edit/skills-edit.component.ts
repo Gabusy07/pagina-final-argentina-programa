@@ -44,13 +44,25 @@ export class SkillsEditComponent implements OnInit {
     })
    }
 
-   private addSkill(skill:Skill){
+   private addSkill(skill:Skill):void{
     
     this.skillSvc.createSkill(skill).subscribe({
       next: data=> console.log(data),
       error: error=> console.log(error)
 
     })
+
+   }
+
+   private deleteSkill(id:BigInt):void{
+    this.skillSvc.deleteSkill(id).subscribe({
+      next: data=> console.log(data),
+      error: error => console.log(error)
+    })
+
+   }
+
+   private updateSkill(id:BigInt, editedSkill: Skill):void{
 
    }
 
@@ -61,8 +73,8 @@ export class SkillsEditComponent implements OnInit {
 
   
 
-
-  // agranda el div de una skill
+//--------------------------------------
+// agranda el div de una skill
   enlarge(index: number){
      this.stateDiv[index] = "estado2" ;
   }
@@ -98,22 +110,27 @@ export class SkillsEditComponent implements OnInit {
 
   }
 
-  onDeleteButtom(i:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
+  onDeleteButtom(index:number, id:BigInt):void{  //funcion en html, llama a funcion crud
     
-    this.listOfSkills = this.listOfSkills.splice(i);
+    if (confirm("seguro quieres eliminar "+this.listOfSkills[index].name)+"?"){
+      this.deleteSkill(id);
+    }
     window.location.reload()
 
   }
 
-  onEditButtom(index:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
+  onEditButtom(index:number, id:BigInt):void{  //llama a funcion crud. Los argumentos son los indices de la lista de pares y el id del obj
     
+    alert(typeof(document.getElementById(index+'div')?.innerText));
     this.editPen = this.editPen == false ? true : false;
     this.deleteTrash = false;
     let skillEditable = document.getElementById(index+"div");
     skillEditable?.setAttribute("contenteditable", "false");
     skillEditable?.setAttribute("autofocus", "false");
+    if (confirm("seguro quieres guardar lo cambios?")){
+      this.updateSkill(id, this.editedSkill);
+    }
     
-
   }
 
   onCloseForm():void{
@@ -128,6 +145,7 @@ export class SkillsEditComponent implements OnInit {
   editPen:boolean = false;
   deleteTrash:boolean = false;
   newSkill: Skill = new Skill();
+  editedSkill:Skill = new Skill();
 
   
 

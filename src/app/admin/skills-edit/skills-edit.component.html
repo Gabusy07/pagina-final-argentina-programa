@@ -7,10 +7,10 @@
           <small>puedes editar el texto</small>
         </div>
       </div>
-        <div [@animation1]="stateDiv[i]" class="alert alert-info " (mouseenter)="enlarge(i)"
-         (mouseleave)="reduce(i)" [id]="i+'div'">{{skill.name}} </div>
-       <button *ngIf="editPen && i == indexSkill" class="btn btn-outline-warning w-75" (click)="onEditButtom(i)">editar</button>
-       <button *ngIf="deleteTrash && i == indexSkill" class="btn btn-outline-danger w-75 " (click)="onDeleteButtom(i)">eliminar</button>
+        <div  [@animation1]="stateDiv[i]" class="alert alert-info " (mouseenter)="enlarge(i)"
+         (mouseleave)="reduce(i)" [id]="i+'div'">{{skill.name}}</div>
+       <button *ngIf="editPen && i == indexSkill" class="btn btn-outline-warning w-75" (click)="onEditButtom(i, skill.id)">editar</button>
+       <button *ngIf="deleteTrash && i == indexSkill" class="btn btn-outline-danger w-75 " (click)="onDeleteButtom(i, skill.id)">eliminar</button>
      </div>
 </div>
 
@@ -18,8 +18,8 @@
   <app-no-data-template></app-no-data-template>
 </ng-template>
 
-<i class="bi bi-plus-square text-dark" id="add_square"></i>
 <div *ngIf="isLenOfListOfSkillShort" id="form_skills">
+  <i class="bi bi-plus-square text-dark" id="add_square"></i>
   <button type="button" class="btn-close" id="close_button" aria-label="Close" (click)="onCloseForm()"></button>
   <form>
     <label for="skill">Nombre</label>

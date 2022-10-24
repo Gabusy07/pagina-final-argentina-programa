@@ -48,8 +48,8 @@ export class SkillsEditComponent implements OnInit {
     
     this.skillSvc.createSkill(skill).subscribe({
       next: data=> console.log(data),
-      error: error=> console.log(error)
-
+      error: error=> console.log(error),
+      complete: ()=> window.location.reload()
     })
 
    }
@@ -124,8 +124,8 @@ export class SkillsEditComponent implements OnInit {
   }
 
   onDeleteButtom(index:number, id:BigInt):void{  //funcion en html, llama a funcion crud
-    
-    if (confirm("seguro quieres eliminar "+this.listOfSkills[index].name)+"?"){
+
+    if (confirm("seguro quieres eliminar "+this.listOfSkills[index].name+"?")){
       this.deleteSkill(id);
     }
     window.location.reload()

@@ -109,7 +109,7 @@ export class SkillsEditComponent implements OnInit {
   }
 
   inputSkill(event: Event){
-    this.editedSkill.name = (<HTMLInputElement>event.target).value;
+    this.newSkill.name = (<HTMLInputElement>event.target).value;
   }
 
   onSubmitButtom():void{

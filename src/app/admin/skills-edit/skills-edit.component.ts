@@ -63,6 +63,11 @@ export class SkillsEditComponent implements OnInit {
    }
 
    private updateSkill(id:BigInt, editedSkill: Skill):void{
+    this.skillSvc.updateSkill(id, editedSkill).subscribe({
+      next: data=> alert("exito"),
+      error: error => console.log(error)
+
+    })
 
    }
 
@@ -99,7 +104,15 @@ export class SkillsEditComponent implements OnInit {
 
   }
 
-  onAddButtom():void{
+  onAddButtom(){
+    this.isAddSkillFormVisible= !this.isAddSkillFormVisible;
+  }
+
+  inputSkill(event: Event){
+    this.editedSkill.name = (<HTMLInputElement>event.target).value;
+  }
+
+  onSubmitButtom():void{
     this.addSkill(this.newSkill);
   }
 
@@ -121,7 +134,9 @@ export class SkillsEditComponent implements OnInit {
 
   onEditButtom(index:number, id:BigInt):void{  //llama a funcion crud. Los argumentos son los indices de la lista de pares y el id del obj
     
-    alert(typeof(document.getElementById(index+'div')?.innerText));
+    let editedName: any = document.getElementById(index+'div')?.innerText.toString();
+    editedName == undefined? " ": editedName;
+    this.editedSkill.name = editedName;
     this.editPen = this.editPen == false ? true : false;
     this.deleteTrash = false;
     let skillEditable = document.getElementById(index+"div");
@@ -143,6 +158,7 @@ export class SkillsEditComponent implements OnInit {
   stateDiv: string[] = [];
   indexSkill: number =NaN;
   editPen:boolean = false;
+  isAddSkillFormVisible:boolean = false;
   deleteTrash:boolean = false;
   newSkill: Skill = new Skill();
   editedSkill:Skill = new Skill();

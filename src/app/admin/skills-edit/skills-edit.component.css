@@ -1,4 +1,11 @@
 
+
+#container{
+    position: relative;
+    margin-bottom: 10%;
+
+}
+
 .box_skill{
     display: block;
     width: 20%;
@@ -10,7 +17,7 @@
 
 
 
-#container{
+#container_skillsDivs{
     width: 95%;
     padding: 2.5%;
 }
@@ -46,7 +53,10 @@
 }
 
 #add_square{
-    margin: auto 25%;
+    position: absolute;
+    left: 25%;
+    top: 0;
+    margin: 10% 25%;
     height: 2rem;
     width: 2rem;
     font-size: 2rem;

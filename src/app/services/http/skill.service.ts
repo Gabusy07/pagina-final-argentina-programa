@@ -14,18 +14,18 @@ export class SkillService {
   //-------------crud-----------------
 
 
-  createLanguage(skill: Skill): Observable<Object>{
+  createSkill(skill: Skill): Observable<Object>{
     const headers = this.getheader();
     return this.request.post<Skill>(this.url+"/add", skill, {headers});
 
   }
 
-  deleteLanguage(id:BigInt):  Observable<Object>{
+  deleteSkill(id:BigInt):  Observable<Object>{
     const headers = this.getheader();
     return this.request.delete(this.url+"/delete/"+id, {headers})
   }
 
-  updateLanguage(id:BigInt, skill: Skill): Observable<Object>{
+  updateSkill(id:BigInt, skill: Skill): Observable<Object>{
     const headers = this.getheader();
     return this.request.patch(this.url+`/update/${id}`, skill, {headers});
   }

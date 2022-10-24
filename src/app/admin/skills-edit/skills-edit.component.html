@@ -19,6 +19,11 @@
 </ng-template>
 
 <i class="bi bi-plus-square text-dark" id="add_square"></i>
-<div *ngIf="isLenOfListOfSkillShort">
-  hello
- </div>
+<div *ngIf="isLenOfListOfSkillShort" id="form_skills">
+  <button type="button" class="btn-close" id="close_button" aria-label="Close" (click)="onCloseForm()"></button>
+  <form>
+    <label for="skill">Nombre</label>
+    <input name="skill" [(ngModel)]="newSkill.name" type="text" required>
+    <button (click)="onAddButtom()">agregar</button>
+  </form>
+</div>

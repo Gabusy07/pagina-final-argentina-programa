@@ -36,13 +36,24 @@ export class SkillsEditComponent implements OnInit {
    */
 
 
-   getAllSkill(){
+   private getAllSkill(){
     this.skillSvc.getAll().subscribe({
       next: data =>  this.listOfSkills = data,
       error: error => console.log(error),
       complete: ()=> this.isLenOfListOfSkillShort = this.listOfSkills.length < 4
     })
    }
+
+   private addSkill(skill:Skill){
+    
+    this.skillSvc.createSkill(skill).subscribe({
+      next: data=> console.log(data),
+      error: error=> console.log(error)
+
+    })
+
+   }
+
 
 
 
@@ -74,9 +85,10 @@ export class SkillsEditComponent implements OnInit {
     }
     
 
-    
-    
+  }
 
+  onAddButtom():void{
+    this.addSkill(this.newSkill);
   }
 
   onDeleteTrash(index:number):void{ //icono eliminar
@@ -104,6 +116,10 @@ export class SkillsEditComponent implements OnInit {
 
   }
 
+  onCloseForm():void{
+
+  }
+
 
   isLenOfListOfSkillShort:boolean = false;
   listOfSkills:Skill[] = [];
@@ -111,6 +127,7 @@ export class SkillsEditComponent implements OnInit {
   indexSkill: number =NaN;
   editPen:boolean = false;
   deleteTrash:boolean = false;
+  newSkill: Skill = new Skill();
 
   
 

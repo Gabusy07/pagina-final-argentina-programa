@@ -53,12 +53,12 @@ textEditPen(){
   para cambiar la foto de perfil*/
   photoEditPen():void{
     this.onEditPhoto = this.onEditPhoto == false ? true : false;
-    console.log(this.urlPhoto)
 
   }
 
   onSubmitPhoto():void{ 
     this.onEditPhoto = true;
+    console.log(this.urlPhoto)
 
   }
 

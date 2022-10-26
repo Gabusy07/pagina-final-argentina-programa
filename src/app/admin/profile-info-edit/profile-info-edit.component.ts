@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Description } from 'app/model/Description';
 import { DescriptionService } from 'app/services/http/description.service';
-import { UploadFilesService } from 'app/services/upload-files.service';
+import { FilesService} from 'app/services/files.service';
+import { getDownloadURL } from 'firebase/storage';
 
 
 
@@ -15,13 +16,16 @@ import { UploadFilesService } from 'app/services/upload-files.service';
 export class ProfileInfoEditComponent implements OnInit {
 
   constructor(private readonly formBuilder : FormBuilder, private readonly descHttpSvc:DescriptionService,
-    private uploadImgSvc: UploadFilesService) {
+    private imgSvc: FilesService) {
+    this.images = []
     this.form = this.initForm();
 
-   }
+}
+
 
   ngOnInit(): void {
     this.getDescription();
+    
 }
 
 
@@ -32,7 +36,8 @@ export class ProfileInfoEditComponent implements OnInit {
       next: data =>  {
         this.id= data[0].id;
         this.text= data[0].text;
-        this.title = data[0].title
+        this.title = data[0].title;
+        this.image = data[0].photo;
       },
       error: error => console.log(error),
 
@@ -86,13 +91,22 @@ export class ProfileInfoEditComponent implements OnInit {
   uploadImg($e:any){
     this.file = $e.target.files[0];
 
-    console.log(this.file)
-    //this.uploadImgSvc.uploadFiles(file);
-
   }
 
+  downloadingImg():void{
+    this.imgSvc.getImages().then(async response => {
+      this.images = [];
+      const url = await getDownloadURL(response.items[0]);
+      this.image = url;
+    })
+    .catch(error => console.log(error)).finally(()=>{
+      let desc:Description = new Description(this.text, this.title, this.image);
+      this.updateDescription(this.id, desc);
+    }
+      
+   )
 
-
+  }
 
 
 
@@ -103,22 +117,21 @@ export class ProfileInfoEditComponent implements OnInit {
     this.text = formText.text;
     alert(this.text)
     this.onEditText = true;
-    let desc:Description = new Description(this.text, this.title, this.photo);
+    let desc:Description = new Description(this.text, this.title, this.image);
     this.updateDescription(this.id, desc);
   
   }
 
   onSubmitPhoto():void{
     this.editPhoto = true;
-    let desc:Description = new Description(this.text, this.title, this.photo);
-    this.updateDescription(this.id, desc);
-
+    this.imgSvc.uploadFiles(this.file);
+    this.downloadingImg();
   }
 
   onDeletePhoto():void{
     this.editPhoto = !this.editPhoto;
-    this.photo = "";
-    let desc:Description = new Description(this.text, this.title, this.photo);
+    this.image = "";
+    let desc:Description = new Description(this.text, this.title, this.image);
     this.updateDescription(this.id, desc);
 
   }
@@ -131,9 +144,12 @@ editPhoto: boolean = true;
 onEditText: boolean = true;
 form: FormGroup;
 title!:String;
-photo!:String;
 file!:any;
+images!: string[];
+image!:String;
 
 }
+
+
 
 

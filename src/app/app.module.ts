@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -34,6 +35,15 @@ import { HomeEditComponent } from './admin/home-edit/home-edit.component';
 import { AboutEditComponent } from './admin/about-edit/about-edit.component';
 import { NoDataTemplateComponent } from './shared_/no-data-template/no-data-template.component';
 import { ProfileUserComponent } from './shared_/profile-user/profile-user.component';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from '../environments/environment';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideStorage,getStorage } from '@angular/fire/storage';
+
 
 
 
@@ -77,13 +87,18 @@ import { ProfileUserComponent } from './shared_/profile-user/profile-user.compon
     CoreModule,
     HttpClientModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage())
   ],
   exports: [RouterModule],
 
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy},
     UserService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true},
     
   ],
   bootstrap: [AppComponent]

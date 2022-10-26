@@ -32,9 +32,7 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
-          
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
@@ -104,6 +102,16 @@
               "src/styles.css"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "angular-porfolio-arg-programa:build:production",
+            "firebaseProject": "porfolio-eced8",
+            "firebaseHostingSite": "porfolio-eced8"
           }
         }
       }

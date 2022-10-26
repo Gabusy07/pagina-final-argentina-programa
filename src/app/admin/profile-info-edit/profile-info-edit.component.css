@@ -10,3 +10,8 @@ div{
     top: 0%;
     cursor: pointer;
 }
+
+#input_photo{
+    text-decoration: none;
+    width: 75%;
+}

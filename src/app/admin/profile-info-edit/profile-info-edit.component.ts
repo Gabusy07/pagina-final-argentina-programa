@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Description } from 'app/model/Description';
 import { DescriptionService } from 'app/services/http/description.service';
+import { UploadFilesService } from 'app/services/upload-files.service';
+
+
+
 
 @Component({
   selector: 'app-profile-info-edit',
@@ -10,7 +14,8 @@ import { DescriptionService } from 'app/services/http/description.service';
 })
 export class ProfileInfoEditComponent implements OnInit {
 
-  constructor(private readonly formBuilder : FormBuilder, private readonly descHttpSvc:DescriptionService ) {
+  constructor(private readonly formBuilder : FormBuilder, private readonly descHttpSvc:DescriptionService,
+    private uploadImgSvc: UploadFilesService) {
     this.form = this.initForm();
 
    }
@@ -20,7 +25,7 @@ export class ProfileInfoEditComponent implements OnInit {
 }
 
 
-   //---------------CRUD-------------------
+   //---------------CRUD READ UPDATE-------------------
 
   private getDescription():void{
     this.descHttpSvc.readDescription().subscribe({
@@ -43,6 +48,7 @@ export class ProfileInfoEditComponent implements OnInit {
   }
 
 
+  //-------------------------------------------------
 
   //construccion del reactiveForm
   initForm(): FormGroup{
@@ -76,6 +82,19 @@ export class ProfileInfoEditComponent implements OnInit {
   onPhotoEditPen():void{
     this.editPhoto = !this.editPhoto;
   }
+
+  uploadImg($e:any){
+    this.file = $e.target.files[0];
+
+    console.log(this.file)
+    //this.uploadImgSvc.uploadFiles(file);
+
+  }
+
+
+
+
+
 
   onEditButtom():void{
     this.editPhoto = !this.editPhoto;
@@ -113,8 +132,8 @@ onEditText: boolean = true;
 form: FormGroup;
 title!:String;
 photo!:String;
+file!:any;
 
 }
-
 
 

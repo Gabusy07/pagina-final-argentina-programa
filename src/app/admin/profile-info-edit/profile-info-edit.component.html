@@ -11,7 +11,8 @@
             <span class="input-group-text">foto de perfil</span>
         </div>
         
-        <input name="inputPhoto" [(ngModel)]="photo" type="file"><br>
+        <input name="inputPhoto" (change)="uploadImg($event)" [(ngModel)]="photo" type="file" id="input_photo"><br>
+        <img [src]="file" alt="">
         <button class="btn btn-secondary d-block position-relative start-25 w-75 m-2" (click)="onSubmitPhoto()" >editar</button>
         <button class="btn btn-danger d-block position-relative start-30 w-75 m-2" (click)="onDeletePhoto()" >eliminar</button>
     </div>

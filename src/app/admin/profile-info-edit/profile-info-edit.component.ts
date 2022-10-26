@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Description } from 'app/model/Description';
+import { DescriptionService } from 'app/services/http/description.service';
 
 @Component({
   selector: 'app-profile-info-edit',
@@ -8,73 +10,109 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ProfileInfoEditComponent implements OnInit {
 
-  constructor(private readonly formBuilder : FormBuilder) {
+  constructor(private readonly formBuilder : FormBuilder, private readonly descHttpSvc:DescriptionService ) {
     this.form = this.initForm();
 
    }
 
   ngOnInit(): void {
-    this.text = ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam tempora adipisci amet numquam officiis pariatur! Eveniet eius fugit aliquid porro obcaecati eos nihil? Expedita,\
-    accusamus voluptate fuga fugit nihil enim? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor recusandae veniam repellat fugiat temporibus rem, illum impedit enim dignissimos aspernatur\
-     ab fuga neque, unde qui autem. Ab quae\
-     laboriosam dolorem? Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quia harum natus, enim blanditiis\
-     in porro illo laudantium, aliquam iusto quisquam possimus temporibus provident tenetur fugit tempore eligendi quis ratione!\
-   Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate soluta, iusto corrupti ipsum nostrum illo nobis veritatis numquam id atque aspernatur accusantium sint iure? Et ab amet quo nulla voluptate?\
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque officia eius quo ad! Aliquid odit, animi autem repellendus ratione, ut, inventore incidunt natus perferendis facilis magnam. Commodi ipsa aperiam repellat!'
-   
+    this.getDescription();
 }
 
- //construccion del reactiveForm
- initForm(): FormGroup{
-  return this.formBuilder.group({
-    text: ["",[Validators.required, Validators.minLength(12), Validators.maxLength(100)]],
-  })
 
-}
+   //---------------CRUD-------------------
 
-get Text(): any{
-  return this.form.get('text');
-}
+  private getDescription():void{
+    this.descHttpSvc.readDescription().subscribe({
+      next: data =>  {
+        this.id= data[0].id;
+        this.text= data[0].text;
+        this.title = data[0].title
+      },
+      error: error => console.log(error),
 
-//para editar el texto descriptivo principal 
-textEditPen(){
-    this.onEditText = this.onEditText == false ? true : false;
+    })
+  }
+
+
+  private updateDescription(id:BigInt, desc:Description):void{
+    this.descHttpSvc.updateDescription(id, desc).subscribe({
+      next: data=> console.log("data"),
+      error: error => console.log(error)
+    })
+  }
+
+
+
+  //construccion del reactiveForm
+  initForm(): FormGroup{
+    return this.formBuilder.group({
+      text: [this.text,[Validators.required, Validators.minLength(12), Validators.maxLength(100)]],
+      title: [this.title,[Validators.required, Validators.minLength(5), Validators.maxLength(25)]],
+    })
 
   }
 
+  get Text(){
+    return this.form.get('text');
+  }
+
+  get Title(){
+    return this.form.get('title');
+  }
+
+  //para editar el texto descriptivo principal 
+  textEditPen(){
+      this.onEditText = !this.onEditText;
+  }
+
   onSubmitText(){
-    const formText = this.form.value;
-    this.text = formText.text;
-    this.onEditText = true;
 
   }
 
   /*  -----------------------------
   para cambiar la foto de perfil*/
-  photoEditPen():void{
-    this.onEditPhoto = this.onEditPhoto == false ? true : false;
 
+  onPhotoEditPen():void{
+    this.editPhoto = !this.editPhoto;
   }
 
-  onSubmitPhoto():void{ 
-    this.onEditPhoto = true;
-    console.log(this.urlPhoto)
+  onEditButtom():void{
+    this.editPhoto = !this.editPhoto;
+    const formText = this.form.value;
+    this.title = formText.title;
+    this.text = formText.text;
+    alert(this.text)
+    this.onEditText = true;
+    let desc:Description = new Description(this.text, this.title, this.photo);
+    this.updateDescription(this.id, desc);
+  
+  }
+
+  onSubmitPhoto():void{
+    this.editPhoto = true;
+    let desc:Description = new Description(this.text, this.title, this.photo);
+    this.updateDescription(this.id, desc);
 
   }
 
   onDeletePhoto():void{
-    this.onEditPhoto = this.onEditPhoto == false ? true : false;
-    this.urlPhoto = "";
+    this.editPhoto = !this.editPhoto;
+    this.photo = "";
+    let desc:Description = new Description(this.text, this.title, this.photo);
+    this.updateDescription(this.id, desc);
 
   }
 
+//--------------atributos------------
 
-
-  text: any = "";
-  urlPhoto: string = "";
-  onEditPhoto: boolean = true;
-  onEditText: boolean = true;
-  form: FormGroup;
+id!:BigInt;
+text!: String;
+editPhoto: boolean = true;
+onEditText: boolean = true;
+form: FormGroup;
+title!:String;
+photo!:String;
 
 }
 

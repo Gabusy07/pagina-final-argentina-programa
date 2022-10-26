@@ -29,7 +29,7 @@ export class DescriptionService {
 
   updateDescription(id:BigInt, editedDesc:Description):Observable<object>{
     const headers = this.getheader();
-    return this.request.patch(this.url+"/update"+id, editedDesc, {headers})
+    return this.request.patch(this.url+"/update/"+id, editedDesc, {headers})
    }
 
 

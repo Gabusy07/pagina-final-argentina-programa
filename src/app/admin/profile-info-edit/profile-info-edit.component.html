@@ -1,17 +1,17 @@
 <!--foto-->
-<div *ngIf="onEditPhoto; else elseInputPhoto">
-    <i class="bi bi-pencil-square pen" (click)="photoEditPen()"></i>
+<div *ngIf="editPhoto; else elseInputPhoto">
+    <i class="bi bi-pencil-square pen" (click)="onPhotoEditPen()"></i>
     <img src="#" alt="foto" class="img-fluid rounded float-right">
 </div>
 
 <ng-template #elseInputPhoto>
     <div class="container">
         <div class="input-group-prepend">
-            <i class="bi bi-pencil-square pen" (click)="photoEditPen()"></i>
+            <i class="bi bi-pencil-square pen" (click)="onPhotoEditPen()"></i>
             <span class="input-group-text">foto de perfil</span>
         </div>
         
-        <input name="inputPhoto" [(ngModel)]="urlPhoto" type="file"><br>
+        <input name="inputPhoto" [(ngModel)]="photo" type="file"><br>
         <button class="btn btn-secondary d-block position-relative start-25 w-75 m-2" (click)="onSubmitPhoto()" >editar</button>
         <button class="btn btn-danger d-block position-relative start-30 w-75 m-2" (click)="onDeletePhoto()" >eliminar</button>
     </div>
@@ -21,8 +21,11 @@
 
 <!--descripción-->
 <div *ngIf="onEditText; else elseInputText">
-<i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
-<p>{{text}}</p>
+    <div>
+        <i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
+        <h2>{{title}}</h2>
+    </div>
+   <p>{{text}}</p>
 </div>
 
 <ng-template #elseInputText>
@@ -31,10 +34,13 @@
             <i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
             <span class="input-group-text">Descripción</span>
         </div>
+        <input type="text" [placeholder]="title" class="form-control m-2" formControlName="title"
+        [ngClass]="{'is-invalid' : Title?.errors && Title?.touched, 'is-valid' : !Title?.errors}">
+
         <textarea class="form-control" aria-label="With textarea" name="textInput" [placeholder]="text"
         [ngClass]="{'is-invalid' : Text?.errors && Text?.touched, 'is-valid' : !Text?.errors}" formControlName="text"
         
         ></textarea>
-        <button class="btn btn-secondary position-relative start-50 w-50 mr-2" (click)="onSubmitText()" [disabled]="form.invalid">editar</button>
+        <button class="btn btn-secondary position-relative start-50 w-50 mr-2" (click)="onEditButtom()" [disabled]="form.invalid">editar</button>
     </form>
 </ng-template>

@@ -9,7 +9,8 @@ import { DescriptionService } from 'app/services/http/description.service';
 })
 export class ProfileInfoComponent implements OnInit {
 
-  constructor(private readonly descHttpSvc: DescriptionService) { }
+  constructor(private readonly descHttpSvc: DescriptionService) {
+   }
 
   ngOnInit(): void {
     this.getDescription();

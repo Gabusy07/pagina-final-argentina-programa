@@ -67,7 +67,11 @@ export class RegisterFormComponent implements OnInit {
   //metodos en html
 
   public submitSignIn(){
-    this.saveUser();
+  //crea un usuario con los valores del formgroup
+    const user = this.form.value;
+    const u = new User();
+    u.user(user.name, user.lastname, user.nickname, user.email, user.password, user.getRol);
+    this.saveUser(u);
   }
 
   // cerrar formulario al presionar 'x/close'
@@ -80,16 +84,10 @@ export class RegisterFormComponent implements OnInit {
   //--------------------------------------------------------
   //CRUD
 
-  private saveUser():void{
-
-    //crea un usuario con los valores del formgroup y llama al servicio que conecta con el servidor
-
-    const user = this.form.value;
-    const u = new User();
-    u.user(user.name, user.lastname, user.nickname, user.email, user.password);
-
-    this.httpSvc.createUser(u).subscribe({
-      
+  private saveUser(u:User):void{
+  //  llama al servicio que conecta con el servidor
+    
+    let a = this.httpSvc.createUser(u).subscribe({
       next: data => {
         alert ("usuario guardado con exito")
     },
@@ -100,6 +98,7 @@ export class RegisterFormComponent implements OnInit {
       complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
       //en local storage
     });
+    console.log(a)
 
 
   }

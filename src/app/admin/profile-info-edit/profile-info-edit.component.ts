@@ -90,13 +90,17 @@ export class ProfileInfoEditComponent implements OnInit {
   }
 
   uploadImg($e:any){
-    this.file = $e.target.files[0];
+    const file = $e.target.files[0];
     if (confirm("deseas subir este archivo?")){
-      const fileRef = this.imgSvc.getRef($e)
-      const task = this.imgSvc.uploadFile(this.file);
+      const fileRef = this.imgSvc.getRef(file.name)
+      const task = this.imgSvc.uploadFile(file);
+
       this.uploadPercent = task.percentageChanges();
+
       task.snapshotChanges().pipe(
-        finalize(() => this.downloadURL = fileRef.getDownloadURL() )
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(imgRef => console.log(imgRef))
+        } )
      )
     .subscribe()
 
@@ -118,14 +122,12 @@ export class ProfileInfoEditComponent implements OnInit {
 
   onSubmitPhoto():void{
     this.editPhoto = !this.editPhoto;
-    /*
-    this.imgSvc.getImages().then(async response => {
-        const url = await getDownloadURL(response.items[0]);
-        this.imageUrl = url  
-    }).catch(error => console.log(error)).finally(()=>{
-      let desc:Description = new Description(this.text, this.title, this.imageUrl);  
-      this.updateDescription(this.id, desc)
-    })*/
+    
+    let desc:Description = new Description(this.text, this.title, this.imageUrl);  
+    this.updateDescription(this.id, desc)
+      
+    
+   
   }
 
   onDeletePhoto():void{

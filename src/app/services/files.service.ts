@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL, deleteObject } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -25,8 +25,8 @@ export class FilesService {
     }
     
 
-  getRef(file:File):any{
-    const filePath = 'images/'+file.name;
+  getRef(name:String):AngularFireStorageReference{
+    const filePath =  `images/${name}`;
     return this.storage.ref(filePath);
 
   }

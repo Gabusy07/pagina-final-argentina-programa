@@ -12,7 +12,7 @@
         </div>
         
         <input name="inputPhoto" (change)="uploadImg($event)" type="file" accept=".jpg,.png,.svg" id="input_photo"><br>
-        <div>{{ uploadPercent  | async | number: '2.0' }}</div>
+        <div>{{ uploadPercent  | async | number: '2.1' }}</div>
         <button class="btn btn-secondary d-block position-relative start-25 w-75 m-2" [disabled]="isUploadingIncomplete" (click)="onSubmitPhoto()">Guardar</button>
         <button class="btn btn-danger d-block position-relative start-30 w-75 m-2" (click)="onDeletePhoto()" >eliminar</button>
     </div>

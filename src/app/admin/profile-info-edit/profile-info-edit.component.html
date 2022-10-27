@@ -1,7 +1,7 @@
 <!--foto-->
 <div *ngIf="editPhoto; else elseInputPhoto">
     <i class="bi bi-pencil-square pen" (click)="onPhotoEditPen()"></i>
-    <img [src]="image" alt="foto" class="img-fluid rounded float-right">
+    <img [src]="imageUrl" alt="foto" class="img-fluid rounded float-right">
 </div>
 
 <ng-template #elseInputPhoto>
@@ -11,7 +11,9 @@
             <span class="input-group-text">foto de perfil</span>
         </div>
         
-        <input name="inputPhoto" (change)="uploadImg($event)" [(ngModel)]="image" type="file" id="input_photo"><br>
+        <input name="inputPhoto" (change)="uploadImg($event)" type="file" accept=".jpg,.png,.svg" id="input_photo"><br>
+        <div>{{ uploadPercent  | async | number: '2.0' }}</div>
+        <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
         <button class="btn btn-secondary d-block position-relative start-25 w-75 m-2" (click)="onSubmitPhoto()" >editar</button>
         <button class="btn btn-danger d-block position-relative start-30 w-75 m-2" (click)="onDeletePhoto()" >eliminar</button>
     </div>

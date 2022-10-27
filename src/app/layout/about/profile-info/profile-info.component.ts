@@ -21,8 +21,9 @@ export class ProfileInfoComponent implements OnInit {
 private getDescription(){
   this.descHttpSvc.readDescription().subscribe({
     next: data =>  {
-      this.text_descr= data[0].text;
-      this.title = data[0].title
+      this.text= data[0].text;
+      this.title = data[0].title;
+      this.imageUrl = data[0].photo;
     },
     error: error => console.log(error),
 
@@ -36,8 +37,8 @@ private getDescription(){
 
 //--------------atributos------------
 
-text_descr!: String;
+text!: String;
 title!:String;
-photo!:String;
+imageUrl!:String;
 
 }

@@ -31,11 +31,14 @@
                     <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi-person-circle fs-1"></i>
                     </a>
-                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropupUser3">
                         <li><a class="dropdown-item" (click)="onDeleteUser()">Eliminar</a></li>
                         <li><a class="dropdown-item" routerLink="/profile">Perfil+</a></li>
                     </ul>
                 </div>
+            </div>
+            <div class="d-block text-center text-decoration-none">
+                <a routerLink="" (click)="logout()">cerrar sesión</a>
             </div>
         </div>
     </div>

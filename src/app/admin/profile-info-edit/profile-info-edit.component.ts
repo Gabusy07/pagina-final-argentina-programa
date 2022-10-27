@@ -95,7 +95,7 @@ export class ProfileInfoEditComponent implements OnInit {
       const fileRef = this.imgSvc.getRef(file.name)
       const task = this.imgSvc.uploadFile(file);
       this.name_photo = file.name;
-
+      alert(this.name_photo)
       this.uploadPercent = task.percentageChanges();
       this.uploadPercent.subscribe(
         ({complete: ()=> this.isUploadingIncomplete = false})
@@ -125,7 +125,9 @@ export class ProfileInfoEditComponent implements OnInit {
 
   onSubmitPhoto():void{
     this.editPhoto = !this.editPhoto;
-    let desc:Description = new Description(this.text, this.title, this.imageUrl,this.name_photo );  
+    let desc:Description = new Description(this.text, this.title, this.imageUrl,this.name_photo);
+    console.log(desc) 
+    alert()
     this.updateDescription(this.id, desc)
   }
 

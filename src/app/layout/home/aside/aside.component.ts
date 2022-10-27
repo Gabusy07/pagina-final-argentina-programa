@@ -39,9 +39,11 @@ closingSidebar(){
   this.sidebar = this.activeVisibilityOfSidebar? "sidebar--closed":"sidebar--opened"
 }
 
-visibilityOfSidebar=false; //estado actual de visibilidad
-activeVisibilityOfSidebar=true; // al hacer click en evento
-sidebar:string = "sidebar--closed"
+logout(){
+  localStorage.removeItem('token');
+}
+
+
 
 
 
@@ -78,10 +80,16 @@ onDeleteUser(){
 
 
 
+
+
+
 /*--------------------------------------------
 atributos
 */
 
+visibilityOfSidebar=false; //estado actual de visibilidad
+activeVisibilityOfSidebar=true; // al hacer click en evento
+sidebar:string = "sidebar--closed"
 user:User = new User();
 
 

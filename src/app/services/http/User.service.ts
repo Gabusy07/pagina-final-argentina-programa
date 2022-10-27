@@ -16,8 +16,7 @@ export class UserService {
   //metodos conexion con servidor crear, leer, loggear, eliminar, modificar
   createUser(u: User): Observable<object>{
     const headers = this.getheader();
-    
-    return this.request.post<User>(this.url+"/add", u, {headers});
+    return this.request.post<User>(this.url+"/add", u);
   }
 
   deleteUser():Observable<object>{

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ANALYZE_FOR_ENTRY_COMPONENTS, Injectable } from '@angular/core';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL, deleteObject } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
@@ -17,6 +17,12 @@ export class FilesService {
     const filePath = 'images/'+file.name;
     this.task = this.storage.upload(filePath, file);
     return this.task;
+  }
+
+  deleteFile(name : String):Observable<number> | any{
+    const fileRef = this.getRef(name)
+    return fileRef.delete();
+
   }
 
 

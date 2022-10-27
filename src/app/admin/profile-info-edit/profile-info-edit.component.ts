@@ -94,12 +94,16 @@ export class ProfileInfoEditComponent implements OnInit {
     if (confirm("deseas subir este archivo?")){
       const fileRef = this.imgSvc.getRef(file.name)
       const task = this.imgSvc.uploadFile(file);
+      this.name_photo = file.name;
 
       this.uploadPercent = task.percentageChanges();
+      this.uploadPercent.subscribe(
+        ({complete: ()=> this.isUploadingIncomplete = false})
+      )
 
       task.snapshotChanges().pipe(
         finalize(() => {
-          fileRef.getDownloadURL().subscribe(imgRef => console.log(imgRef))
+          fileRef.getDownloadURL().subscribe(imgRef => this.imageUrl = imgRef)
         } )
      )
     .subscribe()
@@ -113,27 +117,25 @@ export class ProfileInfoEditComponent implements OnInit {
     this.title = formText.title;
     this.text = formText.text;
     this.onEditText = true;
-    let desc:Description = new Description(this.text, this.title, this.imageUrl);
+    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.name_photo);
     this.updateDescription(this.id, desc);
   
   }
 
-  //revisar luego
 
   onSubmitPhoto():void{
     this.editPhoto = !this.editPhoto;
-    
-    let desc:Description = new Description(this.text, this.title, this.imageUrl);  
+    let desc:Description = new Description(this.text, this.title, this.imageUrl,this.name_photo );  
     this.updateDescription(this.id, desc)
-      
-    
-   
   }
 
   onDeletePhoto():void{
     this.editPhoto = !this.editPhoto;
+    const task = this.imgSvc.deleteFile(this.name_photo)
+    task.suscribe()
     this.imageUrl = "#";
-    let desc:Description = new Description(this.text, this.title, this.imageUrl);
+    this.name_photo = "";
+    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.name_photo);
     this.updateDescription(this.id, desc);
     this.loading.show()
     setTimeout(()=> this.loading.hide(), 2000)
@@ -149,8 +151,10 @@ onEditText: boolean = true;
 form: FormGroup;
 title!:String;
 file!:any;
+name_photo!:String
 
 imageUrl!:String;
+isUploadingIncomplete:boolean = true;
 
 uploadPercent!: Observable<any>;
 downloadURL!: Observable<string>;

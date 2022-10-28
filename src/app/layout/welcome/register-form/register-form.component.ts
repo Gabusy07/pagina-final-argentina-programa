@@ -93,12 +93,18 @@ export class RegisterFormComponent implements OnInit {
         swal({
           title: "Registrado!",
           text: "Usuario registrado con exito en la base de datos",
-          icon: "success",  
-        });
+          icon: "success",
+          timer: 3000,
+        })
     },
       error: error => {
-             console.log (error);
-             setTimeout(() => window.location.reload(), 550 );
+        swal({
+          title: "Error!",
+          text: "No se ha podido registrar el usuario",
+          icon: "error",
+          timer: 3000,
+        });
+             setTimeout(() => window.location.reload(), 3500 );
       },
       complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
       //en local storage
@@ -113,17 +119,25 @@ export class RegisterFormComponent implements OnInit {
       next: data => {
         let token =  data.token;
         if(token == "FAIL"){
-          alert ("ha ocurrido un error");
-          setTimeout(() => window.location.reload(), 550 );
+          swal({
+            title: "Error en sistema",
+            text: "Ha occurrido un error al ingresar al sistema",
+            icon: "error",  
+          });
+          setTimeout(() => window.location.reload(), 3500 );
   
         }else{
             localStorage.setItem("token",token);
-            this.router.navigate(['home']);
+            setTimeout(()=> this.router.navigate(['home']), 3400 )
           }
         },
         error: error => {
-          alert ("ha ocurrido un error");
-          setTimeout(() => window.location.reload(), 550 );
+          swal({
+            title: "Error en sistema",
+            text: "Ha occurrido un error al ingresar al sistema",
+            icon: "error",  
+          });
+          setTimeout(() => window.location.reload(), 3500 );
                          
         },
         //una vez loggeado el usuario recientemente creado llama a matchserver para crear la tabla de match

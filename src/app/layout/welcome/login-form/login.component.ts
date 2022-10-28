@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'app/model/User';
 import { UserService } from 'app/services/http/User.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-login',
@@ -71,21 +72,31 @@ export class LoginComponent implements OnInit {
     user.password = userForm.password;
 
 
-    this.userSvc.LoginUser(user).subscribe(
-      data => { 
-
+    this.userSvc.LoginUser(user).subscribe({
+      next:data => { 
             let token = data.token;
-        
             if (token == "FAIL"){
-              alert("los datos ingresados son incorrectos")
-              setTimeout(() => window.location.reload(), 550 );
+              swal({
+                title: "Datos incorrectos",
+                text: "los datos ingresados son incorrectos",
+                icon: "error",
+                timer: 3000,
+              });
+              setTimeout(() => window.location.reload(), 3500 );
             }
             else{
               localStorage.setItem("token",token)
               this.router.navigate(['home']); 
-            }
+            }  
         
-        
+          }
+        ,
+        error: ()=> swal({
+          title: "Servidor",
+          text: "No se ha podido conectar con el servidor\nPruebe mas tarde",
+          icon: "error",
+          timer: 3000,
+        })
       })
         
   }

@@ -1,6 +1,8 @@
 
 import { animate, stagger, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Skill } from 'app/model/Skill';
+import { SkillService } from 'app/services/http/skill.service';
 
 @Component({
   selector: 'app-skills',
@@ -20,7 +22,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class SkillsComponent implements OnInit {
 
-  constructor() {
+  constructor(private readonly skillSvc: SkillService) {
     for (let i=0; i<this.listOfSkills.length; i++){
       this.stateDiv.push("state1");
     }
@@ -28,7 +30,21 @@ export class SkillsComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getAllSkill();
   }
+
+  /*-----------------------------
+   CRUD READ
+   */
+
+
+   private getAllSkill(){
+    this.skillSvc.getAll().subscribe({
+      next: data =>  this.listOfSkills = data,
+      error: error => console.log(error),
+      complete: ()=> this.isLenOfListOfSkillShort = this.listOfSkills.length < 4
+    })
+   }
 
 
   // agranda el div de una skill
@@ -41,10 +57,14 @@ export class SkillsComponent implements OnInit {
     this.stateDiv[index] =  "estado1";
   }
 
+  //-------------atributos--------------
 
-  listOfSkills:string[] = ["ingles(B2)", "aservito", "comprometido", "proactivo"];
+
+  listOfSkills:Skill[] = [];
+  isLenOfListOfSkillShort:boolean = false;
   stateDiv: string[] = [];
 
   
 
 }
+

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { UserMatch } from "app/model/UserMatch";
 import { Observable } from "rxjs";
+import baseUrl from "./helper";
 
 @Injectable({
     providedIn: 'root'
@@ -57,5 +58,5 @@ import { Observable } from "rxjs";
 
 
  // atributos
-  url = "http://localhost:8080/porfolio/user_match";
+ private url = `${baseUrl}/porfolio/user_match`;
   }

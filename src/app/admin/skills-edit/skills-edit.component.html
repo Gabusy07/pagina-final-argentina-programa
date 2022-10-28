@@ -1,14 +1,37 @@
-<div id="container" class="row d-flex p2 justify-content-between">
-    <div *ngFor="let skill of listOfSkills; let i = index" class="col-3 box_skill position-relative">
-      <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen(i)"></i>
-      <i class="bi bi-trash pen text-danger" id="delete_trash"  (click)="onDeleteTrash(i)"></i>
-      <div *ngIf="editPen && i == indexSkill" class="card" id="skill_up_text">
-        <div class="card-body">
-          <small>puedes editar el texto</small>
+<div id="container">
+  <div *ngIf="listOfSkills.length > 0; else noDataTemplate" id="container_skillsDivs" class="row d-flex p2 justify-content-between">
+      <div *ngFor="let skill of listOfSkills; let i = index" class="col-3 box_skill position-relative">
+        <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen(i)"></i>
+        <i class="bi bi-trash pen text-danger" id="delete_trash"  (click)="onDeleteTrash(i)"></i>
+        <div *ngIf="editPen && i == indexSkill" class="card" id="skill_up_text">
+          <div class="card-body">
+            <small>puedes editar el texto</small>
+          </div>
         </div>
+          <div  [@animation1]="stateDiv[i]" class="alert alert-info " (mouseenter)="enlarge(i)"
+          (mouseleave)="reduce(i)" [id]="i+'div'">{{skill.name}}</div>
+        <button *ngIf="editPen && i == indexSkill" class="btn btn-outline-warning w-75" (click)="onEditButtom(i, skill.id)">editar</button>
+        <button *ngIf="deleteTrash && i == indexSkill" class="btn btn-outline-danger w-75 " (click)="onDeleteButtom(i, skill.id)">eliminar</button>
       </div>
-        <div [@animation1]="stateDiv[i]" class="alert alert-info " (mouseenter)="enlarge(i)"
-         (mouseleave)="reduce(i)" [id]="i+'div'">{{skill}} </div>
-       <button *ngIf="editPen && i == indexSkill" class="btn btn-outline-warning w-75" (click)="onEditButtom(i)">editar</button>
-       <button *ngIf="deleteTrash && i == indexSkill" class="btn btn-outline-danger w-75 " (click)="onDeleteButtom(i)">eliminar</button>
-     </div>
+  </div>
+
+  <ng-template #noDataTemplate>
+    <app-no-data-template></app-no-data-template>
+  </ng-template>
+
+  <div class="mt-5">
+    <i *ngIf="isLenOfListOfSkillShort" class="bi bi-plus-square text-dark" id="add_square" (click)="onAddButtom()"></i>
+  </div>
+  <div *ngIf="isAddSkillFormVisible" id="form_skills" class="mb-2" >
+    <button type="button" class="btn-close" id="close_button" aria-label="Close" (click)="onAddButtom()"></button>
+    <form class="row g-3 m-2">
+      <div class="col-auto">
+        <label for="skill" class="visually-hidden">P</label>
+        <input type="text" class="form-control" id="skill" placeholder="Habilidad" (input)="inputSkill($event)" [value]="newSkill.name">
+      </div>
+      <div class="col-auto">
+        <button type="submit" (click)="onSubmitButtom()" class="btn btn-warning mb-2" [disabled]="newSkill.name.length <= 1">Agregar</button>
+      </div>
+    </form>
+  </div>
+</div>

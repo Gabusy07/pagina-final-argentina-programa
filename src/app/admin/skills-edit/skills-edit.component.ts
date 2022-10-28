@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SkillService } from 'app/services/http/skill.service';
+import { Skill } from 'app/model/Skill';
 
 @Component({
   selector: 'app-skills-edit',
@@ -18,7 +20,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class SkillsEditComponent implements OnInit {
 
   
-  constructor() {
+  constructor(private readonly skillSvc: SkillService) {
     for (let i=0; i<this.listOfSkills.length; i++){
       this.stateDiv.push("state1");
     }
@@ -26,12 +28,58 @@ export class SkillsEditComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getAllSkill();
   }
+
+  /*-----------------------------
+   CRUD
+   */
+
+
+   private getAllSkill(){
+    this.skillSvc.getAll().subscribe({
+      next: data =>  this.listOfSkills = data,
+      error: error => console.log(error),
+      complete: ()=> this.isLenOfListOfSkillShort = this.listOfSkills.length < 4
+    })
+   }
+
+   private addSkill(skill:Skill):void{
+    
+    this.skillSvc.createSkill(skill).subscribe({
+      next: data=> console.log(data),
+      error: error=> console.log(error),
+      complete: ()=> window.location.reload()
+    })
+
+   }
+
+   private deleteSkill(id:BigInt):void{
+    this.skillSvc.deleteSkill(id).subscribe({
+      next: data=> console.log(data),
+      error: error => console.log(error)
+    })
+
+   }
+
+   private updateSkill(id:BigInt, editedSkill: Skill):void{
+    this.skillSvc.updateSkill(id, editedSkill).subscribe({
+      next: data=> alert("exito"),
+      error: error => console.log(error)
+
+    })
+
+   }
+
+
+
+
+
 
   
 
-
-  // agranda el div de una skill
+//--------------------------------------
+// agranda el div de una skill
   enlarge(index: number){
      this.stateDiv[index] = "estado2" ;
   }
@@ -54,9 +102,18 @@ export class SkillsEditComponent implements OnInit {
     }
     
 
-    
-    
+  }
 
+  onAddButtom(){
+    this.isAddSkillFormVisible= !this.isAddSkillFormVisible;
+  }
+
+  inputSkill(event: Event){
+    this.newSkill.name = (<HTMLInputElement>event.target).value;
+  }
+
+  onSubmitButtom():void{
+    this.addSkill(this.newSkill);
   }
 
   onDeleteTrash(index:number):void{ //icono eliminar
@@ -66,30 +123,45 @@ export class SkillsEditComponent implements OnInit {
 
   }
 
-  onDeleteButtom(i:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
-    
-    this.listOfSkills = this.listOfSkills.splice(i);
+  onDeleteButtom(index:number, id:BigInt):void{  //funcion en html, llama a funcion crud
+
+    if (confirm("seguro quieres eliminar "+this.listOfSkills[index].name+"?")){
+      this.deleteSkill(id);
+    }
     window.location.reload()
 
   }
 
-  onEditButtom(index:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
+  onEditButtom(index:number, id:BigInt):void{  //llama a funcion crud. Los argumentos son los indices de la lista de pares y el id del obj
     
+    let editedName: any = document.getElementById(index+'div')?.innerText.toString();
+    editedName == undefined? " ": editedName;
+    this.editedSkill.name = editedName;
     this.editPen = this.editPen == false ? true : false;
     this.deleteTrash = false;
     let skillEditable = document.getElementById(index+"div");
     skillEditable?.setAttribute("contenteditable", "false");
     skillEditable?.setAttribute("autofocus", "false");
+    if (confirm("seguro quieres guardar lo cambios?")){
+      this.updateSkill(id, this.editedSkill);
+    }
     
+  }
+
+  onCloseForm():void{
 
   }
 
 
-  listOfSkills:string[] = ["ingles(B2)", "asertivo", "comprometido", "proactivo"];
+  isLenOfListOfSkillShort:boolean = false;
+  listOfSkills:Skill[] = [];
   stateDiv: string[] = [];
   indexSkill: number =NaN;
   editPen:boolean = false;
+  isAddSkillFormVisible:boolean = false;
   deleteTrash:boolean = false;
+  newSkill: Skill = new Skill();
+  editedSkill:Skill = new Skill();
 
   
 

@@ -7,6 +7,14 @@ div{
 .pen{
     position: absolute;
     right: 0%;
-    top: 0%;
+    top: -10%;
     cursor: pointer;
+}
+
+#input_file{
+    max-width: 99%;
+}
+
+img{
+    width: 13rem;
 }

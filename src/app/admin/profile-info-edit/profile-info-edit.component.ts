@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Description } from 'app/model/Description';
+import { DescriptionService } from 'app/services/http/description.service';
+import { FilesService} from 'app/services/files.service';
+import { LoadingService } from 'app/services/loading.service';
+import { finalize, Observable } from 'rxjs';
+import { JsonPipe } from '@angular/common';
+
+
+
 
 @Component({
   selector: 'app-profile-info-edit',
@@ -8,75 +17,179 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ProfileInfoEditComponent implements OnInit {
 
-  constructor(private readonly formBuilder : FormBuilder) {
+  constructor(private readonly formBuilder : FormBuilder, private readonly descHttpSvc:DescriptionService,
+    private imgSvc: FilesService, private loading:LoadingService) {
     this.form = this.initForm();
 
-   }
+}
+
 
   ngOnInit(): void {
-    this.text = ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam tempora adipisci amet numquam officiis pariatur! Eveniet eius fugit aliquid porro obcaecati eos nihil? Expedita,\
-    accusamus voluptate fuga fugit nihil enim? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor recusandae veniam repellat fugiat temporibus rem, illum impedit enim dignissimos aspernatur\
-     ab fuga neque, unde qui autem. Ab quae\
-     laboriosam dolorem? Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quia harum natus, enim blanditiis\
-     in porro illo laudantium, aliquam iusto quisquam possimus temporibus provident tenetur fugit tempore eligendi quis ratione!\
-   Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate soluta, iusto corrupti ipsum nostrum illo nobis veritatis numquam id atque aspernatur accusantium sint iure? Et ab amet quo nulla voluptate?\
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque officia eius quo ad! Aliquid odit, animi autem repellendus ratione, ut, inventore incidunt natus perferendis facilis magnam. Commodi ipsa aperiam repellat!'
-   
+    this.getDescription();
 }
 
- //construccion del reactiveForm
- initForm(): FormGroup{
-  return this.formBuilder.group({
-    text: ["",[Validators.required, Validators.minLength(12), Validators.maxLength(100)]],
-  })
 
-}
+   //---------------CRUD READ UPDATE-------------------
 
-get Text(): any{
-  return this.form.get('text');
-}
+  private getDescription():void{
+    this.descHttpSvc.readDescription().subscribe({
+      next: data =>  {
+        this.id= data[0].id;
+        this.text= data[0].text;
+        this.title = data[0].title;
+        this.imageUrl = data[0].photo;
+      },
+      error: error => console.log(error),
 
-//para editar el texto descriptivo principal 
-textEditPen(){
-    this.onEditText = this.onEditText == false ? true : false;
+    })
+  }
+
+
+  private updateDescription(id:BigInt, desc:Description):void{
+    this.descHttpSvc.updateDescription(id, desc).subscribe({
+      next: data=> console.log("data"),
+      error: error => console.log(error)
+    })
+  }
+
+
+  //-------------------------------------------------
+
+  //construccion del reactiveForm
+  initForm(): FormGroup{
+    return this.formBuilder.group({
+      text: [this.text,[Validators.required, Validators.minLength(12), Validators.maxLength(100)]],
+      title: [this.title,[Validators.required, Validators.minLength(5), Validators.maxLength(25)]],
+    })
 
   }
 
+  get Text(){
+    return this.form.get('text');
+  }
+
+  get Title(){
+    return this.form.get('title');
+  }
+
+  //para editar el texto descriptivo principal 
+  textEditPen(){
+      this.onEditText = !this.onEditText;
+  }
+
   onSubmitText(){
-    const formText = this.form.value;
-    this.text = formText.text;
-    this.onEditText = true;
 
   }
 
   /*  -----------------------------
   para cambiar la foto de perfil*/
-  photoEditPen():void{
-    this.onEditPhoto = this.onEditPhoto == false ? true : false;
-    console.log(this.urlPhoto)
 
+  onPhotoEditPen():void{
+    this.editPhoto = !this.editPhoto;
   }
 
-  onSubmitPhoto():void{ 
-    this.onEditPhoto = true;
+  uploadImg($e:any){
+    const file = $e.target.files[0];
+    if(this.isFileValid(file)){
+      if (confirm("deseas subir este archivo?")){
+        const fileRef = this.imgSvc.getRef(file.name)
+        const task = this.imgSvc.uploadFile(file);
+        this.namePhoto = file.name;
+        this.uploadPercent = task.percentageChanges();
+        this.uploadPercent.subscribe(
+          ({complete: ()=> this.isUploadingIncomplete = false})
+        )
+  
+        task.snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(imgRef => this.imageUrl = imgRef)
+          } )
+       )
+      .subscribe()
+  
+      }
 
+    }
+  }
+
+  onEditButtom():void{
+    this.editPhoto = !this.editPhoto;
+    const formText = this.form.value;
+    this.title = formText.title;
+    this.text = formText.text;
+    this.onEditText = true;
+    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto);
+    this.updateDescription(this.id, desc);
+  
+  }
+
+
+  onSubmitPhoto():void{
+    this.editPhoto = !this.editPhoto;
+    let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
+    console.log(desc)
+    alert()
+    this.updateDescription(this.id, desc)
   }
 
   onDeletePhoto():void{
-    this.onEditPhoto = this.onEditPhoto == false ? true : false;
-    this.urlPhoto = "";
+    this.editPhoto = !this.editPhoto;
+    const task = this.imgSvc.deleteFile(this.namePhoto)
+    task.suscribe()
+    this.imageUrl = "#";
+    this.namePhoto = "";
+    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto);
+    this.updateDescription(this.id, desc);
+    this.loading.show()
+    setTimeout(()=> this.loading.hide(), 2000)
 
   }
 
 
 
-  text: any = "";
-  urlPhoto: string = "";
-  onEditPhoto: boolean = true;
-  onEditText: boolean = true;
-  form: FormGroup;
+  private isFileValid(file:any):boolean{
+    //verifica que el archivo seleccionado sea img
+    //EXTENSIONES Y TAMANO PERMITIDO.
+      var ext_availables = [".png", ".bmp", ".jpg", ".jpeg", ".svg"];
+      var size = 10; // EXPRESADO EN MB.
+      var route = file.name;
+      var last_dot = file.name.lastIndexOf(".");
+      var extension = route.slice(last_dot, route.length);
+      alert(ext_availables.indexOf(extension))
+      if(ext_availables.indexOf(extension) == -1)
+      {
+          alert("Extensión de archivo no valida");
+          file.name = "";
+          return false;
+      }
+      else if((file.files[0].size / 1048576) > size)
+      {
+          alert("El archivo no puede superar los "+size+"MB");
+          file.name = "";
+          return false;
+      }
+      return true;
+  }
+
+//--------------atributos------------
+
+id!:BigInt;
+text!: String;
+editPhoto: boolean = true;
+onEditText: boolean = true;
+form: FormGroup;
+title!:String;
+file!:any;
+namePhoto:String = "a"
+
+imageUrl!:String;
+isUploadingIncomplete:boolean = true;
+
+uploadPercent!: Observable<any>;
+downloadURL!: Observable<string>;
 
 }
+
 
 
 

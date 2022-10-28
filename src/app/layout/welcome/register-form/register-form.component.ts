@@ -5,6 +5,7 @@ import { User } from 'app/model/User';
 import { UserMatch } from 'app/model/UserMatch';
 import { UserMatchService } from 'app/services/http/user-match-service';
 import { UserService } from 'app/services/http/User.service';
+import swal from 'sweetalert';
 
 
 @Component({
@@ -67,7 +68,11 @@ export class RegisterFormComponent implements OnInit {
   //metodos en html
 
   public submitSignIn(){
-    this.saveUser();
+  //crea un usuario con los valores del formgroup
+    const user = this.form.value;
+    const u = new User();
+    u.user(user.name, user.lastname, user.nickname, user.email, user.password, user.getRol);
+    this.saveUser(u);
   }
 
   // cerrar formulario al presionar 'x/close'
@@ -80,22 +85,20 @@ export class RegisterFormComponent implements OnInit {
   //--------------------------------------------------------
   //CRUD
 
-  private saveUser():void{
-
-    //crea un usuario con los valores del formgroup y llama al servicio que conecta con el servidor
-
-    const user = this.form.value;
-    const u = new User();
-    u.user(user.name, user.lastname, user.nickname, user.email, user.password);
-
+  private saveUser(u:User):void{
+  //  llama al servicio que conecta con el servidor
+    
     this.httpSvc.createUser(u).subscribe({
-      
       next: data => {
-        alert ("usuario guardado con exito")
+        swal({
+          title: "Registrado!",
+          text: "Usuario registrado con exito en la base de datos",
+          icon: "success",  
+        });
     },
       error: error => {
              console.log (error);
-             //setTimeout(() => window.location.reload(), 550 );
+             setTimeout(() => window.location.reload(), 550 );
       },
       complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
       //en local storage
@@ -127,7 +130,7 @@ export class RegisterFormComponent implements OnInit {
         complete: ()=>{
           this.httpUserMatchSvc.createMatch(user_match).subscribe({
             next: data => console.log("exito"),
-            error: err => console.log("error")
+            error: err => console.log(err)
           })
 
         }

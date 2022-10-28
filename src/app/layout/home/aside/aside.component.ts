@@ -63,16 +63,16 @@ chargingDataUser():void{
 onDeleteUser(){
   if (confirm("seguro que deseas eliminar esta cuenta?")){
     this.httpUserMatchSvc.deleteMatch().subscribe({
-      next: ()=> console.log("usuario eliminado con exito"),
-      complete: ()=>{
-        localStorage.removeItem('token')
-        this.httpSvc.deleteUser().subscribe({
-          next: data =>  console.log("exito"),
-          complete: ()=> this.route.navigate([''])
+      complete: ()=> this.httpSvc.deleteUser().subscribe({
+          next: data => alert("usuario eliminado con exito") ,
+          complete: ()=> {
+            this.route.navigate([''])
+            localStorage.removeItem('token')
+          }
         })
   
       }
-    })
+    )
 
   }
 

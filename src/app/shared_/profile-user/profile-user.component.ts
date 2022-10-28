@@ -115,14 +115,11 @@ public deleteUser():void{
     this.httpUserMatchSvc.deleteMatch().subscribe({
       error: error => console.log (error),
       complete: ()=>{
-  
         this.httpSvc.deleteUser().subscribe({
-          next: data =>  console.log("exito"),
+          next: data =>  alert("el usuario ha sido removido de la base de deatos"),
         })
-  
       }
     })
-
   }
 
 }

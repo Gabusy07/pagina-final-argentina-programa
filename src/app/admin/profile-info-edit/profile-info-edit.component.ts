@@ -26,7 +26,6 @@ export class ProfileInfoEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDescription();
-    
 }
 
 
@@ -94,7 +93,7 @@ export class ProfileInfoEditComponent implements OnInit {
     if (confirm("deseas subir este archivo?")){
       const fileRef = this.imgSvc.getRef(file.name)
       const task = this.imgSvc.uploadFile(file);
-      this.name_photo = file.name;
+      this.namePhoto = file.name;
       this.uploadPercent = task.percentageChanges();
       this.uploadPercent.subscribe(
         ({complete: ()=> this.isUploadingIncomplete = false})
@@ -116,7 +115,7 @@ export class ProfileInfoEditComponent implements OnInit {
     this.title = formText.title;
     this.text = formText.text;
     this.onEditText = true;
-    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.name_photo);
+    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto);
     this.updateDescription(this.id, desc);
   
   }
@@ -124,17 +123,19 @@ export class ProfileInfoEditComponent implements OnInit {
 
   onSubmitPhoto():void{
     this.editPhoto = !this.editPhoto;
-    let desc:Description = new Description(this.text, this.title, this.imageUrl,this.name_photo);
+    let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
+    console.log(desc)
+    alert()
     this.updateDescription(this.id, desc)
   }
 
   onDeletePhoto():void{
     this.editPhoto = !this.editPhoto;
-    const task = this.imgSvc.deleteFile(this.name_photo)
+    const task = this.imgSvc.deleteFile(this.namePhoto)
     task.suscribe()
     this.imageUrl = "#";
-    this.name_photo = "";
-    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.name_photo);
+    this.namePhoto = "";
+    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto);
     this.updateDescription(this.id, desc);
     this.loading.show()
     setTimeout(()=> this.loading.hide(), 2000)
@@ -150,7 +151,7 @@ onEditText: boolean = true;
 form: FormGroup;
 title!:String;
 file!:any;
-name_photo!:String
+namePhoto:String = "a"
 
 imageUrl!:String;
 isUploadingIncomplete:boolean = true;

@@ -43,12 +43,17 @@ export class KnowledgesEditComponent implements OnInit {
 
 
   addLang(lang:Language){
-    
     this.http_svc.createLanguage(lang).subscribe({
-      next: data => {setTimeout (() => alert ("lenguaje guardado con exito"), 500)
-    },
-      error: error => console.log (error),
-    });
+      next: ()=> alert("datos guardados con exito"),
+      error: error => {
+        console.log(error);
+        alert ("no se han podido guardar los datos")
+      },
+      complete: ()=> window.location.reload()
+
+  });
+    
+    
   }
 
   delLang(id: BigInt){
@@ -68,6 +73,17 @@ export class KnowledgesEditComponent implements OnInit {
       la funcion que carga en una nueva lista para mejor lectura en html */
       complete: ()=> this.createObjForList(this.resultGetAll)
     });
+  }
+
+  updateLang(id:BigInt, langEdited:Language):void{
+    this.http_svc.updateLanguage(id, langEdited).subscribe({
+      next: ()=> alert("datos actualizados con exito"),
+      error: error => {
+        console.log(error);
+        alert ("no se han podido actualizar los datos")
+      },
+      complete: ()=> window.location.reload()
+  });
 }
 
 
@@ -94,35 +110,12 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
-  submitEditForm(id:BigInt){
-    const f = this.knwForm.value;
-    const lang = new Language(f.name, f.date);
-    this.http_svc.updateLanguage(id, lang).subscribe({
-      next: ()=> alert("datos actualizados con exito"),
-      error: error => {
-        console.log(error);
-        alert ("no se han podido actualizar los datos")
-      },
-      complete: ()=> window.location.reload()
-
-  });
-    
-
-  }
 
   submitAddForm(){
     const f = this.knwForm.value;
     let name = f.name.charAt(0).toUpperCase() + f.name.slice(1);;
     const lang = new Language(name, f.date);
-    this.http_svc.createLanguage(lang).subscribe({
-      next: ()=> alert("datos guardados con exito"),
-      error: error => {
-        console.log(error);
-        alert ("no se han podido guardar los datos")
-      },
-      complete: ()=> window.location.reload()
-
-  });
+    this.addLang(lang)
     this.openKnwForm = false;
   }
 
@@ -145,7 +138,13 @@ export class KnowledgesEditComponent implements OnInit {
 
   onEditButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
     
-    this.submitEditForm(this.languages[i][j].id)
+    const oldLang = this.languages[i][j]
+    const f = this.knwForm.value;
+    //asegura que se hayan realizado cambios en form y sino guarda los antiguos
+    let name = f.name? f.name.charAt(0).toUpperCase() + f.name.slice(1): oldLang.name;
+    let date = f.date? f.date: oldLang.date_start;
+    const lang = new Language(name, date);
+    this.updateLang(oldLang.id, lang)
     window.location.reload();
 
   }

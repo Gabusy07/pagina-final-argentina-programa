@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Description } from 'app/model/Description';
 import { Observable } from 'rxjs';
+import baseUrl from './helper';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,5 @@ export class DescriptionService {
   }
 
   // ----------atributos---------
-  url = "http://localhost:8080/porfolio/home/description";
+  private url = `${baseUrl}/porfolio/home/description`;
 }

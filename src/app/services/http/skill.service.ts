@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Skill } from 'app/model/Skill';
 import { Observable } from 'rxjs';
+import baseUrl from './helper';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,5 @@ export class SkillService {
 
   //------------atributos------------
 
-  url = "http://localhost:8080/porfolio/home/skills";
+  private url = `${baseUrl}/porfolio/home/skills`;
 }

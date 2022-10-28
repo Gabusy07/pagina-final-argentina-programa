@@ -11,9 +11,8 @@ div{
     cursor: pointer;
 }
 
-#input_photo{
-    text-decoration: none;
-    max-width: 70%;
+#input_file{
+    max-width: 99%;
 }
 
 img{

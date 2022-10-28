@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from 'app/model/User';
 import { Observable } from 'rxjs';
 import { Token } from 'app/model/Token-interface';
+import baseUrl from './helper';
 
 // servicio conecta con los formularios loginForm y RegisterForm
 @Injectable({
@@ -25,7 +26,7 @@ export class UserService {
   }
 
   LoginUser(u: User):Observable<Token>{
-    return this.request.post<Token>(this.urlLogIn+"login", u); //devuelve respuesta con el token
+    return this.request.post<Token>(this.urlLogin+"login", u); //devuelve respuesta con el token
     
   }
 
@@ -56,10 +57,11 @@ export class UserService {
 
 
   // conecta con UserController en el servidor
-  url = "http://localhost:8080/porfolio/user";
+  private url = `${baseUrl}/porfolio/user`;
 
   // conecta con AuthController en el servidor
-  urlLogIn = "http://localhost:8080/porfolio/api/";
+  private urlLogin = `${baseUrl}/porfolio/api/`;
+
 
   
 }

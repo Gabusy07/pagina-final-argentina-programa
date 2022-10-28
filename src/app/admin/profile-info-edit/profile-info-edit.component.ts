@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Description } from 'app/model/Description';
 import { DescriptionService } from 'app/services/http/description.service';
 import { FilesService} from 'app/services/files.service';
-import { getDownloadURL } from 'firebase/storage';
 import { LoadingService } from 'app/services/loading.service';
 import { finalize, Observable } from 'rxjs';
+import { JsonPipe } from '@angular/common';
 
 
 
@@ -90,21 +90,24 @@ export class ProfileInfoEditComponent implements OnInit {
 
   uploadImg($e:any){
     const file = $e.target.files[0];
-    if (confirm("deseas subir este archivo?")){
-      const fileRef = this.imgSvc.getRef(file.name)
-      const task = this.imgSvc.uploadFile(file);
-      this.namePhoto = file.name;
-      this.uploadPercent = task.percentageChanges();
-      this.uploadPercent.subscribe(
-        ({complete: ()=> this.isUploadingIncomplete = false})
-      )
-
-      task.snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe(imgRef => this.imageUrl = imgRef)
-        } )
-     )
-    .subscribe()
+    if(this.isFileValid(file)){
+      if (confirm("deseas subir este archivo?")){
+        const fileRef = this.imgSvc.getRef(file.name)
+        const task = this.imgSvc.uploadFile(file);
+        this.namePhoto = file.name;
+        this.uploadPercent = task.percentageChanges();
+        this.uploadPercent.subscribe(
+          ({complete: ()=> this.isUploadingIncomplete = false})
+        )
+  
+        task.snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(imgRef => this.imageUrl = imgRef)
+          } )
+       )
+      .subscribe()
+  
+      }
 
     }
   }
@@ -140,6 +143,31 @@ export class ProfileInfoEditComponent implements OnInit {
     this.loading.show()
     setTimeout(()=> this.loading.hide(), 2000)
 
+  }
+
+
+
+  private isFileValid(file:any):boolean{
+    //verifica que el archivo seleccionado sea img
+    //EXTENSIONES Y TAMANO PERMITIDO.
+      var ext_availables = [".png", ".bmp", ".jpg", ".jpeg", ".svg"];
+      var size = 8; // EXPRESADO EN MB.
+      var rutayarchivo = file.name;
+      var last_dot = file.name.lastIndexOf(".");
+      var extension = rutayarchivo.slice(last_dot, rutayarchivo.length);
+      if(ext_availables.indexOf(extension) == -1)
+      {
+          alert("Extensión de archivo no valida");
+          file.name = "";
+          return false; // Si la extension es no válida ya no chequeo lo de abajo.
+      }
+      if((file.files[0].size / 1048576) > size)
+      {
+          alert("El archivo no puede superar los "+size+"MB");
+          file.name = "";
+          return false;
+      }
+      return true;
   }
 
 //--------------atributos------------

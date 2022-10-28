@@ -16,7 +16,7 @@ const routes: Routes =[
   {path : 'home', component : HomeComponent, canActivate:[LoginSuccessGuard]},
   {path : 'about', component : AboutComponent},
   {path : 'projects', component : ProjectsContainerComponent},
-  {path : 'profile', component : ProfileUserComponent},
+  {path : 'profile', component : ProfileUserComponent, canActivate:[LoginSuccessGuard]},
   {path : 'register-form', component : RegisterFormComponent},
   {path: '**', component: ErrorPageComponent},
 

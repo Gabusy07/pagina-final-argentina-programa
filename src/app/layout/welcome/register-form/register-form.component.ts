@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
+import { LoginSuccessGuard } from 'app/guards/login-success.guard';
 import { User } from 'app/model/User';
 import { UserMatch } from 'app/model/UserMatch';
 import { UserMatchService } from 'app/services/http/user-match-service';
@@ -18,7 +19,8 @@ export class RegisterFormComponent implements OnInit {
   @Output() onCloseRegisterEvent = new EventEmitter<boolean>();
 
   constructor( private router: Router, private readonly formBuilder : FormBuilder ,
-     private readonly httpSvc: UserService, private readonly httpUserMatchSvc: UserMatchService) {
+     private readonly httpSvc: UserService, private readonly httpUserMatchSvc: UserMatchService,
+     private loginGuard: LoginSuccessGuard) {
     this.openedForm = true;
     this.form = this.initForm();
     
@@ -128,6 +130,7 @@ export class RegisterFormComponent implements OnInit {
   
         }else{
             localStorage.setItem("token",token);
+            this.loginGuard.login = true;
             setTimeout(()=> this.router.navigate(['home']), 3400 )
           }
         },

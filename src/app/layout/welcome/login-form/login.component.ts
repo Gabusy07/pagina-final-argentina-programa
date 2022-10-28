@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginSuccessGuard } from 'app/guards/login-success.guard';
 import { User } from 'app/model/User';
 import { UserService } from 'app/services/http/User.service';
 import swal from 'sweetalert';
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor( private router: Router,
     private readonly formBuilder : FormBuilder,
-    private readonly userSvc: UserService) {
+    private readonly userSvc: UserService,
+    private loginGuard:LoginSuccessGuard) {
     this.openedForm = true;
     this.form = this.initForm();
     
@@ -86,6 +88,7 @@ export class LoginComponent implements OnInit {
             }
             else{
               localStorage.setItem("token",token)
+              this.loginGuard.login = true
               this.router.navigate(['home']); 
             }  
         

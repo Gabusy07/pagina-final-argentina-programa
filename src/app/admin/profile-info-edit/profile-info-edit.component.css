@@ -7,7 +7,7 @@ div{
 .pen{
     position: absolute;
     right: 0%;
-    top: 0%;
+    top: -10%;
     cursor: pointer;
 }
 

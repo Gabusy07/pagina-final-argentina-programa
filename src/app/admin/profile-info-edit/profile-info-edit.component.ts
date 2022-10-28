@@ -151,17 +151,18 @@ export class ProfileInfoEditComponent implements OnInit {
     //verifica que el archivo seleccionado sea img
     //EXTENSIONES Y TAMANO PERMITIDO.
       var ext_availables = [".png", ".bmp", ".jpg", ".jpeg", ".svg"];
-      var size = 8; // EXPRESADO EN MB.
-      var rutayarchivo = file.name;
+      var size = 10; // EXPRESADO EN MB.
+      var route = file.name;
       var last_dot = file.name.lastIndexOf(".");
-      var extension = rutayarchivo.slice(last_dot, rutayarchivo.length);
+      var extension = route.slice(last_dot, route.length);
+      alert(ext_availables.indexOf(extension))
       if(ext_availables.indexOf(extension) == -1)
       {
           alert("Extensión de archivo no valida");
           file.name = "";
-          return false; // Si la extension es no válida ya no chequeo lo de abajo.
+          return false;
       }
-      if((file.files[0].size / 1048576) > size)
+      else if((file.files[0].size / 1048576) > size)
       {
           alert("El archivo no puede superar los "+size+"MB");
           file.name = "";

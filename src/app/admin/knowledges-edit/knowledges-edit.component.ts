@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Language } from 'app/model/Language';
 import { LanguageService } from 'app/services/http/language.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-knowledges-edit',
@@ -68,7 +69,12 @@ export class KnowledgesEditComponent implements OnInit {
   getAllLang():void{
     this.http_svc.getAll().subscribe({
       next: data =>  this.resultGetAll = data,
-      error: error => console.log (error),
+      error: error => swal({
+        title: "Servidor",
+        text: "No se ha podido conectar con el servidor",
+        icon: "info",
+        timer: 3000,
+      }),
       /* asegura que la peticion al servidor se haya completado y llama a
       la funcion que carga en una nueva lista para mejor lectura en html */
       complete: ()=> this.createObjForList(this.resultGetAll)
@@ -77,7 +83,12 @@ export class KnowledgesEditComponent implements OnInit {
 
   updateLang(id:BigInt, langEdited:Language):void{
     this.http_svc.updateLanguage(id, langEdited).subscribe({
-      next: ()=> alert("datos actualizados con exito"),
+      next: ()=> swal({
+        title: "Guardado",
+        text: "Datos guardados con exito",
+        icon: "success",
+        timer: 3000,
+      }),
       error: error => {
         console.log(error);
         alert ("no se han podido actualizar los datos")

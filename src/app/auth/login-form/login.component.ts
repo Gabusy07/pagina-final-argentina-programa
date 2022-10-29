@@ -88,8 +88,15 @@ export class LoginComponent implements OnInit {
             }
             else{
               localStorage.setItem("token",token)
-              this.loginGuard.login = true
-              this.router.navigate(['home']); 
+              //this.loginGuard.isUserLogged()
+              swal({
+                title: "Exito",
+                text: "cargando página",
+                icon: "info",
+                timer: 2500,
+              });
+              setTimeout(() => this.router.navigate(['home']), 3000 );
+              
             }  
         
           }

@@ -10,7 +10,7 @@ import swal from 'sweetalert';
 })
 export class LoginSuccessGuard implements CanActivate {
 
-  constructor(private route: Router, private readonly userSvc: UserService) { }
+  constructor(private _route: Router, private readonly userSvc: UserService) { }
 
 
   canActivate(
@@ -25,12 +25,12 @@ export class LoginSuccessGuard implements CanActivate {
           // Si la peticion tiene un error de estado >= 400 se dirige al login
           catchError(() => {
             swal({
-              title: "Datos incorrectos",
-              text: "los datos ingresados son incorrectos",
+              title: "Ruta denegada",
+              text: "La dirección a la que quieres ingresar requiere que inicies sesión \n o puedes ingresar como invitado",
               icon: "error",
-              timer: 3000,
+              timer: 7000,
             });
-             return of(this._router.createUrlTree(['/login']))
+             return of(this._route.createUrlTree(['']))
           })
       );
     }

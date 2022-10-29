@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { LoginSuccessGuard } from './guards/login-success.guard';
+import { UserService } from './services/http/User.service';
 
 
 
@@ -10,9 +12,10 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class AppComponent {
 
-  //private router:Router;
+  constructor( private router: Router,private readonly httpSvc: UserService, private loginGuard: LoginSuccessGuard) {
+  }
 
-  title = 'angular-porfolio-arg-programa';
+  title = 'porfolio-arg-programa';
 
   enterPage(){
     //this.router.navigate(['']);

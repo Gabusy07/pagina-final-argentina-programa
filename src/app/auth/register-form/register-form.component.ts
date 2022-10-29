@@ -130,7 +130,7 @@ export class RegisterFormComponent implements OnInit {
   
         }else{
             localStorage.setItem("token",token);
-            this.loginGuard.login = true;
+            //this.loginGuard.isUserLogged()
             setTimeout(()=> this.router.navigate(['home']), 3400 )
           }
         },

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { UserService } from 'app/services/http/User.service';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import swal from 'sweetalert';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,29 +15,24 @@ export class LoginSuccessGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.login) return true;
-      swal({
-        title: "Acceso negado",
-        text: "debes estar registrado o \n ingresar como invitado para acceder a esa ruta",
-        icon: "error",
-        timer: 3000,
-      });
-      this.route.navigate(['/']);
-      return false;
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree { 
+      
+      
+      return  this.userSvc.isLogged()
+      .pipe(
+          // Si la petición es exitosa se puede proceder
+          map(() => true),
+          // Si la peticion tiene un error de estado >= 400 se dirige al login
+          catchError(() => {
+            swal({
+              title: "Datos incorrectos",
+              text: "los datos ingresados son incorrectos",
+              icon: "error",
+              timer: 3000,
+            });
+             return of(this._router.createUrlTree(['/login']))
+          })
+      );
+    }
   }
-
-  public isUserLogged(){
-    
-    let a = this.userSvc.isLogged().subscribe({
-      next: resp => this.login = resp,
-      error: error => {console.log(error)
-      alert()}
-    })
-
-  }
-
-
-  private login:boolean = false;
-  
-}
+      

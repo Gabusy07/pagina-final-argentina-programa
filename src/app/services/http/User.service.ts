@@ -30,6 +30,11 @@ export class UserService {
     
   }
 
+  isLogged():Observable<boolean>{
+    const headers = this.getheader();
+    return this.request.get<boolean>(this.urlLogin+"logged", {headers}); //devuelve respuesta con el token   
+  }
+
 
   getUser():Observable<User>{
     const headers = this.getheader();
@@ -42,7 +47,6 @@ export class UserService {
     return this.request.patch<User>(this.url+"/update", u, {headers});
 
   }
-
   private getheader():HttpHeaders{
   
     const token:string = localStorage['token'];

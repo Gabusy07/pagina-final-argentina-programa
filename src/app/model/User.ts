@@ -1,7 +1,7 @@
 export class User {
 
     constructor(){}
-    public user (name: String, lastname: String, nickname: String, email: String, password: String, rol:String){
+    public user (name: String, lastname: String, nickname: String, email: String, password: String, rol:String[]){
         this.name = name;
         this.lastname = lastname;
         this.nickname = nickname;
@@ -11,8 +11,20 @@ export class User {
 
     }
 
-    public getRol():String{
+    public getRol():String[]{
         return this.rol;
+    }
+
+    public getPoints():number{
+        return this.points;
+    }
+
+    public getAvatar():String{
+        return this.avatar;
+    }
+
+    public setAvatar(avatar: String):void{
+        this.avatar = avatar;
     }
 
     public id!: BigInt;
@@ -21,6 +33,8 @@ export class User {
     public nickname!: String;
     public email!: String;
     public password!: String;
-    private rol!: String;
+    private rol!: String[];
+    private points!: number;
+    private avatar!: String;
 
 }

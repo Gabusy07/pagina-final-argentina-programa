@@ -1,5 +1,5 @@
 
-<div id="bodyHome">
+<div class="container-fluid" id="bodyHome" (scroll)="availableComponents()">
   
     <app-porter></app-porter>
     
@@ -17,12 +17,9 @@
           <!--catalogo de proyectos (deben estar hubicados en componentes independientes)-->
             <app-projects-container *ngIf="enableProjectComponent"></app-projects-container>
         </div>
-      
     </main>
-
     <app-footer *ngIf="enableFooterComponent"></app-footer>
 </div> 
 
-<app-home-edit></app-home-edit>
 
  

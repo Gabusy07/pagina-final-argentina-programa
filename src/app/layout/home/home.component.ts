@@ -18,6 +18,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  availableComponents(){
+
+  }
   changeColumnSide(){
     this.pos_about = this.childMessage == "active"? "about_pos--before" : "about_pos--after";
     //this.col_aside = this.childMessage == "active"? "aside_pos--before": "aside_pos--before";

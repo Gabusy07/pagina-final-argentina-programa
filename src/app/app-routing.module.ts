@@ -10,6 +10,9 @@ import { LoginSuccessGuard } from './guards/login-success.guard';
 import { HomeComponent } from './layout/home/home.component';
 import { ProfileUserComponent } from './shared_/profile-user/profile-user.component';
 import { User } from './model/User';
+import { HomeEditComponent } from '@layout/admin/home-edit/home-edit.component';
+import { AboutEditComponent } from '@layout/admin/about-edit/about-edit.component';
+import { ProjectsEditComponent } from '@layout/admin/projects-edit/projects-edit.component';
 
 export let userData: User
 
@@ -19,6 +22,9 @@ const routes: Routes =[
   {path : 'about', component : AboutComponent, canActivate:[LoginSuccessGuard]},
   {path : 'projects', component : ProjectsContainerComponent, canActivate:[LoginSuccessGuard]},
   {path : 'profile', component : ProfileUserComponent, canActivate:[LoginSuccessGuard], resolve: { DataResolveServiceResolver: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot)=> userData }},
+  {path : 'admin/home', component : HomeEditComponent, canActivate:[LoginSuccessGuard]},
+  {path : 'admin/about', component : AboutEditComponent, canActivate:[LoginSuccessGuard]},
+  {path : 'admin/projects', component : ProjectsEditComponent, canActivate:[LoginSuccessGuard]},
   
   {path: '**', component: ErrorPageComponent},
 

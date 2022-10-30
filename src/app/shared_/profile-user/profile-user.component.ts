@@ -103,8 +103,10 @@ public chargingDataUser():void{
   this.httpSvc.getUser().subscribe({
     next: data =>  {
       this.user = data
-      this.user.setPoints(data.getPoints());
-      this.points = this.user.getPoints();
+      this.user.points = data.points;
+      this.user.rol = data.rol;
+      // crear y aplicar resolver
+      console.log(this.user)
     },
     error: error => console.log (error)
   });

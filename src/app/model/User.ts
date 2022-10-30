@@ -15,21 +15,6 @@ export class User {
         return this.rol;
     }
 
-    public getPoints():number{
-        return this.points;
-    }
-
-    public setPoints(points: number):void{
-        this.points = points;
-    }
-
-    public getAvatar():String{
-        return this.avatar;
-    }
-
-    public setAvatar(avatar: String):void{
-        this.avatar = avatar;
-    }
 
     public id!: BigInt;
     public name!: String;
@@ -37,8 +22,8 @@ export class User {
     public nickname!: String;
     public email!: String;
     public password!: String;
-    private rol!: String[];
-    private points!: number;
-    private avatar!: String;
+    public rol!: String[];
+    public points!: number;
+    public avatar!: String;
 
 }

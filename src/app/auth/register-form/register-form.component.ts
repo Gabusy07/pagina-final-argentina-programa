@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { LoginSuccessGuard } from 'app/guards/login-success.guard';
 import { User } from 'app/model/User';
-import { UserMatch } from 'app/model/UserMatch';
-import { UserMatchService } from 'app/services/http/user-match-service';
 import { UserService } from 'app/services/http/User.service';
 import swal from 'sweetalert';
 
@@ -19,7 +17,7 @@ export class RegisterFormComponent implements OnInit {
   @Output() onCloseRegisterEvent = new EventEmitter<boolean>();
 
   constructor( private router: Router, private readonly formBuilder : FormBuilder ,
-     private readonly httpSvc: UserService, private readonly httpUserMatchSvc: UserMatchService,
+     private readonly httpSvc: UserService,
      private loginGuard: LoginSuccessGuard) {
     this.openedForm = true;
     this.form = this.initForm();
@@ -116,7 +114,6 @@ export class RegisterFormComponent implements OnInit {
   }
 
   logAfterRegister(u:User){
-    let user_match = new UserMatch();
     this.httpSvc.LoginUser(u).subscribe({
       next: data => {
         let token =  data.token;
@@ -143,14 +140,6 @@ export class RegisterFormComponent implements OnInit {
           setTimeout(() => window.location.reload(), 3500 );
                          
         },
-        //una vez loggeado el usuario recientemente creado llama a matchserver para crear la tabla de match
-        complete: ()=>{
-          this.httpUserMatchSvc.createMatch(user_match).subscribe({
-            next: data => console.log("exito"),
-            error: err => console.log(err)
-          })
-
-        }
        }
     )
 

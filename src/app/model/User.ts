@@ -19,6 +19,10 @@ export class User {
         return this.points;
     }
 
+    public setPoints(points: number):void{
+        this.points = points;
+    }
+
     public getAvatar():String{
         return this.avatar;
     }

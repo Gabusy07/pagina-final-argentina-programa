@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'app/model/User';
 import { Observable } from 'rxjs';
-import { Token } from 'app/model/Token-interface';
 import baseUrl from './helper';
 
 // servicio conecta con los formularios loginForm y RegisterForm
@@ -25,15 +24,7 @@ export class UserService {
     return  this.request.delete(this.url+"/delete", {headers});
   }
 
-  LoginUser(u: User):Observable<Token>{
-    return this.request.post<Token>(this.urlLogin+"login", u); //devuelve respuesta con el token
-    
-  }
-
-  isLogged():Observable<boolean>{
-    const headers = this.getheader();
-    return this.request.get<boolean>(this.urlLogin+"logged", {headers}); //devuelve respuesta con el token   
-  }
+  
 
 
   getUser():Observable<User>{
@@ -62,9 +53,6 @@ export class UserService {
 
   // conecta con UserController en el servidor
   private url = `${baseUrl}/porfolio/user`;
-
-  // conecta con AuthController en el servidor
-  private urlLogin = `${baseUrl}/porfolio/api/`;
 
 
   

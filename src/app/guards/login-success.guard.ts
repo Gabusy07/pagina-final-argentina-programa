@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { AuthService } from 'app/services/http/auth.service';
 import { UserService } from 'app/services/http/User.service';
 import { catchError, map, Observable, of } from 'rxjs';
 import swal from 'sweetalert';
@@ -10,7 +11,8 @@ import swal from 'sweetalert';
 })
 export class LoginSuccessGuard implements CanActivate {
 
-  constructor(private _route: Router, private readonly userSvc: UserService) { }
+  constructor(private _route: Router,
+     private readonly _authHTTP: AuthService) { }
 
 
   canActivate(
@@ -18,7 +20,7 @@ export class LoginSuccessGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree { 
       
       
-      return  this.userSvc.isLogged()
+      return  this._authHTTP.isLogged()
       .pipe(
           // Si la petición es exitosa se puede proceder
           map(() => true),

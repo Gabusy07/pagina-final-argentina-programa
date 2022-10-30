@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { LoginSuccessGuard } from 'app/guards/login-success.guard';
 import { User } from 'app/model/User';
+import { AuthService } from 'app/services/http/auth.service';
 import { UserService } from 'app/services/http/User.service';
 import swal from 'sweetalert';
 
@@ -17,7 +18,8 @@ export class RegisterFormComponent implements OnInit {
   @Output() onCloseRegisterEvent = new EventEmitter<boolean>();
 
   constructor( private router: Router, private readonly formBuilder : FormBuilder ,
-     private readonly httpSvc: UserService,
+     private readonly _userHTTP: UserService,
+     private readonly _authHTTP:AuthService,
      private loginGuard: LoginSuccessGuard) {
     this.openedForm = true;
     this.form = this.initForm();
@@ -88,7 +90,7 @@ export class RegisterFormComponent implements OnInit {
   private saveUser(u:User):void{
   //  llama al servicio que conecta con el servidor
     
-    this.httpSvc.createUser(u).subscribe({
+    this._userHTTP.createUser(u).subscribe({
       next: data => {
         swal({
           title: "Registrado!",
@@ -114,7 +116,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   logAfterRegister(u:User){
-    this.httpSvc.LoginUser(u).subscribe({
+    this._authHTTP.LoginUser(u).subscribe({
       next: data => {
         let token =  data.token;
         if(token == "FAIL"){

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginSuccessGuard } from 'app/guards/login-success.guard';
 import { User } from 'app/model/User';
+import { AuthService } from 'app/services/http/auth.service';
 import { UserService } from 'app/services/http/User.service';
 import swal from 'sweetalert';
 
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor( private router: Router,
     private readonly formBuilder : FormBuilder,
-    private readonly userSvc: UserService,
+    private readonly _authHTTP:AuthService,
     private loginGuard:LoginSuccessGuard) {
     this.openedForm = true;
     this.form = this.initForm();
@@ -74,7 +75,7 @@ export class LoginComponent implements OnInit {
     user.password = userForm.password;
 
 
-    this.userSvc.LoginUser(user).subscribe({
+    this._authHTTP.LoginUser(user).subscribe({
       next:data => { 
             let token = data.token;
             if (token == "FAIL"){

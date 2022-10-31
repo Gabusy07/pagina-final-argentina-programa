@@ -21,7 +21,6 @@
     --orange: #fd7e14;
     --yellow: #f6c23e;
     --green: #1cc88a;
-    --teal: #20c9a6;
     --cyan: #36b9cc;
     --white: #fff;
     --gray: #858796;
@@ -48,6 +47,6 @@
 body{
     overflow-x: hidden;
     width: 99vw;
-    height: 120rem;
+    height: 100rem;
     
 }

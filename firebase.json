@@ -1,10 +1,16 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "dist/angular-porfolio-arg-programa",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   }
 }

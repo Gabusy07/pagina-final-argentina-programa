@@ -1,7 +1,10 @@
-<div id="container" class="row d-flex p2 justify-content-between">
+<div *ngIf="listOfSkills.length > 0; else noDataTemplate" id="container" class="row d-flex p2 justify-content-between">
   <div *ngFor="let skill of listOfSkills; let i = index" class="col-3 box_skill">
-    <div [@animation1]="stateDiv[i]" class="alert alert-info " (mouseenter)="enlarge(i)" (mouseleave)="reduce(i)">{{skill}}
+    <div [@animation1]="stateDiv[i]" class="alert alert-info " (mouseenter)="enlarge(i)" (mouseleave)="reduce(i)">{{skill.name}}
      </div>
    </div>
 </div>
+<ng-template #noDataTemplate>
+  <app-no-data-template></app-no-data-template>
+</ng-template>
 

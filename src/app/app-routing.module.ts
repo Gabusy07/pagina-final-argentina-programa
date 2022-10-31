@@ -18,7 +18,7 @@ import { AdminRolGuard } from './guards/admin-rol.guard';
 export let userData: User
 
 const routes: Routes =[
-  {path : '', component : WelcomeComponent},
+  {path : '',  component : WelcomeComponent,},
   {path : 'home', component : HomeComponent, canActivate:[LoginSuccessGuard]},
   {path : 'about', component : AboutComponent, canActivate:[LoginSuccessGuard]},
   {path : 'projects', component : ProjectsContainerComponent, canActivate:[LoginSuccessGuard]},

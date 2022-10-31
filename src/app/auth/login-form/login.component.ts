@@ -6,6 +6,7 @@ import { User } from 'app/model/User';
 import { AuthService } from 'app/services/http/auth.service';
 import { UserService } from 'app/services/http/User.service';
 import { StorageService } from 'app/services/storage.service';
+import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert';
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private readonly formBuilder : FormBuilder,
     private readonly _authHTTP:AuthService,
     private loginGuard:LoginSuccessGuard,
-    private _storage: StorageService) {
+    private _storage: StorageService,
+    private toastr:ToastrService) {
 
     this.openedForm = true;
     this.form = this.initForm();
@@ -93,16 +95,17 @@ export class LoginComponent implements OnInit {
             else{
               this._storage.addTokenToStorage(token);
               this._storage.addUserToStorage()
-            
-              swal({
-                text: "cargando página",
-                icon: "info",
-                timer: 2000,
-              });
-              setTimeout(() => this.router.navigate(['home']), 2500 );
-              
+              this.toastr.info("cargando pagina...", "datos correctos");
+              this._authHTTP.isRolAdmin().subscribe({
+                next: data => { if(data){
+                  setTimeout(() => this.router.navigate(['admin/home']), 2500 );
+                }else{
+                  setTimeout(() => this.router.navigate(['home']), 2500 );
+
+                }
+              }}
+             )
             }  
-        
           }
         ,
         error: ()=> swal({

@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { isAdmin } from '@firebase/util';
+import { AuthService } from 'app/services/http/auth.service';
 import { StorageService } from 'app/services/storage.service';
-import { Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import swal from 'sweetalert';
+import { LoginSuccessGuard } from './login-success.guard';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminRolGuard implements CanActivate {
-  constructor(private _storage: StorageService, private _route: Router){}
+  constructor(private _storage: StorageService, private _route: Router, private readonly _authHTTP:AuthService){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      
+   
       let roles:any = this._storage.getRolesFromStorage;
       let arrayRoles:string[] = JSON.parse( roles((data: any) => data))
       if (arrayRoles.includes("admin")){
-        return true
+        of(this._route.createUrlTree(['/admin/home']))
+        return true;
       }
       swal({
         title: "Ruta denegada",
@@ -23,9 +29,8 @@ export class AdminRolGuard implements CanActivate {
         icon: "error",
         timer: 7000,
       });
-       return of(this._route.createUrlTree(['']))
-      return false
-     
+       return of(this._route.createUrlTree(['/home']))
+
+    }
   }
-  
-}
+

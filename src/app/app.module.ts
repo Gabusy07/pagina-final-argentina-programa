@@ -40,6 +40,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -86,6 +87,10 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    ToastrModule.forRoot({
+      timeOut:2000,
+      preventDuplicates: true,
+    }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage())
   ],

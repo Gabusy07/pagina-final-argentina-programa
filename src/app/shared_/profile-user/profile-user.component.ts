@@ -104,7 +104,7 @@ public chargingDataUser():void{
     next: data =>  {
       this.user = data
       this.user.points = data.points;
-      this.user.rol = data.rol;
+      this.user.roles = data.roles;
       // crear y aplicar resolver
       console.log(this.user)
     },

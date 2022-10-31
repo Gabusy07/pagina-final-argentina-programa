@@ -13,6 +13,7 @@ import { User } from './model/User';
 import { HomeEditComponent } from '@layout/admin/home-edit/home-edit.component';
 import { AboutEditComponent } from '@layout/admin/about-edit/about-edit.component';
 import { ProjectsEditComponent } from '@layout/admin/projects-edit/projects-edit.component';
+import { AdminRolGuard } from './guards/admin-rol.guard';
 
 export let userData: User
 
@@ -21,10 +22,10 @@ const routes: Routes =[
   {path : 'home', component : HomeComponent, canActivate:[LoginSuccessGuard]},
   {path : 'about', component : AboutComponent, canActivate:[LoginSuccessGuard]},
   {path : 'projects', component : ProjectsContainerComponent, canActivate:[LoginSuccessGuard]},
-  {path : 'profile', component : ProfileUserComponent, canActivate:[LoginSuccessGuard], resolve: { DataResolveServiceResolver: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot)=> userData }},
-  {path : 'admin/home', component : HomeEditComponent, canActivate:[LoginSuccessGuard]},
-  {path : 'admin/about', component : AboutEditComponent, canActivate:[LoginSuccessGuard]},
-  {path : 'admin/projects', component : ProjectsEditComponent, canActivate:[LoginSuccessGuard]},
+  {path : 'profile', component : ProfileUserComponent, canActivate:[LoginSuccessGuard]},
+  {path : 'admin/home', component : HomeEditComponent, canActivate:[AdminRolGuard]},
+  {path : 'admin/about', component : AboutEditComponent, canActivate:[AdminRolGuard]},
+  {path : 'admin/projects', component : ProjectsEditComponent, canActivate:[AdminRolGuard]},
   
   {path: '**', component: ErrorPageComponent},
 

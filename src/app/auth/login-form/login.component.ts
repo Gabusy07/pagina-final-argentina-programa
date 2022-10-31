@@ -5,6 +5,7 @@ import { LoginSuccessGuard } from 'app/guards/login-success.guard';
 import { User } from 'app/model/User';
 import { AuthService } from 'app/services/http/auth.service';
 import { UserService } from 'app/services/http/User.service';
+import { StorageService } from 'app/services/storage.service';
 import swal from 'sweetalert';
 
 @Component({
@@ -20,7 +21,9 @@ export class LoginComponent implements OnInit {
   constructor( private router: Router,
     private readonly formBuilder : FormBuilder,
     private readonly _authHTTP:AuthService,
-    private loginGuard:LoginSuccessGuard) {
+    private loginGuard:LoginSuccessGuard,
+    private _storage: StorageService) {
+
     this.openedForm = true;
     this.form = this.initForm();
     
@@ -88,15 +91,15 @@ export class LoginComponent implements OnInit {
               setTimeout(() => window.location.reload(), 3500 );
             }
             else{
-              localStorage.setItem("token",token)
-              //this.loginGuard.isUserLogged()
+              this._storage.addTokenToStorage(token);
+              this._storage.addUserToStorage()
+            
               swal({
-                title: "Exito",
                 text: "cargando página",
                 icon: "info",
-                timer: 2500,
+                timer: 2000,
               });
-              setTimeout(() => this.router.navigate(['home']), 3000 );
+              setTimeout(() => this.router.navigate(['home']), 2500 );
               
             }  
         

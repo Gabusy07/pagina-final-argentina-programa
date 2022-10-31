@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthService } from 'app/services/http/auth.service';
-import { UserService } from 'app/services/http/User.service';
+
 import { catchError, map, Observable, of } from 'rxjs';
 import swal from 'sweetalert';
 

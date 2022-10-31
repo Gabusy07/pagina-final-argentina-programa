@@ -1,8 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginSuccessGuard } from 'app/guards/login-success.guard';
 import { User } from 'app/model/User';
+import { AuthService } from 'app/services/http/auth.service';
 import { UserService } from 'app/services/http/User.service';
+import { StorageService } from 'app/services/storage.service';
+import { ToastrService } from 'ngx-toastr';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +21,11 @@ export class LoginComponent implements OnInit {
 
   constructor( private router: Router,
     private readonly formBuilder : FormBuilder,
-    private readonly userSvc: UserService) {
+    private readonly _authHTTP:AuthService,
+    private loginGuard:LoginSuccessGuard,
+    private _storage: StorageService,
+    private toastr:ToastrService) {
+
     this.openedForm = true;
     this.form = this.initForm();
     
@@ -71,21 +80,40 @@ export class LoginComponent implements OnInit {
     user.password = userForm.password;
 
 
-    this.userSvc.LoginUser(user).subscribe(
-      data => { 
-
+    this._authHTTP.LoginUser(user).subscribe({
+      next:data => { 
             let token = data.token;
-        
             if (token == "FAIL"){
-              alert("los datos ingresados son incorrectos")
-              setTimeout(() => window.location.reload(), 550 );
+              swal({
+                title: "Datos incorrectos",
+                text: "los datos ingresados son incorrectos",
+                icon: "error",
+                timer: 3000,
+              });
+              setTimeout(() => window.location.reload(), 3500 );
             }
             else{
-              localStorage.setItem("token",token)
-              this.router.navigate(['home']); 
-            }
-        
-        
+              this._storage.addTokenToStorage(token);
+              this._storage.addUserToStorage()
+              this.toastr.info("cargando pagina...", "datos correctos");
+              this._authHTTP.isRolAdmin().subscribe({
+                next: data => { if(data){
+                  setTimeout(() => this.router.navigate(['admin/home']), 2500 );
+                }else{
+                  setTimeout(() => this.router.navigate(['home']), 2500 );
+
+                }
+              }}
+             )
+            }  
+          }
+        ,
+        error: ()=> swal({
+          title: "Servidor",
+          text: "No se ha podido conectar con el servidor\nPruebe mas tarde",
+          icon: "error",
+          timer: 3000,
+        })
       })
         
   }

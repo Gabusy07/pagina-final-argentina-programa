@@ -1,6 +1,7 @@
-<section class="container-fluid row justify-content-around  " id="projects_container">
+<section class="container-fluid row justify-content-around " id="projects_container">
 
-    <div class="card text-white bg-primary mb-3 card_container" (mouseover)="projectAlertMessage()">
+
+  <div class="card text-white bg-primary mb-3 card_container" (mouseover)="projectAlertMessage()" >
         <div class="card-body">
           <a href="">
           <img src="data:image/png;base64,
@@ -26,6 +27,33 @@
         </div>
         <div class="card-footer text-center lead"><code class="code"><</code>tetris<code class="code">/></code></div>
       </div>
+
+      <!--
+      
+      <div class="col-12 d-flex justify-content-center m-5">
+        <i class="bi bi-plus-square text-dark mb-3 square" (click)="onAddSquare()" *ngIf="!openForm"></i>
+        <i class="bi bi-trash square text-danger" (click)="onDeleteSquare()" *ngIf="!openForm"></i>
+  
+      </div>
+
+      <div *ngIf="openForm" class="d-flex justify-content-center">
+        <form [formGroup]="form">
+            <button *ngIf="openForm" type="button" class="btn-close" id="close_button" aria-label="Close" (click)="onCloseForm()"></button>
+            <div class="form-group-row elementP div">
+                <label class="col-sm-2 col-form-label" for="title">Titulo:</label>
+                <div class="col-sm-15">
+                    <input [ngClass]="{'is-invalid' : Title?.errors && Title?.touched, 'is-valid' : !Title?.errors && Title?.touched}" class="form-control w-100" #title  type="text" formControlName="title" >
+               </div>
+               <label class="col-sm-2 col-form-label" for="direction">Dirección:</label>
+                <div class="col-sm-15">
+                    <input [ngClass]="{'is-invalid' : Image?.errors && Image?.touched, 'is-valid' : !Image?.errors && Image?.touched}" class="form-control w-100" type="text" #direction  formControlName="image" >
+               </div>
+               <input type="submit" class="btn btn-secondary" (click)="submitForm()" [disabled]="form.invalid">
+            </div>
+        </form>
+     </div>
+     -->
+
 
 
 </section>

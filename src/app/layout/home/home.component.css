@@ -2,12 +2,15 @@
 #bodyHome{
     margin: -0.9%;
     padding: 0%;
-    background-color: rgb(222, 213, 205)!important;
-
+    background-color: rgb(222, 213, 205);
+   
+    width: 99vw;
+    
 }
 
 #main_about{
     margin: 10% 1% 10% 2%;
+    
 }
 
 

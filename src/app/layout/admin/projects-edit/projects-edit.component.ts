@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-projects-edit',
@@ -8,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ProjectsEditComponent implements OnInit {
 
-  constructor(private readonly formBuilder : FormBuilder) {
+  constructor(private readonly formBuilder : FormBuilder, private toastr:ToastrService) {
     this.form = this.initForm();
    }
 
@@ -53,6 +54,12 @@ export class ProjectsEditComponent implements OnInit {
   onDeleteSquare():void{
     this.deleteTrash = this.deleteTrash == false ? true : false;
     this.editPen = false;
+
+  }
+
+  //--------------------------------
+  projectAlertMessage(){
+    this.toastr.info("projecto en construcción", "No disponible");
 
   }
 

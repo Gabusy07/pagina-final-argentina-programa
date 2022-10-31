@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'app/model/User';
-import { UserMatchService } from 'app/services/http/user-match-service';
 import { UserService } from 'app/services/http/User.service';
 
 @Component({
@@ -15,7 +14,7 @@ export class AsideComponent implements OnInit {
 
 
   constructor(private route: Router, private readonly httpSvc: UserService,
-     private readonly httpUserMatchSvc: UserMatchService) { }
+     ) { }
 
   ngOnInit(): void {
     this.chargingDataUser()
@@ -62,7 +61,6 @@ chargingDataUser():void{
 
 onDeleteUser(){
   if (confirm("seguro que deseas eliminar esta cuenta?")){
-    this.httpUserMatchSvc.deleteMatch().subscribe({
       complete: ()=> this.httpSvc.deleteUser().subscribe({
           next: data => alert("usuario eliminado con exito") ,
           complete: ()=> {
@@ -70,9 +68,6 @@ onDeleteUser(){
             localStorage.removeItem('token')
           }
         })
-  
-      }
-    )
 
   }
 

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'app/model/User';
-import { UserMatch } from 'app/model/UserMatch';
-import { UserMatchService } from 'app/services/http/user-match-service';
 import { UserService } from 'app/services/http/User.service';
 
 @Component({
@@ -13,7 +11,7 @@ import { UserService } from 'app/services/http/User.service';
 })
 export class ProfileUserComponent implements OnInit {
 
-  constructor(private readonly httpSvc: UserService, private readonly httpUserMatchSvc: UserMatchService,
+  constructor(private readonly httpSvc: UserService,
     private router:Router,private readonly formBuilder:FormBuilder) { 
       
     }
@@ -103,23 +101,26 @@ crud con servidor
 public chargingDataUser():void{
 
   this.httpSvc.getUser().subscribe({
-    next: data =>  this.user = data,
-    error: error => console.log (error),
-    complete: ()=> this.chargingDataUserMatch()
+    next: data =>  {
+      this.user = data
+      this.user.points = data.points;
+      this.user.roles = data.roles;
+      // crear y aplicar resolver
+      console.log(this.user)
+    },
+    error: error => console.log (error)
   });
 
 }
 
 public deleteUser():void{
   if (confirm("seguro que deseas eliminar esta cuenta?")){
-    this.httpUserMatchSvc.deleteMatch().subscribe({
-      error: error => console.log (error),
-      complete: ()=>{
+    
         this.httpSvc.deleteUser().subscribe({
           next: data =>  alert("el usuario ha sido removido de la base de deatos"),
         })
-      }
-    })
+      
+    
   }
 
 }
@@ -139,14 +140,6 @@ public updateUser(editedUser:User):void{
 }
 
 
-private chargingDataUserMatch():void{
-
-  this.httpUserMatchSvc.getMatch().subscribe({
-    next: data =>  this.user_match = data,
-    error: error => console.log (error),
-  });
-
-}
 
 //-------------------------------
 
@@ -160,8 +153,8 @@ atributos
 
 isEditFormOpen: boolean = false;
 form!: FormGroup;
-user_match:UserMatch = new UserMatch();
 user:User = new User();
+points: number = 1;
 
 }
 

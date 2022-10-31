@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
+import { LoginSuccessGuard } from 'app/guards/login-success.guard';
 import { User } from 'app/model/User';
-import { UserMatch } from 'app/model/UserMatch';
-import { UserMatchService } from 'app/services/http/user-match-service';
+import { AuthService } from 'app/services/http/auth.service';
 import { UserService } from 'app/services/http/User.service';
 import swal from 'sweetalert';
 
@@ -18,7 +18,9 @@ export class RegisterFormComponent implements OnInit {
   @Output() onCloseRegisterEvent = new EventEmitter<boolean>();
 
   constructor( private router: Router, private readonly formBuilder : FormBuilder ,
-     private readonly httpSvc: UserService, private readonly httpUserMatchSvc: UserMatchService) {
+     private readonly _userHTTP: UserService,
+     private readonly _authHTTP:AuthService,
+     private loginGuard: LoginSuccessGuard) {
     this.openedForm = true;
     this.form = this.initForm();
     
@@ -88,17 +90,23 @@ export class RegisterFormComponent implements OnInit {
   private saveUser(u:User):void{
   //  llama al servicio que conecta con el servidor
     
-    this.httpSvc.createUser(u).subscribe({
+    this._userHTTP.createUser(u).subscribe({
       next: data => {
         swal({
           title: "Registrado!",
           text: "Usuario registrado con exito en la base de datos",
-          icon: "success",  
-        });
+          icon: "success",
+          timer: 3000,
+        })
     },
       error: error => {
-             console.log (error);
-             setTimeout(() => window.location.reload(), 550 );
+        swal({
+          title: "Error!",
+          text: "No se ha podido registrar el usuario",
+          icon: "error",
+          timer: 3000,
+        });
+             setTimeout(() => window.location.reload(), 3500 );
       },
       complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
       //en local storage
@@ -108,32 +116,32 @@ export class RegisterFormComponent implements OnInit {
   }
 
   logAfterRegister(u:User){
-    let user_match = new UserMatch();
-    this.httpSvc.LoginUser(u).subscribe({
+    this._authHTTP.LoginUser(u).subscribe({
       next: data => {
         let token =  data.token;
         if(token == "FAIL"){
-          alert ("ha ocurrido un error");
-          setTimeout(() => window.location.reload(), 550 );
+          swal({
+            title: "Error en sistema",
+            text: "Ha occurrido un error al ingresar al sistema",
+            icon: "error",  
+          });
+          setTimeout(() => window.location.reload(), 3500 );
   
         }else{
             localStorage.setItem("token",token);
-            this.router.navigate(['home']);
+            //this.loginGuard.isUserLogged()
+            setTimeout(()=> this.router.navigate(['home']), 3400 )
           }
         },
         error: error => {
-          alert ("ha ocurrido un error");
-          setTimeout(() => window.location.reload(), 550 );
+          swal({
+            title: "Error en sistema",
+            text: "Ha occurrido un error al ingresar al sistema",
+            icon: "error",  
+          });
+          setTimeout(() => window.location.reload(), 3500 );
                          
         },
-        //una vez loggeado el usuario recientemente creado llama a matchserver para crear la tabla de match
-        complete: ()=>{
-          this.httpUserMatchSvc.createMatch(user_match).subscribe({
-            next: data => console.log("exito"),
-            error: err => console.log(err)
-          })
-
-        }
        }
     )
 

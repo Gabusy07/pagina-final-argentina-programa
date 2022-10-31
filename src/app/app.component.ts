@@ -15,7 +15,7 @@ export class AppComponent {
   constructor( private router: Router,private readonly httpSvc: UserService, private loginGuard: LoginSuccessGuard) {
   }
 
-  title = 'porfolio-arg-programa';
+  title = 'gmr-porfolio';
 
   enterPage(){
     //this.router.navigate(['']);

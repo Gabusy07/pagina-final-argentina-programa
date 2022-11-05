@@ -39,7 +39,7 @@
         <input type="text" [placeholder]="title" class="form-control m-2" formControlName="title"
         [ngClass]="{'is-invalid' : Title?.errors && Title?.touched, 'is-valid' : !Title?.errors}">
 
-        <textarea class="form-control" aria-label="With textarea" name="textInput" [placeholder]="text"
+        <textarea class="form-control" aria-label="With textarea" name="textInput" [placeholder]="text == undefined? 'descripcion': text"
         [ngClass]="{'is-invalid' : Text?.errors && Text?.touched, 'is-valid' : !Text?.errors}" formControlName="text"
         
         ></textarea>

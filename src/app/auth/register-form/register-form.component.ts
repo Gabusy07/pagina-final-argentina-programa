@@ -106,7 +106,7 @@ export class RegisterFormComponent implements OnInit {
           icon: "error",
           timer: 3000,
         });
-             //setTimeout(() => window.location.reload(), 3500 );
+             setTimeout(() => window.location.reload(), 3500 );
       },
       complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
       //en local storage
@@ -125,7 +125,7 @@ export class RegisterFormComponent implements OnInit {
             text: "Ha occurrido un error al ingresar al sistema",
             icon: "error",  
           });
-          //setTimeout(() => window.location.reload(), 3500 );
+          setTimeout(() => window.location.reload(), 3500 );
   
         }else{
             localStorage.setItem("token",token);
@@ -139,7 +139,7 @@ export class RegisterFormComponent implements OnInit {
             text: "Ha occurrido un error al ingresar al sistema",
             icon: "error",  
           });
-          //setTimeout(() => window.location.reload(), 3500 );
+          setTimeout(() => window.location.reload(), 3500 );
                          
         },
        }

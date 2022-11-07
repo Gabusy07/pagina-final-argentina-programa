@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SkillService } from 'app/services/http/skill.service';
 import { Skill } from 'app/model/Skill';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-skills-edit',
@@ -68,15 +69,7 @@ export class SkillsEditComponent implements OnInit {
       error: error => console.log(error)
 
     })
-
    }
-
-
-
-
-
-
-  
 
 //--------------------------------------
 // agranda el div de una skill
@@ -91,7 +84,7 @@ export class SkillsEditComponent implements OnInit {
 
   onEditPen(index:number):void{ //icono editar
     this.indexSkill = index;
-    this.editPen = this.editPen == false ? true : false;
+    this.editPen = this.editPen = !this.editPen;
     this.deleteTrash = false;
     let skillEditable = document.getElementById(index+"div");
     if (this.editPen){
@@ -152,7 +145,6 @@ export class SkillsEditComponent implements OnInit {
 
   }
 
-
   isLenOfListOfSkillShort:boolean = false;
   listOfSkills:Skill[] = [];
   stateDiv: string[] = [];
@@ -162,8 +154,7 @@ export class SkillsEditComponent implements OnInit {
   deleteTrash:boolean = false;
   newSkill: Skill = new Skill();
   editedSkill:Skill = new Skill();
-
-  
+ 
 
 }
 

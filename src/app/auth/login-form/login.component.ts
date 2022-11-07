@@ -98,9 +98,9 @@ export class LoginComponent implements OnInit {
               this.toastr.info("cargando pagina...", "datos correctos");
               this._authHTTP.isRolAdmin().subscribe({
                 next: data => { if(data){
-                  setTimeout(() => this.router.navigate(['admin/home']), 2500 );
+                 this.router.navigate(['admin/home']);
                 }else{
-                  setTimeout(() => this.router.navigate(['home']), 2500 );
+                   this.router.navigate(['home']);
 
                 }
               }}

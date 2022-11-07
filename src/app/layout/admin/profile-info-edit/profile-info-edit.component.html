@@ -24,9 +24,9 @@
 <div *ngIf="onEditText; else elseInputText">
     <div>
         <i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
-        <h2>{{title}}</h2>
+        <h2>{{title== undefined? "Sin titulo": title}}</h2>
     </div>
-   <p>{{text}}</p>
+   <p>{{text== undefined? "Sin descripción": text}}</p>
 </div>
 
 <ng-template #elseInputText>
@@ -35,10 +35,12 @@
             <i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
             <span class="input-group-text">Descripción</span>
         </div>
-        <input type="text" [placeholder]="title" class="form-control m-2" formControlName="title"
+        <input type="text" [placeholder]="title== undefined? 'titulo':title" class="form-control m-2" formControlName="title" placeholder="titlo"
         [ngClass]="{'is-invalid' : Title?.errors && Title?.touched, 'is-valid' : !Title?.errors}">
 
-        <textarea class="form-control" aria-label="With textarea" name="textInput" [placeholder]="text == undefined? 'descripcion': text"
+
+        <textarea class="form-control" aria-label="With textarea" name="textInput" [placeholder]="text == undefined? 'descripción': text"
+
         [ngClass]="{'is-invalid' : Text?.errors && Text?.touched, 'is-valid' : !Text?.errors}" formControlName="text"
         
         ></textarea>

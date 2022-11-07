@@ -45,7 +45,12 @@ export class KnowledgesEditComponent implements OnInit {
 
   addLang(lang:Language){
     this.http_svc.createLanguage(lang).subscribe({
-      next: ()=> alert("datos guardados con exito"),
+      next: ()=> swal({
+        title: "Carga exitosa",
+        text: "",
+        icon: "success",
+        timer: 3000,
+      }),
       error: error => {
         console.log(error);
         alert ("no se han podido guardar los datos")
@@ -59,8 +64,15 @@ export class KnowledgesEditComponent implements OnInit {
 
   delLang(id: BigInt){
     this.http_svc.deleteLanguage(id).subscribe({
-      next: data => {setTimeout (() => alert ("lenguaje borrado con exito"), 500)
-    },
+      next: data => {
+        swal({
+          title: "Borrado exitoso",
+          text: "",
+          icon: "info",
+          timer: 3000,
+        })
+      }
+    ,
       error: error => console.log (error),
     });
 

@@ -34,7 +34,7 @@ export class ProfileInfoEditComponent implements OnInit {
   private getDescription():void{
     this.descHttpSvc.readDescription().subscribe({
       next: data =>  {
-        this.id= data[0].id;
+        this.id= BigInt(1);
         this.text= data[0].text;
         this.title = data[0].title;
         this.imageUrl = data[0].photo;

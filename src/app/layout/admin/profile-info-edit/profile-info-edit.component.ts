@@ -5,7 +5,7 @@ import { DescriptionService } from 'app/services/http/description.service';
 import { FilesService} from 'app/services/files.service';
 import { LoadingService } from 'app/services/loading.service';
 import { finalize, Observable } from 'rxjs';
-import { JsonPipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -18,7 +18,7 @@ import { JsonPipe } from '@angular/common';
 export class ProfileInfoEditComponent implements OnInit {
 
   constructor(private readonly formBuilder : FormBuilder, private readonly descHttpSvc:DescriptionService,
-    private imgSvc: FilesService, private loading:LoadingService) {
+    private imgSvc: FilesService, private loading:LoadingService, private toastr:ToastrService) {
     this.form = this.initForm();
 
 }
@@ -47,7 +47,6 @@ export class ProfileInfoEditComponent implements OnInit {
 
   private updateDescription(id:BigInt, desc:Description):void{
     this.descHttpSvc.updateDescription(id, desc).subscribe({
-      next: data=> console.log("data"),
       error: error => console.log(error)
     })
   }
@@ -90,7 +89,9 @@ export class ProfileInfoEditComponent implements OnInit {
 
   uploadImg($e:any){
     const file = $e.target.files[0];
+   
     if(this.isFileValid(file)){
+      
       if (confirm("deseas subir este archivo?")){
         const fileRef = this.imgSvc.getRef(file.name)
         const task = this.imgSvc.uploadFile(file);
@@ -99,7 +100,6 @@ export class ProfileInfoEditComponent implements OnInit {
         this.uploadPercent.subscribe(
           ({complete: ()=> this.isUploadingIncomplete = false})
         )
-  
         task.snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe(imgRef => this.imageUrl = imgRef)
@@ -127,8 +127,6 @@ export class ProfileInfoEditComponent implements OnInit {
   onSubmitPhoto():void{
     this.editPhoto = !this.editPhoto;
     let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
-    console.log(desc)
-    alert()
     this.updateDescription(this.id, desc)
   }
 
@@ -151,20 +149,12 @@ export class ProfileInfoEditComponent implements OnInit {
     //verifica que el archivo seleccionado sea img
     //EXTENSIONES Y TAMANO PERMITIDO.
       var ext_availables = [".png", ".bmp", ".jpg", ".jpeg", ".svg"];
-      var size = 10; // EXPRESADO EN MB.
       var route = file.name;
       var last_dot = file.name.lastIndexOf(".");
       var extension = route.slice(last_dot, route.length);
-      alert(ext_availables.indexOf(extension))
       if(ext_availables.indexOf(extension) == -1)
       {
-          alert("Extensión de archivo no valida");
-          file.name = "";
-          return false;
-      }
-      else if((file.files[0].size / 1048576) > size)
-      {
-          alert("El archivo no puede superar los "+size+"MB");
+          this.toastr.warning("las imagenes solo pueden ser png, bmb, jpg , jpeg o svg","archivo no válido");
           file.name = "";
           return false;
       }

@@ -90,7 +90,9 @@ export class ProfileInfoEditComponent implements OnInit {
 
   uploadImg($e:any){
     const file = $e.target.files[0];
+   
     if(this.isFileValid(file)){
+      
       if (confirm("deseas subir este archivo?")){
         const fileRef = this.imgSvc.getRef(file.name)
         const task = this.imgSvc.uploadFile(file);
@@ -99,7 +101,6 @@ export class ProfileInfoEditComponent implements OnInit {
         this.uploadPercent.subscribe(
           ({complete: ()=> this.isUploadingIncomplete = false})
         )
-  
         task.snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe(imgRef => this.imageUrl = imgRef)
@@ -128,7 +129,6 @@ export class ProfileInfoEditComponent implements OnInit {
     this.editPhoto = !this.editPhoto;
     let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
     console.log(desc)
-    alert()
     this.updateDescription(this.id, desc)
   }
 
@@ -155,16 +155,9 @@ export class ProfileInfoEditComponent implements OnInit {
       var route = file.name;
       var last_dot = file.name.lastIndexOf(".");
       var extension = route.slice(last_dot, route.length);
-      alert(ext_availables.indexOf(extension))
       if(ext_availables.indexOf(extension) == -1)
       {
           alert("Extensión de archivo no valida");
-          file.name = "";
-          return false;
-      }
-      else if((file.files[0].size / 1048576) > size)
-      {
-          alert("El archivo no puede superar los "+size+"MB");
           file.name = "";
           return false;
       }

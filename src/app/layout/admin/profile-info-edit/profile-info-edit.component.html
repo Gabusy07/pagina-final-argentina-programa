@@ -10,10 +10,9 @@
             <i class="bi bi-pencil-square pen" (click)="onPhotoEditPen()"></i>
             <span class="input-group-text">foto de perfil</span>
         </div>
-        
         <label class="form-label" for="customFile">carga tu imagen aqui</label>
         <input type="file" accept="image/*" name="inputPhoto" (change)="uploadImg($event)" class="form-control" id="customFile"><br>
-        <div>{{ uploadPercent  | async | number: '2.1' }}</div>
+        <p *ngIf="isUploadingIncomplete">Cargando...</p>
         <button class="btn btn-secondary d-block position-relative start-25 w-75 m-2" [disabled]="isUploadingIncomplete" (click)="onSubmitPhoto()">Guardar</button>
         <button class="btn btn-danger d-block position-relative start-30 w-75 m-2" (click)="onDeletePhoto()" >eliminar</button>
     </div>

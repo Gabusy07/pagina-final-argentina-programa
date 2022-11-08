@@ -24,7 +24,7 @@
 <div *ngIf="onEditText; else elseInputText">
     <div>
         <i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
-        <h2>{{title== undefined? "Sin titulo": title}}</h2>
+        <h2>{{title== undefined || title ==" "? "Sin titulo": title}}</h2>
     </div>
    <p>{{text== undefined? "Sin descripción": text}}</p>
 </div>

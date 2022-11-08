@@ -126,6 +126,7 @@ export class ProfileInfoEditComponent implements OnInit {
 
   onSubmitPhoto():void{
     this.editPhoto = !this.editPhoto;
+    this.Title == undefined? " ": this.title;
     let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
     console.log(desc)
     this.updateDescription(this.id, desc)
@@ -172,10 +173,8 @@ form: FormGroup;
 title!:String;
 file!:any;
 namePhoto:String = "a"
-
 imageUrl!:String;
 isUploadingIncomplete:boolean = true;
-
 uploadPercent!: Observable<any>;
 downloadURL!: Observable<string>;
 

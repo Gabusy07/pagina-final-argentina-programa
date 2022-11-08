@@ -54,11 +54,11 @@
     <form [formGroup]="knwForm">
         <button *ngIf="openKnwForm" type="button" class="btn-close" id="close_button" aria-label="Close" (click)="onCloseKnwForm()"></button>
         <div class="form-group-row elementP div">
-            <label class="col-sm-2 col-form-label">Nombre:</label>
+            <label class="col-sm-2 col-form-label">Lenguaje:</label>
             <div class="col-sm-15">
                 <input [ngClass]="{'is-invalid' : Name?.errors && Name?.touched, 'is-valid' : !Name?.errors && Name?.touched}" class="form-control w-75"  type="text" formControlName="name" >
            </div>
-           <label class="col-sm-2 col-form-label">Fecha:</label>
+           <label class="col-sm-2 col-form-label">Fecha de inicio:</label>
             <div class="col-sm-15">
                 <input [ngClass]="{'is-invalid' : Date?.errors && Date?.touched, 'is-valid' : !Date?.errors && Date?.touched}" class="form-control w-75" type="date" [max]="datePickerId" formControlName="date" >
            </div>

@@ -126,9 +126,8 @@ export class ProfileInfoEditComponent implements OnInit {
 
   onSubmitPhoto():void{
     this.editPhoto = !this.editPhoto;
-    this.Title == undefined? " ": this.title;
+    this.Title == undefined? "Sin titulo": this.title;
     let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
-    console.log(desc)
     this.updateDescription(this.id, desc)
   }
 

@@ -35,10 +35,10 @@
             <i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
             <span class="input-group-text">Descripción</span>
         </div>
-        <input type="text" [placeholder]="title" class="form-control m-2" formControlName="title"
+        <input type="text" [placeholder]="title" class="form-control m-2" formControlName="title" [(ngModel)]="title"
         [ngClass]="{'is-invalid' : Title?.errors && Title?.touched, 'is-valid' : !Title?.errors}">
 
-        <textarea class="form-control" aria-label="With textarea" name="textInput" [placeholder]="text == undefined? 'descripcion': text"
+        <textarea class="form-control" aria-label="With textarea" name="textInput" [placeholder]="text == undefined? 'descripcion': text" [(ngModel)]="text"
         [ngClass]="{'is-invalid' : Text?.errors && Text?.touched, 'is-valid' : !Text?.errors}" formControlName="text"
         
         ></textarea>

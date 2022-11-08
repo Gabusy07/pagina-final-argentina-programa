@@ -127,6 +127,7 @@ export class ProfileInfoEditComponent implements OnInit {
   onSubmitPhoto():void{
     this.editPhoto = !this.editPhoto;
     let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
+    console.log(desc)
     this.updateDescription(this.id, desc)
   }
 

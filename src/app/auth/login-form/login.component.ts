@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { LoginSuccessGuard } from 'app/guards/login-success.guard';
 import { User } from 'app/model/User';
 import { AuthService } from 'app/services/http/auth.service';
-import { UserService } from 'app/services/http/User.service';
 import { StorageService } from 'app/services/storage.service';
 import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert';

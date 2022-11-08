@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SkillService } from 'app/services/http/skill.service';
 import { Skill } from 'app/model/Skill';
-import swal from 'sweetalert';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-skills-edit',
@@ -21,7 +21,7 @@ import swal from 'sweetalert';
 export class SkillsEditComponent implements OnInit {
 
   
-  constructor(private readonly skillSvc: SkillService) {
+  constructor(private readonly skillSvc: SkillService, private toastr:ToastrService) {
     for (let i=0; i<this.listOfSkills.length; i++){
       this.stateDiv.push("state1");
     }
@@ -48,7 +48,6 @@ export class SkillsEditComponent implements OnInit {
    private addSkill(skill:Skill):void{
     
     this.skillSvc.createSkill(skill).subscribe({
-      next: data=> console.log(data),
       error: error=> console.log(error),
       complete: ()=> window.location.reload()
     })
@@ -65,7 +64,7 @@ export class SkillsEditComponent implements OnInit {
 
    private updateSkill(id:BigInt, editedSkill: Skill):void{
     this.skillSvc.updateSkill(id, editedSkill).subscribe({
-      next: data=> alert("exito"),
+      next: ()=> this.toastr.success("", "Guardado"),
       error: error => console.log(error)
 
     })

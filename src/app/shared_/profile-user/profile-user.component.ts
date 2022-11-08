@@ -154,7 +154,7 @@ atributos
 isEditFormOpen: boolean = false;
 form!: FormGroup;
 user:User = new User();
-points: number = 1;
+points!: number;
 
 }
 

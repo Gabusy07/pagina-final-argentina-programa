@@ -50,7 +50,7 @@
 
 
 
- <div *ngIf="openKnwForm">
+ <div *ngIf="openKnwForm" cdkDrag id="form">
     <form [formGroup]="knwForm">
         <button *ngIf="openKnwForm" type="button" class="btn-close" id="close_button" aria-label="Close" (click)="onCloseKnwForm()"></button>
         <div class="form-group-row elementP div">

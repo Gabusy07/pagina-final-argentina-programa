@@ -61,3 +61,10 @@
           width: 0%;
       }
   }
+
+  #form{
+    background-color: rgb(225, 235, 240);
+    border-radius: 2.5%;
+    padding: 5%;
+    box-shadow: var(--boxes-shadow);
+  }

@@ -44,6 +44,10 @@
     font-family: var(--font-family-sans-serif);
 }
 
+p{
+    color: var(--gray_letter);
+}
+
 body{
     overflow-x: hidden;
     width: 99vw;

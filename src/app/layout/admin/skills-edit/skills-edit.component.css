@@ -53,7 +53,7 @@
 }
 
 #add_square{
-    position: absolute;
+    position: relative;
     left: 25%;
     top: 0;
     margin: 10% 25%;
@@ -89,5 +89,12 @@
 }
 
 #form_skills{
+    position: absolute;
+    top: -15%;
+    right: 1rem;
+    background-color: #CDDA;
+    border-radius: 2.5%;
+    max-width: 20rem;
     margin: 10%;
+    box-shadow: var(--boxes-shadow);
 }

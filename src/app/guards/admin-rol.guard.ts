@@ -16,30 +16,20 @@ export class AdminRolGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
      
-      return this._authHTTP.isRolAdmin()
-
-      /*
-      return this._authHTTP.isRolAdmin().pipe(
-        map(
-        data => this.isAdmin = data
-        ),
-        ()=>{
-          if (this.isAdmin){
-            swal({
-              title: "Ruta denegada",
-              text: "La dirección a la que quieres ingresar requiere un permiso especial",
-              icon: "error",
-              timer: 7000,
-            });
-             return of(this._route.createUrlTree(['']))
-          }else{
-            return of(this._route.createUrlTree(['admin/home']))
-          }   
-        }
-          
-      )*/
+      let roles:any = this._storage.getRolesFromStorage;
+      let arrayRoles:string[] = JSON.parse( roles((data: any) => data))
+      if (arrayRoles.includes("admin")){
+        of(this._route.createUrlTree(['/admin/home']))
+        return true;
+      }
+      swal({
+        title: "Ruta denegada",
+        text: "La dirección a la que quieres ingresar requiere que inicies sesión \n o puedes ingresar como invitado",
+        icon: "error",
+        timer: 7000,
+      });
+       return of(this._route.createUrlTree(['/home']))
 
     }
-    private isAdmin:boolean = false;
   }
 

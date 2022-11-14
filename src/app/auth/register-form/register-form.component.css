@@ -1,6 +1,6 @@
 #enter_form{
    
-    width: 40vw;
+    width: 50vw;
     border: 1px solid black;
     border-radius: 10px;
     background-color: white;
@@ -8,6 +8,7 @@
     padding: 2.5rem;
     font-size: larger;
     margin: 5%;
+    
 }
 
 .elementsP{
@@ -19,5 +20,14 @@
     position: absolute;
     right: 0.25rem;
     top: 2.5rem;
+}
+
+@media only screen and (max-width: 500px) {
+    #enter_form{
+        min-width: 95%;
+        margin: 0.5%;
+        word-wrap: break-word;
+    }
+    
 }
 

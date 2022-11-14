@@ -1,4 +1,4 @@
 
-const baseUrl = "https://gmr-porfolio.herokuapp.com";
+const baseUrl = "http://localhost:8080";
 export default baseUrl
 

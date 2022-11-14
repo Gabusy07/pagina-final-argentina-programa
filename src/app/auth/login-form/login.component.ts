@@ -73,12 +73,9 @@ export class LoginComponent implements OnInit {
   public login_user(){
     const userForm = this.form.value;
     const user: User = new User();
-
     //asigna los valores del form formGroup
     user.email = userForm.email;
     user.password = userForm.password;
-
-
     this._authHTTP.LoginUser(user).subscribe({
       next:data => { 
             let token = data.token;
@@ -89,18 +86,17 @@ export class LoginComponent implements OnInit {
                 icon: "error",
                 timer: 3000,
               });
-              setTimeout(() => window.location.reload(), 3500 );
+              //setTimeout(() => window.location.reload(), 3500 );
             }
             else{
               this._storage.addTokenToStorage(token);
-              this._storage.addUserToStorage()
+              //this._storage.addUserToStorage()
               this.toastr.info("cargando pagina...", "datos correctos");
               this._authHTTP.isRolAdmin().subscribe({
                 next: data => { if(data){
                  this.router.navigate(['admin/home']);
                 }else{
                    this.router.navigate(['home']);
-
                 }
               }}
              )
@@ -113,8 +109,7 @@ export class LoginComponent implements OnInit {
           icon: "error",
           timer: 3000,
         })
-      })
-        
+      })     
   }
 
 

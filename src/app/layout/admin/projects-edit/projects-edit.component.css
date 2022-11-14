@@ -54,6 +54,13 @@
     
 }
 
+@media only screen and (max-width: 480px) {
+    .card_container{
+        min-width: 90%;
+    }
+
+}
+
 
 
 

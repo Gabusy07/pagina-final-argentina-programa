@@ -5,6 +5,8 @@ import { DescriptionService } from 'app/services/http/description.service';
 import { FilesService} from 'app/services/files.service';
 import { LoadingService } from 'app/services/loading.service';
 import { finalize, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 
@@ -17,7 +19,7 @@ import { finalize, Observable } from 'rxjs';
 export class ProfileInfoEditComponent implements OnInit {
 
   constructor(private readonly formBuilder : FormBuilder, private readonly descHttpSvc:DescriptionService,
-    private imgSvc: FilesService, private loading:LoadingService) {
+    private imgSvc: FilesService, private loading:LoadingService, private toastr:ToastrService) {
     this.form = this.initForm();
 
 }
@@ -32,7 +34,7 @@ export class ProfileInfoEditComponent implements OnInit {
   private getDescription():void{
     this.descHttpSvc.readDescription().subscribe({
       next: data =>  {
-        this.id= data[0].id;
+        this.id= BigInt(1);
         this.text= data[0].text;
         this.title = data[0].title;
         this.imageUrl = data[0].photo;
@@ -44,7 +46,6 @@ export class ProfileInfoEditComponent implements OnInit {
 
   private updateDescription(id:BigInt, desc:Description):void{
     this.descHttpSvc.updateDescription(id, desc).subscribe({
-      next: data=> console.log("data"),
       error: error => console.log(error)
     })
   }
@@ -119,6 +120,7 @@ export class ProfileInfoEditComponent implements OnInit {
   onSubmitPhoto():void{
    
     this.editPhoto = !this.editPhoto;
+    this.Title == undefined? "Sin titulo": this.title;
     let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
     this.updateDescription(this.id, desc)
   }
@@ -146,7 +148,7 @@ export class ProfileInfoEditComponent implements OnInit {
       var extension = route.slice(last_dot, route.length);
       if(ext_availables.indexOf(extension) == -1)
       {
-          alert("Extensión de archivo no valida");
+          this.toastr.warning("las imagenes solo pueden ser png, bmb, jpg , jpeg o svg","archivo no válido");
           file.name = "";
           return false;
       }
@@ -165,6 +167,7 @@ file!:any;
 namePhoto:String = "a";
 imageUrl!:String;
 isUploadingIncomplete!:boolean;
+
 uploadPercent!: Observable<any>;
 downloadURL!: Observable<string>;
 

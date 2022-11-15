@@ -15,9 +15,7 @@ import { SkillService } from 'app/services/http/skill.service';
       filter: 'brightness(1.009)'})),
       transition('estado1 <=> estado2', animate('0.08s'))
     ])
-
-   ] 
-   
+   ]  
 })
 
 export class SkillsComponent implements OnInit {
@@ -36,8 +34,6 @@ export class SkillsComponent implements OnInit {
   /*-----------------------------
    CRUD READ
    */
-
-
    private getAllSkill(){
     this.skillSvc.getAll().subscribe({
       next: data =>  this.listOfSkills = data,
@@ -45,7 +41,6 @@ export class SkillsComponent implements OnInit {
       complete: ()=> this.isLenOfListOfSkillShort = this.listOfSkills.length < 4
     })
    }
-
 
   // agranda el div de una skill
   enlarge(index: number){
@@ -59,12 +54,9 @@ export class SkillsComponent implements OnInit {
 
   //-------------atributos--------------
 
-
   listOfSkills:Skill[] = [];
   isLenOfListOfSkillShort:boolean = false;
-  stateDiv: string[] = [];
-
-  
+  stateDiv: string[] = []; 
 
 }
 

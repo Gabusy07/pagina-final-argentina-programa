@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'app/model/User';
 import { UserService } from 'app/services/http/User.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-aside',
@@ -13,7 +14,7 @@ export class AsideComponent implements OnInit {
   @Output() messageEvent = new EventEmitter<string>();
 
 
-  constructor(private route: Router, private readonly httpSvc: UserService,
+  constructor(private route: Router, private readonly httpSvc: UserService,private toastr:ToastrService
      ) { }
 
   ngOnInit(): void {
@@ -29,8 +30,6 @@ showAsidebar(){
   this.messageEvent.emit(this.activeVisibilityOfSidebar? "active":"inactive"); //envia estado de activacion a componente padre
   setTimeout(()=>{
     this.visibilityOfSidebar = this.activeVisibilityOfSidebar? false : true;
-    
-
   },500)
 }
 
@@ -41,9 +40,6 @@ closingSidebar(){
 logout(){
   localStorage.removeItem('token');
 }
-
-
-
 
 
 /*----------------------------------------------
@@ -62,7 +58,7 @@ chargingDataUser():void{
 onDeleteUser(){
   if (confirm("seguro que deseas eliminar esta cuenta?")){
       complete: ()=> this.httpSvc.deleteUser().subscribe({
-          next: data => alert("usuario eliminado con exito") ,
+          next: data => this.toastr.success("exito", "usuario eliminado") ,
           complete: ()=> {
             this.route.navigate([''])
             localStorage.removeItem('token')

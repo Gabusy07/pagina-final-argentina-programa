@@ -30,7 +30,7 @@
         <input type="text" class="form-control" id="skill" placeholder="Habilidad" (input)="inputSkill($event)" [value]="newSkill.name">
       </div>
       <div class="col-auto">
-        <button type="submit" (click)="onSubmitButtom()" class="btn btn-warning mb-2" [disabled]="newSkill.name.length <= 1">Agregar</button>
+        <button type="submit" (click)="onSubmitButtom()" class="btn btn-primary mb-2" [disabled]="newSkill.name.length <= 1">Agregar</button>
       </div>
     </form>
   </div>

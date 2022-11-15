@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Description } from 'app/model/Description';
 import { DescriptionService } from 'app/services/http/description.service';
 
 @Component({
@@ -29,11 +28,6 @@ private getDescription(){
 
   })
  }
-
-
-
-
-
 
 //--------------atributos------------
 

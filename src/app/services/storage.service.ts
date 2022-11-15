@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { User } from 'app/model/User';
-
 import { UserService } from './http/User.service';
 
 @Injectable({
@@ -21,7 +20,6 @@ export class StorageService {
 
   addTokenToStorage(token :string){
     localStorage.setItem("token", token)
-
   }
 
   getRolesFromStorage():any{

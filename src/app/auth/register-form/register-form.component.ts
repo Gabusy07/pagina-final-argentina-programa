@@ -23,7 +23,6 @@ export class RegisterFormComponent implements OnInit {
      private loginGuard: LoginSuccessGuard) {
     this.openedForm = true;
     this.form = this.initForm();
-    
    }
 
   ngOnInit(): void {
@@ -41,34 +40,26 @@ export class RegisterFormComponent implements OnInit {
       email: ['',[Validators.required, Validators.email]],
       password: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(18)]],
     })
-
   }
   
 
   public get Name(){
     return this.form.get('name');
   }
-
   public get Lastname(){
     return this.form.get('lastname');
   }
-
   public get Email(){
     return this.form.get('email');
   }
-
   public get Password(){
     return this.form.get('password');
   }
-
   public get Nickname(){
     return this.form.get('nickname');
   }
 
-
-
   //metodos en html
-
   public submitSignIn(){
   //crea un usuario con los valores del formgroup
     const user = this.form.value;
@@ -78,7 +69,6 @@ export class RegisterFormComponent implements OnInit {
   }
 
   // cerrar formulario al presionar 'x/close'
- 
   public closingForm(){
     this.openedForm = false;
     this.onCloseRegisterEvent.emit(this.openedForm);
@@ -89,7 +79,6 @@ export class RegisterFormComponent implements OnInit {
 
   private saveUser(u:User):void{
   //  llama al servicio que conecta con el servidor
-    
     this._userHTTP.createUser(u).subscribe({
       next: data => {
         swal({
@@ -111,8 +100,6 @@ export class RegisterFormComponent implements OnInit {
       complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
       //en local storage
     });
-
-
   }
 
   logAfterRegister(u:User){
@@ -126,7 +113,6 @@ export class RegisterFormComponent implements OnInit {
             icon: "error",  
           });
           setTimeout(() => window.location.reload(), 3500 );
-  
         }else{
             localStorage.setItem("token",token);
             //this.loginGuard.isUserLogged()
@@ -139,12 +125,10 @@ export class RegisterFormComponent implements OnInit {
             text: "Ha occurrido un error al ingresar al sistema",
             icon: "error",  
           });
-          setTimeout(() => window.location.reload(), 3500 );
-                         
+          setTimeout(() => window.location.reload(), 3500 );                   
         },
        }
     )
-
   }
 
 

@@ -39,12 +39,10 @@
 
 #edit_pen{
     right: 0%;
-
 }
 #delete_trash{
     right: -10%;
 }
-
 
 #skill_up_text{
     border-right:0rem;
@@ -72,10 +70,8 @@
 @media screen and (max-width:750px){
     .box_skill{
         width: 90%;
-        margin: 5% auto;
-        
-    }
-    
+        margin: 5% auto;    
+    }  
 }
 
 @media screen and (max-width:500px){
@@ -92,9 +88,11 @@
     position: absolute;
     top: -15%;
     right: 1rem;
-    background-color: rgb(225, 235, 240);
+    background-color: var(--orange);
+    opacity: .99;
     border-radius: 2.5%;
     max-width: 20rem;
     margin: 10%;
     box-shadow: var(--boxes-shadow);
+    z-index: var(--highest-z-index);
 }

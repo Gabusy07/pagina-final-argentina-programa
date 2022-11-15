@@ -49,10 +49,8 @@
     right: 0%;
     top: 0%;
 }
-
-
   
-  .progress--bar{
+.progress--bar{
       animation: knw-animated-bar ease-out 2.5s forwards;
   }
   
@@ -63,7 +61,9 @@
   }
 
   #form{
-    background-color: rgb(225, 235, 240);
+    background-color: var(--orange);
+    z-index: var(--highest-z-index);
+    opacity: .99;
     border-radius: 2.5%;
     padding: 5%;
     box-shadow: var(--boxes-shadow);

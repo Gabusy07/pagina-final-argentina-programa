@@ -48,7 +48,6 @@ export class AuthService {
     return headers;
   }
 
-
   // conecta con AuthController en el servidor
   private urlLogin = `${baseUrl}/porfolio/api/`;
 }

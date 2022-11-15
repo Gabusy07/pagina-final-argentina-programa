@@ -5,7 +5,6 @@ import { DescriptionService } from 'app/services/http/description.service';
 import { FilesService} from 'app/services/files.service';
 import { LoadingService } from 'app/services/loading.service';
 import { finalize, Observable } from 'rxjs';
-import { JsonPipe } from '@angular/common';
 
 
 
@@ -28,7 +27,6 @@ export class ProfileInfoEditComponent implements OnInit {
     this.getDescription();
 }
 
-
    //---------------CRUD READ UPDATE-------------------
 
   private getDescription():void{
@@ -40,7 +38,6 @@ export class ProfileInfoEditComponent implements OnInit {
         this.imageUrl = data[0].photo;
       },
       error: error => console.log(error),
-
     })
   }
 
@@ -61,7 +58,6 @@ export class ProfileInfoEditComponent implements OnInit {
       text: [this.text,[Validators.required, Validators.minLength(12), Validators.maxLength(100)]],
       title: [this.title,[Validators.required, Validators.minLength(5), Validators.maxLength(25)]],
     })
-
   }
 
   get Text(){
@@ -90,10 +86,9 @@ export class ProfileInfoEditComponent implements OnInit {
 
   uploadImg($e:any){
     const file = $e.target.files[0];
-   
     if(this.isFileValid(file)){
-      
       if (confirm("deseas subir este archivo?")){
+        this.isUploadingIncomplete = true;
         const fileRef = this.imgSvc.getRef(file.name)
         const task = this.imgSvc.uploadFile(file);
         this.namePhoto = file.name;
@@ -105,11 +100,8 @@ export class ProfileInfoEditComponent implements OnInit {
           finalize(() => {
             fileRef.getDownloadURL().subscribe(imgRef => this.imageUrl = imgRef)
           } )
-       )
-      .subscribe()
-  
+       ).subscribe()
       }
-
     }
   }
 
@@ -121,16 +113,13 @@ export class ProfileInfoEditComponent implements OnInit {
     this.onEditText = true;
     let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto);
     this.updateDescription(this.id, desc);
-  
   }
 
 
   onSubmitPhoto():void{
-    console.log(this.id)
+   
     this.editPhoto = !this.editPhoto;
     let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
-    console.log(desc)
-    console.log(this.id)
     this.updateDescription(this.id, desc)
   }
 
@@ -144,16 +133,14 @@ export class ProfileInfoEditComponent implements OnInit {
     this.updateDescription(this.id, desc);
     this.loading.show()
     setTimeout(()=> this.loading.hide(), 2000)
-
   }
 
 
 
   private isFileValid(file:any):boolean{
     //verifica que el archivo seleccionado sea img
-    //EXTENSIONES Y TAMANO PERMITIDO.
+    //EXTENSIONES PERMITIDO.
       var ext_availables = [".png", ".bmp", ".jpg", ".jpeg", ".svg"];
-      var size = 10; // EXPRESADO EN MB.
       var route = file.name;
       var last_dot = file.name.lastIndexOf(".");
       var extension = route.slice(last_dot, route.length);
@@ -175,11 +162,9 @@ onEditText: boolean = true;
 form: FormGroup;
 title!:String;
 file!:any;
-namePhoto:String = "a"
-
+namePhoto:String = "a";
 imageUrl!:String;
-isUploadingIncomplete:boolean = true;
-
+isUploadingIncomplete!:boolean;
 uploadPercent!: Observable<any>;
 downloadURL!: Observable<string>;
 

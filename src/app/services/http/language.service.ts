@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Language } from 'app/model/Language';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import baseUrl from './helper';
 
 @Injectable({
@@ -9,13 +9,10 @@ import baseUrl from './helper';
 })
 export class LanguageService {
 
-  constructor(private request:HttpClient) { 
-
-  }
+  constructor(private request:HttpClient) { }
 
   createLanguage(lang: Language): Observable<Object>{
     return this.request.post<Language>(this.url+"/add", lang);
-
   }
 
   deleteLanguage(id:BigInt):  Observable<Object>{
@@ -29,10 +26,6 @@ export class LanguageService {
   getAll(): Observable<Language[]>{
     return this.request.get<Language[]>(this.url+"/all");
   }
-
-
-
-
 
   /*-----------------------------------------
   atributos

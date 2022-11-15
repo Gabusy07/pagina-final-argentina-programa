@@ -11,5 +11,4 @@ export class NoDataTemplateComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

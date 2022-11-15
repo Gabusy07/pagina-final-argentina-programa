@@ -10,10 +10,7 @@ import { LanguageService } from 'app/services/http/language.service';
 })
 export class KnowledgesComponent implements OnInit {
 
-  constructor(private readonly http_svc: LanguageService) {
- 
-   }
-
+  constructor(private readonly http_svc: LanguageService) {}
 
   ngOnInit(): void {
     this.getAllLang();
@@ -34,7 +31,6 @@ export class KnowledgesComponent implements OnInit {
     }
    
   }
-
 
   getAllLang():void{
     this.http_svc.getAll().subscribe({

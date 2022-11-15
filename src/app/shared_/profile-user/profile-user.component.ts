@@ -12,9 +12,7 @@ import { UserService } from 'app/services/http/User.service';
 export class ProfileUserComponent implements OnInit {
 
   constructor(private readonly httpSvc: UserService,
-    private router:Router,private readonly formBuilder:FormBuilder) { 
-      
-    }
+    private router:Router,private readonly formBuilder:FormBuilder) {}
 
   ngOnInit(): void {
     this.chargingDataUser();
@@ -34,7 +32,6 @@ export class ProfileUserComponent implements OnInit {
       password: [undefined,[Validators.required, Validators.minLength(5), Validators.maxLength(18)]],
       repeatPassword:[undefined]
     })
-
   }
   
 
@@ -65,13 +62,11 @@ export class ProfileUserComponent implements OnInit {
 
   closingForm(){
     this.isEditFormOpen = !this.isEditFormOpen;
-
   }
 
   public editUser():void{
     this.form = this.initForm();
     this.isEditFormOpen = !this.isEditFormOpen;
-  
   }
 
 
@@ -99,7 +94,6 @@ crud con servidor
 */
 
 public chargingDataUser():void{
-
   this.httpSvc.getUser().subscribe({
     next: data =>  {
       this.user = data
@@ -110,7 +104,6 @@ public chargingDataUser():void{
     },
     error: error => console.log (error)
   });
-
 }
 
 public deleteUser():void{
@@ -119,10 +112,7 @@ public deleteUser():void{
         this.httpSvc.deleteUser().subscribe({
           next: data =>  alert("el usuario ha sido removido de la base de deatos"),
         })
-      
-    
   }
-
 }
 
 public updateUser(editedUser:User):void{
@@ -138,11 +128,6 @@ public updateUser(editedUser:User):void{
   })
 
 }
-
-
-
-//-------------------------------
-
 
 
 

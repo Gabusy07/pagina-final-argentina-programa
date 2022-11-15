@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
     private loginGuard:LoginSuccessGuard,
     private _storage: StorageService,
     private toastr:ToastrService) {
-
     this.openedForm = true;
     this.form = this.initForm();
     
@@ -112,15 +111,7 @@ export class LoginComponent implements OnInit {
       })     
   }
 
-
-
-
   // -------------------atributos-------------------
-  
-
-
-
-
  
   private openedForm: boolean;
   public form: FormGroup;

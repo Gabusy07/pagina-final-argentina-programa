@@ -62,7 +62,7 @@
             <div class="col-sm-15">
                 <input [ngClass]="{'is-invalid' : Date?.errors && Date?.touched, 'is-valid' : !Date?.errors && Date?.touched}" class="form-control w-75" type="date" [max]="datePickerId" formControlName="date" >
            </div>
-           <input type="submit" class="btn btn-secondary" (click)="submitAddForm()" [disabled]="knwForm.invalid">
+           <input type="submit" class="btn btn-primary mt-2" (click)="submitAddForm()" [disabled]="knwForm.invalid">
         </div>
     </form>
 </div>

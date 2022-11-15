@@ -36,7 +36,6 @@ export class SkillsEditComponent implements OnInit {
    CRUD
    */
 
-
    private getAllSkill(){
     this.skillSvc.getAll().subscribe({
       next: data =>  this.listOfSkills = data,
@@ -45,8 +44,7 @@ export class SkillsEditComponent implements OnInit {
     })
    }
 
-   private addSkill(skill:Skill):void{
-    
+   private addSkill(skill:Skill):void{ 
     this.skillSvc.createSkill(skill).subscribe({
       error: error=> console.log(error),
       complete: ()=> window.location.reload()
@@ -92,8 +90,6 @@ export class SkillsEditComponent implements OnInit {
       skillEditable?.setAttribute("contenteditable", "false");
       skillEditable?.autofocus;
     }
-    
-
   }
 
   onAddButtom(){
@@ -111,7 +107,7 @@ export class SkillsEditComponent implements OnInit {
   onDeleteTrash(index:number):void{ //icono eliminar
     this.indexSkill = index;
     this.editPen =  false;
-    this.deleteTrash = this.deleteTrash == false ? true : false;
+    this.deleteTrash = !this.deleteTrash;
 
   }
 
@@ -129,19 +125,14 @@ export class SkillsEditComponent implements OnInit {
     let editedName: any = document.getElementById(index+'div')?.innerText.toString();
     editedName == undefined? " ": editedName;
     this.editedSkill.name = editedName;
-    this.editPen = this.editPen == false ? true : false;
+    this.editPen = !this.editPen;
     this.deleteTrash = false;
     let skillEditable = document.getElementById(index+"div");
     skillEditable?.setAttribute("contenteditable", "false");
     skillEditable?.setAttribute("autofocus", "false");
     if (confirm("seguro quieres guardar lo cambios?")){
       this.updateSkill(id, this.editedSkill);
-    }
-    
-  }
-
-  onCloseForm():void{
-
+    }  
   }
 
   isLenOfListOfSkillShort:boolean = false;
@@ -153,7 +144,5 @@ export class SkillsEditComponent implements OnInit {
   deleteTrash:boolean = false;
   newSkill: Skill = new Skill();
   editedSkill:Skill = new Skill();
- 
-
 }
 

@@ -9,11 +9,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
 
-  constructor() {
-
-
-   }
-
+  constructor() {}
 
   ngOnInit(): void {
   }
@@ -23,8 +19,6 @@ export class HomeComponent implements OnInit {
   }
   changeColumnSide(){
     this.pos_about = this.childMessage == "active"? "about_pos--before" : "about_pos--after";
-    //this.col_aside = this.childMessage == "active"? "aside_pos--before": "aside_pos--before";
-
   }
   
   receiveMessage($event:string) {  //recibe de asideComponent un mensaje de activo o inactivo del aside
@@ -32,7 +26,6 @@ export class HomeComponent implements OnInit {
     this.changeColumnSide();
   }
 
-  //revisar *********************
   @HostListener("document:scroll")
   enable_mainComponents():void{
     if(document.body.scrollTop > 1 || document.documentElement.scrollTop > 0){

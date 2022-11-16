@@ -12,7 +12,7 @@
         </div>
         <label class="form-label" for="customFile">carga tu imagen aqui</label>
         <input type="file" accept="image/*" name="inputPhoto" (change)="uploadImg($event)" class="form-control" id="customFile"><br>
-        <p *ngIf="isUploadingIncomplete">Cargando...</p>
+        <p *ngIf="isUploadingIncomplete" class="p-charg">Cargando...</p>
         <button class="btn btn-secondary d-block position-relative start-25 w-75 m-2" [disabled]="isUploadingIncomplete" (click)="onSubmitPhoto()">Guardar</button>
         <button class="btn btn-danger d-block position-relative start-30 w-75 m-2" (click)="onDeletePhoto()" >eliminar</button>
     </div>
@@ -23,7 +23,7 @@
 <div *ngIf="onEditText; else elseInputText">
     <div>
         <i class="bi bi-pencil-square pen" (click)="textEditPen()"></i>
-        <h2>{{title== undefined? "Sin titulo": title}}</h2>
+        <h2>{{title== undefined || title ==" "? "Sin titulo": title}}</h2>
     </div>
    <p>{{text== undefined? "Sin descripción": text}}</p>
 </div>

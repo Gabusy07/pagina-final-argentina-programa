@@ -18,3 +18,8 @@ div{
 img{
     width: 13rem;
 }
+
+.p-charg{
+    color: var(--blue);
+    font-size: medium;
+}

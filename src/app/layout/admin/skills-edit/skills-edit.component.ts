@@ -3,6 +3,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { SkillService } from 'app/services/http/skill.service';
 import { Skill } from 'app/model/Skill';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'app/services/http/auth.service';
+import swal from 'sweetalert';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-skills-edit',
@@ -21,7 +24,12 @@ import { ToastrService } from 'ngx-toastr';
 export class SkillsEditComponent implements OnInit {
 
   
-  constructor(private readonly skillSvc: SkillService, private toastr:ToastrService) {
+  constructor(
+    private readonly skillSvc: SkillService,
+    private toastr:ToastrService,
+    private readonly _authHTTP:AuthService,
+    private router: Router,
+    ) {
     for (let i=0; i<this.listOfSkills.length; i++){
       this.stateDiv.push("state1");
     }
@@ -37,16 +45,26 @@ export class SkillsEditComponent implements OnInit {
    */
 
    private getAllSkill(){
+    this._authHTTP.isLogged().subscribe({
+      error: ()=>{
+        swal({
+          title: "Servidor",
+          text: "Error al cargar datos desde el servidor \n o su sesión ha expirado",
+          icon: "info",
+          timer: 3000,
+        })
+        this.router.navigate([''])
+      }
+    }
+    )
     this.skillSvc.getAll().subscribe({
       next: data =>  this.listOfSkills = data,
-      error: error => console.log(error),
       complete: ()=> this.isLenOfListOfSkillShort = this.listOfSkills.length < 4
     })
    }
 
    private addSkill(skill:Skill):void{ 
     this.skillSvc.createSkill(skill).subscribe({
-      error: error=> console.log(error),
       complete: ()=> window.location.reload()
     })
 
@@ -55,7 +73,7 @@ export class SkillsEditComponent implements OnInit {
    private deleteSkill(id:BigInt):void{
     this.skillSvc.deleteSkill(id).subscribe({
       next: data=> console.log(data),
-      error: error => console.log(error)
+      error: error => this.toastr.error("No se han podido completar la acción", "error")
     })
 
    }
@@ -63,7 +81,7 @@ export class SkillsEditComponent implements OnInit {
    private updateSkill(id:BigInt, editedSkill: Skill):void{
     this.skillSvc.updateSkill(id, editedSkill).subscribe({
       next: ()=> this.toastr.success("", "Guardado"),
-      error: error => console.log(error)
+      error: error => this.toastr.error("No se han guardado los cambios", "error")
 
     })
    }

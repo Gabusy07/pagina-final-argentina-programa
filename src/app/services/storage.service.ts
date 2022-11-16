@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { User } from 'app/model/User';
+import { AuthService } from './http/auth.service';
 import { UserService } from './http/User.service';
 
 @Injectable({
@@ -7,7 +8,8 @@ import { UserService } from './http/User.service';
 })
 export class StorageService {
 
-  constructor(private _userHTTP: UserService) { }
+  constructor(private _userHTTP: UserService, private readonly _authHTTP:AuthService)  {}
+  
 
   addUserToStorage(){
     this._userHTTP.getUser().subscribe({
@@ -25,6 +27,13 @@ export class StorageService {
   getRolesFromStorage():any{
     return localStorage.getItem("roles");
   }
+
+ 
+  
+
+ 
+
+
 
 user:User = new User()
 }

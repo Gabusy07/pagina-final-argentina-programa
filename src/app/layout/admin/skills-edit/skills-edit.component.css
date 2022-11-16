@@ -16,7 +16,6 @@
 }
 
 
-
 #container_skillsDivs{
     width: 95%;
     padding: 2.5%;
@@ -48,6 +47,11 @@
     border-right:0rem;
     border-left:0rem;
     border-bottom:0rem;
+}
+#close_button{
+    position: absolute;
+    right: 2px;
+    top: 2px;
 }
 
 #add_square{
@@ -89,7 +93,7 @@
     top: -15%;
     right: 1rem;
     background-color: var(--orange);
-    opacity: .99;
+    opacity: .9;
     border-radius: 2.5%;
     max-width: 20rem;
     margin: 10%;

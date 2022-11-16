@@ -1,4 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'app/services/http/auth.service';
+import { StorageService } from 'app/services/storage.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +13,19 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private readonly _authHTTP:AuthService,
+    ) {
+  }
+  
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    
   }
 
-  availableComponents(){
 
-  }
+  
   changeColumnSide(){
     this.pos_about = this.childMessage == "active"? "about_pos--before" : "about_pos--after";
   }
@@ -55,6 +64,6 @@ export class HomeComponent implements OnInit {
   childMessage:string="";
   col_aside:string= "col-0";
   pos_about:string= "about_pos--before";
-
+  isUserLogged:boolean = true;
 
 }

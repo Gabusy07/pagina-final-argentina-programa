@@ -1,4 +1,4 @@
-#enter_form{
+#register_form{
    
     width: 40vw;
     border: 1px solid black;
@@ -22,12 +22,13 @@
     top: 2.5rem;
 }
 
-@media only screen and (max-width: 500px) {
-    #enter_form{
-        min-width: 95%;
-        margin: 0.5%;
-        word-wrap: break-word;
+@media only screen and (max-width: 600px) {
+    #register_form {
+      position: relative;
+      left: 5rem;
+      min-width: 90vw;
+      margin-left: 5%;
+      float: right;
     }
-    
-}
+  }
 

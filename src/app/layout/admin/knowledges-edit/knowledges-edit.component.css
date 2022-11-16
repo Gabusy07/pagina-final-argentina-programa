@@ -1,5 +1,6 @@
 
 #comp-container{
+    position: relative;
     margin-left: 5%;
     margin-right: 0%;
     
@@ -26,6 +27,13 @@
     cursor: pointer;
 }
 
+
+.pen:hover{
+    scale: 1.2;
+    transition-delay: .09s;
+    transform: translateY(-5px);
+    filter: brightness(.75);
+}
 #add_square{
     margin: auto 25%;
     height: 2rem;
@@ -41,7 +49,7 @@
 
 
 #edit_pen{
-    right: 5%;
+    right: 10%;
     top: 0%;
 
 }
@@ -53,6 +61,7 @@
 .progress--bar{
       animation: knw-animated-bar ease-out 2.5s forwards;
   }
+
   
   @keyframes knw-animated-bar {
       from{
@@ -63,7 +72,7 @@
   #form{
     background-color: var(--orange);
     z-index: var(--highest-z-index);
-    opacity: .99;
+    opacity: .9;
     border-radius: 2.5%;
     padding: 5%;
     box-shadow: var(--boxes-shadow);

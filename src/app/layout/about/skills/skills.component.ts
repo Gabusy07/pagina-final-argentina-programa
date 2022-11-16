@@ -1,8 +1,11 @@
 
 import { animate, stagger, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Skill } from 'app/model/Skill';
+import { AuthService } from 'app/services/http/auth.service';
 import { SkillService } from 'app/services/http/skill.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-skills',
@@ -20,7 +23,7 @@ import { SkillService } from 'app/services/http/skill.service';
 
 export class SkillsComponent implements OnInit {
 
-  constructor(private readonly skillSvc: SkillService) {
+  constructor(private readonly skillSvc: SkillService, private router: Router, private readonly _authHTTP:AuthService) {
     for (let i=0; i<this.listOfSkills.length; i++){
       this.stateDiv.push("state1");
     }
@@ -35,12 +38,27 @@ export class SkillsComponent implements OnInit {
    CRUD READ
    */
    private getAllSkill(){
+    this._authHTTP.isLogged().subscribe({
+      error: ()=>{
+        swal({
+          title: "Servidor",
+          text: "Error al cargar datos desde el servidor \n o su sesión ha expirado",
+          icon: "info",
+          timer: 3000,
+        })
+        this.router.navigate([''])
+      }
+    }
+    )
+
     this.skillSvc.getAll().subscribe({
-      next: data =>  this.listOfSkills = data,
-      error: error => console.log(error),
+      next: data =>  {
+        this.listOfSkills = data},
       complete: ()=> this.isLenOfListOfSkillShort = this.listOfSkills.length < 4
     })
    }
+
+
 
   // agranda el div de una skill
   enlarge(index: number){
@@ -56,7 +74,7 @@ export class SkillsComponent implements OnInit {
 
   listOfSkills:Skill[] = [];
   isLenOfListOfSkillShort:boolean = false;
-  stateDiv: string[] = []; 
+  stateDiv: string[] = [];
 
 }
 

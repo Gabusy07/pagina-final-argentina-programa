@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
             }
             else{
               this._storage.addTokenToStorage(token);
-              //this._storage.addUserToStorage()
+              this._storage.addUserToStorage()
               this.toastr.info("cargando pagina...", "datos correctos");
               this._authHTTP.isRolAdmin().subscribe({
                 next: data => { if(data){

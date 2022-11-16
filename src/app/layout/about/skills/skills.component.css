@@ -15,8 +15,6 @@
 
 
 @media screen and (max-width:750px){
-   
-
     .box_skill{
         width: 90%;
         margin: 5% auto;
@@ -25,13 +23,10 @@
     
 }
 
-@media screen and (max-width:500px){
-    
+@media screen and (max-width:500px){  
     .box_skill{
         width: 60%;
         margin: 2% auto;
     }
-
-    
     
 }

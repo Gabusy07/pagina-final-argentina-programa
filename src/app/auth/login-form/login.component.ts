@@ -85,11 +85,9 @@ export class LoginComponent implements OnInit {
                 icon: "error",
                 timer: 3000,
               });
-              //setTimeout(() => window.location.reload(), 3500 );
             }
             else{
               this._storage.addTokenToStorage(token);
-              this._storage.addUserToStorage()
               this.toastr.info("cargando pagina...", "datos correctos");
               this._authHTTP.isRolAdmin().subscribe({
                 next: data => { if(data){

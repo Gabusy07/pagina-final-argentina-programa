@@ -95,6 +95,7 @@ export class RegisterFormComponent implements OnInit {
           icon: "error",
           timer: 3000,
         });
+        alert()
              setTimeout(() => window.location.reload(), 3500 );
       },
       complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
@@ -116,7 +117,7 @@ export class RegisterFormComponent implements OnInit {
         }else{
             localStorage.setItem("token",token);
             //this.loginGuard.isUserLogged()
-            setTimeout(()=> this.router.navigate(['home']), 3400 )
+            setTimeout(()=> this.router.navigate(['home']), 500 )
           }
         },
         error: error => {
@@ -134,7 +135,6 @@ export class RegisterFormComponent implements OnInit {
 
   //--------------------------------------------------------
   //atributos
-  private user_created:boolean = false;
   private a:any;
   private openedForm: boolean;
   public form: FormGroup;

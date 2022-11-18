@@ -100,7 +100,6 @@ public chargingDataUser():void{
       this.user.points = data.points;
       this.user.roles = data.roles;
       // crear y aplicar resolver
-      console.log(this.user)
     },
     error: error => console.log (error)
   });
@@ -108,9 +107,12 @@ public chargingDataUser():void{
 
 public deleteUser():void{
   if (confirm("seguro que deseas eliminar esta cuenta?")){
-    
+  
         this.httpSvc.deleteUser().subscribe({
-          next: data =>  alert("el usuario ha sido removido de la base de deatos"),
+          next: data => { alert("el usuario ha sido removido de la base de datos")
+          this.router.navigate([''])
+        },
+
         })
   }
 }

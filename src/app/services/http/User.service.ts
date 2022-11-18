@@ -24,8 +24,6 @@ export class UserService {
     return  this.request.delete(this.url+"/delete", {headers});
   }
 
-  
-
 
   getUser():Observable<User>{
     const headers = this.getheader();
@@ -48,12 +46,7 @@ export class UserService {
     return headers;
   }
 
-
-
-
   // conecta con UserController en el servidor
   private url = `${baseUrl}/porfolio/user`;
-
-
   
 }

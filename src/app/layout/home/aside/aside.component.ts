@@ -57,7 +57,7 @@ chargingDataUser():void{
 
 onDeleteUser(){
   if (confirm("seguro que deseas eliminar esta cuenta?")){
-      complete: ()=> this.httpSvc.deleteUser().subscribe({
+       this.httpSvc.deleteUser().subscribe({
           next: data => this.toastr.success("exito", "usuario eliminado") ,
           complete: ()=> {
             this.route.navigate([''])

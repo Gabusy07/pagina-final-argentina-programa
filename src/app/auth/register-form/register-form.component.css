@@ -1,6 +1,6 @@
 #register_form{
    
-    width: 50vw;
+    width: 40vw;
     border: 1px solid black;
     border-radius: 10px;
     background-color: white;
@@ -8,6 +8,7 @@
     padding: 2.5rem;
     font-size: larger;
     margin: 5%;
+    
 }
 
 .elementsP{
@@ -30,3 +31,4 @@
       float: right;
     }
   }
+

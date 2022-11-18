@@ -18,28 +18,6 @@ export class AdminRolGuard implements CanActivate {
      
       return this._authHTTP.isRolAdmin()
 
-      /*
-      return this._authHTTP.isRolAdmin().pipe(
-        map(
-        data => this.isAdmin = data
-        ),
-        ()=>{
-          if (this.isAdmin){
-            swal({
-              title: "Ruta denegada",
-              text: "La dirección a la que quieres ingresar requiere un permiso especial",
-              icon: "error",
-              timer: 7000,
-            });
-             return of(this._route.createUrlTree(['']))
-          }else{
-            return of(this._route.createUrlTree(['admin/home']))
-          }   
-        }
-          
-      )*/
-
     }
-    private isAdmin:boolean = false;
   }
 

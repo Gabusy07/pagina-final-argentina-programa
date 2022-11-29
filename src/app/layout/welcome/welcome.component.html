@@ -2,7 +2,7 @@
 <div class="container-fluid" id="container">
   <div class="header">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end " >
-       <button class="btn btn-outline-dark" id="account_button" type="button" (click)="enterHome()" [disabled]="optionSelected">ingresar</button>
+       <button class="btn btn-outline-dark" id="account_button" type="button" (click)="enterHome()" [disabled]="optionSelected">iniciar sesión</button>
        <button class="btn btn-outline-dark" id="account_button" type="button" (click)="register()" [disabled]="optionSelected">registrar</button>
     </div>
   </div>
@@ -10,11 +10,12 @@
    
   <main class="container-fluid" id="sub_container">
     <div id="principal_background">
-      <h1 class="text-center" id="welcome_message">BIENVENID@!<span>&#160;</span></h1>
+      <h1 class="text-center" id="welcome_message">BIENVENID@!<span>&#160;</span></h1><br>
+      <button type="button" class="btn btn-outline-dark btn-lg mt-5" (click)="goHomeAsGuess()">Ingresar <i class="bi bi-box-arrow-in-right"></i></button>
     </div>
     <!--formularios de ingreso y registro -->
     <div id="form">
-      <app-register-form (onCloseRegisterEvent)="closeRegisterForm($event)" *ngIf="signIn"></app-register-form>
+      <app-register-form (onCloseRegisterEvent)="closeRegisterForm($event)" *ngIf="signUp"></app-register-form>
       <app-login (onCloseLogingEvent)="closeLoginForm($event)" *ngIf="login"></app-login>
     </div>
   </main>

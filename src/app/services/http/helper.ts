@@ -1,4 +1,4 @@
 
-const baseUrl = "https://porfolio-gmr.rj.r.appspot.com";
+const baseUrl = "https://guilty-lelah-gabusy07.koyeb.app/";
 export default baseUrl
 

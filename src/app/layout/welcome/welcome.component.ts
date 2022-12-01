@@ -2,6 +2,7 @@
 
 
 import {  Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 
@@ -12,7 +13,7 @@ import {  Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() {
+  constructor(private router: Router) {
     this.signIn = false;
     this.login = false;
    }
@@ -25,9 +26,12 @@ export class WelcomeComponent implements OnInit {
   }
 
   // llamada al hacer click en 'ingresar' abre formulario
-  enterHome(){
+  logIn(){
     this.login = true
     this.optionSelected = true;
+  }
+
+  goHome(){
   }
 
   

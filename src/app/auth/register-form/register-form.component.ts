@@ -80,7 +80,7 @@ export class RegisterFormComponent implements OnInit {
   private saveUser(u:User):void{
   //  llama al servicio que conecta con el servidor
     this._userHTTP.createUser(u).subscribe({
-      next: data => {
+      next: () => {
         swal({
           title: "Registrado!",
           text: "Usuario registrado con exito en la base de datos",
@@ -88,15 +88,14 @@ export class RegisterFormComponent implements OnInit {
           timer: 3000,
         })
     },
-      error: error => {
+      error: () => {
         swal({
           title: "Error!",
           text: "No se ha podido registrar el usuario",
           icon: "error",
           timer: 3000,
         });
-        alert()
-             setTimeout(() => window.location.reload(), 3500 );
+        setTimeout(() => window.location.reload(), 3500 );
       },
       complete: ()=>  this.logAfterRegister(u) //una vez hecho el registro logea al usuario para guardar el token
       //en local storage

@@ -27,6 +27,7 @@ export class ProfileInfoEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDescription();
+    console.log(this.namePhoto)
 }
 
    //---------------CRUD READ UPDATE-------------------
@@ -164,7 +165,7 @@ onEditText: boolean = true;
 form: FormGroup;
 title!:String;
 file!:any;
-namePhoto:String = "a";
+namePhoto:String = "";
 imageUrl!:String;
 isUploadingIncomplete!:boolean;
 

@@ -15,12 +15,13 @@ export class AsideComponent implements OnInit {
 
 
   constructor(private route: Router, private readonly httpSvc: UserService,private toastr:ToastrService
-     ) { }
+     ) {
+      this.isGuest = true;
+      }
 
   ngOnInit(): void {
     this.chargingDataUser()
-
-  
+    
   }
 
 showAsidebar(){
@@ -39,6 +40,7 @@ closingSidebar(){
 
 logout(){
   localStorage.removeItem('token');
+  localStorage.removeItem('roles')
 }
 
 
@@ -47,10 +49,14 @@ crud con servidor
 */
 
 chargingDataUser():void{
-
   this.httpSvc.getUser().subscribe({
-    next: data =>  this.user = data,
-    error: error => console.log (error),
+    next: data =>  {
+      this.user = data;
+      this.isGuest = false;
+    },
+    error: error => {
+      this.isGuest = true;
+      console.log (error)},
   });
 
 }
@@ -58,20 +64,18 @@ chargingDataUser():void{
 onDeleteUser(){
   if (confirm("seguro que deseas eliminar esta cuenta?")){
        this.httpSvc.deleteUser().subscribe({
-          next: data => this.toastr.success("exito", "usuario eliminado") ,
-          complete: ()=> {
-            this.route.navigate([''])
+          next: () => {
+            this.toastr.success("exito", "usuario eliminado")
             localStorage.removeItem('token')
+            localStorage.removeItem('roles')
+            this.route.navigate([''])
           }
-        })
+          }
+        )
 
   }
 
 }
-
-
-
-
 
 
 /*--------------------------------------------
@@ -82,6 +86,6 @@ visibilityOfSidebar=false; //estado actual de visibilidad
 activeVisibilityOfSidebar=true; // al hacer click en evento
 sidebar:string = "sidebar--closed"
 user:User = new User();
-
+isGuest!: boolean;
 
 }

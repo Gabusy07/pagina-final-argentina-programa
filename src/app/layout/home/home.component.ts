@@ -1,8 +1,5 @@
-import { AfterViewInit, Component, DoCheck, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'app/services/http/auth.service';
-import { StorageService } from 'app/services/storage.service';
-import swal from 'sweetalert';
+import {  Component, HostListener, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-home',
@@ -13,17 +10,12 @@ import swal from 'sweetalert';
 export class HomeComponent implements OnInit {
 
 
-  constructor(
-    private router: Router,
-    private readonly _authHTTP:AuthService,
-    ) {
-  }
-  
+  constructor() {}
 
+  
   ngOnInit(): void { 
     
   }
-
 
   
   changeColumnSide(){

@@ -14,8 +14,10 @@ import swal from 'sweetalert';
 })
 export class WelcomeComponent implements OnInit {
 
+
   constructor(private router: Router, private _authSvc: AuthService, private _localStorageSvc: StorageService) {
     this.signIn = false;
+
     this.login = false;
    }
   
@@ -24,8 +26,10 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   // llamada al hacer click en 'ingresar' abre formulario
   logIn(){
+
     this.login = true
     this.optionSelected = true;
   }
@@ -54,13 +58,16 @@ export class WelcomeComponent implements OnInit {
 
   // llamada al hacer click en 'registrar' abre formularip
   register () {
-    this.signIn = true;
+    this.signUp = true;
     this.optionSelected = true;
+  }
+
+  goHomeAsGuess(){
   }
 
 // cerrar formulario en el welcome a partir del atributo 'closedRegisterForm' del child 'RegisterForm-Component'
 closeRegisterForm($event: boolean){
-  this.signIn = $event;
+  this.signUp = $event;
   this.optionSelected = false
   
 }
@@ -75,7 +82,7 @@ closeLoginForm($event: boolean){
 
   // atributos para registrar y registrado
   optionSelected = false // desabilita los botones al abrir formulario
-  signIn : boolean;
+  signUp : boolean;
   login : boolean;
 
 }

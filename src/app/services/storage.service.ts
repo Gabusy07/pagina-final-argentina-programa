@@ -28,6 +28,11 @@ export class StorageService {
     return localStorage.getItem("roles");
   }
 
+  clearLocalStorage():void{
+    localStorage.removeItem("roles");
+    localStorage.removeItem("token")
+  }
+
  
   
 

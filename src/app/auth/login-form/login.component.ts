@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginSuccessGuard } from 'app/guards/login-success.guard';
 import { User } from 'app/model/User';
 import { AuthService } from 'app/services/http/auth.service';
 import { StorageService } from 'app/services/storage.service';
@@ -21,7 +20,6 @@ export class LoginComponent implements OnInit {
   constructor( private router: Router,
     private readonly formBuilder : FormBuilder,
     private readonly _authHTTP:AuthService,
-    private loginGuard:LoginSuccessGuard,
     private _storage: StorageService,
     private toastr:ToastrService) {
     this.openedForm = true;

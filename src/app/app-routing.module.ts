@@ -18,14 +18,13 @@ import { AdminRolGuard } from './guards/admin-rol.guard';
 
 const routes: Routes =[
   {path : '',  component : WelcomeComponent,},
-  {path : 'home', component : HomeComponent, canActivate:[LoginSuccessGuard]},
-  {path : 'about', component : AboutComponent, canActivate:[LoginSuccessGuard]},
-  {path : 'projects', component : ProjectsContainerComponent, canActivate:[LoginSuccessGuard]},
+  {path : 'home', component : HomeComponent, canActivate: [LoginSuccessGuard]},
+  {path : 'about', component : AboutComponent},
+  {path : 'projects', component : ProjectsContainerComponent},
   {path : 'profile', component : ProfileUserComponent, canActivate:[LoginSuccessGuard]},
   {path : 'admin/home', component : HomeEditComponent, canActivate:[AdminRolGuard]},
   {path : 'admin/about', component : AboutEditComponent, canActivate:[AdminRolGuard]},
   {path : 'admin/projects', component : ProjectsEditComponent, canActivate:[AdminRolGuard]},
-  
   {path: '**', component: ErrorPageComponent},
 
 ];

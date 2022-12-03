@@ -38,6 +38,10 @@ export class AuthService {
     return this.request.get<boolean>(this.urlLogin+"auth/guess", {headers}); 
   }
 
+  public guestToken():Observable<Token>{
+    return this.request.get<Token>(this.urlLogin+"auth/guest"); //devuelve respuesta con el token
+  }
+
   private getheader():HttpHeaders{
   
     const token:string = localStorage['token'];

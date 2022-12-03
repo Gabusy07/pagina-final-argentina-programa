@@ -1,9 +1,10 @@
 // pagina de bienvenida con opciones para ingresar o registrarse
 
-
 import {  Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { AuthService } from 'app/services/http/auth.service';
+import { StorageService } from 'app/services/storage.service';
+import swal from 'sweetalert';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private _authSvc: AuthService, private _localStorageSvc: StorageService) {
     this.signIn = false;
     this.login = false;
    }
@@ -21,8 +22,6 @@ export class WelcomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
-
   }
 
   // llamada al hacer click en 'ingresar' abre formulario
@@ -31,7 +30,24 @@ export class WelcomeComponent implements OnInit {
     this.optionSelected = true;
   }
 
+  
   goHome(){
+
+    let token: string =""
+    this._authSvc.guestToken().subscribe({
+      next: data => {
+        token = data.token
+        this._localStorageSvc.addTokenToStorage(token);
+        this.router.navigate(['home']);
+      },
+      error: ()=> swal({
+        title: "Servidor",
+        text: "No se ha podido conectar con el servidor\nPruebe mas tarde",
+        icon: "error",
+        timer: 3000,
+      })
+    });
+    ;
   }
 
   

@@ -23,12 +23,12 @@ export class DescriptionService {
     return this.request.get<Description[]>(this.url+"/read", {headers});
    }
 
-  deleteDescription(id:BigInt):Observable<object>{
+  deleteDescription(id:number):Observable<object>{
     const headers = this.getheader();
     return this.request.delete(this.url+"/delete/"+id)
    }
 
-  updateDescription(id:BigInt, editedDesc:Description):Observable<object>{
+  updateDescription(id:number, editedDesc:Description):Observable<object>{
     const headers = this.getheader();
     return this.request.patch(this.url+"/update/"+id, editedDesc, {headers})
    }

@@ -62,7 +62,7 @@ export class KnowledgesEditComponent implements OnInit {
     
   }
 
-  delLang(id: BigInt){
+  delLang(id: number){
     this.http_svc.deleteLanguage(id).subscribe({
       next: data => {
         swal({
@@ -93,7 +93,7 @@ export class KnowledgesEditComponent implements OnInit {
     });
   }
 
-  updateLang(id:BigInt, langEdited:Language):void{
+  updateLang(id:number, langEdited:Language):void{
     this.http_svc.updateLanguage(id, langEdited).subscribe({
       next: ()=> swal({
         title: "Guardado",

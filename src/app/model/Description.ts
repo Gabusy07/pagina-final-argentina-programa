@@ -7,7 +7,7 @@ export class Description {
         this.namePhoto = namePhoto;
     }
 
-    public id!: BigInt;
+    public id!: number;
     public text!: String;
     public title!: String;
     public photo!: String;

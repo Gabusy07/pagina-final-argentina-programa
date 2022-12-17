@@ -21,12 +21,12 @@ export class SkillService {
 
   }
 
-  deleteSkill(id:BigInt):  Observable<Object>{
+  deleteSkill(id:number):  Observable<Object>{
     const headers = this.getheader();
     return this.request.delete(this.url+"/delete/"+id, {headers})
   }
 
-  updateSkill(id:BigInt, skill: Skill): Observable<Object>{
+  updateSkill(id:number, skill: Skill): Observable<Object>{
     const headers = this.getheader();
     return this.request.patch(this.url+`/update/${id}`, skill, {headers});
   }

@@ -70,6 +70,10 @@
   font-weight: bold;
 }
 
+.box-img{
+
+  margin: 1px;
+}
 
 
 .portfolio-item {
@@ -149,11 +153,17 @@
   figure {
     margin: 0 0 1rem;
   }
-  
-  img,
-  svg {
-    vertical-align: middle;
+
+  .project-text{
+    visibility: hidden
   }
+
+  .portfolio-item:hover .project-text{
+    visibility:visible;
+  }
+  
+
+
   
 
 

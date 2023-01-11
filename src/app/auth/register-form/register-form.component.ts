@@ -68,11 +68,6 @@ export class RegisterFormComponent implements OnInit {
     this.saveUser(u);
   }
 
-  // cerrar formulario al presionar 'x/close'
-  public closingForm(){
-    this.openedForm = false;
-    this.onCloseRegisterEvent.emit(this.openedForm);
-  }
 
   //--------------------------------------------------------
   //CRUD

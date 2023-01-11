@@ -87,14 +87,15 @@ export class LoginComponent implements OnInit {
             else{
               this._storage.addTokenToStorage(token);
               this.toastr.info("cargando pagina...", "datos correctos");
-              this._authHTTP.isRolAdmin().subscribe({
+              this.router.navigate(['admin/home']);
+              /*this._authHTTP.isRolAdmin().subscribe({
                 next: data => { if(data){
                  this.router.navigate(['admin/home']);
                 }else{
                    this.router.navigate(['home']);
                 }
               }}
-             )
+             )*/
             }  
           }
         ,

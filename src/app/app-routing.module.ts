@@ -1,6 +1,6 @@
 
 import { NgModule } from '@angular/core';
-import {  RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from '@layout/about/about.component';
 import { ProjectsContainerComponent } from '@layout/home/projects-container/projects-container.component';
 
@@ -12,25 +12,30 @@ import { ProfileUserComponent } from './shared_/profile-user/profile-user.compon
 import { HomeEditComponent } from '@layout/admin/home-edit/home-edit.component';
 import { AboutEditComponent } from '@layout/admin/about-edit/about-edit.component';
 import { ProjectsEditComponent } from '@layout/admin/projects-edit/projects-edit.component';
-import { AdminRolGuard } from './guards/admin-rol.guard';
-
+import { RedirectGuard } from './guards/redirect.guard';
+import { RegisterFormComponent } from './auth/register-form/register-form.component';
+import { AdminUserGuard } from './guards/admin-user.guard';
 
 
 const routes: Routes =[
-  {path : '',  component : WelcomeComponent,},
+  {path: '',component: WelcomeComponent ,pathMatch: 'full', canActivate:[RedirectGuard]},
   {path : 'home', component : HomeComponent, canActivate: [LoginSuccessGuard]},
+  {path : 'register-template', component: RegisterFormComponent},
   {path : 'about', component : AboutComponent},
   {path : 'projects', component : ProjectsContainerComponent},
   {path : 'profile', component : ProfileUserComponent, canActivate:[LoginSuccessGuard]},
-  {path : 'admin/home', component : HomeEditComponent, canActivate:[AdminRolGuard]},
-  {path : 'admin/about', component : AboutEditComponent, canActivate:[AdminRolGuard]},
-  {path : 'admin/projects', component : ProjectsEditComponent, canActivate:[AdminRolGuard]},
+  {path : 'admin/home', component : HomeEditComponent, canActivate:[LoginSuccessGuard]},
+  {path : 'admin/about', component : AboutEditComponent, canActivate:[LoginSuccessGuard]},
+  {path : 'admin/projects', component : ProjectsEditComponent, canActivate:[LoginSuccessGuard]},
+  {path : 'register', component : RegisterFormComponent, canActivate:[AdminUserGuard]},
+
   {path: '**', component: ErrorPageComponent},
 
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

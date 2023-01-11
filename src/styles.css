@@ -47,9 +47,10 @@ p{
     color: var(--gray_letter);
 }
 
-body{
+html body{
     overflow-x: hidden;
     width: 99vw;
     height: 90rem;
-    
+    margin: 0;
+    padding: 0;
 }

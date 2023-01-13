@@ -3,12 +3,14 @@ export class Project {
     private linkProject: String;
     private id: number;
     private title: String;
+    private description:String;
 
-    constructor(id:number, title:String, linkProject:String, image:String){
+    constructor(id:number, title:String, linkProject:String, image:String, description:String){
         this.id=id;
         this.title = title;
         this.image=image;
-        this.linkProject=linkProject;    
+        this.linkProject=linkProject;  
+        this.description = description;  
     }
 
     public getID(): number | undefined {
@@ -17,6 +19,10 @@ export class Project {
 
     public getTitle(): String {
         return this.title;
+    }
+
+    public getDescription(): String {
+        return this.description;
     }
 
     public getImage(): String {

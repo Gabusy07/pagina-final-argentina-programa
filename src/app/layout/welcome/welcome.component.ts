@@ -50,14 +50,6 @@ export class WelcomeComponent implements OnInit {
     ;
   }
 
-  
-
-  // llamada al hacer click en 'registrar' abre formularip
-  register () {
-    this.signIn = true;
-    this.optionSelected = true;
-  }
-
 // cerrar formulario en el welcome a partir del atributo 'closedRegisterForm' del child 'RegisterForm-Component'
 closeRegisterForm($event: boolean){
   this.signIn = $event;

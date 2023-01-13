@@ -13,22 +13,27 @@ export class ProjectsService {
 
   //------------CRUD-------------
 
-  createExperience(project:Project):Observable<object>{
+  createProject(project:Project):Observable<object>{
     const headers = this.getheader();
     return this.request.post(this.url+"/add", project, {headers});
    }
 
-  readExperience():Observable<Project[]>{
+  readOneProject(id:number):Observable<Project>{
     const headers = this.getheader();
-    return this.request.get<Project[]>(this.url+"/read", {headers});
+    return this.request.get<Project>(this.url+`/data/{id}`, {headers});
    }
 
-  deleteExperience(id:number):Observable<object>{
+   getAllProjects():Observable<Project[]>{
+    const headers = this.getheader();
+    return this.request.get<Project[]>(this.url+"/all-data",{headers})
+   }
+
+  deleteProject(id:number):Observable<object>{
     const headers = this.getheader();
     return this.request.delete(this.url+"/delete/"+id)
    }
 
-  updateExperience(id:number, project:Project):Observable<object>{
+  updateProject(id:number, project:Project):Observable<object>{
     const headers = this.getheader()
     return this.request.patch(this.url+"/update/"+id, project, {headers})
    }
@@ -45,5 +50,5 @@ export class ProjectsService {
   }
 
   // ----------atributos---------
-  private url = `${baseUrl}/porfolio/home/workExperience`;
+  private url = `${baseUrl}/porfolio/project`;
 }

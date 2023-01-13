@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Project } from 'app/model/Project';
+import { ProjectsService } from 'app/services/http/projects.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -9,11 +11,17 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProjectsEditComponent implements OnInit {
 
-  constructor(private readonly formBuilder : FormBuilder, private toastr:ToastrService) {
+  constructor(
+     private readonly formBuilder : FormBuilder,
+     private toastr:ToastrService,
+     private readonly _ProjectsHTTP: ProjectsService
+    ) {
     this.form = this.initForm();
    }
 
   ngOnInit(): void {
+    this.getAllProjects();
+    console.log(this.projects)
   }
 
   //construccion del reactiveForm
@@ -63,10 +71,38 @@ export class ProjectsEditComponent implements OnInit {
 
   }
 
+  private createObjForList(list:Project[]):Project[][]{
+    let resultList:Project[][]=[]
+    for(let i=0; i<= list.length; i+=2){
+      if (i+1 > list.length){
+        break
+      }
+      if (i == list.length-1){
+        resultList.push([list[i]])
+        break
+      }
+      resultList.push([list[i], list[i+1]])
+    }
+    return resultList;
+  }
+
+
+  //---------------CRUD-----------------------
+
+  getAllProjects(){
+    let list:Project[] = []
+    this._ProjectsHTTP.getAllProjects().subscribe({
+      next: data => list = data
+      ,
+      error: error => console.log(error),
+      complete: ()=> this.projects = this.createObjForList(list)
+    })
+  }
 
   openForm:boolean = false;
   editPen:boolean = false;
   deleteTrash:boolean = false;
   form:FormGroup;
+  projects!:Project[][];
 
 }

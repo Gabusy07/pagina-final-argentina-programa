@@ -111,7 +111,7 @@ export class RegisterFormComponent implements OnInit {
         }else{
             localStorage.setItem("token",token);
             //this.loginGuard.isUserLogged()
-            setTimeout(()=> this.router.navigate(['home']), 500 )
+            setTimeout(()=> this.router.navigate(['admin/home']), 500 )
           }
         },
         error: error => {

@@ -1,14 +1,23 @@
-<section class="container-fluid row justify-content-around " id="projects_container">
-
-
-  <div class="container px-4 px-lg-5 projects">
+<section class="container-fluid " id="projects_container">
     <div class="content-section-heading text-center">
-        <h2 class="text-secondary mb-0">Portfolio</h2>
-        <h4 class="mb-5">Recent Projects</h4>
+        <h2 class="text-secondary mb-1">Proyectos</h2>
+        <h4 class="mb-5 text-danger">Lista de recientes</h4>
     </div>
-    <div class="row gx-2">
-        <div class="col-lg-6 box-img">
-            <a class="portfolio-item" href="#!">
+
+
+    <div *ngFor="let projectPares of projects">
+        <div *ngFor="let project of projectPares">
+            <p>{{project.getTitle}}</p>
+            <p>{{project.getID}}</p>
+        </div>
+    </div>
+
+
+    <!-- ________________________________________________________________________-->
+
+    <div class="row justify-content-around mt-6">
+        <div class="col-lg-5 box-img mb-2 mt-2">
+            <a class="portfolio-item" href="#!" (mouseover)="projectAlertMessage()">
                 <div class="caption">
                     <div class="caption-content">
                         <h2 class="">Stationary</h2>
@@ -18,7 +27,7 @@
                 <img class="img-fluid" src="assets/drug.webp" alt="..." />
             </a>
         </div>
-        <div class="col-lg-6 box-img">
+        <div class="col-lg-5 box-img mb-2 mt-2">
             <a class="portfolio-item" href="#!">
                 <div class="caption">
                     <div class="caption-content">
@@ -29,7 +38,9 @@
                 <img class="img-fluid" src="assets/drug.webp" alt="..." />
             </a>
         </div>
-        <div class="col-lg-6 box-img">
+    </div>
+    <div class="row justify-content-around">
+        <div class="col-lg-5 box-img mb-2 mt-2">
             <a class="portfolio-item" href="#!">
                 <div class="caption">
                     <div class="caption-content">
@@ -40,7 +51,7 @@
                 <img class="img-fluid" src="assets/todo.jpg" alt="..." />
             </a>
         </div>
-        <div class="col-lg-6 box-img">
+        <div class="col-lg-5 box-img mb-2 mt-2">
             <a class="portfolio-item" href="#!">
                 <div class="caption">
                     <div class="caption-content">
@@ -52,7 +63,6 @@
             </a>
         </div>
     </div>
-</div>
 
 
   <!-- <div class="card text-white bg-primary mb-3 card_container" (mouseover)="projectAlertMessage()" cdkDrag>

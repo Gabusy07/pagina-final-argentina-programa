@@ -5,7 +5,7 @@ export class Skill {
         
     }
 
-    public id!: BigInt
+    public id!: number;
     public name:String
 
 }

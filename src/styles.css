@@ -22,7 +22,6 @@
     --yellow: #f6c23e;
     --green: #1cc88a;
     --cyan: #36b9cc;
-    --white: #fff;
     --gray: #858796;
     --gray-dark: #5a5c69;
     --primary: #4e73df;
@@ -35,6 +34,7 @@
     --dark: #5a5c69;
     --font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --input-container-color: linear-gradient(to bottom, #2a2929, #21212b);
 }
 
 *{
@@ -48,9 +48,10 @@ p{
     color: var(--gray_letter);
 }
 
-body{
+html body{
     overflow-x: hidden;
     width: 99vw;
     height: 90rem;
-    
+    margin: 0;
+    padding: 0;
 }

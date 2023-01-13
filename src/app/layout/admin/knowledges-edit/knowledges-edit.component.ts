@@ -27,19 +27,19 @@ export class KnowledgesEditComponent implements OnInit {
   funciones dde conexion al servidor
   */
 
-  createObjForList(responseList: Language[]):void{
-    let list: Language[] = [];
-    for(let i=0; i<= responseList.length; i+=2){
-      if (i+1 > responseList.length){
-        return;
+  createObjForList(list: Language[]):Language[][]{
+    let resultList:Language[][]=[];
+    for(let i=0; i<= list.length; i+=2){
+      if (i+1 > list.length){
+        break
       }
-      if (i == responseList.length-1){
-        this.languages.push([responseList[i]])
-        return;
+      if (i == list.length-1){
+        resultList.push([list[i]])
+        break
       }
-      this.languages.push([responseList[i], responseList[i+1]])
+      resultList.push([list[i], list[i+1]])
     }
-   
+    return resultList;
   }
 
 
@@ -62,7 +62,7 @@ export class KnowledgesEditComponent implements OnInit {
     
   }
 
-  delLang(id: BigInt){
+  delLang(id: number){
     this.http_svc.deleteLanguage(id).subscribe({
       next: data => {
         swal({
@@ -79,8 +79,9 @@ export class KnowledgesEditComponent implements OnInit {
   }
 
   getAllLang():void{
+    let list:Language[];
     this.http_svc.getAll().subscribe({
-      next: data =>  this.resultGetAll = data,
+      next: data =>  list = data,
       error: error => swal({
         title: "Servidor",
         text: "No se ha podido conectar con el servidor",
@@ -89,11 +90,11 @@ export class KnowledgesEditComponent implements OnInit {
       }),
       /* asegura que la peticion al servidor se haya completado y llama a
       la funcion que carga en una nueva lista para mejor lectura en html */
-      complete: ()=> this.createObjForList(this.resultGetAll)
+      complete: ()=> this.languages = this.createObjForList(list)
     });
   }
 
-  updateLang(id:BigInt, langEdited:Language):void{
+  updateLang(id:number, langEdited:Language):void{
     this.http_svc.updateLanguage(id, langEdited).subscribe({
       next: ()=> swal({
         title: "Guardado",
@@ -165,7 +166,7 @@ export class KnowledgesEditComponent implements OnInit {
     const f = this.knwForm.value;
     //asegura que se hayan realizado cambios en form y sino guarda los antiguos
     let name = f.name? f.name.charAt(0).toUpperCase() + f.name.slice(1): oldLang.name;
-    let date = f.date? f.date: oldLang.date_start;
+    let date = f.date? f.date: oldLang.date;
     const lang = new Language(name, date);
     this.updateLang(oldLang.id, lang)
     window.location.reload();
@@ -197,7 +198,6 @@ export class KnowledgesEditComponent implements OnInit {
 
 
   languages: Language[][] = [];
-  resultGetAll: Language []=[];
   indexsDeleteLang: number[] =[NaN,NaN];
   indexsEditLang: number[] =[NaN,NaN];
   datePickerId: String;

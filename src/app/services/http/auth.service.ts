@@ -42,6 +42,10 @@ export class AuthService {
     return this.request.get<Token>(this.urlLogin+"auth/guest"); //devuelve respuesta con el token
   }
 
+  public existsAdmin():Observable<boolean>{
+    return this.request.get<boolean>(this.urlLogin+"doesExistAdmin"); 
+  }
+
   private getheader():HttpHeaders{
   
     const token:string = localStorage['token'];

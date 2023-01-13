@@ -56,7 +56,7 @@ chargingDataUser():void{
     },
     error: error => {
       this.isGuest = true;
-      console.log (error)},
+      },
   });
 
 }

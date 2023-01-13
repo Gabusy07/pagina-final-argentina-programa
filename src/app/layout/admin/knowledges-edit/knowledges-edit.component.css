@@ -70,9 +70,10 @@
   }
 
   #form{
-    background-color: var(--orange);
+    background: var(--input-container-color);
+    color: aliceblue;
     z-index: var(--highest-z-index);
-    opacity: .9;
+    opacity: .95;
     border-radius: 2.5%;
     padding: 5%;
     box-shadow: var(--boxes-shadow);

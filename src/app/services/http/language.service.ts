@@ -15,11 +15,11 @@ export class LanguageService {
     return this.request.post<Language>(this.url+"/add", lang);
   }
 
-  deleteLanguage(id:BigInt):  Observable<Object>{
+  deleteLanguage(id:number):  Observable<Object>{
     return this.request.delete(this.url+"/delete/"+id)
   }
 
-  updateLanguage(id:BigInt, lang:Language): Observable<Object>{
+  updateLanguage(id:number, lang:Language): Observable<Object>{
     return this.request.patch(this.url+`/update/${id}`, lang);
   }
 

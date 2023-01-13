@@ -68,11 +68,6 @@ export class RegisterFormComponent implements OnInit {
     this.saveUser(u);
   }
 
-  // cerrar formulario al presionar 'x/close'
-  public closingForm(){
-    this.openedForm = false;
-    this.onCloseRegisterEvent.emit(this.openedForm);
-  }
 
   //--------------------------------------------------------
   //CRUD
@@ -116,7 +111,7 @@ export class RegisterFormComponent implements OnInit {
         }else{
             localStorage.setItem("token",token);
             //this.loginGuard.isUserLogged()
-            setTimeout(()=> this.router.navigate(['home']), 500 )
+            setTimeout(()=> this.router.navigate(['admin/home']), 500 )
           }
         },
         error: error => {

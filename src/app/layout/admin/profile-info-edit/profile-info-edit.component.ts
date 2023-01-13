@@ -35,7 +35,7 @@ export class ProfileInfoEditComponent implements OnInit {
   private getDescription():void{
     this.descHttpSvc.readDescription().subscribe({
       next: data =>  {
-        this.id= BigInt(1);
+        this.id= 1;
         this.text= data[0].text;
         this.title = data[0].title;
         this.imageUrl = data[0].photo;
@@ -45,7 +45,7 @@ export class ProfileInfoEditComponent implements OnInit {
   }
 
 
-  private updateDescription(id:BigInt, desc:Description):void{
+  private updateDescription(id:number, desc:Description):void{
     this.descHttpSvc.updateDescription(id, desc).subscribe({
       error: error => console.log(error)
     })
@@ -158,7 +158,7 @@ export class ProfileInfoEditComponent implements OnInit {
 
 //--------------atributos------------
 
-id!:BigInt;
+id!:number;
 text!: String;
 editPhoto: boolean = true;
 onEditText: boolean = true;

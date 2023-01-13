@@ -70,7 +70,7 @@ export class SkillsEditComponent implements OnInit {
 
    }
 
-   private deleteSkill(id:BigInt):void{
+   private deleteSkill(id:number):void{
     this.skillSvc.deleteSkill(id).subscribe({
       next: data=> console.log(data),
       error: error => this.toastr.error("No se han podido completar la acción", "error")
@@ -78,7 +78,7 @@ export class SkillsEditComponent implements OnInit {
 
    }
 
-   private updateSkill(id:BigInt, editedSkill: Skill):void{
+   private updateSkill(id:number, editedSkill: Skill):void{
     this.skillSvc.updateSkill(id, editedSkill).subscribe({
       next: ()=> this.toastr.success("", "Guardado"),
       error: error => this.toastr.error("No se han guardado los cambios", "error")
@@ -129,7 +129,7 @@ export class SkillsEditComponent implements OnInit {
 
   }
 
-  onDeleteButtom(index:number, id:BigInt):void{  //funcion en html, llama a funcion crud
+  onDeleteButtom(index:number, id:number):void{  //funcion en html, llama a funcion crud
 
     if (confirm("seguro quieres eliminar "+this.listOfSkills[index].name+"?")){
       this.deleteSkill(id);
@@ -138,7 +138,7 @@ export class SkillsEditComponent implements OnInit {
 
   }
 
-  onEditButtom(index:number, id:BigInt):void{  //llama a funcion crud. Los argumentos son los indices de la lista de pares y el id del obj
+  onEditButtom(index:number, id:number):void{  //llama a funcion crud. Los argumentos son los indices de la lista de pares y el id del obj
     
     let editedName: any = document.getElementById(index+'div')?.innerText.toString();
     editedName == undefined? " ": editedName;

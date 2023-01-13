@@ -6,7 +6,7 @@
       <h1 style="color: green">Conocimientos</h1>
     </div>
     
-    <small><b>  años de estudio</b></small><br>
+    <small><b> Años de experiencia</b></small><br>
 
     <div class="d-flex justify-content-between"> <!--parte superior-->
 
@@ -52,7 +52,7 @@
 
  <div *ngIf="openKnwForm" cdkDrag id="form">
     <form [formGroup]="knwForm">
-        <button *ngIf="openKnwForm" type="button" class="btn-close" id="close_button" aria-label="Close" (click)="onCloseKnwForm()"></button>
+        <button *ngIf="openKnwForm" type="button" class="btn-close bg-light" id="close_button" aria-label="Close" (click)="onCloseKnwForm()"></button>
         <div class="form-group-row elementP div">
             <label class="col-sm-2 col-form-label">Lenguaje:</label>
             <div class="col-sm-15">

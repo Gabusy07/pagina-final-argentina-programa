@@ -27,8 +27,12 @@ export class UserService {
 
   getUser():Observable<User>{
     const headers = this.getheader();
-    return this.request.get<User>(this.url+"/data", {headers});
-    
+    return this.request.get<User>(this.url+"/data", {headers}); 
+  }
+
+  getAllUsers():Observable<User>{
+    const headers = this.getheader();
+    return this.request.get<User>(this.url+"/all"); 
   }
 
   updateUser( u:User):Observable<object>{

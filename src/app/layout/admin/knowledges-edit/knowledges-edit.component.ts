@@ -44,6 +44,8 @@ export class KnowledgesEditComponent implements OnInit {
 
 
   addLang(lang:Language){
+    console.log(lang)
+    alert()
     this.http_svc.createLanguage(lang).subscribe({
       next: ()=> swal({
         title: "Carga exitosa",
@@ -165,7 +167,7 @@ export class KnowledgesEditComponent implements OnInit {
     const f = this.knwForm.value;
     //asegura que se hayan realizado cambios en form y sino guarda los antiguos
     let name = f.name? f.name.charAt(0).toUpperCase() + f.name.slice(1): oldLang.name;
-    let date = f.date? f.date: oldLang.date_start;
+    let date = f.date? f.date: oldLang.date;
     const lang = new Language(name, date);
     this.updateLang(oldLang.id, lang)
     window.location.reload();

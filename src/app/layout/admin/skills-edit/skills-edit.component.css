@@ -89,10 +89,11 @@
 }
 
 #form_skills{
+    background: var(--input-container-color);
+    color: aliceblue;
     position: absolute;
     top: -15%;
     right: 1rem;
-    background-color: var(--orange);
     opacity: .9;
     border-radius: 2.5%;
     max-width: 20rem;

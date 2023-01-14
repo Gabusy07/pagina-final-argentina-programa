@@ -74,7 +74,6 @@
     margin: 1px;
   }
   
-  
   .portfolio-item {
       display: block;
       position: relative;
@@ -135,8 +134,8 @@
       }
       .portfolio-item:hover .caption {
         background-color: rgba(29, 128, 159, 0.9);
-        -webkit-clip-path: inset(2rem);
-                clip-path: inset(2rem);
+        -webkit-clip-path: inset(1rem);
+                clip-path: inset(1rem);
       }
     }
   

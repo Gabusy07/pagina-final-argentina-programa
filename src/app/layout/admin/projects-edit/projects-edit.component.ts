@@ -21,7 +21,6 @@ export class ProjectsEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProjects();
-    console.log(this.projects)
   }
 
   //construccion del reactiveForm
@@ -95,10 +94,14 @@ export class ProjectsEditComponent implements OnInit {
       next: data => list = data
       ,
       error: error => console.log(error),
-      complete: ()=> this.projects = this.createObjForList(list)
+      complete: ()=> {
+        this.projects = this.createObjForList(list);
+        this.listProjectChargeComplete = true;
+      }
     })
   }
 
+  listProjectChargeComplete:boolean = false;
   openForm:boolean = false;
   editPen:boolean = false;
   deleteTrash:boolean = false;

@@ -4,11 +4,12 @@
         <h4 class="mb-5 text-danger">Lista de recientes</h4>
     </div>
 
-
-    <div *ngFor="let projectPares of projects">
-        <div *ngFor="let project of projectPares">
-            <p>{{project.getTitle}}</p>
-            <p>{{project.getID}}</p>
+    <div *ngIf="listProjectChargeComplete">
+        <div *ngFor="let projectPares of projects">
+            <div *ngFor="let project of projectPares">
+                <p>{{project.getTitle}}</p>
+                <p>{{project.getID}}</p>
+            </div>
         </div>
     </div>
 

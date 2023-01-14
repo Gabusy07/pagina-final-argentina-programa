@@ -4,63 +4,18 @@
         <h4 class="mb-5 text-danger">Lista de recientes</h4>
     </div>
 
-    <div *ngIf="listProjectChargeComplete">
-        <div *ngFor="let projectPares of projects">
-            <div *ngFor="let project of projectPares">
-                <p>{{project.getTitle}}</p>
-                <p>{{project.getID}}</p>
-            </div>
-        </div>
-    </div>
-
-
     <!-- ________________________________________________________________________-->
 
-    <div class="row justify-content-around mt-6">
-        <div class="col-lg-5 box-img mb-2 mt-2">
+    <div *ngFor="let projectPares of projects" class="row justify-content-around mt-6">
+        <div *ngFor="let project of projectPares" class="col-lg-5 box-img mb-2 mt-2">
             <a class="portfolio-item" href="#!" (mouseover)="projectAlertMessage()">
                 <div class="caption">
                     <div class="caption-content">
-                        <h2 class="">Stationary</h2>
-                        <p class="project-text">A yellow pencil with envelopes on a clean, blue backdrop!</p>
+                        <p class="text-md text-light">{{project.title}}</p>
+                        <p class="text-xl project-text">{{project.description}}</p>
                     </div>
                 </div>
-                <img class="img-fluid" src="assets/drug.webp" alt="..." />
-            </a>
-        </div>
-        <div class="col-lg-5 box-img mb-2 mt-2">
-            <a class="portfolio-item" href="#!">
-                <div class="caption">
-                    <div class="caption-content">
-                        <h2 class="">Ice Cream</h2>
-                        <p class="project-text">A dark blue background with a colored pencil, a clip, and a tiny ice cream cone!</p>
-                    </div>
-                </div>
-                <img class="img-fluid" src="assets/drug.webp" alt="..." />
-            </a>
-        </div>
-    </div>
-    <div class="row justify-content-around">
-        <div class="col-lg-5 box-img mb-2 mt-2">
-            <a class="portfolio-item" href="#!">
-                <div class="caption">
-                    <div class="caption-content">
-                        <h2 class="">Strawberries</h2>
-                        <p class="project-text">Strawberries are such a tasty snack, especially with a little sugar on top!</p>
-                    </div>
-                </div>
-                <img class="img-fluid" src="assets/todo.jpg" alt="..." />
-            </a>
-        </div>
-        <div class="col-lg-5 box-img mb-2 mt-2">
-            <a class="portfolio-item" href="#!">
-                <div class="caption">
-                    <div class="caption-content">
-                        <h2 class="">Workspace</h2>
-                        <p class="project-text">A yellow workspace with some scissors, pencils, and other objects.</p>
-                    </div>
-                </div>
-                <img class="img-fluid img" src="assets/todo.jpg" alt="..." />
+                <img class="img-fluid" src="assets/drug.webp" alt={{project.title}} imagen />
             </a>
         </div>
     </div>

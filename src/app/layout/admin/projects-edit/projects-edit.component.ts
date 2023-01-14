@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Project } from 'app/model/Project';
 import { ProjectsService } from 'app/services/http/projects.service';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +14,7 @@ export class ProjectsEditComponent implements OnInit {
 
   constructor(
      private readonly formBuilder : FormBuilder,
+     private route:ActivatedRoute,
      private toastr:ToastrService,
      private readonly _ProjectsHTTP: ProjectsService
     ) {
@@ -20,7 +22,8 @@ export class ProjectsEditComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getAllProjects();
+    let listProjects: Project[] = this.route.snapshot.data['data'];
+    this.projects = this.createObjForList(listProjects);
   }
 
   //construccion del reactiveForm
@@ -88,20 +91,7 @@ export class ProjectsEditComponent implements OnInit {
 
   //---------------CRUD-----------------------
 
-  getAllProjects(){
-    let list:Project[] = []
-    this._ProjectsHTTP.getAllProjects().subscribe({
-      next: data => list = data
-      ,
-      error: error => console.log(error),
-      complete: ()=> {
-        this.projects = this.createObjForList(list);
-        this.listProjectChargeComplete = true;
-      }
-    })
-  }
 
-  listProjectChargeComplete:boolean = false;
   openForm:boolean = false;
   editPen:boolean = false;
   deleteTrash:boolean = false;

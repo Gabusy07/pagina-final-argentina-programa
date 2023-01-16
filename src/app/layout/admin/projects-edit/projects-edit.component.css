@@ -1,3 +1,10 @@
+#comp-container{
+  position: relative;
+  margin-left: 5%;
+  margin-right: 0%;
+  
+}
+
 #projects_container{
     border: 1.5px solid rgba(0, 0, 0, .25) ;
     border-radius: 2%;
@@ -13,6 +20,51 @@
     color: white;
 }
 
+.pen{
+  position: absolute;
+  cursor: pointer;
+}
+
+
+.pen:hover{
+  scale: 1.2;
+  transition-delay: .09s;
+  transform: translateY(-5px);
+  filter: brightness(.75);
+}
+#add_square{
+  margin: auto 25%;
+  height: 2rem;
+  width: 2rem;
+  font-size: 2rem;
+  transition: font-size filter .25s;
+}
+
+#add_square:hover{
+  font-size: 2.5rem;
+  filter: brightness(1.1)
+}
+
+
+#edit_pen{
+  right: 10%;
+  top: -15%;
+
+}
+#delete_trash{
+  right: 5%;
+  top: -15%;
+}
+
+#form{
+  background: var(--input-container-color);
+  color: aliceblue;
+  z-index: var(--highest-z-index);
+  opacity: .95;
+  border-radius: 2.5%;
+  padding: 5%;
+  box-shadow: var(--boxes-shadow);
+}
 
 .card_container::after{
     content: "";

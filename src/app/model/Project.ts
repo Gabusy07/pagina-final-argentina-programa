@@ -1,7 +1,7 @@
 export class Project {
     public image: String;
     public linkProject: String;
-    private id: number;
+    public id: number;
     public title: String;
     public description:String;
 
@@ -11,10 +11,6 @@ export class Project {
         this.image=image;
         this.linkProject=linkProject;  
         this.description = description;  
-    }
-
-    public getID():number{
-        return this.id;
     }
 
 }

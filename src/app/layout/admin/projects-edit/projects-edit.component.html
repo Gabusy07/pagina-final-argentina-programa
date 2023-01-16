@@ -6,18 +6,62 @@
 
     <!-- ________________________________________________________________________-->
 
-    <div *ngFor="let projectPares of projects" class="row justify-content-around mt-6">
-        <div *ngFor="let project of projectPares" class="col-lg-5 box-img mb-2 mt-2">
-            <a class="portfolio-item" href="#!" (mouseover)="projectAlertMessage()">
-                <div class="caption">
-                    <div class="caption-content">
-                        <p class="text-md text-light">{{project.title}}</p>
-                        <p class="text-xl project-text">{{project.description}}</p>
+    <div id="comp_container" *ngIf="projects.length > 0; else noDataTemplate">
+        <div *ngFor="let projectPares of projects, let i = index" class="row justify-content-around mt-6">
+            <div *ngFor="let project of projectPares let j = index" class="col-lg-5 box-img mb-3 mt-3 position-relative">
+                <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen(i, j)"></i>
+                <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash(i, j)"></i>
+                <a class="portfolio-item" href="#!" (mouseover)="projectAlertMessage()">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <p class="text-md text-light">{{ project.title }}</p>
+                            <p class="text-xl project-text">{{ project.description }}</p>
+                        </div>
                     </div>
-                </div>
-                <img class="img-fluid" src="assets/drug.webp" alt={{project.title}} imagen />
-            </a>
+                    <img class="img-fluid" src="assets/drug.webp" alt={{project.title}} imagen />
+                </a>
+                <form [formGroup]="form">
+                    <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="title" class="form-control m-2 w-75"  type="text" [placeholder]="project.title" [value]="project.title" formControlName="title">
+                    <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="description" class="form-control m-2 w-75"  type="text" [placeholder]="project.description" [value]="project.description" formControlName="description">
+                    
+                </form>
+                <button *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" class="btn btn-warning m-1 w-75" (click)="onEditButtom(i, j)" >editar</button>
+                <button *ngIf="deleteTrash && i ==indexsDeleteProject[0] && j == indexsDeleteProject[1]" class="btn btn-danger w-75" (click)="onDeleteButtom(i,j)">eliminar</button>
+            </div>
         </div>
+    </div>
+    <ng-template #noDataTemplate>
+        <app-no-data-template></app-no-data-template>
+    </ng-template>
+
+    <!--form-->
+
+    <i class="bi bi-plus-square text-dark" id="add_square" (click)="onAddSquare()" *ngIf="!openForm"></i>
+
+    <div *ngIf="openForm" cdkDrag id="form">
+        <form [formGroup]="form">
+            <button *ngIf="openForm" type="button" class="btn-close bg-light" id="close_button" aria-label="Close" (click)="onCloseForm()"></button>
+            <div class="form-group-row elementP div">
+                <label class="col-sm-2 col-form-label">Proyecto:</label>
+                <div class="col-sm-15">
+                    <input [ngClass]="{'is-invalid' : Title?.errors && Title?.touched, 'is-valid' : !Title?.errors && Title?.touched}" class="form-control w-75"  type="text" formControlName="title" >
+               </div>
+               <label class="col-sm-2 col-form-label">Descripción:</label>
+                <div class="col-sm-15">
+                    <input [ngClass]="{'is-invalid' : Description?.errors && Description?.touched, 'is-valid' : !Description?.errors && Description?.touched}" class="form-control w-75"  type="text" formControlName="description" >
+               </div>
+
+               <label class="col-sm-2 col-form-label">url imagen:</label>
+                <div class="col-sm-15">
+                    <input [ngClass]="{'is-invalid' : Image?.errors && Image?.touched, 'is-valid' : !Image?.errors && Image?.touched}" class="form-control w-75" type="text" formControlName="image" >
+               </div>
+               <label class="col-sm-2 col-form-label">Link:</label>
+                <div class="col-sm-15">
+                    <input [ngClass]="{'is-invalid' : LinkProject?.errors && LinkProject?.touched, 'is-valid' : !LinkProject?.errors && LinkProject?.touched}" class="form-control w-75"  type="text" formControlName="linkProject" >
+               </div>
+               <input type="submit" class="btn btn-primary mt-2" (click)="submitForm()" [disabled]="form.invalid">
+            </div>
+        </form>
     </div>
 
 

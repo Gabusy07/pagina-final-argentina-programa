@@ -117,7 +117,7 @@ export class ProjectsEditComponent implements OnInit {
     let description = f.description? f.description: oldProject.description;
     let linkProject = f.linkProject? f.linkProject: oldProject.linkProject;
     const project = new Project(NaN, title, linkProject, image, description);
-    //this.updateLang(oldLang.id, lang)
+    this.updateProject(oldProject.id, project)
     window.location.reload();
 
   }

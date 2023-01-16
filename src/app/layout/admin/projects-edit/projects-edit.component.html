@@ -23,7 +23,8 @@
                 <form [formGroup]="form">
                     <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="title" class="form-control m-2 w-75"  type="text" [placeholder]="project.title" [value]="project.title" formControlName="title">
                     <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="description" class="form-control m-2 w-75"  type="text" [placeholder]="project.description" [value]="project.description" formControlName="description">
-                    
+                    <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="image" class="form-control m-2 w-75"  type="text" [placeholder]="project.image" [value]="project.image" formControlName="image">
+                    <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="linkProject" class="form-control m-2 w-75"  type="text" [placeholder]="project.linkProject" [value]="project.linkProject" formControlName="linkProject">  
                 </form>
                 <button *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" class="btn btn-warning m-1 w-75" (click)="onEditButtom(i, j)" >editar</button>
                 <button *ngIf="deleteTrash && i ==indexsDeleteProject[0] && j == indexsDeleteProject[1]" class="btn btn-danger w-75" (click)="onDeleteButtom(i,j)">eliminar</button>

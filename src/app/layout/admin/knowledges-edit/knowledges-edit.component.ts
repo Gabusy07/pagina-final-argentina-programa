@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Language } from 'app/model/Language';
-import { LanguageService } from 'app/services/http/language.service';
+import { Knowledge } from 'app/model/Knowledge';
+import { KnowledgeService } from 'app/services/http/Knowledge.service';
 import swal from 'sweetalert';
 
 @Component({
@@ -11,7 +11,7 @@ import swal from 'sweetalert';
 })
 export class KnowledgesEditComponent implements OnInit {
 
-  constructor(private readonly formBuilder : FormBuilder, private readonly http_svc: LanguageService) {
+  constructor(private readonly formBuilder : FormBuilder, private readonly http_svc: KnowledgeService) {
 
     this.datePickerId =new Date().toISOString().substring(0, 10);
     this.knwForm = this.initKnwForm();
@@ -19,7 +19,7 @@ export class KnowledgesEditComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getAllLang();
+    this.getAllKnws();
 
   }
 
@@ -27,8 +27,8 @@ export class KnowledgesEditComponent implements OnInit {
   funciones dde conexion al servidor
   */
 
-  createObjForList(list: Language[]):Language[][]{
-    let resultList:Language[][]=[];
+  createObjForList(list: Knowledge[]):Knowledge[][]{
+    let resultList:Knowledge[][]=[];
     for(let i=0; i<= list.length; i+=2){
       if (i+1 > list.length){
         break
@@ -43,8 +43,8 @@ export class KnowledgesEditComponent implements OnInit {
   }
 
 
-  addLang(lang:Language){
-    this.http_svc.createLanguage(lang).subscribe({
+  addLang(knw:Knowledge){
+    this.http_svc.createKnowledge(knw).subscribe({
       next: ()=> swal({
         title: "Carga exitosa",
         text: "",
@@ -62,8 +62,8 @@ export class KnowledgesEditComponent implements OnInit {
     
   }
 
-  delLang(id: number){
-    this.http_svc.deleteLanguage(id).subscribe({
+  delKnowledge(id: number){
+    this.http_svc.deleteKnowledge(id).subscribe({
       next: data => {
         swal({
           title: "Borrado exitoso",
@@ -78,8 +78,8 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
-  getAllLang():void{
-    let list:Language[];
+  getAllKnws():void{
+    let list:Knowledge[];
     this.http_svc.getAll().subscribe({
       next: data =>  list = data,
       error: error => swal({
@@ -90,12 +90,12 @@ export class KnowledgesEditComponent implements OnInit {
       }),
       /* asegura que la peticion al servidor se haya completado y llama a
       la funcion que carga en una nueva lista para mejor lectura en html */
-      complete: ()=> this.languages = this.createObjForList(list)
+      complete: ()=> this.knowledges = this.createObjForList(list)
     });
   }
 
-  updateLang(id:number, langEdited:Language):void{
-    this.http_svc.updateLanguage(id, langEdited).subscribe({
+  updateKnw(id:number, knwEdited:Knowledge):void{
+    this.http_svc.updateKnowledge(id, knwEdited).subscribe({
       next: ()=> swal({
         title: "Guardado",
         text: "Datos guardados con exito",
@@ -138,7 +138,7 @@ export class KnowledgesEditComponent implements OnInit {
   submitAddForm(){
     const f = this.knwForm.value;
     let name = f.name.charAt(0).toUpperCase() + f.name.slice(1);;
-    const lang = new Language(name, f.date);
+    const lang = new Knowledge(name, f.date);
     this.addLang(lang)
     this.openKnwForm = false;
   }
@@ -146,7 +146,7 @@ export class KnowledgesEditComponent implements OnInit {
 
   onEditPen(i:number, j:number):void{
     
-    this.indexsEditLang = [i, j];
+    this.indexsEditKnw = [i, j];
     this.editPen = !this.editPen
     this.deleteTrash = false;
 
@@ -154,7 +154,7 @@ export class KnowledgesEditComponent implements OnInit {
 
 
   onDeleteTrash(i:number, j:number):void{
-    this.indexsDeleteLang = [i, j];
+    this.indexsDeleteKnw = [i, j];
     this.deleteTrash = !this.deleteTrash;
     this.editPen = false;
 
@@ -162,20 +162,20 @@ export class KnowledgesEditComponent implements OnInit {
 
   onEditButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
     
-    const oldLang = this.languages[i][j]
+    const oldLang = this.knowledges[i][j]
     const f = this.knwForm.value;
     //asegura que se hayan realizado cambios en form y sino guarda los antiguos
     let name = f.name? f.name.charAt(0).toUpperCase() + f.name.slice(1): oldLang.name;
     let date = f.date? f.date: oldLang.date;
-    const lang = new Language(name, date);
-    this.updateLang(oldLang.id, lang)
+    const lang = new Knowledge(name, date);
+    this.updateKnw(oldLang.id, lang)
     window.location.reload();
 
   }
 
   onDeleteButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
     
-    this.delLang(this.languages[i][j].id);
+    this.delKnowledge(this.knowledges[i][j].id);
     window.location.reload();
 
   }
@@ -197,9 +197,9 @@ export class KnowledgesEditComponent implements OnInit {
   }
 
 
-  languages: Language[][] = [];
-  indexsDeleteLang: number[] =[NaN,NaN];
-  indexsEditLang: number[] =[NaN,NaN];
+  knowledges: Knowledge[][] = [];
+  indexsDeleteKnw: number[] =[NaN,NaN];
+  indexsEditKnw: number[] =[NaN,NaN];
   datePickerId: String;
   openKnwForm:boolean = false;
   editPen:boolean = false;

@@ -75,9 +75,6 @@ export class ProfileInfoEditComponent implements OnInit {
       this.onEditText = !this.onEditText;
   }
 
-  onSubmitText(){
-
-  }
 
   /*  -----------------------------
   para cambiar la foto de perfil*/
@@ -88,11 +85,11 @@ export class ProfileInfoEditComponent implements OnInit {
 
   uploadImg($e:any){
     const file = $e.target.files[0];
-    if(this.isFileValid(file)){
+    if(this.imgSvc.isFileValid(file)){
       if (confirm("deseas subir este archivo?")){
         this.isUploadingIncomplete = true;
-        const fileRef = this.imgSvc.getRef(file.name)
-        const task = this.imgSvc.uploadFile(file);
+        const fileRef = this.imgSvc.getRef(file.name, "images/")
+        const task = this.imgSvc.uploadFile(file, "images/");
         this.namePhoto = file.name;
         this.uploadPercent = task.percentageChanges();
         this.uploadPercent.subscribe(
@@ -128,7 +125,7 @@ export class ProfileInfoEditComponent implements OnInit {
 
   onDeletePhoto():void{
     this.editPhoto = !this.editPhoto;
-    const task = this.imgSvc.deleteFile(this.namePhoto)
+    const task = this.imgSvc.deleteFile(this.namePhoto, "images/")
     task.suscribe()
     this.imageUrl = "#";
     this.namePhoto = "";
@@ -138,23 +135,6 @@ export class ProfileInfoEditComponent implements OnInit {
     setTimeout(()=> this.loading.hide(), 2000)
   }
 
-
-
-  private isFileValid(file:any):boolean{
-    //verifica que el archivo seleccionado sea img
-    //EXTENSIONES PERMITIDO.
-      var ext_availables = [".png", ".bmp", ".jpg", ".jpeg", ".svg"];
-      var route = file.name;
-      var last_dot = file.name.lastIndexOf(".");
-      var extension = route.slice(last_dot, route.length);
-      if(ext_availables.indexOf(extension) == -1)
-      {
-          this.toastr.warning("las imagenes solo pueden ser png, bmb, jpg , jpeg o svg","archivo no válido");
-          file.name = "";
-          return false;
-      }
-      return true;
-  }
 
 //--------------atributos------------
 
@@ -168,7 +148,6 @@ file!:any;
 namePhoto:String = "";
 imageUrl!:String;
 isUploadingIncomplete!:boolean;
-
 uploadPercent!: Observable<any>;
 downloadURL!: Observable<string>;
 

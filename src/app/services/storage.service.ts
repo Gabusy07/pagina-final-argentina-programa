@@ -33,11 +33,6 @@ export class StorageService {
     localStorage.removeItem("token")
   }
 
- 
-  
-
- 
-
 
 
 user:User = new User()

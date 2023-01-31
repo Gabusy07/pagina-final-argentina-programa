@@ -30,6 +30,6 @@ export class KnowledgeService {
   /*-----------------------------------------
   atributos
   */
-  private url = `${baseUrl}/porfolio/languages`;
+  private url = `${baseUrl}/porfolio/knowledges`;
 
 }

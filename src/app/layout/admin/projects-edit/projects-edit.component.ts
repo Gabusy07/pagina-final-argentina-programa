@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from 'app/model/Project';
+import { FilesService } from 'app/services/files.service';
 import { ProjectsService } from 'app/services/http/projects.service';
+import { FirebaseStorage } from 'firebase/storage';
 import { ToastrService } from 'ngx-toastr';
+import { finalize, Observable } from 'rxjs';
 import swal from 'sweetalert';
 
 @Component({
@@ -17,7 +20,8 @@ export class ProjectsEditComponent implements OnInit {
      private readonly formBuilder : FormBuilder,
      private route:ActivatedRoute,
      private toastr:ToastrService,
-     private readonly _ProjectsHTTP: ProjectsService
+     private readonly _ProjectsHTTP: ProjectsService,
+     private imgSvc: FilesService
     ) {
     this.openForm = false;
     this.editPen = false;
@@ -25,6 +29,7 @@ export class ProjectsEditComponent implements OnInit {
     this.form = this.initForm();
     this.indexsDeleteProject = [NaN,NaN];
     this.indexsEditProject = [NaN,NaN];
+    this.flexRadioDefault1 = document.getElementById("flexRadioDefault1")
    }
 
   ngOnInit(): void {
@@ -42,7 +47,9 @@ export class ProjectsEditComponent implements OnInit {
       title: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
       image: [''],
       description: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-      linkProject: ['',[Validators.required]]
+      linkProject: ['',[Validators.required, Validators.pattern('')]],
+      enabled: [''],
+      disabled: ['']
     })
 
   }
@@ -68,6 +75,16 @@ export class ProjectsEditComponent implements OnInit {
 
   }
 
+  get Enabled (){
+    return this.form.get('enabled');
+
+  }
+
+  get Disabled (){
+    return this.form.get('disabled');
+
+  }
+
 
   onAddSquare():void{
     this.openForm =true;
@@ -81,8 +98,12 @@ export class ProjectsEditComponent implements OnInit {
 
   submitForm(){
     this.openForm = false;
+    let title:String;
+    let enabled: boolean;
     const f = this.form.value;
-    const project = new Project(NaN, f.title, f.linkProject, f.image, f.description)
+    title = f.title? f.title: "sin titulo";
+    enabled = f.enabled == "SI"? true: false;
+    const project = new Project(NaN, title, f.linkProject, this.imageUrl, f.description, enabled)
     this.addProject(project)
   }
 
@@ -116,7 +137,8 @@ export class ProjectsEditComponent implements OnInit {
     let image = f.image? f.image: oldProject.image;
     let description = f.description? f.description: oldProject.description;
     let linkProject = f.linkProject? f.linkProject: oldProject.linkProject;
-    const project = new Project(NaN, title, linkProject, image, description);
+    let enabled = f.enabled? f.enabled: oldProject.enabled;
+    const project = new Project(NaN, title, linkProject, image, description, enabled);
     this.updateProject(oldProject.id, project)
     window.location.reload();
 
@@ -129,9 +151,10 @@ export class ProjectsEditComponent implements OnInit {
   }
 
   //---------------------otras funcionalidades-------------------------------------------
-  projectAlertMessage(){
-    this.toastr.info("projecto en construcción", "No disponible");
-
+  projectAlertMessage(projectEnable:Boolean){
+    if(projectEnable){
+      this.toastr.info("projecto en construcción", "No disponible");
+    }
   }
 
   private createObjForList(list:Project[]):Project[][]{
@@ -205,6 +228,56 @@ export class ProjectsEditComponent implements OnInit {
 }
 
 
+//--------------------download and upload image to firebase------------------------
+
+// REVISAR
+uploadImg($e:any){
+  const file = $e.target.files[0];
+  const firebase_folderName:String = "project_images/";
+  if(this.imgSvc.isFileValid(file)){
+    if (confirm("deseas subir este archivo?")){
+      this.isUploadingIncomplete = true;
+      const fileRef = this.imgSvc.getRef(file.name, firebase_folderName);
+      const task:any = this.imgSvc.uploadFile(file, firebase_folderName)
+      this.namePhoto = file.name;
+      this.uploadPercent = task.percentageChanges();
+      this.uploadPercent.subscribe(
+        ({complete: ()=> this.isUploadingIncomplete = false})
+      )
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(imgRef => {
+            console.log(imgRef)
+            this.imageUrl = imgRef
+          })
+        } )
+     ).subscribe({
+      error: () =>{
+        alert("no se ha podido cargar el archivo")
+
+     }})
+    }
+  }
+}
+
+openUPloadImgForm(){
+  this.editPhoto = !this.editPhoto;
+}
+
+onSubmitPhoto():void{
+  this.editPhoto = !this.editPhoto;
+}
+
+
+onDeletePhoto():void{}
+
+
+showEnabled(event: any){
+  alert(typeof(event.target.getAttribute("value")))
+}
+
+
+
 
   //--------------------------------------------
   openForm:boolean;
@@ -214,5 +287,14 @@ export class ProjectsEditComponent implements OnInit {
   projects!:Project[][];
   indexsDeleteProject: number[];
   indexsEditProject: number[];
+  file!:any;
+  namePhoto:String = "";
+  imageUrl!:String;
+  isUploadingIncomplete!:boolean;
+  uploadPercent!: Observable<any>;
+  downloadURL!: Observable<string>;
+  editPhoto: boolean = true;
+  onEditText: boolean = true; 
+  flexRadioDefault1!:any;
 
 }

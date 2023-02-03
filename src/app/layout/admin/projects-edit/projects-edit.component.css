@@ -125,13 +125,12 @@
 /*--------------------------------------------------------------------------------*/
 
 
-.project-text{
-    color: var(--light);
-    font-weight: bold;
+.project-description{
+    color: whitesmoke;
+    font-weight: bolder;
   }
   
-  .box-img{
-  
+.box-img{
     margin: 1px;
   }
   

@@ -6,15 +6,15 @@
 
     <!-- ________________________________________________________________________-->
     <div id="comp_container" *ngIf="projects.length > 0; else noDataTemplate">
-        <div *ngFor="let projectPares of projects, let i = index" class="row justify-content-around mt-6">
-            <div *ngFor="let project of projectPares let j = index" class="col-lg-5 box-img mb-3 mt-3 position-relative">
+        <div *ngFor="let projectPares of projects, let i = index" class="row justify-content-around mt-4">
+            <div *ngFor="let project of projectPares let j = index" class="col-lg-5 box-img mb-2 mt-2 position-relative">
                 <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen(i, j)"></i>
                 <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash(i, j)"></i>
                 <a class="porfolio-item" href="#!" (mouseover)="projectAlertMessage(project.enabled)">
                     <div class="caption">
                         <div class="caption-content">
-                            <p class="text-md text-light">{{ project.title }}</p>
-                            <p class="text-xl project-text">{{ project.description }}</p>
+                            <p class="text-xl text-light mt-3">{{ project.title }}</p>
+                            <p class="text-xxl project-description">{{ project.description }}</p>
                         </div>
                     </div>
                     <img class="img-fluid" [src]="project.image" [alt]="project.title" imagen />
@@ -25,7 +25,8 @@
                     <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="image" class="form-control m-2 w-75"  type="text" [placeholder]="project.image" [value]="project.image" formControlName="image" (click)="openUPloadImgForm()">
                     <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="linkProject" class="form-control m-2 w-75"  type="text" [placeholder]="project.linkProject" [value]="project.linkProject" formControlName="linkProject">  
                 </form>
-                <button *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" class="btn btn-warning m-1 text-center w-75 m-3" (click)="onEditButtom(i, j)" >editar</button>
+                <button *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" class="btn btn-warning text-center w-75 m-2" (click)="onEditButtom(i, j)" >editar</button>
+                <button *ngIf="deleteTrash && i ==indexsDeleteProject[0] && j == indexsDeleteProject[1]" class="btn btn-danger text-center w-75 m-2" (click)="onDeleteButtom(i,j)">eliminar</button>
             </div>
         </div>
     </div>
@@ -48,9 +49,9 @@
     </ng-template>
 
     <!--form-->
-
-    <i class="bi bi-plus-square text-dark" id="add_square" (click)="onAddSquare()" *ngIf="!openForm"></i>
-
+    <div class="text-center">
+      <i class="bi bi-plus-square text-dark mb-5" id="add_square" (click)="onAddSquare()" *ngIf="!openForm"></i>
+    </div>
     <div *ngIf="openForm" cdkDrag id="form">
         <form [formGroup]="form">
             <button *ngIf="openForm" type="button" class="btn-close bg-light close_button" aria-label="Close" (click)="onCloseForm()"></button>

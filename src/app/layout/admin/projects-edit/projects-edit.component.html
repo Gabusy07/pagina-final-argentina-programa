@@ -40,7 +40,6 @@
         <input type="file" accept="image/*" name="inputPhoto" (change)="uploadImg($event)" class="form-control" id="customFile"><br>
         <p *ngIf="isUploadingIncomplete" class="p-charg">Cargando...</p>
         <button class="btn btn-secondary d-block position-relative start-25 w-100 m-2" [disabled]="isUploadingIncomplete" (click)="onSubmitPhoto()">Guardar</button>
-        <button class="btn btn-danger d-block position-relative start-30 w-100 m-2" (click)="onDeletePhoto()" >eliminar</button>
     </div>
     <br>
     <!--_____________________________________________________________________________________________-->

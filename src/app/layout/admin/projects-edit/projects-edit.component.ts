@@ -29,7 +29,6 @@ export class ProjectsEditComponent implements OnInit {
     this.form = this.initForm();
     this.indexsDeleteProject = [NaN,NaN];
     this.indexsEditProject = [NaN,NaN];
-    this.flexRadioDefault1 = document.getElementById("flexRadioDefault1")
    }
 
   ngOnInit(): void {
@@ -230,7 +229,6 @@ export class ProjectsEditComponent implements OnInit {
 
 //--------------------download and upload image to firebase------------------------
 
-// REVISAR
 uploadImg($e:any){
   const file = $e.target.files[0];
   const firebase_folderName:String = "project_images/";
@@ -267,16 +265,6 @@ openUPloadImgForm(){
 onSubmitPhoto():void{
   this.editPhoto = !this.editPhoto;
 }
-
-
-onDeletePhoto():void{}
-
-
-showEnabled(event: any){
-  alert(typeof(event.target.getAttribute("value")))
-}
-
-
 
 
   //--------------------------------------------

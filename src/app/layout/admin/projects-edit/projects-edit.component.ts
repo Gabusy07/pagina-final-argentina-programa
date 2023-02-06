@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Project } from 'app/model/Project';
 import { FilesService } from 'app/services/files.service';
 import { ProjectsService } from 'app/services/http/projects.service';
-import { FirebaseStorage } from 'firebase/storage';
 import { ToastrService } from 'ngx-toastr';
 import { finalize, Observable } from 'rxjs';
 import swal from 'sweetalert';

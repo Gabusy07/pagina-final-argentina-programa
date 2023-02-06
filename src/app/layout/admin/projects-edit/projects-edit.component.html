@@ -4,21 +4,30 @@
         <h4 class="mb-5 text-danger">Lista de recientes</h4>
     </div>
 
+
     <!-- ________________________________________________________________________-->
     <div id="comp_container" *ngIf="projects.length > 0; else noDataTemplate">
         <div *ngFor="let projectPares of projects, let i = index" class="row justify-content-around mt-4">
             <div *ngFor="let project of projectPares let j = index" class="col-lg-5 box-img mb-2 mt-2 position-relative">
                 <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen(i, j)"></i>
                 <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash(i, j)"></i>
-                <a class="porfolio-item" href="#!" (mouseover)="projectAlertMessage(project.enabled)">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <p class="text-xl text-light mt-3">{{ project.title }}</p>
-                            <p class="text-xxl project-description">{{ project.description }}</p>
+                <div class="container ml-5" (mouseover)="projectAlertMessage(project.enabled)">
+                    <div class="card">
+                        <div class="face face1">
+                            <div class="content">
+                                <img class="img-fluid" [src]="project.image" [alt]="project.title" imagen />
+                            </div>
+                        </div>
+                        <div class="face face2">
+                            <div class="content">
+                                <h3>
+                                    <a href="#" target="_blank"><code><</code>{{project.title}}<code>/></code></a>
+                                </h3>
+                                <p>{{project.description}}.</p>
+                            </div>
                         </div>
                     </div>
-                    <img class="img-fluid" [src]="project.image" [alt]="project.title" imagen />
-                </a>
+                </div>
                 <form [formGroup]="form" class="form form-edit">
                     <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="title" class="form-control m-2 w-75"  type="text" [placeholder]="project.title" [value]="project.title" formControlName="title">
                     <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="description" class="form-control m-2 w-75"  type="text" [placeholder]="project.description" [value]="project.description" formControlName="description">
@@ -30,8 +39,8 @@
             </div>
         </div>
     </div>
-    <!-- formulario para cargar la imagen-->
-    <div *ngIf="!editPhoto" class="container img-upload-container" cdkDrag>
+     <!-- formulario para cargar la imagen-->
+     <div *ngIf="!editPhoto" class="container-fluid img-upload-container w-50" cdkDrag>
         <div class="input-group-prepend">
              <i class="bi bi-x close_buttom text-right" (click)="openUPloadImgForm()"></i>
               <span class="input-group-text">Imagen de proyecto</span>
@@ -39,8 +48,9 @@
         <label class="form-label" for="customFile">carga tu imagen aqui</label>
         <input type="file" accept="image/*" name="inputPhoto" (change)="uploadImg($event)" class="form-control" id="customFile"><br>
         <p *ngIf="isUploadingIncomplete" class="p-charg">Cargando...</p>
-        <button class="btn btn-secondary d-block position-relative start-25 w-100 m-2" [disabled]="isUploadingIncomplete" (click)="onSubmitPhoto()">Guardar</button>
+        <button class="btn btn-success d-block position-relative start-25 w-100 m-2" [disabled]="isUploadingIncomplete" (click)="onSubmitPhoto()">Guardar</button>
     </div>
+
     <br>
     <!--_____________________________________________________________________________________________-->
     <ng-template #noDataTemplate>

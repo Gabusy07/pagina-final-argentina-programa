@@ -1,35 +1,17 @@
 export class Project {
-    private image: String;
-    private linkProject: String;
-    private id: number;
-    private title: String;
-    private description:String;
+    public image: String;
+    public linkProject: String;
+    public id: number;
+    public title: String;
+    public description:String;
+    public enabled:Boolean
 
-    constructor(id:number, title:String, linkProject:String, image:String, description:String){
+    constructor(id:number, title:String, linkProject:String, image:String, description:String, enabled:Boolean){
         this.id=id;
         this.title = title;
         this.image=image;
-        this.linkProject=linkProject;  
+        this.linkProject= linkProject;  
         this.description = description;  
-    }
-
-    public getID(): number | undefined {
-        return this.id;
-    }
-
-    public getTitle(): String {
-        return this.title;
-    }
-
-    public getDescription(): String {
-        return this.description;
-    }
-
-    public getImage(): String {
-        return this.image;
-    }
-
-    public getLinkProject(): String {
-        return this.linkProject;
+        this.enabled= enabled;
     }
 }

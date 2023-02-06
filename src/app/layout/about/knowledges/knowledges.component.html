@@ -19,12 +19,12 @@
         </div>
     </div><br>
     <!--recorrido de los elementos de array lenguages de knowledges.ts-->
-    <div *ngIf="languages.length > 0; else noDataTemplate">
-        <div class="row" *ngFor="let language_pares of languages">
-            <div class="col-6 mb-3" *ngFor="let language of language_pares">
-                <h5>{{language.name}}</h5>
+    <div *ngIf="knowledges.length > 0; else noDataTemplate">
+        <div class="row" *ngFor="let knowledge_pares of knowledges">
+            <div class="col-6 mb-3" *ngFor="let knowledge of knowledge_pares">
+                <h5>{{knowledge.name}}</h5>
                 <div class="progress knw-container">
-                    <div class="{{language.progressbar}} progress--bar" [ngStyle]="{'width' : language.width.toString()+'%'}">
+                    <div class="{{knowledge.progressbar}} progress--bar" [ngStyle]="{'width' : knowledge.width.toString()+'%'}">
                     </div>
                 </div>
             </div>

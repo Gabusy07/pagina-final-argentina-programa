@@ -21,21 +21,21 @@
         </div>
     </div><br>
     <!--recorrido de los elementos de array lenguages de knowledges.ts-->
-    <div *ngIf="languages.length > 0; else noDataTemplate">
-        <div class="row" *ngFor="let language_pares of languages; let i=index">
-            <div class="col-6 mb-3 position-relative" *ngFor="let language of language_pares; let j=index">
+    <div *ngIf="knowledges.length > 0; else noDataTemplate">
+        <div class="row" *ngFor="let knowledge_pares of knowledges; let i=index">
+            <div class="col-6 mb-3 position-relative" *ngFor="let knowledge of knowledge_pares; let j=index">
                 <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen(i, j)"></i>
                 <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash(i, j)"></i>
-                <h5 [hidden]="editPen && i ==indexsEditLang[0] && j == indexsEditLang[1]">{{language.name}}</h5>
+                <h5 [hidden]="editPen && i ==indexsEditKnw[0] && j == indexsEditKnw[1]">{{knowledge.name}}</h5>
                 <form [formGroup]="knwForm">
-                    <input *ngIf="editPen && i ==indexsEditLang[0] && j == indexsEditLang[1]" name="name" class="form-control m-2 w-75"  type="text" [placeholder]="language.name" [value]="language.name" formControlName="name">
-                    <input *ngIf="editPen && i ==indexsEditLang[0] && j == indexsEditLang[1]" name="date" class="form-control m-2 w-75"  type="date" [max]="datePickerId" formControlName="date">
-                    <button *ngIf="editPen && i ==indexsEditLang[0] && j == indexsEditLang[1]" class="btn btn-warning m-1" (click)="onEditButtom(i, j)" >editar</button>
-                    <button *ngIf="deleteTrash && i ==indexsDeleteLang[0] && j == indexsDeleteLang[1]" class="btn btn-danger" (click)="onDeleteButtom(i,j)">eliminar</button>
+                    <input *ngIf="editPen && i ==indexsEditKnw[0] && j == indexsEditKnw[1]" name="name" class="form-control m-2 w-75"  type="text" [placeholder]="knowledge.name" [value]="knowledge.name" formControlName="name">
+                    <input *ngIf="editPen && i ==indexsEditKnw[0] && j == indexsEditKnw[1]" name="date" class="form-control m-2 w-75"  type="date" [max]="datePickerId" formControlName="date">
+                    <button *ngIf="editPen && i ==indexsEditKnw[0] && j == indexsEditKnw[1]" class="btn btn-warning m-1" (click)="onEditButtom(i, j)" >editar</button>
+                    <button *ngIf="deleteTrash && i ==indexsDeleteKnw[0] && j == indexsDeleteKnw[1]" class="btn btn-danger" (click)="onDeleteButtom(i,j)">eliminar</button>
                 </form>
-                <div [hidden]="editPen && i ==indexsEditLang[0] && j == indexsEditLang[1] || deleteTrash && i ==indexsEditLang[0] && j == indexsEditLang[1]" 
+                <div [hidden]="editPen && i ==indexsEditKnw[0] && j == indexsEditKnw[1] || deleteTrash && i ==indexsEditKnw[0] && j == indexsEditKnw[1]" 
                 class="progress knw-container">
-                    <div class="{{language.progressbar}} progress--bar" [ngStyle]="{'width' : language.width.toString()+'%'}">
+                    <div class="{{knowledge.progressbar}} progress--bar" [ngStyle]="{'width' : knowledge.width.toString()+'%'}">
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
     </ng-template>
 
 
-    <i class="bi bi-plus-square text-dark" id="add_square" (click)="onAddSquare()" *ngIf="!openKnwForm"></i>
+    <i class="bi bi-plus-square text-dark text-align-center" id="add_square" (click)="onAddSquare()" *ngIf="!openKnwForm"></i>
 
 
 

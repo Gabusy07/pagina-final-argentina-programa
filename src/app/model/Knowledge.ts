@@ -1,4 +1,4 @@
-export class Language {
+export class Knowledge {
 
     constructor(name: String, date: String){
         this.name = name;

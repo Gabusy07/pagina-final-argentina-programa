@@ -30,7 +30,7 @@ export class ProjectsService {
 
   deleteProject(id:number):Observable<object>{
     const headers = this.getheader();
-    return this.request.delete(this.url+"/delete/"+id)
+    return this.request.delete(this.url+"/delete/"+id, {headers})
    }
 
   updateProject(id:number, project:Project):Observable<object>{

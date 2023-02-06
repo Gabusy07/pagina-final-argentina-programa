@@ -15,6 +15,7 @@ import { ProjectsEditComponent } from '@layout/admin/projects-edit/projects-edit
 import { RedirectGuard } from './guards/redirect.guard';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
 import { AdminUserGuard } from './guards/admin-user.guard';
+import { DataProjectsResolver } from './services/resolvers/data-projects.resolver';
 
 
 const routes: Routes =[
@@ -24,7 +25,7 @@ const routes: Routes =[
   {path : 'about', component : AboutComponent},
   {path : 'projects', component : ProjectsContainerComponent},
   {path : 'profile', component : ProfileUserComponent, canActivate:[LoginSuccessGuard]},
-  {path : 'admin/home', component : HomeEditComponent, canActivate:[LoginSuccessGuard]},
+  {path : 'admin/home', component : HomeEditComponent, canActivate:[LoginSuccessGuard], resolve: {data:DataProjectsResolver}},
   {path : 'admin/about', component : AboutEditComponent, canActivate:[LoginSuccessGuard]},
   {path : 'admin/projects', component : ProjectsEditComponent, canActivate:[LoginSuccessGuard]},
   {path : 'register', component : RegisterFormComponent, canActivate:[AdminUserGuard]},

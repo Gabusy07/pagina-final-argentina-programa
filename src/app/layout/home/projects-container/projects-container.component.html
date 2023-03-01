@@ -1,31 +1,38 @@
 <section class="container-fluid row justify-content-around  " id="projects_container">
+    <div class="content-section-heading text-center mb-5">
+        <h2 class="text-secondary mb-1">Proyectos</h2>
+        <h4 class="mb-5 text-danger">Lista de recientes</h4>
+    </div>
 
-    <div class="card text-white bg-primary mb-3 card_container" (mouseover)="projectAlertMessage()" cdkDrag>
-        <div class="card-body">
-          <a href="">
-          <img src="data:image/png;base64,
-          iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABAlBMVEX///
-          9oPJY0tRUEe6CDXqUSmwsEnL+lDADviAzONRvWYgMeIyM1Ojr//fz7/
-          vr1+/wTrwAAb5jMIgAAlgAAAAD6+Pux2q/
-          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" class="card-img-bottom opacity-75" alt="projecto tetris"></a>
+     <!-- ________________________________________________________________________-->
+     <div *ngIf="projects.length > 0; else noDataTemplate">
+        <div *ngFor="let projectPares of projects, let i = index" class="row justify-content-around mt-4 p-5">
+            <div *ngFor="let project of projectPares let j = index" class="col-lg-5 box-img mb-2 mt-2 position-relative">
+                <div class="container ml-5" (mouseover)="projectAlertMessage(project.enabled)">
+                    <div class="card">
+                        <div class="face face1">
+                            <div class="content">
+                                <img class="img-fluid" [src]="project.image" [alt]="project.title" imagen />
+                            </div>
+                        </div>
+                        <div class="face face2">
+                            <div class="content">
+                                <h3>
+                                    <a href="#" target="_blank"><code><</code>{{project.title}}<code>/></code></a>
+                                </h3>
+                                <p>{{project.description}}.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-footer text-center lead"><code class="code"><</code>tetris<code class="code">/></code></div>
-      </div>
+    </div>
+    <br>
+    <!--_____________________________________________________________________________________________-->
+    <ng-template #noDataTemplate>
+        <app-no-data-template></app-no-data-template>
+    </ng-template>
 
 
 </section>

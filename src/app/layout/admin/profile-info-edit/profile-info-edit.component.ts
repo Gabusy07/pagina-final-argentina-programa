@@ -6,6 +6,8 @@ import { FilesService} from 'app/services/files.service';
 import { LoadingService } from 'app/services/loading.service';
 import { finalize, Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { LanguageService } from 'app/services/language.service';
+import { Language } from 'app/model/LanguageEnum';
 
 
 
@@ -19,15 +21,15 @@ import { ToastrService } from 'ngx-toastr';
 export class ProfileInfoEditComponent implements OnInit {
 
   constructor(private readonly formBuilder : FormBuilder, private readonly descHttpSvc:DescriptionService,
-    private imgSvc: FilesService, private loading:LoadingService, private toastr:ToastrService) {
+    private imgSvc: FilesService, private loading:LoadingService, private toastr:ToastrService,
+    private readonly _languageSvc : LanguageService) {
     this.form = this.initForm();
 
 }
 
 
-  ngOnInit(): void {
+ngOnInit(): void {
     this.getDescription();
-    console.log(this.namePhoto)
 }
 
    //---------------CRUD READ UPDATE-------------------
@@ -35,7 +37,7 @@ export class ProfileInfoEditComponent implements OnInit {
   private getDescription():void{
     this.descHttpSvc.readDescription().subscribe({
       next: data =>  {
-        this.id= BigInt(1);
+        this.id= 1;
         this.text= data[0].text;
         this.title = data[0].title;
         this.imageUrl = data[0].photo;
@@ -45,9 +47,9 @@ export class ProfileInfoEditComponent implements OnInit {
   }
 
 
-  private updateDescription(id:BigInt, desc:Description):void{
+  private updateDescription(id:number, desc:Description):void{
     this.descHttpSvc.updateDescription(id, desc).subscribe({
-      error: error => console.log(error)
+      error: error => alert(error)
     })
   }
 
@@ -75,9 +77,6 @@ export class ProfileInfoEditComponent implements OnInit {
       this.onEditText = !this.onEditText;
   }
 
-  onSubmitText(){
-
-  }
 
   /*  -----------------------------
   para cambiar la foto de perfil*/
@@ -88,11 +87,11 @@ export class ProfileInfoEditComponent implements OnInit {
 
   uploadImg($e:any){
     const file = $e.target.files[0];
-    if(this.isFileValid(file)){
+    if(this.imgSvc.isFileValid(file)){
       if (confirm("deseas subir este archivo?")){
         this.isUploadingIncomplete = true;
-        const fileRef = this.imgSvc.getRef(file.name)
-        const task = this.imgSvc.uploadFile(file);
+        const fileRef = this.imgSvc.getRef(file.name, "images/")
+        const task = this.imgSvc.uploadFile(file, "images/");
         this.namePhoto = file.name;
         this.uploadPercent = task.percentageChanges();
         this.uploadPercent.subscribe(
@@ -108,37 +107,40 @@ export class ProfileInfoEditComponent implements OnInit {
   }
 
   onEditButtom():void{
+    let currentLang;
     this.editPhoto = !this.editPhoto;
     const formText = this.form.value;
     this.title = formText.title;
     this.text = formText.text;
+    currentLang = this._languageSvc.getCurrentLanguage()
     this.onEditText = true;
-    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto);
+    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto, currentLang);
     this.updateDescription(this.id, desc);
   }
 
 
   onSubmitPhoto():void{
-   
+    let currentLang : Language;
     this.editPhoto = !this.editPhoto;
     this.Title == undefined? "Sin titulo": this.title;
-    let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
+    currentLang = this._languageSvc.getCurrentLanguage();
+    let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto, currentLang);
     this.updateDescription(this.id, desc)
   }
 
   onDeletePhoto():void{
+    let currentLang : Language;
     this.editPhoto = !this.editPhoto;
-    const task = this.imgSvc.deleteFile(this.namePhoto)
+    const task = this.imgSvc.deleteFile(this.namePhoto, "images/")
     task.suscribe()
     this.imageUrl = "#";
     this.namePhoto = "";
-    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto);
+    currentLang = this._languageSvc.getCurrentLanguage();
+    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto, currentLang);
     this.updateDescription(this.id, desc);
     this.loading.show()
     setTimeout(()=> this.loading.hide(), 2000)
   }
-
-
 
   private isFileValid(file:any):boolean{
     //verifica que el archivo seleccionado sea img
@@ -156,9 +158,10 @@ export class ProfileInfoEditComponent implements OnInit {
       return true;
   }
 
+
 //--------------atributos------------
 
-id!:BigInt;
+id!:number;
 text!: String;
 editPhoto: boolean = true;
 onEditText: boolean = true;
@@ -168,7 +171,6 @@ file!:any;
 namePhoto:String = "";
 imageUrl!:String;
 isUploadingIncomplete!:boolean;
-
 uploadPercent!: Observable<any>;
 downloadURL!: Observable<string>;
 

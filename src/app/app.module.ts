@@ -42,6 +42,7 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'environments/environment.prod';
+import { RegisterTemplateComponent } from './layout/register-template/register-template.component';
 
 
 
@@ -72,6 +73,7 @@ import { environment } from 'environments/environment.prod';
     AboutEditComponent,
     NoDataTemplateComponent,
     ProfileUserComponent,
+    RegisterTemplateComponent,
  
   ],
   imports: [

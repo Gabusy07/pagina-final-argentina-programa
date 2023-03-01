@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Language } from 'app/model/Language';
-import { LanguageService } from 'app/services/http/language.service';
+import { Knowledge } from 'app/model/Knowledge';
+import { KnowledgeService } from 'app/services/http/Knowledge.service';
 
 @Component({
   selector: 'app-knowledges',
@@ -10,29 +10,29 @@ import { LanguageService } from 'app/services/http/language.service';
 })
 export class KnowledgesComponent implements OnInit {
 
-  constructor(private readonly http_svc: LanguageService) {}
+  constructor(private readonly http_svc: KnowledgeService) {}
 
   ngOnInit(): void {
-    this.getAllLang();
+    this.getAllKnws();
   }
 
   
-  createObjForList(responseList: Language[]):void{
-    let list: Language[] = [];
+  createObjForList(responseList: Knowledge[]):void{
+    let list: Knowledge[] = [];
     for(let i=0; i<= responseList.length; i+=2){
       if (i+1 > responseList.length){
         return;
       }
       if (i == responseList.length-1){
-        this.languages.push([responseList[i]])
+        this.knowledges.push([responseList[i]])
         return;
       }
-      this.languages.push([responseList[i], responseList[i+1]])
+      this.knowledges.push([responseList[i], responseList[i+1]])
     }
    
   }
 
-  getAllLang():void{
+  getAllKnws():void{
     this.http_svc.getAll().subscribe({
       next: data => { this.resultGetAll = data;
       this.isLoading = true;
@@ -45,6 +45,6 @@ export class KnowledgesComponent implements OnInit {
 }
 
   isLoading: boolean = false;
-  languages: Language[][] = [];
-  resultGetAll: Language []=[]  ;
+  knowledges: Knowledge[][] = [];
+  resultGetAll: Knowledge []=[]  ;
 }

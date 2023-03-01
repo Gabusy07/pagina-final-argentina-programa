@@ -13,7 +13,7 @@ export class User {
 
 
 
-    public id!: BigInt;
+    public id!: number;
     public name!: String;
     public lastname!: String;
     public nickname!: String;

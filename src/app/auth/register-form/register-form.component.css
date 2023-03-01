@@ -1,10 +1,18 @@
-#register_form{
-   
-    width: 40vw;
+.bd{
+    /* background: linear-gradient(to right, hsl(39, 100%, 80%), hsl(14, 100%, 90%)); */
+    /* background: linear-gradient(to right, hsl(39, 100%, 80%), hsl(45, 100%, 85%), hsl(45, 100%, 90%)); */
+     background: linear-gradient(to bottom, hsl(39, 100%, 90%), hsl(36, 100%, 90%)); 
+    /* background: linear-gradient(to top right, #ffa600, #ffecb3, #ffcc80); */
+    width: 100vw;
+    height: 100%;
+    padding: 0;
+}
+#register_form{ 
+    width: 75vw;
     border: 1px solid black;
     border-radius: 10px;
     background-color: white;
-    opacity: 0.95;
+    opacity: .92;
     padding: 2.5rem;
     font-size: larger;
     margin: 5%;

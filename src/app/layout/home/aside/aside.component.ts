@@ -56,7 +56,7 @@ chargingDataUser():void{
     },
     error: error => {
       this.isGuest = true;
-      console.log (error)},
+      },
   });
 
 }
@@ -75,6 +75,10 @@ onDeleteUser(){
 
   }
 
+}
+
+languageMessageCard(){
+  this.toastr.info( "Por ahora esta función está siendo modificada", "No disponible", {timeOut: 5000})
 }
 
 

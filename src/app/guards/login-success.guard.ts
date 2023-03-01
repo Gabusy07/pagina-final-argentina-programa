@@ -11,7 +11,7 @@ import swal from 'sweetalert';
 })
 export class LoginSuccessGuard implements CanActivate {
 
-  constructor(private _route: Router, private readonly _authHTTP: AuthService,) { }
+  constructor(private _route: Router, private readonly _authHTTP: AuthService) { }
 
 
   canActivate(

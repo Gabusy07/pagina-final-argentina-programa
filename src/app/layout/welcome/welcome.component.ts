@@ -16,7 +16,7 @@ export class WelcomeComponent implements OnInit {
 
 
   constructor(private router: Router, private _authSvc: AuthService, private _localStorageSvc: StorageService) {
-    this.signIn = false;
+    this.signUp = false;
 
     this.login = false;
    }

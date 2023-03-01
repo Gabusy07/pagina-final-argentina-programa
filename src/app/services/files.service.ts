@@ -12,7 +12,6 @@ export class FilesService {
   constructor(private storage: AngularFireStorage, private toastr:ToastrService) {}
 
 
-
   uploadFile(file: File, folderName:String):Observable<number> | any{
     const filePath = folderName+file.name;
     this.task = this.storage.upload(filePath, file);

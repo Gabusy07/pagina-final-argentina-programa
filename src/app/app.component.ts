@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { LoginSuccessGuard } from './guards/login-success.guard';
-import { UserService } from './services/http/User.service';
+import { Language } from './model/LanguageEnum';
+import { StorageService } from './services/storage.service';
 
 
 
@@ -12,13 +11,9 @@ import { UserService } from './services/http/User.service';
 })
 export class AppComponent {
 
-  constructor( private router: Router,private readonly httpSvc: UserService, private loginGuard: LoginSuccessGuard) {
+  constructor(private readonly _storageSvg:StorageService) {
+     this._storageSvg.addLanguageToStorage(Language.SPANISH)
   }
-
   title = 'gmr-porfolio';
-
-  enterPage(){
-    //this.router.navigate(['']);
-  }
-  
+  porfolioLanguage!:Language
 }

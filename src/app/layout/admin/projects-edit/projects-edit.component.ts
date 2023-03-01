@@ -102,6 +102,8 @@ export class ProjectsEditComponent implements OnInit {
     title = f.title? f.title: "sin titulo";
     enabled = f.enabled == "SI"? true: false;
     const project = new Project(NaN, title, f.linkProject, this.imageUrl, f.description, enabled)
+    console.log(project)
+    alert()
     this.addProject(project)
   }
 
@@ -150,7 +152,7 @@ export class ProjectsEditComponent implements OnInit {
 
   //---------------------otras funcionalidades-------------------------------------------
   projectAlertMessage(projectEnable:Boolean){
-    if(projectEnable){
+    if(!projectEnable){
       this.toastr.info("projecto en construcción", "No disponible");
     }
   }
@@ -221,7 +223,7 @@ export class ProjectsEditComponent implements OnInit {
         console.log(error);
         alert ("no se han podido actualizar los datos")
       },
-      complete: ()=> window.location.reload()
+      complete: ()=> setTimeout(()=> window.location.reload(), 3000)
   });
 }
 

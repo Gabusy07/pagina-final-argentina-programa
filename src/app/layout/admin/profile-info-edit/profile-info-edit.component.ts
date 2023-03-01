@@ -6,6 +6,8 @@ import { FilesService} from 'app/services/files.service';
 import { LoadingService } from 'app/services/loading.service';
 import { finalize, Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { LanguageService } from 'app/services/language.service';
+import { Language } from 'app/model/LanguageEnum';
 
 
 
@@ -19,15 +21,15 @@ import { ToastrService } from 'ngx-toastr';
 export class ProfileInfoEditComponent implements OnInit {
 
   constructor(private readonly formBuilder : FormBuilder, private readonly descHttpSvc:DescriptionService,
-    private imgSvc: FilesService, private loading:LoadingService, private toastr:ToastrService) {
+    private imgSvc: FilesService, private loading:LoadingService, private toastr:ToastrService,
+    private readonly _languageSvc : LanguageService) {
     this.form = this.initForm();
 
 }
 
 
-  ngOnInit(): void {
+ngOnInit(): void {
     this.getDescription();
-    console.log(this.namePhoto)
 }
 
    //---------------CRUD READ UPDATE-------------------
@@ -47,7 +49,7 @@ export class ProfileInfoEditComponent implements OnInit {
 
   private updateDescription(id:number, desc:Description):void{
     this.descHttpSvc.updateDescription(id, desc).subscribe({
-      error: error => console.log(error)
+      error: error => alert(error)
     })
   }
 
@@ -105,34 +107,55 @@ export class ProfileInfoEditComponent implements OnInit {
   }
 
   onEditButtom():void{
+    let currentLang;
     this.editPhoto = !this.editPhoto;
     const formText = this.form.value;
     this.title = formText.title;
     this.text = formText.text;
+    currentLang = this._languageSvc.getCurrentLanguage()
     this.onEditText = true;
-    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto);
+    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto, currentLang);
     this.updateDescription(this.id, desc);
   }
 
 
   onSubmitPhoto():void{
-   
+    let currentLang : Language;
     this.editPhoto = !this.editPhoto;
     this.Title == undefined? "Sin titulo": this.title;
-    let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto);
+    currentLang = this._languageSvc.getCurrentLanguage();
+    let desc:Description = new Description(this.text, this.title, this.imageUrl,this.namePhoto, currentLang);
     this.updateDescription(this.id, desc)
   }
 
   onDeletePhoto():void{
+    let currentLang : Language;
     this.editPhoto = !this.editPhoto;
     const task = this.imgSvc.deleteFile(this.namePhoto, "images/")
     task.suscribe()
     this.imageUrl = "#";
     this.namePhoto = "";
-    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto);
+    currentLang = this._languageSvc.getCurrentLanguage();
+    let desc:Description = new Description(this.text, this.title, this.imageUrl, this.namePhoto, currentLang);
     this.updateDescription(this.id, desc);
     this.loading.show()
     setTimeout(()=> this.loading.hide(), 2000)
+  }
+
+  private isFileValid(file:any):boolean{
+    //verifica que el archivo seleccionado sea img
+    //EXTENSIONES PERMITIDO.
+      var ext_availables = [".png", ".bmp", ".jpg", ".jpeg", ".svg"];
+      var route = file.name;
+      var last_dot = file.name.lastIndexOf(".");
+      var extension = route.slice(last_dot, route.length);
+      if(ext_availables.indexOf(extension) == -1)
+      {
+          this.toastr.warning("las imagenes solo pueden ser png, bmb, jpg , jpeg o svg","archivo no válido");
+          file.name = "";
+          return false;
+      }
+      return true;
   }
 
 

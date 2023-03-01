@@ -21,7 +21,7 @@ export class ProjectsContainerComponent implements OnInit {
   }
 
   projectAlertMessage(projectEnable:Boolean){
-    if(projectEnable){
+    if(!projectEnable){
       this.toastr.info("projecto en construcción", "No disponible");
     }
   }

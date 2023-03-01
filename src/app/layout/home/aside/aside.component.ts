@@ -77,6 +77,10 @@ onDeleteUser(){
 
 }
 
+languageMessageCard(){
+  this.toastr.info( "Por ahora esta función está siendo modificada", "No disponible", {timeOut: 5000})
+}
+
 
 /*--------------------------------------------
 atributos

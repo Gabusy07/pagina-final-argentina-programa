@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "angular-porfolio-arg-programa"
+  "defaultProject": "angular-porfolio-arg-programa",
+  "cli": {
+    "analytics": false
+  }
 }

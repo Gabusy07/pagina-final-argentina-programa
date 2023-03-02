@@ -30,7 +30,7 @@ export class DescriptionService {
 
   updateDescription(id:number, editedDesc:Description):Observable<object>{
     const headers = this.getheader();
-    return this.request.patch(this.url+"/update/"+id, editedDesc, {headers})
+    return this.request.post(this.url+"/update", editedDesc, {headers})
    }
 
 

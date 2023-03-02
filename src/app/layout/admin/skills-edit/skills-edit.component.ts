@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'app/services/http/auth.service';
 import swal from 'sweetalert';
 import { Router } from '@angular/router';
+import { LanguageService } from 'app/services/language.service';
 
 @Component({
   selector: 'app-skills-edit',
@@ -29,6 +30,7 @@ export class SkillsEditComponent implements OnInit {
     private toastr:ToastrService,
     private readonly _authHTTP:AuthService,
     private router: Router,
+    private readonly _languageSvg:LanguageService
     ) {
     for (let i=0; i<this.listOfSkills.length; i++){
       this.stateDiv.push("state1");
@@ -72,8 +74,8 @@ export class SkillsEditComponent implements OnInit {
 
    private deleteSkill(id:number):void{
     this.skillSvc.deleteSkill(id).subscribe({
-      next: data=> console.log(data),
-      error: error => this.toastr.error("No se han podido completar la acción", "error")
+      next: ()=> this.toastr.success("la habilidad ha sido eliminada"),
+      error: () => this.toastr.error("No se han podido completar la acción", "error")
     })
 
    }
@@ -116,6 +118,7 @@ export class SkillsEditComponent implements OnInit {
 
   inputSkill(event: Event){
     this.newSkill.name = (<HTMLInputElement>event.target).value;
+    this.newSkill.language = this._languageSvg.getCurrentLanguage();
   }
 
   onSubmitButtom():void{

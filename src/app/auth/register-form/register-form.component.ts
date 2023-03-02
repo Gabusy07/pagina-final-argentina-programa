@@ -27,7 +27,6 @@ export class RegisterFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
   }
 
   //formulario

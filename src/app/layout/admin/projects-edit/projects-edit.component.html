@@ -32,7 +32,21 @@
                     <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="title" class="form-control m-2 w-75"  type="text" [placeholder]="project.title" [value]="project.title" formControlName="title">
                     <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="description" class="form-control m-2 w-75"  type="text" [placeholder]="project.description" [value]="project.description" formControlName="description">
                     <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="image" class="form-control m-2 w-75"  type="text" [placeholder]="project.image" [value]="project.image" formControlName="image" (click)="openUPloadImgForm()">
-                    <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="linkProject" class="form-control m-2 w-75"  type="text" [placeholder]="project.linkProject" [value]="project.linkProject" formControlName="linkProject">  
+                    <input *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" name="linkProject" class="form-control m-2 w-75"  type="text" [placeholder]="project.linkProject" [value]="project.linkProject" formControlName="linkProject">
+                 
+
+                    <div *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" class="form-check">
+                        <input class="form-check-input" type="radio" name="enabledRadio"  id="flexRadioDefault1" value="SI" formControlName="enabled">
+                        <label class="form-check-label" for="enable">
+                          Si
+                        </label>
+                      </div>
+                      <div *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" class="form-check">
+                        <input class="form-check-input" type="radio" name="enabledRadio"  id="flexRadioDefault2" value="NO" checked  formControlName="disabled">
+                        <label class="form-check-label" for="disabled">
+                          No
+                        </label>
+                      </div>
                 </form>
                 <button *ngIf="editPen && i ==indexsEditProject[0] && j == indexsEditProject[1]" class="btn btn-warning text-center w-75 m-2" (click)="onEditButtom(i, j)" >editar</button>
                 <button *ngIf="deleteTrash && i ==indexsDeleteProject[0] && j == indexsDeleteProject[1]" class="btn btn-danger text-center w-75 m-2" (click)="onDeleteButtom(i,j)">eliminar</button>

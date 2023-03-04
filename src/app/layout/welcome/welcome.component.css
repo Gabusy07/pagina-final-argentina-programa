@@ -43,10 +43,8 @@ main{
     display: inline;
     position: relative;
     font-size: 7rem;
-
     font-family: 'Bungee Spice', cursive;
     font-family: 'Roboto', sans-serif;
-    color: white;
     letter-spacing: 5px;
     /*animation: ghost 5s linear forwards;*/
        

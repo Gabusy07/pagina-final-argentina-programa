@@ -19,7 +19,6 @@ import { LanguageService } from 'app/services/language.service';
       filter: 'brightness(1.009)'})),
       transition('estado1 <=> estado2', animate('0.08s'))
     ])
-
    ] 
 })
 export class SkillsEditComponent implements OnInit {

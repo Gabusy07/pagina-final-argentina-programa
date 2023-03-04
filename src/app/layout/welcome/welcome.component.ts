@@ -1,10 +1,12 @@
 // pagina de bienvenida con opciones para ingresar o registrarse
 
-import {  Component, OnInit } from '@angular/core';
+import {  Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/services/http/auth.service';
 import { StorageService } from 'app/services/storage.service';
 import swal from 'sweetalert';
+// @ts-ignore
+import Typewriter from 't-writer.js';
 
 
 @Component({
@@ -15,16 +17,28 @@ import swal from 'sweetalert';
 export class WelcomeComponent implements OnInit {
 
 
+
   constructor(private router: Router, private _authSvc: AuthService, private _localStorageSvc: StorageService) {
     this.signUp = false;
-
     this.login = false;
    }
   
 
 
   ngOnInit(): void {
+    const target = document.querySelector('.tw')
+    const writer = new Typewriter(target, {
+      loop: false,
+      typeColor: 'white',
+      typeSpeed: 200
+    })
+    
+    writer
+      .type('BIENVENID@!')
+      .rest(700)
+      .start()
   }
+
 
 
   // llamada al hacer click en 'ingresar' abre formulario
@@ -55,6 +69,7 @@ export class WelcomeComponent implements OnInit {
   }
 
 
+
 // cerrar formulario en el welcome a partir del atributo 'closedRegisterForm' del child 'RegisterForm-Component'
 closeRegisterForm($event: boolean){
   this.signUp = $event;
@@ -71,6 +86,11 @@ closeLoginForm($event: boolean){
 
 
   // atributos para registrar y registrado
+
+
+  //_----------------end animation---------------
+
+
   optionSelected = false // desabilita los botones al abrir formulario
   signUp : boolean;
   login : boolean;

@@ -1,6 +1,10 @@
-#logo{
+#principal{
     letter-spacing: 0.5vh;
     padding-bottom: 0px;
     font-size: x-large;
+    @font-face {
+        font-family: TXT Groovy Smooth;
+        src: local('./my-fonts/txtgroovysmooth.ttf');
+    }
 
 }

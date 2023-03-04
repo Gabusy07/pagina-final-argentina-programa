@@ -1,14 +1,14 @@
 
 #porter{
     position: relative;
-    height: 55vh;
+    height: 35vh;
     width: 100%;
-    background: linear-gradient(to left, rgba(255, 132, 0), rgba(255, 120, 0, .65));
+    background: linear-gradient(to left, rgba(80,185,251,70), rgba(71,170,231,255) );
 }
 
 #img{
     position: absolute;
-    bottom: 0;
+    top: 10%;
     float: left;
     width: 15rem;
 }

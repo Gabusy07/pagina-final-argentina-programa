@@ -1,6 +1,6 @@
 
 
-const baseUrl = "http://localhost:8080";
+const baseUrl = "https://guilty-lelah-gabusy07.koyeb.app/";
 
 export default baseUrl
 

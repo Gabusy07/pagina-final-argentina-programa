@@ -12,6 +12,7 @@
     --middle-z-index: 3;
     --middle-high-z-index: 4;
     --highest-z-index: 5;
+    --back-gray: rgb(222, 213, 205);
     --blue: #4e73df;
     --indigo: #6610f2;
     --purple: #6f42c1;
@@ -53,4 +54,5 @@ html body{
     height: 90rem;
     margin: 0;
     padding: 0;
+    background-color: var(--back-gray);
 }

@@ -3,7 +3,7 @@
     position: relative;
     height: 32vh;
     width: 100%;
-    background: linear-gradient(to left, rgba(80,185,251,70), rgba(71,170,231,255) );
+    background:  rgba(71,170,231,255);
 }
 
 #img{

@@ -42,10 +42,10 @@ export class ProjectsEditComponent implements OnInit {
   */
   initForm(): FormGroup{
     return this.formBuilder.group({
-      title: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
+      title: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
       image: [''],
-      description: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-      linkProject: ['',[Validators.required, Validators.pattern('')]],
+      description: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+      linkProject: ['',[Validators.pattern('^(http|https)://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$')]],
       enabled: [''],
       disabled: ['']
     })
@@ -152,7 +152,7 @@ export class ProjectsEditComponent implements OnInit {
 
   //---------------------otras funcionalidades-------------------------------------------
   projectAlertMessage(projectEnable:Boolean){
-    if(!projectEnable){
+    if(projectEnable){
       this.toastr.info("projecto en construcción", "No disponible");
     }
   }

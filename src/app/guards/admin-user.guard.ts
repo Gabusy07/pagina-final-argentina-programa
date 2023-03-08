@@ -12,7 +12,7 @@ export class AdminUserGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return  this._authService.existsAdmin().pipe(map(isAdmin =>{
-        if(isAdmin){
+        if(!isAdmin){
         return false;}
         return true
       }))

@@ -89,7 +89,7 @@ import { RegisterTemplateComponent } from './layout/register-template/register-t
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     ToastrModule.forRoot({
-      timeOut:2000,
+      timeOut:3000,
       preventDuplicates: true,
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

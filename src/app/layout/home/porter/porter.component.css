@@ -1,7 +1,7 @@
 
 #porter{
     position: relative;
-    height: 35vh;
+    height: 32vh;
     width: 100%;
     background: linear-gradient(to left, rgba(80,185,251,70), rgba(71,170,231,255) );
 }

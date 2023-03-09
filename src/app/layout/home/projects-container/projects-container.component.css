@@ -23,14 +23,12 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    margin-top: 1;
   }
   
   .container .card {
     position: relative;
     border-radius: 5%;
   }
-  
   
   
   .container .card .icon .fa {

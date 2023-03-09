@@ -45,7 +45,7 @@ export class ProjectsEditComponent implements OnInit {
       title: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
       image: [''],
       description: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-      linkProject: ['',[Validators.pattern('^(http|https)://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$')]],
+      linkProject: [''],
       enabled: [''],
       disabled: ['']
     })
@@ -151,9 +151,14 @@ export class ProjectsEditComponent implements OnInit {
 
   //---------------------otras funcionalidades-------------------------------------------
   projectAlertMessage(projectEnable:Boolean){
+    this.isHovering = false;
     if(projectEnable){
       this.toastr.info("projecto en construcción", "No disponible");
     }
+  }
+
+  onMouseOutImg() {
+    this.isHovering = true;
   }
 
   private createObjForList(list:Project[]):Project[][]{
@@ -184,7 +189,6 @@ export class ProjectsEditComponent implements OnInit {
         timer: 3000,
       }),
       error: error => {
-        console.log(error);
         alert ("no se han podido guardar los datos")
       },
       complete: ()=> setTimeout(()=> window.location.reload(), 3000)
@@ -283,5 +287,6 @@ onSubmitPhoto():void{
   editPhoto: boolean = true;
   onEditText: boolean = true; 
   flexRadioDefault1!:any;
+  isHovering = true;
 
 }

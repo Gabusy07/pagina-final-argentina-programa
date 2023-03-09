@@ -7,10 +7,10 @@
     <!--------------------------------------------------------------------------->
     <div id="comp_container" *ngIf="projects.length > 0; else noDataTemplate">
         <div *ngFor="let projectPares of projects, let i = index" class="row justify-content-around mt-4">
-            <div *ngFor="let project of projectPares let j = index" class="col-lg-5 box-img mb-2 mt-2 position-relative">
+            <div *ngFor="let project of projectPares let j = index" class="col-lg-5 box-img mb-5 mt-2 position-relative">
                 <i class="bi bi-pencil-square pen text-warning" id="edit_pen" (click)="onEditPen(i, j)"></i>
                 <i class="bi bi-trash pen text-danger" id="delete_trash" (click)="onDeleteTrash(i, j)"></i>
-                <div class="container ml-5" (mouseover)="projectAlertMessage(project.enabled)">
+                <div class="container ml-5" (mouseover)="projectAlertMessage(project.enabled)" (mouseout)="onMouseOutImg()">
                     <div class="card">
                         <div class="face face1">
                             <div class="content">
@@ -20,9 +20,9 @@
                         <div class="face face2">
                             <div class="content">
                                 <h3>
-                                    <a href="#" target="_blank"><code><</code>{{project.title}}<code>/></code></a>
+                                    <a href={{project.linkProject}} target="_blank"><code><</code>{{project.title}}<code>/></code></a>
                                 </h3>
-                                <p>{{project.description}}.</p>
+                                <p [ngClass]="{'displayNone': isHovering} ">{{project.description}}</p>
                             </div>
                         </div>
                     </div>

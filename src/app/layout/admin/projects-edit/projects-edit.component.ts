@@ -140,7 +140,6 @@ export class ProjectsEditComponent implements OnInit {
     let enabled = f.enabled? f.enabled: oldProject.enabled;
     const project = new Project(NaN, title, linkProject, image, description, enabled);
     this.updateProject(oldProject.id, project)
-    window.location.reload();
 
   }
 
@@ -219,8 +218,7 @@ export class ProjectsEditComponent implements OnInit {
         icon: "success",
         timer: 3000,
       }),
-      error: error => {
-        console.log(error);
+      error: () => {
         alert ("no se han podido actualizar los datos")
       },
       complete: ()=> setTimeout(()=> window.location.reload(), 3000)

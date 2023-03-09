@@ -6,8 +6,8 @@
 
      <!-- ________________________________________________________________________-->
      <div *ngIf="projects.length > 0; else noDataTemplate">
-        <div *ngFor="let projectPares of projects, let i = index" class="row justify-content-around mt-4 p-5">
-            <div *ngFor="let project of projectPares let j = index" class="col-lg-5 box-img mb-2 mt-2 position-relative">
+        <div *ngFor="let projectPares of projects, let i = index" class="row justify-content-around mt-2 p-5">
+            <div *ngFor="let project of projectPares let j = index" class="col-lg-5 box-img mb-1 position-relative">
                 <div class="container ml-5" (mouseover)="projectAlertMessage(project.enabled)">
                     <div class="card">
                         <div class="face face1">

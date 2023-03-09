@@ -21,9 +21,14 @@ export class ProjectsContainerComponent implements OnInit {
   }
 
   projectAlertMessage(projectEnable:Boolean){
-    if(!projectEnable){
+    this.isHovering = false;
+    if(projectEnable){
       this.toastr.info("projecto en construcción", "No disponible");
     }
+  }
+
+  onMouseOutImg() {
+    this.isHovering = true;
   }
 
   private createObjForList(list:Project[]):Project[][]{
@@ -61,5 +66,6 @@ export class ProjectsContainerComponent implements OnInit {
 
   /*--------------atributes----------------------*/
   projects!:Project[][];
+  isHovering = true;
 
 }

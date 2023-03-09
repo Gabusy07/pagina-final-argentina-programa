@@ -45,7 +45,7 @@ export class ProjectsEditComponent implements OnInit {
       title: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
       image: [''],
       description: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-      linkProject: ['',[Validators.pattern('^(http|https)://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$')]],
+      linkProject: [''],
       enabled: [''],
       disabled: ['']
     })

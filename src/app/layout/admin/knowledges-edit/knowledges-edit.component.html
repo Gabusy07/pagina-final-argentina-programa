@@ -30,6 +30,15 @@
                 <form [formGroup]="knwForm">
                     <input *ngIf="editPen && i ==indexsEditKnw[0] && j == indexsEditKnw[1]" name="name" class="form-control m-2 w-75"  type="text" [placeholder]="knowledge.name" [value]="knowledge.name" formControlName="name">
                     <input *ngIf="editPen && i ==indexsEditKnw[0] && j == indexsEditKnw[1]" name="date" class="form-control m-2 w-75"  type="date" [max]="datePickerId" formControlName="date">
+                    <div *ngIf="editPen && i ==indexsEditKnw[0] && j == indexsEditKnw[1]" class="col-sm">
+                        <label for="colors">Selecciona un nivel:</label>
+                        <select id="colors"  name="color" [ngClass]="{'is-invalid' : Color?.errors && Color?.touched, 'is-valid' : !Color?.errors && Color?.touched}" class="form-control w-75"  formControlName="color" [autofocus]="knowledge.progressbar" >
+                            <option value="success">alto</option>
+                            <option value="primary">medio</option>
+                            <option value="warning">bajo</option>
+                            <option value="danger">inicial</option>
+                          </select>
+                       </div>
                     <button *ngIf="editPen && i ==indexsEditKnw[0] && j == indexsEditKnw[1]" class="btn btn-warning m-1" (click)="onEditButtom(i, j)" >editar</button>
                     <button *ngIf="deleteTrash && i ==indexsDeleteKnw[0] && j == indexsDeleteKnw[1]" class="btn btn-danger" (click)="onDeleteButtom(i,j)">eliminar</button>
                 </form>

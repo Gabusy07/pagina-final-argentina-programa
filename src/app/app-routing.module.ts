@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from '@layout/about/about.component';
-import { ProjectsContainerComponent } from '@layout/home/projects-container/projects-container.component';
 
 import { WelcomeComponent } from '@layout/welcome/welcome.component';
 import { ErrorPageComponent } from 'app/shared_/error-page/error-page.component';
@@ -16,6 +15,7 @@ import { RedirectGuard } from './guards/redirect.guard';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
 import { AdminUserGuard } from './guards/admin-user.guard';
 import { DataProjectsResolver } from './services/resolvers/data-projects.resolver';
+import { ProjectsContainerComponent } from './component/projects-container/projects-container.component';
 
 
 const routes: Routes =[

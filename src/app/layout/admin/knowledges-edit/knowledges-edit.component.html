@@ -62,6 +62,15 @@
             <div class="col-sm-15">
                 <input [ngClass]="{'is-invalid' : Date?.errors && Date?.touched, 'is-valid' : !Date?.errors && Date?.touched}" class="form-control w-75" type="date" [max]="datePickerId" formControlName="date" >
            </div>
+           <div class="col-sm-15">
+            <label for="colors">Selecciona un nivel:</label>
+            <select id="colors"  name="color" [ngClass]="{'is-invalid' : Color?.errors && Color?.touched, 'is-valid' : !Color?.errors && Color?.touched}" class="form-control w-75"  formControlName="color">
+                <option value="success">alto</option>
+                <option value="primary">medio</option>
+                <option value="warning">bajo</option>
+                <option value="danger">inicial</option>
+              </select>
+           </div>
            <input type="submit" class="btn btn-primary mt-2" (click)="submitAddForm()" [disabled]="knwForm.invalid">
         </div>
     </form>

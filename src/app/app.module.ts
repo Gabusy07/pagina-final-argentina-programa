@@ -10,13 +10,7 @@ import { WelcomeComponent } from './layout/welcome/welcome.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { KnowledgesComponent } from './layout/about/knowledges/knowledges.component';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { NavigationComponent } from './layout/navigation/navigation.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { AsideComponent } from './layout/home/aside/aside.component';
-import { AboutComponent } from '@layout/about/about.component';
-import { PorterComponent } from './layout/home/porter/porter.component';
-import { SkillsComponent } from '@layout/about/skills/skills.component';
-import { ProjectsContainerComponent } from '@layout/home/projects-container/projects-container.component';
+
 import { RegisterFormComponent } from 'app/auth/register-form/register-form.component';
 import { UserService } from "./services/http/User.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -43,6 +37,13 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'environments/environment.prod';
 import { RegisterTemplateComponent } from './layout/register-template/register-template.component';
+import { AboutComponent } from '@layout/about/about.component';
+import { NavigationComponent } from './component/navigation/navigation.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { AsideComponent } from './component/aside/aside.component';
+import { PorterComponent } from './component/porter/porter.component';
+import { SkillsComponent } from '@layout/about/skills/skills.component';
+import { ProjectsContainerComponent } from './component/projects-container/projects-container.component';
 
 
 

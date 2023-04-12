@@ -120,6 +120,7 @@ export class KnowledgesEditComponent implements OnInit {
     return this.formBuilder.group({
       name: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
       date: ['',[Validators.required]],
+      color: []
     })
 
   }
@@ -134,11 +135,16 @@ export class KnowledgesEditComponent implements OnInit {
 
   }
 
+  get Color (){
+    return this.knwForm.get('color');
+
+  }
 
   submitAddForm(){
+    
     const f = this.knwForm.value;
     let name = f.name.charAt(0).toUpperCase() + f.name.slice(1);;
-    const lang = new Knowledge(name, f.date);
+    const lang = new Knowledge(name, f.date, f.color);
     this.addLang(lang)
     this.openKnwForm = false;
   }
@@ -167,9 +173,11 @@ export class KnowledgesEditComponent implements OnInit {
     //asegura que se hayan realizado cambios en form y sino guarda los antiguos
     let name = f.name? f.name.charAt(0).toUpperCase() + f.name.slice(1): oldLang.name;
     let date = f.date? f.date: oldLang.date;
-    const lang = new Knowledge(name, date);
-    this.updateKnw(oldLang.id, lang)
-    window.location.reload();
+    let color = f.color? f.color: oldLang.progressbar;
+    const lang = new Knowledge(name, date, color);
+    this.updateKnw(oldLang.id, lang);
+    console.log(lang)
+    //window.location.reload();
 
   }
 

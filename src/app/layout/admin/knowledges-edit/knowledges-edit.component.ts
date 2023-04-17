@@ -168,16 +168,17 @@ export class KnowledgesEditComponent implements OnInit {
 
   onEditButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
     
-    const oldLang = this.knowledges[i][j]
+    const oldKnw = this.knowledges[i][j]
     const f = this.knwForm.value;
     //asegura que se hayan realizado cambios en form y sino guarda los antiguos
-    let name = f.name? f.name.charAt(0).toUpperCase() + f.name.slice(1): oldLang.name;
-    let date = f.date? f.date: oldLang.date;
-    let color = f.color? f.color: oldLang.progressbar;
-    const lang = new Knowledge(name, date, color);
-    this.updateKnw(oldLang.id, lang);
-    console.log(lang)
-    //window.location.reload();
+    let name = f.name? f.name.charAt(0).toUpperCase() + f.name.slice(1): oldKnw.name;
+    let date = f.date? f.date: oldKnw.date;
+    let color = f.color? f.color: oldKnw.progressbar;
+    const knw = new Knowledge(name, date, color);
+    console.log(knw);
+    alert()
+    this.updateKnw(oldKnw.id, knw);
+    alert()
 
   }
 

@@ -96,21 +96,13 @@ export class ProjectsEditComponent implements OnInit {
 
   submitForm(){
     this.openForm = false;
-    let title:String;
-    let enabled: boolean;
-    const f = this.form.value;
-    title = f.title? f.title: "sin titulo";
-    enabled = f.enabled == "SI"? true: false;
-    const project = new Project(NaN, title, f.linkProject, this.imageUrl, f.description, enabled)
-    console.log(project)
-    alert()
+    const project = this.formatedProjectData(new Project());
     this.addProject(project)
   }
 
   onDeleteSquare():void{
     this.deleteTrash = this.deleteTrash == false ? true : false;
     this.editPen = false;
-
   }
 
   onEditPen(i:number, j:number):void{
@@ -118,7 +110,6 @@ export class ProjectsEditComponent implements OnInit {
     this.indexsEditProject = [i, j];
     this.editPen = !this.editPen
     this.deleteTrash = false;
-
   }
 
 
@@ -131,14 +122,8 @@ export class ProjectsEditComponent implements OnInit {
   onEditButtom(i:number, j:number):void{  //los argumentos son los indices de la lista de pares y del obj en esta ultima
     
     const oldProject = this.projects[i][j]
-    const f = this.form.value;
     //asegura que se hayan realizado cambios en form y sino guarda los antiguos
-    let title = f.title? f.title.charAt(0).toUpperCase() + f.title.slice(1): oldProject.title;
-    let image = f.image? f.image: oldProject.image;
-    let description = f.description? f.description: oldProject.description;
-    let linkProject = f.linkProject? f.linkProject: oldProject.linkProject;
-    let enabled = f.enabled? f.enabled: oldProject.enabled;
-    const project = new Project(NaN, title, linkProject, image, description, enabled);
+    const project = this.formatedProjectData(oldProject);
     this.updateProject(oldProject.id, project)
 
   }
@@ -148,6 +133,9 @@ export class ProjectsEditComponent implements OnInit {
     window.location.reload();
 
   }
+
+
+  
 
   //---------------------otras funcionalidades-------------------------------------------
   projectAlertMessage(projectEnable:Boolean){
@@ -180,7 +168,7 @@ export class ProjectsEditComponent implements OnInit {
 
   //---------------CRUD-----------------------
 
-  addProject(p:Project){
+ private addProject(p:Project){
     this._ProjectsHTTP.createProject(p).subscribe({
       next: ()=> swal({
         title: "Carga exitosa",
@@ -189,7 +177,12 @@ export class ProjectsEditComponent implements OnInit {
         timer: 3000,
       }),
       error: error => {
-        alert ("no se han podido guardar los datos")
+        swal({
+          title: "error",
+          text: "no se han podido guardar los datos 2",
+          icon: "error",
+          timer: 3000,
+        })
       },
       complete: ()=> setTimeout(()=> window.location.reload(), 3000)
 
@@ -198,7 +191,7 @@ export class ProjectsEditComponent implements OnInit {
     
   }
 
-  deleteProject(id: number){
+  private deleteProject(id: number){
     this._ProjectsHTTP.deleteProject(id).subscribe({
       next: data => {
         swal({
@@ -214,7 +207,7 @@ export class ProjectsEditComponent implements OnInit {
 
   }
 
-  updateProject(id:number, projectEdited:Project):void{
+  private updateProject(id:number, projectEdited:Project):void{
     this._ProjectsHTTP.updateProject(id, projectEdited).subscribe({
       next: ()=> swal({
         title: "Guardado",
@@ -223,8 +216,12 @@ export class ProjectsEditComponent implements OnInit {
         timer: 3000,
       }),
       error: () => {
-        alert ("no se han podido actualizar los datos")
-      },
+        swal({
+          title: "Error",
+          text: "no se han podido actualizar los datos",
+          icon: "error",
+          timer: 3000,
+        })},
       complete: ()=> setTimeout(()=> window.location.reload(), 3000)
   });
 }
@@ -248,14 +245,17 @@ uploadImg($e:any){
       task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(imgRef => {
-            console.log(imgRef)
             this.imageUrl = imgRef
           })
         } )
      ).subscribe({
       error: () =>{
-        alert("no se ha podido cargar el archivo")
-
+        swal({
+          title: "Error",
+          text: "no se han podido cargar el archivo",
+          icon: "error",
+          timer: 3000,
+        })
      }})
     }
   }
@@ -269,6 +269,25 @@ onSubmitPhoto():void{
   this.editPhoto = !this.editPhoto;
 }
 
+private formatedProjectData(p : Project): Project{
+
+  const f = this.form.value;
+  let title = f.title? f.title.charAt(0).toUpperCase() + f.title.slice(1): p.title;
+  let image = this.imageUrl =="" || this.imageUrl == null && f.image ==="src/assets/download.png"? p.image : this.imageUrl ;
+  let description = f.description? f.description: p.description;
+  let linkProject = f.linkProject? f.linkProject: p.linkProject;
+  let enabled = f.enabled == "YES"? false: true;
+
+  const project = new Project();
+  project.id = f.id;
+  project.title = title;
+  project.description = description;
+  project.image = image;
+  project.enabled = enabled;
+  project.linkProject = linkProject;
+  return project;
+}
+
 
   //--------------------------------------------
   openForm:boolean;
@@ -280,7 +299,7 @@ onSubmitPhoto():void{
   indexsEditProject: number[];
   file!:any;
   namePhoto:String = "";
-  imageUrl!:String;
+  imageUrl:String = "";
   isUploadingIncomplete!:boolean;
   uploadPercent!: Observable<any>;
   downloadURL!: Observable<string>;

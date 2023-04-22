@@ -12,6 +12,7 @@
   width: 90%;
   min-height: 50rem;
   font-family: sans-serif;
+  margin-bottom: 5%;
 }
 
 .pen{
@@ -271,6 +272,11 @@
 
 .displayNone{
   display: none;
+}
+
+#charge-img-card{
+  top: 50%;
+
 }
 
 

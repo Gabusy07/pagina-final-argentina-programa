@@ -1,17 +1,12 @@
 export class Project {
-    public image: String;
-    public linkProject: String;
-    public id: number;
-    public title: String;
-    public description:String;
-    public enabled:Boolean
+    public image: String = "src/assets/download.png";
+    public linkProject: String = "";
+    public id: number = NaN;
+    public title: String = "Sin titulo";
+    public description:String = "Sin descripción";
+    public enabled:Boolean = false;
 
-    constructor(id:number, title:String, linkProject:String, image:String, description:String, enabled:Boolean){
-        this.id=id;
-        this.title = title;
-        this.image=image;
-        this.linkProject= linkProject;  
-        this.description = description;  
-        this.enabled= enabled;
+    constructor(){
+        
     }
 }

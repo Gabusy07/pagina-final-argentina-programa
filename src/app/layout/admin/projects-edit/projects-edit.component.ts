@@ -179,7 +179,7 @@ export class ProjectsEditComponent implements OnInit {
       error: error => {
         swal({
           title: "error",
-          text: "no se han podido guardar los datos",
+          text: "no se han podido guardar los datos 2",
           icon: "error",
           timer: 3000,
         })
@@ -273,7 +273,7 @@ private formatedProjectData(p : Project): Project{
 
   const f = this.form.value;
   let title = f.title? f.title.charAt(0).toUpperCase() + f.title.slice(1): p.title;
-  let image = this.imageUrl =="" || this.imageUrl == null && f.image ===""? p.image : this.imageUrl ;
+  let image = this.imageUrl =="" || this.imageUrl == null && f.image ==="src/assets/download.png"? p.image : this.imageUrl ;
   let description = f.description? f.description: p.description;
   let linkProject = f.linkProject? f.linkProject: p.linkProject;
   let enabled = f.enabled == "YES"? false: true;
